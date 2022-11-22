@@ -2,18 +2,18 @@ import { Flex, Spacer, Box, Center, Button, Container } from "@chakra-ui/react";
 
 export default function Navbar() {
     return(
-        <div>
+        <div style={{backgroundColor: "var(--chakra-colors-brand-lightGray)"}}>
             <Container maxW="1200px" p="1rem">
                 <Flex>
                     <Center>
-                        <Box>
-                            <h1>LogoName</h1>
+                        <Box textStyle="logoText">
+                            <h1>GO:RENT</h1>
                         </Box>
                     </Center>
                     <Spacer />
                     <Center>
                         <Box>
-                            <Button colorScheme='brand.gothenburg' variant='solid'>
+                            <Button variant='primary'>
                                 Lägg upp annons
                             </Button>
                         </Box>
