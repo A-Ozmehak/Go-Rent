@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import { ChakraProvider, Heading, Text, Box } from "@chakra-ui/react";
 import { theme } from "../utils/theme";
 
+import next from "next";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
