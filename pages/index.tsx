@@ -20,7 +20,7 @@ export default function Index() {
       <Text fontSize="2rem" pt="4rem" pl="2rem">Senaste upplagt</Text>
       <Flex direction="column">
         {placeholderListing.map(listing => (
-          <a className="listingBox" href="#">
+          <a key={listing.title} className="listingBox" href="#">
             <Box>
               <Flex direction="row" width="100%">
                 <img style={{"width": "30%", "height": "30%", "objectFit": "cover"}} src={listing.imageSrc} alt="" />
