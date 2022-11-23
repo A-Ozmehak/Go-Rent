@@ -1,6 +1,7 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { Text, Heading, Box } from '@chakra-ui/react'
+import { Text, Heading, Box } from "@chakra-ui/react";
+import ListingCard from "../components/cards/ListingCard";
 
 export default function Index() {
   return (
@@ -11,7 +12,10 @@ export default function Index() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Heading>xxx</Heading>
-      <Box><Text> hhfjdkhfjds </Text></Box>
+      <Box>
+        <Text> hhfjdkhfjds </Text>
+      </Box>
+      <ListingCard></ListingCard>
     </div>
   );
 }
