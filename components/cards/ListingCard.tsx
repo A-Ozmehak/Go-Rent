@@ -61,20 +61,24 @@ const ListingCard = () => {
     display: { md: "none" },
   };
 
+  const dateInputStyle = {
+    backgroundColor: "#F0F0F0",
+  };
+
   return (
     <Box sx={hideOnDesktop}>
       <div style={flexColumnCenter as React.CSSProperties}>
         <div style={headingStyle}>
           <Heading text="Lägenhet"></Heading>
         </div>
-        <Card sx={cardWidth} maxW="sm">
+        <Card p={0} backgroundColor="#F0F0F0" sx={cardWidth} maxW="sm">
+          <Image
+            src="/mockedListingCardPicture.png"
+            alt="mocked"
+            width="500"
+            height="500"
+          />
           <CardBody>
-            <Image
-              src="/mockedListingCardPicture.png"
-              alt="mocked"
-              width="500"
-              height="500"
-            />
             <Stack mt="6" spacing="3">
               <div style={flexCenter}>
                 <Image
@@ -102,7 +106,7 @@ const ListingCard = () => {
           </div>
           <CardFooter style={cardFooterStyle}>
             <ButtonGroup spacing={20}>
-              <input type="date" />
+              <input style={dateInputStyle} type="date" />
               <Button variant="primary" colorScheme="blue">
                 Hyr
               </Button>
