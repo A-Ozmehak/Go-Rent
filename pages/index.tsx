@@ -15,7 +15,6 @@ export default function Index() {
       <Box>
         <Text> hhfjdkhfjds </Text>
       </Box>
-      <ListingCard></ListingCard>
     </div>
   );
 }
