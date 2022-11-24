@@ -35,3 +35,26 @@ export const placeholderListing = [
         "imageSrc": "https://images.ctfassets.net/pg6xj64qk0kh/2r4QaBLvhQFH1mPGljSdR9/39b737d93854060282f6b4a9b9893202/camden-paces-apartments-buckhead-ga-terraces-living-room-with-den_1.jpg"
     },
 ]
+
+export const categories = [
+    {
+        "title": "fordon",
+        "id": 1,
+    },
+    {
+        "title": "lokaler",
+        "id": 2,
+    },
+    {
+        "title": "tjänster",
+        "id": 3,
+    },
+    {
+        "title": "verktyg",
+        "id": 4,
+    },
+    {
+        "title": "övrigt",
+        "id": 5,
+    },
+]
