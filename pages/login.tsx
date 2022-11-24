@@ -1,79 +1,29 @@
 import React from "react";
-import TextInput from "../components/inputs/TextInput";
-import {Formik} from "formik"
-import PrimaryButton from '../components/buttons/PrimaryButton';
 import ShadowContainer from "../components/layout/ShadowContainer";
-import {FormControl, FormLabel, Input, FormErrorMessage} from "@chakra-ui/react";
-
+import LoginForm from "../components/forms/LoginForm";
+import { Heading } from '@chakra-ui/react'
+import Paragraph from "../components/typography/Paragraph";
+import PageTitle from "../components/typography/PageTitle";
 
 const LoginPage = () => {
-    const passwordLink = {
-        textDecoration: "underline",
+    const infoText = {
+        width: "18rem",
+        margin: "1rem 0"
+    }
+    const title= {
+        marginTop: "1rem"
     }
 
     return (
         <ShadowContainer>
-            <h1>Logga in</h1>
-            <h2>För att hyra eller hyra ut hos oss, logga in eller registrera dig nedan.</h2>
-            <div>
-                <Formik
-                    initialValues={{
-                        email: "",
-                        password: "",
-                    }}
-                    onSubmit={(values) => {
+            <Heading sx={title}>Logga in</Heading>
+            <div style={infoText}>
+                <PageTitle text="För att hyra eller hyra ut hos oss, logga in eller registrera dig nedan." />
+            </div>
+                <LoginForm />
+            <Paragraph text="Har du inget konto? Registrera dig." />
+        </ShadowContainer>
+    )
+};
 
-                    }}
-                >
-                    {({handleSubmit, errors, touched}) => (
-                        <form onSubmit={handleSubmit}>
-                            <FormControl isInvalid={!!errors.email && touched.email}>
-                                <FormLabel htmlFor="email">Email</FormLabel>
-                                <TextInput
-                                    as={Input}
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    variant="filled"
-                                    validate={(value: string) => {
-                                        let error;
-                                        if (value.length < 5) {
-                                            error = "Skriv in en email"
-                                        }
-                                        return error
-                                    }}
-                                    />
-                                <FormErrorMessage>{errors.email}</FormErrorMessage>
-                            </FormControl>
-                            <FormControl isInvalid={!!errors.password && touched.password}>
-                                <FormLabel htmlFor="password">Lösenord</FormLabel>
-                                <TextInput
-                                    as={Input}
-                                    id="password"
-                                    name="password"
-                                    type="password"
-                                    variant="filled"
-                                    validate={(value: string) => {
-                                        let error;
-                                        if (value.length < 5) {
-                                            error = "Lösenordet måste vara längre än 6 karaktärer"
-                                        }
-                                        return error
-                                    }}
-
-                                />
-                                <FormErrorMessage>{errors.password}</FormErrorMessage>
-                            </FormControl>
-
-                            <p style={passwordLink}>Glömt ditt lösenord?</p>
-                            <PrimaryButton title="Logga in" type="submit"/>
-                        </form>
-                        )}
-                        </Formik>
-                        </div>
-                        <p>Har du inget konto? Registrera dig.</p>
-                        </ShadowContainer>
-                        )
-                    };
-
-                    export default LoginPage;
+export default LoginPage;
