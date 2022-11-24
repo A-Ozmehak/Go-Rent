@@ -20,8 +20,12 @@ const ListingCard = () => {
     marginRight: ".5rem",
   };
 
+  const locationStyle = {
+    marginLeft: "12.8rem",
+  };
+
   const priceStyle = {
-    marginLeft: { sm: "9rem", md: "14rem" },
+    marginLeft: { sm: "5.9rem", md: "14rem" },
   };
 
   const dateStyle = {
@@ -68,9 +72,6 @@ const ListingCard = () => {
   return (
     <Box sx={hideOnDesktop}>
       <div style={flexColumnCenter as React.CSSProperties}>
-        <div style={headingStyle}>
-          <Heading text="Lägenhet"></Heading>
-        </div>
         <Card p={0} backgroundColor="#F0F0F0" sx={cardWidth} maxW="sm">
           <Image
             src="/mockedListingCardPicture.png"
@@ -88,11 +89,13 @@ const ListingCard = () => {
                   width="28"
                   height="28"
                 />
-                <Heading text="Monke"></Heading>
-                <Text sx={priceStyle}>100:-</Text>
+                <Text fontWeight="bold">Monke</Text>
+                <Text fontWeight="bold" sx={priceStyle}>
+                  100:- / dygn
+                </Text>
               </div>
               <Divider style={dividerStyle} width="132px" />
-              <Heading text="Beskrivning"></Heading>
+              <Text fontWeight="bold">Beskrivning</Text>
               <Text>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 Aliquam, hic voluptates dicta totam voluptate necessitatibus
@@ -100,9 +103,10 @@ const ListingCard = () => {
                 officia repellendus tenetur atque voluptatum id? At, voluptatem?
               </Text>
             </Stack>
+            <Text sx={locationStyle}>Angered</Text>
           </CardBody>
           <div style={dateStyle}>
-            <Heading text="Välj datum:"></Heading>
+            <Text fontWeight="bold">Välj datum:</Text>
           </div>
           <CardFooter style={cardFooterStyle}>
             <ButtonGroup spacing={20}>
