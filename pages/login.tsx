@@ -24,6 +24,7 @@ const LoginPage = () => {
             <Paragraph text="Har du inget konto? Registrera dig." />
         </ShadowContainer>
     )
+
 };
 
 export default LoginPage;

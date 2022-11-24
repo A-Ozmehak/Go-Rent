@@ -1,9 +1,14 @@
 import React from "react";
-import { Container } from '@chakra-ui/react'
+import { Box } from "@chakra-ui/layout";
 
-// Container around the forms 
 
-const ShadowContainer: React.FC = ({children}) => {
+interface ShadowContainerProps {
+  children?: React.ReactNode;
+}
+
+// Container around the forms
+
+const ShadowContainer = ({ children }: ShadowContainerProps) => {
   const shadowContainer = {
     boxShadow: "3px 3px 16px 3px rgba(0,0,0,0.21)",
     border: "1px solid #E7E7E7",
@@ -13,11 +18,9 @@ const ShadowContainer: React.FC = ({children}) => {
     flexDirection: "column",
     alignItems: "center",
     margin: "auto",
+  };
+  return <Box style={shadowContainer as React.CSSProperties}>{children}</Box>;
 
-}
-
-
-  return <Container sx={shadowContainer}>{children}</Container>;
 };
 
 export default ShadowContainer;
