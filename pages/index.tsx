@@ -1,5 +1,6 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
+import ListingCard from "../components/cards/ListingCard";
 import { Text, Heading, Box, Flex, Button, Center } from '@chakra-ui/react'
 import { placeholderListing } from "../mockData";
 
