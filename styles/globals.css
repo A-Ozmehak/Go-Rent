@@ -1,5 +1,7 @@
-/* html,
+html,
 body {
+  overflow-x: hidden;
+  background-color: #F7F7F7;
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
@@ -14,4 +16,49 @@ a {
 * {
   box-sizing: border-box;
 }
- */
+
+
+.listingBox:nth-child(even) {
+  background-color: #F0F0F0 !important;
+}
+.hero {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 60vh;
+}
+
+.hero-box {
+  font-size: 2rem;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.hero-box Button {
+  font-size: 1.4rem;
+  float: right;
+}
+
+.hero:before {
+  opacity: .4;
+  content: "";
+  background-image: url('https://images.squarespace-cdn.com/content/v1/55467dc6e4b0ebaf8fab24a0/38d5834c-d9b0-40fe-b46b-85a1afa96ebb/Rendering.jpg');
+  background-position: 1000px;
+  position: absolute;
+  right: -10rem;
+  width: 100%;
+  height: 60vh;
+}
+
+.placeholder {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  height: 30vh;
+  width: 100%;
+  background-position: 1000px;
+  background-image: url('https://www.alvsbyhus.se/AdaptiveImages/optimizely/1af56d9f-5e62-4b1e-8c30-99a2e7164ac9/ellaf12_s.jpg?croptop=86&cropbottom=2711&quality=75&width=1200&height=630&stamp=13b20965c95ffa352b85d3816f9ec251e461a168');
+}
+
+.placeholderText {
+  background-color: rgba(128, 128, 128, 0.781);
+}
