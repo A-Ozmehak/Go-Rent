@@ -19,7 +19,7 @@ const ShadowContainer = ({ children }: ShadowContainerProps) => {
     alignItems: "center",
     margin: "auto",
   };
-  return <Box style={shadowContainer as React.CSSProperties}>{children}</Box>;
+  return <Box sx={shadowContainer}>{children}</Box>;
 
 };
 
