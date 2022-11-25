@@ -62,7 +62,7 @@ const LoginForm = () => {
 
                         <Text>Glömt ditt lösenord?</Text>
                         <Box sx={btnDiv}>
-                            <Button variant="primary" type="submit">Logga in</Button>
+                            <Button variant="Primary" type="submit">Logga in</Button>
                         </Box>
                     </form>
                 )}

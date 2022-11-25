@@ -47,12 +47,6 @@ const CategoryCarousel = () => {
         color: "#006699" //should get color from theme instead
     }
 
-    const iconButtonStyle: SystemStyleObject = {
-        color: 'white',
-        borderRadius: '50%',
-        background: "#006699"
-    }
-
     return (
         <>
             {mediaQ600 ?
@@ -67,10 +61,9 @@ const CategoryCarousel = () => {
                         <SwiperSlide key={category.title} className="swiperSlide">
                             <IconButton
                                 mt={2}
-                                sx={iconButtonStyle}
                                 aria-label={"Category select"}
                                 icon={<category.icon />}
-                                // variant="primary" rätt färg men ingen knapp interaktion
+                                variant="iconBg"
                             />
                             <Text sx={catTextStyle}>{category.title}</Text>
                         </SwiperSlide>
@@ -89,10 +82,9 @@ const CategoryCarousel = () => {
                             {categories.map((category) => (
                                 <Box key={category.title} className="swiperSlide">
                                     <IconButton
-                                        sx={iconButtonStyle}
                                         aria-label={"Category select"}
                                         icon={<category.icon />}
-                                        // variant="primary" rätt färg men ingen knapp interaktion
+                                        variant="iconBg"
                                     />
                                     <Text sx={catTextStyle}>{category.title}</Text>
                                 </Box>

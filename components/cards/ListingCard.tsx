@@ -103,7 +103,7 @@ const ListingCard = () => {
           <CardFooter sx={cardFooterStyle}>
             <ButtonGroup spacing={20}>
               <Input sx={dateInputStyle} type="date" />
-              <Button variant="primary" colorScheme="blue">
+              <Button variant="Primary" colorScheme="blue">
                 Hyr
               </Button>
             </ButtonGroup>
