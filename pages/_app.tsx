@@ -8,11 +8,13 @@ import "@fontsource/inter";
 import "@fontsource/josefin-sans";
 import 'material-icons/iconfont/material-icons.css';
 import Footer from "../components/layout/Footer";
+import ProfileCard from "../components/cards/ProfileCard";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={Theme}>
       <Navbar />
+        <ProfileCard />
       <Component {...pageProps} />
       <Footer />
     </ChakraProvider>
