@@ -1,6 +1,11 @@
 import Head from "next/head";
-import { Text, Heading, Box, Flex, Button, Center } from "@chakra-ui/react";
+import styles from "../styles/Home.module.css";
+import ListingCard from "../components/cards/ListingCard";
+import { Text, Heading, Box, Flex, Button, Center } from '@chakra-ui/react'
+import { placeholderListing } from "../mockData";
+import CategoryCarousel from "../components/inputs/CategoryCarousel";
 import ListingPreviewCard from "../components/cards/ListingPreviewCard";
+
 
 export default function Index() {
   return (
@@ -10,6 +15,7 @@ export default function Index() {
         <meta name="description" content="Go:Rent Uthyrning" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <CategoryCarousel/>
       <div className="hero">
         <Box pt="8rem" px="3rem" className="hero-box">
           <h1>
