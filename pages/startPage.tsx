@@ -1,6 +1,4 @@
-import { Box, Center, Flex, Text } from "@chakra-ui/react";
-import styled from "@emotion/styled";
-import BookingForm from "../components/forms/BookingForm";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import { placeholderListing } from "../mockData";
 
 export default function StartPage() {
