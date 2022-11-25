@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <div style={{ backgroundColor: "var(--chakra-colors-brand-lightGray)" }}>
+    <Box sx={{ backgroundColor: "var(--chakra-colors-brand-lightGray)" }}>
       <Container maxW="1200px" p="1rem">
         <Flex>
           <Center>
@@ -30,6 +30,6 @@ export default function Navbar() {
           </Center>
         </Flex>
       </Container>
-    </div>
+    </Box>
   );
 }

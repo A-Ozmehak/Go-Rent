@@ -1,19 +1,11 @@
-import React from "react";
-import Image from "next/image";
-import Heading from "../typography/Heading";
 import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Stack,
-  Text,
-  Button,
-  ButtonGroup,
-  Divider,
-  propNames,
-  Box,
+  Box, Button,
+  ButtonGroup, Card, CardBody,
+  CardFooter, Divider, Input, Stack,
+  Text
 } from "@chakra-ui/react";
+import Image from "next/image";
+import React from "react";
 
 const ListingCard = () => {
   const profileImageStyle = {
@@ -71,7 +63,7 @@ const ListingCard = () => {
 
   return (
     <Box sx={hideOnDesktop}>
-      <div style={flexColumnCenter as React.CSSProperties}>
+      <Box sx={flexColumnCenter}>
         <Card p={0} backgroundColor="#F0F0F0" sx={cardWidth} maxW="sm">
           <Image
             src="/mockedListingCardPicture.png"
@@ -81,7 +73,7 @@ const ListingCard = () => {
           />
           <CardBody>
             <Stack mt="6" spacing="3">
-              <div style={flexCenter}>
+              <Box sx={flexCenter}>
                 <Image
                   style={profileImageStyle}
                   src="/monke.png"
@@ -93,8 +85,8 @@ const ListingCard = () => {
                 <Text fontWeight="bold" sx={priceStyle}>
                   100:- / dygn
                 </Text>
-              </div>
-              <Divider style={dividerStyle} width="132px" />
+              </Box>
+              <Divider sx={dividerStyle} width="132px" />
               <Text fontWeight="bold">Beskrivning</Text>
               <Text>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
@@ -105,19 +97,19 @@ const ListingCard = () => {
             </Stack>
             <Text sx={locationStyle}>Angered</Text>
           </CardBody>
-          <div style={dateStyle}>
+          <Box sx={dateStyle}>
             <Text fontWeight="bold">Välj datum:</Text>
-          </div>
-          <CardFooter style={cardFooterStyle}>
+          </Box>
+          <CardFooter sx={cardFooterStyle}>
             <ButtonGroup spacing={20}>
-              <input style={dateInputStyle} type="date" />
+              <Input sx={dateInputStyle} type="date" />
               <Button variant="primary" colorScheme="blue">
                 Hyr
               </Button>
             </ButtonGroup>
           </CardFooter>
         </Card>
-      </div>
+      </Box>
     </Box>
   );
 };

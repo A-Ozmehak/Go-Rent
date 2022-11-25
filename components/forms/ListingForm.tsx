@@ -6,21 +6,20 @@ import {
   FormErrorMessage,
 } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
-import PrimaryButton from "../buttons/PrimaryButton";
 import TextInput from "../inputs/TextInput";
 import { Flex, VStack, Text } from "@chakra-ui/layout";
 import {
   Alert,
   AlertDescription,
   AlertIcon,
+  Button,
+  Heading,
   Spinner,
   Textarea,
 } from "@chakra-ui/react";
-import Heading from "../typography/Heading";
 import { Select } from "@chakra-ui/select";
 import { categories } from "../../mockData";
 import { useDropzone } from "react-dropzone";
-import UploadButton from "../buttons/UploadButton";
 
 const ListingForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -68,11 +67,11 @@ const ListingForm = () => {
         media: "",
         price: 0,
       }}
-      onSubmit={(values) => {}}
+      onSubmit={(values) => { }}
     >
       {({ handleSubmit, errors, touched }) => (
         <form onSubmit={handleSubmit}>
-          <Heading text={"Skapa annons"} />
+          <Heading variant="h2">Skapa annons</Heading>
           <VStack spacing={4} align="flex-start">
             <FormControl isInvalid={!!errors.title && touched.title}>
               <FormLabel htmlFor="text">Titel</FormLabel>
@@ -113,7 +112,9 @@ const ListingForm = () => {
                 ) : !isDragActive ? (
                   <Flex alignItems="center">
                     <FormLabel htmlFor="media">Ladda upp bilder</FormLabel>
-                    <UploadButton title={"välj filer"} />
+                    <Input placeholder="Ladda upp bilder"
+                      size="md"
+                      type="file" />
                   </Flex>
                 ) : null}
               </Flex>
@@ -171,7 +172,7 @@ const ListingForm = () => {
               />
               <FormErrorMessage>{errors.description}</FormErrorMessage>
             </FormControl>
-            <PrimaryButton title="Skapa annons" type="submit" />
+            <Button variant="primary" type="submit">Skapa annons</Button>
           </VStack>
         </form>
       )}
