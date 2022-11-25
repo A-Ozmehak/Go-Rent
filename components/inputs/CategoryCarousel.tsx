@@ -49,7 +49,8 @@ const CategoryCarousel = () => {
 
     const iconButtonStyle: SystemStyleObject = {
         color: 'white',
-        borderRadius: '50%'
+        borderRadius: '50%',
+        background: "#006699"
     }
 
     return (
@@ -65,10 +66,11 @@ const CategoryCarousel = () => {
                     {categories.map((category) => (
                         <SwiperSlide key={category.title} className="swiperSlide">
                             <IconButton
+                                mt={2}
                                 sx={iconButtonStyle}
                                 aria-label={"Category select"}
                                 icon={<category.icon />}
-                                variant="primary"
+                                // variant="primary" rätt färg men ingen knapp interaktion
                             />
                             <Text sx={catTextStyle}>{category.title}</Text>
                         </SwiperSlide>
@@ -90,7 +92,7 @@ const CategoryCarousel = () => {
                                         sx={iconButtonStyle}
                                         aria-label={"Category select"}
                                         icon={<category.icon />}
-                                        variant="primary"
+                                        // variant="primary" rätt färg men ingen knapp interaktion
                                     />
                                     <Text sx={catTextStyle}>{category.title}</Text>
                                 </Box>
