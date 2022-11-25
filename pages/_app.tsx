@@ -1,4 +1,4 @@
-import "../styles/globals.css";
+import "../styles/globals.sass";
 import type { AppProps } from "next/app";
 import { ChakraProvider, Heading, Text, Box } from "@chakra-ui/react";
 import { Theme } from "../utils/theme";

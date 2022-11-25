@@ -14,7 +14,6 @@ type Props = {
 
 const TextInput = ({ as, id, name, type, variant, validate}: Props) => {
 
-   
   return (
         <Field
             as={as}
