@@ -75,7 +75,6 @@ export default function Index() {
           </Flex>
         </Flex>
       </div>
-      <Footer />
     </div>
   );
 }
