@@ -6,18 +6,24 @@ import {
     Text,
     Box, Image,
 } from "@chakra-ui/react";
+import SearchIcon from "../icons/editIcon";
 
 
 const ProfileCard = () => {
     const profileBox = {
-        width: {sm: '24.3rem', md: '50rem'},
-        background: '#DDDDDD'
+        width:  '100%',
+        height: '8em',
+        background: '#DDDDDD',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
+
     const profileImageStyle = {
         marginLeft: ".2rem",
         marginTop: '.2rem',
-        width: {sm: "2rem", md: "3rem"},
-        height: {sm: "2rem", md: "3rem"}
+        width: {sm: "2rem", md: "3rem", xl: "8rem"},
+        height: {sm: "2rem", md: "3rem", xl: "8rem"}
     };
     const profileContainer = {
         display: "flex",
@@ -29,12 +35,16 @@ const ProfileCard = () => {
     const userBio = {
         width: {sm: '10rem', md: '30rem'},
         marginLeft: '1rem',
-        padding: '0'
+        padding: '0',
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        background: '#EDEDED'
     }
 
     return (
         <Box sx={profileBox}>
             <Card
+
                 direction={{base: 'row', sm: 'row'}}
                 overflow='hidden'
                 variant='outline'
@@ -53,6 +63,7 @@ const ProfileCard = () => {
 
                 <CardBody sx={userBio}>
                     <p>Jag har för mycket prylar i mitt garage... Kan leverera inom en 1 mils radie.</p>
+                    <SearchIcon />
                 </CardBody>
 
             </Card>
