@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Box, Flex, IconButton, Link, SystemStyleObject, Text, useMediaQuery } from "@chakra-ui/react";
+import { Box, Flex, Heading, IconButton, Link, SystemStyleObject, Text, useMediaQuery } from "@chakra-ui/react";
 import { DirectionsCar, PhoneIphone, SportsTennis, Checkroom, Hardware, Celebration, NavigateNext } from '@mui/icons-material';
 import { Navigation } from "swiper";
 
@@ -42,13 +42,16 @@ const CategoryCarousel = () => {
         gap: '2rem'
     }
 
+    const catTextStyle: SystemStyleObject = {
+        fontSize: "1rem",
+        color: "#006699" //should get color from theme instead
+    }
+
     const iconButtonStyle: SystemStyleObject = {
-        background: '#006699',
         color: 'white',
         borderRadius: '50%'
     }
 
-    // Use theme instead of manually entering color.
     return (
         <>
             {mediaQ600 ?
@@ -65,17 +68,18 @@ const CategoryCarousel = () => {
                                 sx={iconButtonStyle}
                                 aria-label={"Category select"}
                                 icon={<category.icon />}
+                                variant="primary"
                             />
-                            <Text color="#006699">{category.title}</Text>
+                            <Text sx={catTextStyle}>{category.title}</Text>
                         </SwiperSlide>
                     ))}
                 </Swiper> :
                 <Flex w="100%" justifyContent="center" className="swiperStyle">
                     <Box>
                         <Flex justifyContent="space-between">
-                            <Text>Utforska efter kategori</Text>
+                            <Heading as="h4" size="sm">Utforska efter kategori</Heading>
                             <Link display="flex">
-                                <Text>Alla annonser</Text>
+                                <Heading as="h4" size="sm">Alla annonser</Heading>
                                 <NavigateNext />
                             </Link>
                         </Flex>
@@ -86,8 +90,9 @@ const CategoryCarousel = () => {
                                         sx={iconButtonStyle}
                                         aria-label={"Category select"}
                                         icon={<category.icon />}
+                                        variant="primary"
                                     />
-                                    <Text color="#006699">{category.title}</Text>
+                                    <Text sx={catTextStyle}>{category.title}</Text>
                                 </Box>
                             ))}
                         </Box>
