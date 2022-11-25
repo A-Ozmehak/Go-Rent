@@ -3,7 +3,8 @@ import styles from "../styles/Home.module.css";
 import ListingCard from "../components/cards/ListingCard";
 import { Text, Heading, Box, Flex, Button, Center } from "@chakra-ui/react";
 import { placeholderListing } from "../mockData";
-import Footer from "../components/layout/Footer";
+import CategoryCarousel from "../components/inputs/CategoryCarousel";
+import ListingPreviewCard from "../components/cards/ListingPreviewCard";
 
 export default function Index() {
   return (
@@ -13,6 +14,7 @@ export default function Index() {
         <meta name="description" content="Go:Rent Uthyrning" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <CategoryCarousel/>
       <div className="hero">
         <Box pt="8rem" px="3rem" className="hero-box">
           <h1>
@@ -23,34 +25,9 @@ export default function Index() {
         </Box>
       </div>
       <Text fontSize="2rem" pt="4rem" pl="2rem">
-        Senaste upplagt
+        Senast upplagt
       </Text>
-      <Flex direction="column">
-        {placeholderListing.map((listing) => (
-          <a key={listing.id} className="listingBox" href="#">
-            <Box>
-              <Flex direction="row" width="100%">
-                <img
-                  style={{ width: "30%", height: "30%", objectFit: "cover" }}
-                  src={listing.imageSrc}
-                  alt=""
-                />
-                <Box p="1rem" width="70%">
-                  <Flex
-                    height="100%"
-                    direction="column"
-                    justifyContent="space-around"
-                  >
-                    <Text textStyle="subHeader">{listing.title}</Text>
-                    <p>{listing.location}</p>
-                    <p style={{ alignSelf: "end" }}>fr {listing.price}</p>
-                  </Flex>
-                </Box>
-              </Flex>
-            </Box>
-          </a>
-        ))}
-      </Flex>
+      <ListingPreviewCard />
       <div className="placeholder">
         <Flex
           m="0 auto"

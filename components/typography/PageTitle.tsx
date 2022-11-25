@@ -1,7 +1,11 @@
 import React from "react";
 
-const PageTitle = () => {
-  return null;
+interface Props {
+  text: string;
+}
+
+const PageTitle = (props: Props) => {
+  return <h2>{props.text}</h2>
 };
 
 export default PageTitle;
