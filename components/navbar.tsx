@@ -1,5 +1,6 @@
 import { Flex, Spacer, Box, Center, Button, Container } from "@chakra-ui/react";
 import Link from "next/link";
+import UserStatusButton from "./buttons/UserStatusButton";
 
 export default function Navbar() {
   return (
@@ -25,6 +26,7 @@ export default function Navbar() {
               <Flex>
                 <h1>icon</h1>
                 <h1>icon</h1>
+                <UserStatusButton />
               </Flex>
             </Box>
           </Center>
