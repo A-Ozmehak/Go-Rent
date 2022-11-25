@@ -75,7 +75,6 @@ const ListingForm = () => {
       const result = await addDoc(dbInstance, values);
       router.push(`listing/${result.id}`);
     } catch (e) {
-      console.log(e);
       return;
     }
   };
@@ -94,7 +93,6 @@ const ListingForm = () => {
       }}
     >
       {({ handleSubmit, errors, touched, values, handleChange }) => {
-        console.log(values);
         return (
           <Form>
             <h1>Skapa annons</h1>
