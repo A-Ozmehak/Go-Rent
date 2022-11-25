@@ -8,7 +8,10 @@ type Props = {
 }
 
 const PrimaryButton = ({title, type}: Props) => {
-  return <Button variant="primary" type={type}>{title}</Button>;
+  const btn = {
+    width: {sm: "10rem", lg: "15rem"}
+  }
+  return <Button sx={btn} variant="primary" type={type}>{title}</Button>;
 };
 
 export default PrimaryButton;
