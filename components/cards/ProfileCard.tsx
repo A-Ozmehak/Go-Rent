@@ -12,18 +12,21 @@ import SearchIcon from "../icons/editIcon";
 const ProfileCard = () => {
     const profileBox = {
         width:  '100%',
-        height: '8em',
-        background: '#DDDDDD',
+        height: {base: '8em', lg: '10rem'},
+        background: {base: '#DDDDDD', xl: '#EDEDED'},
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
+    }
+    const card = {
+        width: {base: '100%', lg: '75%'}
     }
 
     const profileImageStyle = {
         marginLeft: ".2rem",
         marginTop: '.2rem',
-        width: {sm: "2rem", md: "3rem", xl: "8rem"},
-        height: {sm: "2rem", md: "3rem", xl: "8rem"}
+        width: {base: "2rem", md: "3rem", lg: "8rem"},
+        height: {base: "2rem", md: "3rem", lg: "8rem"}
     };
     const profileContainer = {
         display: "flex",
@@ -33,18 +36,18 @@ const ProfileCard = () => {
         marginTop: '.7rem'
     }
     const userBio = {
-        width: {sm: '10rem', md: '30rem'},
+        width: {base: '10rem', md: '30rem'},
         marginLeft: '1rem',
         padding: '0',
         display: 'flex',
         justifyContent: 'space-evenly',
-        background: '#EDEDED'
+        background: {base: '#EDEDED', xl: '#DDDDDD'}
     }
 
     return (
         <Box sx={profileBox}>
             <Card
-
+                sx={card}
                 direction={{base: 'row', sm: 'row'}}
                 overflow='hidden'
                 variant='outline'
