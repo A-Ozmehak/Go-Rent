@@ -1,17 +1,13 @@
 import React, { CSSProperties } from "react";
-import { Box, Text } from "@chakra-ui/react";
+import { AbsoluteCenter, Box, Text } from "@chakra-ui/react";
 import Link from "next/link";
 
 const Footer = () => {
   const mediaQueries = {
     display: { md: "flex" },
-    justifyContent: { md: "space-around" },
+    justifyContent: "center",
+    gap: {md: "2rem", lg: "10rem"},
     paddingTop: { md: "3.7rem", sm: "2rem" },
-  };
-
-  const footerStyle = {
-    backgroundColor: "#F1F1F1",
-    textAlign: "center",
   };
 
   const copyrightStyle = {
@@ -19,7 +15,7 @@ const Footer = () => {
   };
 
   return (
-    <footer style={footerStyle as CSSProperties}>
+    <footer>
       <Box sx={mediaQueries}>
         <Text pb=".3rem">Kontakta oss</Text>
         <Text pb=".3rem">
