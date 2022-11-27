@@ -13,7 +13,7 @@ export default function Navbar() {
         <Flex>
           <Center>
             <Box textStyle="logoText">
-              <h1>GO:RENT</h1>
+              <h1><Link href="/">GO:RENT</Link></h1>
             </Box>
           </Center>
           <Spacer />
