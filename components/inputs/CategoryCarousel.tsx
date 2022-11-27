@@ -1,9 +1,10 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Box, Flex, Heading, IconButton, Link, SystemStyleObject, Text, useMediaQuery } from "@chakra-ui/react";
+import { Box, Flex, Heading, IconButton, SystemStyleObject, Text, useMediaQuery } from "@chakra-ui/react";
 import { DirectionsCar, PhoneIphone, SportsTennis, Checkroom, Hardware, Celebration, NavigateNext } from '@mui/icons-material';
 import { Navigation } from "swiper";
+import Link from "next/link";
 
 
 const categories = [
@@ -44,7 +45,7 @@ const CategoryCarousel = () => {
 
     const catTextStyle: SystemStyleObject = {
         fontSize: "1rem",
-        color: "#006699" //should get color from theme instead
+        color: "#005799" //should get color from theme instead
     }
 
     return (
@@ -73,9 +74,11 @@ const CategoryCarousel = () => {
                     <Box>
                         <Flex justifyContent="space-between">
                             <Heading as="h4" size="sm">Utforska efter kategori</Heading>
-                            <Link display="flex">
-                                <Heading as="h4" size="sm">Alla annonser</Heading>
-                                <NavigateNext />
+                            <Link href="listings/all">
+                                <Flex>
+                                    <Heading as="h4" size="sm">Alla annonser</Heading>
+                                    <NavigateNext />
+                                </Flex>
                             </Link>
                         </Flex>
                         <Box sx={categoriesLarge}>

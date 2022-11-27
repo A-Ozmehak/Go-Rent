@@ -1,7 +1,9 @@
 import React from "react";
 import ShadowContainer from "../components/layout/ShadowContainer";
 import SignupForm from "../components/forms/SignupForm";
-import { Heading, Link, Text } from "@chakra-ui/react";
+import { Heading, Text } from "@chakra-ui/react";
+import Link from "next/link";
+
 
 const RegisterPage = () => {
     return (

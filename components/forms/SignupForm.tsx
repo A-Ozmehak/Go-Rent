@@ -93,7 +93,7 @@ const SignupForm = () => {
                     <FormErrorMessage>{errors.password}</FormErrorMessage>
                   </FormControl>
 
-                  <Button type="submit">Registrera dig</Button>
+                  <Button variant="Primary" type="submit">Registrera dig</Button>
                 </form>
             )}
           </Formik>
