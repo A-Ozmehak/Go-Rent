@@ -31,9 +31,10 @@ const ListingForm = () => {
     media: string;
     price: number;
   }
+import { ListingDoc } from "../../utils/interface";
 
+const ListingForm = () => {
   const [categories, setCategories] = useState<DocumentData[]>([]);
-
   const [loading, setLoading] = useState<boolean>(true);
   const categoriesCollection = collection(db, "category");
 
