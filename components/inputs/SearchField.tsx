@@ -8,7 +8,7 @@ const SearchField = () => {
   const handleSearch = (search: string) => {
     const query = search;
     try {
-      router.push(`filter/${query}`);
+      router.push(`/filter/${query}`);
     } catch (e) {
       return;
     }
