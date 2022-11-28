@@ -24,8 +24,16 @@ const UserStatusButton = () => {
   };
   return (
     <Box>
-      {user && <Button onClick={logOut}>Logga ut</Button>}
-      {!user && <Button onClick={() => router.push("/login")}>Logga in</Button>}
+      {user && (
+        <Button variant="primary" onClick={logOut}>
+          Placeholder Logga ut
+        </Button>
+      )}
+      {!user && (
+        <Button variant="primary" onClick={() => router.push("/login")}>
+          Placeholder Logga in
+        </Button>
+      )}
     </Box>
   );
 };
