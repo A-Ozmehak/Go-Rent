@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import Heading from "../typography/Heading";
 import {
   Card,
   CardHeader,
@@ -14,8 +13,15 @@ import {
   propNames,
   Box,
 } from "@chakra-ui/react";
+import { listingInterface } from "../../utils/interface";
 
-const ListingCard = () => {
+
+interface props {
+  listing: listingInterface
+}
+
+
+const ListingCard = ({listing} : props) => {
   const profileImageStyle = {
     marginRight: ".5rem",
   };
@@ -74,7 +80,7 @@ const ListingCard = () => {
       <div style={flexColumnCenter as React.CSSProperties}>
         <Card p={0} backgroundColor="#F0F0F0" sx={cardWidth} maxW="sm">
           <Image
-            src="/mockedListingCardPicture.png"
+            src={listing.imageSrc}
             alt="mocked"
             width="500"
             height="500"
@@ -84,26 +90,21 @@ const ListingCard = () => {
               <div style={flexCenter}>
                 <Image
                   style={profileImageStyle}
-                  src="/monke.png"
+                  src={listing.user.image}
                   alt="profile picture"
                   width="28"
                   height="28"
                 />
-                <Text fontWeight="bold">Monke</Text>
+                <Text fontWeight="bold">{listing.user.name}</Text>
                 <Text fontWeight="bold" sx={priceStyle}>
                   100:- / dygn
                 </Text>
               </div>
               <Divider style={dividerStyle} width="132px" />
               <Text fontWeight="bold">Beskrivning</Text>
-              <Text>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Aliquam, hic voluptates dicta totam voluptate necessitatibus
-                autem incidunt odit, consectetur placeat fugiat, recusandae
-                officia repellendus tenetur atque voluptatum id? At, voluptatem?
-              </Text>
+              <Text>{listing.description}</Text>
             </Stack>
-            <Text sx={locationStyle}>Angered</Text>
+            <Text sx={locationStyle}>{listing.location}</Text>
           </CardBody>
           <div style={dateStyle}>
             <Text fontWeight="bold">Välj datum:</Text>

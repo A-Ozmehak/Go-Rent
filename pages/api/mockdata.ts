@@ -10,7 +10,11 @@ export const placeholderListing : listingInterface[] = [
         "id": "1",
         "location": "Kärra - Göteborg",
         "price": 1200,
-        "owner": "test",
+        "description": "test",
+        "user": {
+            "image": "https://images.ctfassets.net/pg6xj64qk0kh/2r4QaBLvhQFH1mPGljSdR9/39b737d93854060282f6b4a9b9893202/camden-paces-apartments-buckhead-ga-terraces-living-room-with-den_1.jpg",
+            "name": "test"
+        },
         "imageSrc": "https://images.ctfassets.net/pg6xj64qk0kh/2r4QaBLvhQFH1mPGljSdR9/39b737d93854060282f6b4a9b9893202/camden-paces-apartments-buckhead-ga-terraces-living-room-with-den_1.jpg"
     },
     {
@@ -18,7 +22,11 @@ export const placeholderListing : listingInterface[] = [
         "id": "2",
         "location": "Kärra - Göteborg",
         "price": 1200,
-        "owner": "test",
+        "description": "test",
+        "user": {
+            "image": "https://images.ctfassets.net/pg6xj64qk0kh/2r4QaBLvhQFH1mPGljSdR9/39b737d93854060282f6b4a9b9893202/camden-paces-apartments-buckhead-ga-terraces-living-room-with-den_1.jpg",
+            "name": "test"
+        },
         "imageSrc": "https://images.ctfassets.net/pg6xj64qk0kh/2r4QaBLvhQFH1mPGljSdR9/39b737d93854060282f6b4a9b9893202/camden-paces-apartments-buckhead-ga-terraces-living-room-with-den_1.jpg"
     },
     {
@@ -26,7 +34,11 @@ export const placeholderListing : listingInterface[] = [
         "id": "3",
         "location": "Kärra - Göteborg",
         "price": 1200,
-        "owner": "test",
+        "description": "test",
+        "user": {
+            "image": "https://images.ctfassets.net/pg6xj64qk0kh/2r4QaBLvhQFH1mPGljSdR9/39b737d93854060282f6b4a9b9893202/camden-paces-apartments-buckhead-ga-terraces-living-room-with-den_1.jpg",
+            "name": "test"
+        },
         "imageSrc": "https://images.ctfassets.net/pg6xj64qk0kh/2r4QaBLvhQFH1mPGljSdR9/39b737d93854060282f6b4a9b9893202/camden-paces-apartments-buckhead-ga-terraces-living-room-with-den_1.jpg"
     },
     {
@@ -34,7 +46,11 @@ export const placeholderListing : listingInterface[] = [
         "id": "4",
         "location": "Kärra - Göteborg",
         "price": 1200,
-        "owner": "test",
+        "description": "test",
+        "user": {
+            "image": "https://images.ctfassets.net/pg6xj64qk0kh/2r4QaBLvhQFH1mPGljSdR9/39b737d93854060282f6b4a9b9893202/camden-paces-apartments-buckhead-ga-terraces-living-room-with-den_1.jpg",
+            "name": "test"
+        },
         "imageSrc": "https://images.ctfassets.net/pg6xj64qk0kh/2r4QaBLvhQFH1mPGljSdR9/39b737d93854060282f6b4a9b9893202/camden-paces-apartments-buckhead-ga-terraces-living-room-with-den_1.jpg"
     },
     {
@@ -42,7 +58,11 @@ export const placeholderListing : listingInterface[] = [
         "id": "5",
         "location": "Kärra - Göteborg",
         "price": 1200,
-        "owner": "test",
+        "description": "test",
+        "user": {
+            "image": "https://images.ctfassets.net/pg6xj64qk0kh/2r4QaBLvhQFH1mPGljSdR9/39b737d93854060282f6b4a9b9893202/camden-paces-apartments-buckhead-ga-terraces-living-room-with-den_1.jpg",
+            "name": "test"
+        },
         "imageSrc": "https://images.ctfassets.net/pg6xj64qk0kh/2r4QaBLvhQFH1mPGljSdR9/39b737d93854060282f6b4a9b9893202/camden-paces-apartments-buckhead-ga-terraces-living-room-with-den_1.jpg"
     },
 ]

@@ -38,7 +38,7 @@ export default function Index(props : any) {
             En klimatsatsning från Göteborgs stad, lär dig hur du kan göra
             skillnad.
           </h1>
-          <Button variant="primary">Läs mer</Button>
+          <Button variant="Primary">Läs mer</Button>
         </Box>
       </div>
       <Text fontSize="2rem" pt="4rem" pl="2rem">

@@ -4,5 +4,9 @@ export interface listingInterface {
     location: string,
     price: number,
     imageSrc: string,
-    owner: string,
+    description: string,
+    user: {
+        image: string,
+        name: string
+    }
 }

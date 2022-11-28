@@ -1,12 +1,17 @@
+
+import { Box, Button, Container, Flex, Link } from "@chakra-ui/react";
+import Image from "next/image";
 import React from 'react'
+import ListingCard from "../../components/cards/ListingCard";
+import BookingForm from "../../components/forms/BookingForm";
 import { listingInterface } from '../../utils/interface'
 
 
 const ListingPage = ({listing} : any) => {
     return(
-        <div>
-            <h1></h1>
-        </div>
+      <Container>
+        <ListingCard listing={listing} />
+      </Container>
     )
 }
 export default ListingPage

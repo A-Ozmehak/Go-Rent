@@ -17,7 +17,6 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { Select } from "@chakra-ui/select";
-import { categories } from "../../mockData";
 import { useDropzone } from "react-dropzone";
 import { DownloadIcon } from "@chakra-ui/icons";
 import { collection, addDoc } from "firebase/firestore";
@@ -117,7 +116,7 @@ const ListingForm = () => {
               </FormControl>
               <FormControl isInvalid={!!errors.category && touched.category}>
                 <FormLabel htmlFor="text">Kategori</FormLabel>
-                <Select
+                {/* <Select
                   name="category"
                   value={values.category}
                   onChange={handleChange}
@@ -130,7 +129,7 @@ const ListingForm = () => {
                       </option>
                     );
                   })}
-                </Select>
+                </Select> */}
                 <FormErrorMessage>{errors.category}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={!!errors.media && touched.media}>
