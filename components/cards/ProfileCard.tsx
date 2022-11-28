@@ -5,9 +5,13 @@ import {
     Box, Image,
 } from "@chakra-ui/react";
 import EditIcon from "../icons/editIcon";
-import {profile} from "../../pages/profile/mockdata";
+import {profileInterface} from "../../utils/interface";
 
-const ProfileCard = () => {
+interface props {
+    profileInfo: profileInterface[]
+}
+
+const ProfileCard = ({profileInfo}: props) => {
     const profileBox = {
         width:  '100%',
         height: {base: '8em', lg: '10rem'},
@@ -55,7 +59,7 @@ const ProfileCard = () => {
                 overflow='hidden'
                 variant='outline'
             >
-                {profile.map((profileInfo) => (
+                {profileInfo.map((profileInfo) => (
                     <div style={container} key={profileInfo.id}>
                         <div style={profileContainer}>
                             <Image
@@ -76,10 +80,7 @@ const ProfileCard = () => {
 
                         </CardBody>
                     </div>
-
                 ))}
-
-
             </Card>
         </Box>
     )
