@@ -22,15 +22,6 @@ import {
 import { db } from "../../config/firebase";
 import router from "next/router";
 import UploadMedia from "./UploadMedia";
-
-const ListingForm = () => {
-  interface ListingDoc {
-    title: string;
-    description: string;
-    category: string;
-    media: string;
-    price: number;
-  }
 import { ListingDoc } from "../../utils/interface";
 
 const ListingForm = () => {
