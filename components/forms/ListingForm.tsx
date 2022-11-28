@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, Formik } from "formik";
 import {
   FormControl,
@@ -7,58 +7,28 @@ import {
 } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
 import TextInput from "../inputs/TextInput";
-import { Flex, VStack } from "@chakra-ui/layout";
-import {
-  Alert,
-  AlertDescription,
-  AlertIcon,
-  Button,
-  Heading,
-  Spinner,
-  Textarea,
-} from "@chakra-ui/react";
+import { VStack } from "@chakra-ui/layout";
+import { Button, Textarea } from "@chakra-ui/react";
 import { Select } from "@chakra-ui/select";
-import { useDropzone } from "react-dropzone";
-import { DownloadIcon } from "@chakra-ui/icons";
-import { collection, addDoc } from "firebase/firestore";
+
+import {
+  collection,
+  addDoc,
+  getDoc,
+  DocumentData,
+  query,
+  QueryDocumentSnapshot,
+  getDocs,
+} from "firebase/firestore";
+
 import { db } from "../../config/firebase";
 import router from "next/router";
+import UploadMedia from "./UploadMedia";
 
 const ListingForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [message, setMessage] = useState("");
-
-  const onDrop = useCallback(async (acceptedFiles: any) => {
-    const file = acceptedFiles?.[0];
-
-    const uploadFile = async function () {
-      return null;
-    };
-
-    if (!file) {
-      return;
-    }
-
-    setIsLoading(true);
-    setError(null);
-    setMessage("");
-
-    try {
-      await uploadFile();
-      //what do do with file
-    } catch (error) {
-      setIsLoading(false);
-      //   setError(e)
-      return;
-    }
-
-    setIsLoading(false);
-    setMessage("Uppladdningen lyckades!");
-  }, []);
-
-  //   dropzone is to drag pictures, if to be implemented on desktop later.
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   interface ListingDoc {
     title: string;
@@ -67,6 +37,33 @@ const ListingForm = () => {
     media: string;
     price: number;
   }
+
+  const [categories, setCategories] = useState<
+    QueryDocumentSnapshot<DocumentData>[]
+  >([]);
+
+  const [loading, setLoading] = useState<boolean>(true);
+  const categoriesCollection = collection(db, "category");
+
+  const getCategories = async () => {
+    const categoriesQuery = query(categoriesCollection);
+    const querySnapshot = await getDocs(categoriesQuery);
+
+    const result: QueryDocumentSnapshot<DocumentData>[] = [];
+    querySnapshot.forEach((snapshot) => {
+      result.push(snapshot);
+    });
+
+    setCategories(result);
+  };
+
+  useEffect(() => {
+    getCategories();
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
 
   const handleSubmit = async (values: ListingDoc) => {
     const dbInstance = collection(db, "listing");
@@ -117,7 +114,7 @@ const ListingForm = () => {
               </FormControl>
               <FormControl isInvalid={!!errors.category && touched.category}>
                 <FormLabel htmlFor="text">Kategori</FormLabel>
-                {/* <Select
+                <Select
                   name="category"
                   value={values.category}
                   onChange={handleChange}
@@ -125,39 +122,16 @@ const ListingForm = () => {
                 >
                   {categories.map((category) => {
                     return (
-                      <option key={category.id} value={category.title}>
-                        {category.title}
-                      </option>
+                      <option key={category.id}>{/* {category.name} */}</option>
                     );
                   })}
-                </Select> */}
+                </Select>
                 <FormErrorMessage>{errors.category}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={!!errors.media && touched.media}>
-                <Flex {...getRootProps()}>
-                  <input name="media" {...getInputProps()} />
-                  {isLoading ? (
-                    <Spinner />
-                  ) : !isDragActive ? (
-                    <Flex alignItems="center">
-                      <FormLabel htmlFor="media">Ladda upp bilder</FormLabel>
-                      <Button leftIcon={<DownloadIcon />}>Välj filer</Button>
-                    </Flex>
-                  ) : null}
-                </Flex>
-                {(error || message) && (
-                  <Alert
-                    status={error ? "error" : "success"}
-                    w={250}
-                    borderRadius={5}
-                    m={2}
-                  >
-                    <AlertIcon />
-                    <AlertDescription w={200}>
-                      {error || message}
-                    </AlertDescription>
-                  </Alert>
-                )}
+                <Button>
+                  <UploadMedia />
+                </Button>
               </FormControl>
               <FormControl isInvalid={!!errors.price && touched.price}>
                 <FormLabel htmlFor="text">Pris per dygn</FormLabel>
@@ -167,9 +141,9 @@ const ListingForm = () => {
                   name="price"
                   type="number"
                   variant="filled"
-                  validate={(value: string) => {
+                  validate={(value: number) => {
                     let error;
-                    if (value.length < 1) {
+                    if (value < 1) {
                       error = "Skriv in ett pris";
                     }
                     return error;
