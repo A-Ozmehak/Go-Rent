@@ -1,17 +1,17 @@
 import React from "react";
 import ShadowContainer from "../components/layout/ShadowContainer";
 import SignupForm from "../components/forms/SignupForm";
-import Heading from "../components/typography/Heading";
-import PageTitle from "../components/typography/PageTitle";
-import Paragraph from "../components/typography/Paragraph";
+import { Heading, Text } from "@chakra-ui/react";
+import Link from "next/link";
+
 
 const RegisterPage = () => {
     return (
         <ShadowContainer>
-            <Heading text="Registrera dig" />
-            <PageTitle text="för att också bli en klimathjälte!"/>
+            <Heading>Registrera dig</Heading>
+            <Heading>för att också bli en klimathjälte!</Heading>
             <SignupForm/>
-            <Paragraph text="Har du redan ett konto? Logga in!"/>
+            <Text>Har du redan ett konto? <Link href="/login">Logga in!</Link></Text>
         </ShadowContainer>
     )
 };

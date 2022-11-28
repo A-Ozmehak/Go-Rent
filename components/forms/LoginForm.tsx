@@ -1,14 +1,16 @@
 import React from "react";
 import { Formik } from "formik";
+
 import {
   FormControl,
   FormErrorMessage,
   FormLabel,
   Input,
+  Box,
+  Button,
+  Text,
 } from "@chakra-ui/react";
 import TextInput from "../inputs/TextInput";
-import PrimaryButton from "../buttons/PrimaryButton";
-import Paragraph from "../typography/Paragraph";
 import { app } from "../../firebase/firebaseConfig";
 import {
   getAuth,
@@ -111,15 +113,69 @@ const LoginForm = () => {
               <FormErrorMessage>{errors.password}</FormErrorMessage>
             </FormControl>
 
-            <Paragraph text="Glömt ditt lösenord?" />
+            <Text>Glömt ditt lösenord?</Text>
             <div style={btnDiv}>
-              <PrimaryButton title="Logga in" type="submit" />
+              <Button variant="Primary" type="submit">
+                Logga in
+              </Button>
             </div>
           </form>
         )}
       </Formik>
     </div>
   );
+  //                 onSubmit={(values) => {
+  //                 }}
+  //             >
+  //                 {({ handleSubmit, errors, touched }) => (
+  //                     <form onSubmit={handleSubmit}>
+  //                         <FormControl isInvalid={!!errors.email && touched.email}>
+  //                             <FormLabel htmlFor="email">Email</FormLabel>
+  //                             <TextInput
+  //                                 as={Input}
+  //                                 id="email"
+  //                                 name="email"
+  //                                 type="email"
+  //                                 variant="filled"
+  //                                 validate={(value: string) => {
+  //                                     let error;
+  //                                     if (value.length < 5) {
+  //                                         error = "Skriv in en email"
+  //                                     }
+  //                                     return error
+  //                                 }}
+  //                             />
+  //                             <FormErrorMessage>{errors.email}</FormErrorMessage>
+  //                         </FormControl>
+  //                         <FormControl isInvalid={!!errors.password && touched.password}>
+  //                             <FormLabel htmlFor="password">Lösenord</FormLabel>
+  //                             <TextInput
+  //                                 as={Input}
+  //                                 id="password"
+  //                                 name="password"
+  //                                 type="password"
+  //                                 variant="filled"
+  //                                 validate={(value: string) => {
+  //                                     let error;
+  //                                     if (value.length < 5) {
+  //                                         error = "Lösenordet måste vara längre än 6 karaktärer"
+  //                                     }
+  //                                     return error
+  //                                 }}
+  //                             />
+  //                             <FormErrorMessage>{errors.password}</FormErrorMessage>
+  //                         </FormControl>
+
+  //                         <Text>Glömt ditt lösenord?</Text>
+  //                         <Box sx={btnDiv}>
+  //                             <Button variant="Primary" type="submit">Logga in</Button>
+  //                         </Box>
+  //                     </form>
+  //                 )}
+  //             </Formik>
+  //         </div>
+  //     )
+  // >>>>>>> main
 };
 
 export default LoginForm;
