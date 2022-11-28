@@ -13,13 +13,14 @@ const ShadowContainer = ({ children }: ShadowContainerProps) => {
     boxShadow: "3px 3px 16px 3px rgba(0,0,0,0.21)",
     border: "1px solid #E7E7E7",
     width: {sm: "20rem", md: "35rem", xl: "50rem"},
-    height: "40rem",
+    height: "max-content",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     margin: "auto",
+    padding: "1rem 0"
   };
-  return <Box style={shadowContainer as React.CSSProperties}>{children}</Box>;
+  return <Box sx={shadowContainer}>{children}</Box>;
 
 };
 
