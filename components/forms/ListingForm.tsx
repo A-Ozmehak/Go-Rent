@@ -23,6 +23,7 @@ import { DownloadIcon } from "@chakra-ui/icons";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import router from "next/router";
+import { ListingDoc } from "../../utils/interface";
 
 const ListingForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -60,13 +61,6 @@ const ListingForm = () => {
   //   dropzone is to drag pictures, if to be implemented on desktop later.
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
-  interface ListingDoc {
-    title: string;
-    description: string;
-    category: string;
-    media: string;
-    price: number;
-  }
 
   const handleSubmit = async (values: ListingDoc) => {
     const dbInstance = collection(db, "listing");

@@ -17,25 +17,62 @@ import {
 import { CalendarIcon } from "@chakra-ui/icons";
 import dayjs from "dayjs";
 import "dayjs/locale/sv";
+import { ListingDoc, listingInterface } from "../../utils/interface";
+import { collection, addDoc } from "firebase/firestore";
+import router from "next/router";
+import { db } from "../../config/firebase";
 
-const BookingForm = () => {
+
+interface props {
+  listing : listingInterface
+}
+
+
+const BookingForm = ({listing} : props) => {
+
+
+  
   // TODO: Ändra sen, är om en användare är inloggad
   const loggedInUser = true;
-
+  
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  
   const [selectedStart, setSelectedStart] = useState(dayjs());
   const [selectedEnd, setSelectedEnd] = useState(dayjs());
-
+  
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
-
+  
   const setDate = (dates: [any, any]) => {
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
     setSelectedEnd(end);
     setSelectedStart(start);
+  };
+  const handleSubmit = async () => {
+    const dbInstance = collection(db, "bookings");
+    console.log(startDate, endDate)
+    let totalDays = dayjs(endDate).diff(dayjs(startDate), "days")
+    let totalPrice = totalDays * listing.price
+    let value = {
+      "Seller": listing.user.name,
+      "Buyer": "testBuyer", // LOGGED IN USER 
+      "Status": "Pending", // PENDING AS START VALUE
+      "bookingDetails": {
+        "bookingStartDate": startDate,
+        "bookingEndDate": endDate, 
+        "totalDays": totalDays,
+        "totalPrice": totalPrice
+      }
+    }
+    console.log(value)
+    // AV KOMMENTERA NÄR DATABAS ÄR SETUP ^^
+    // try {
+    //   const result = await addDoc(dbInstance, value);
+    // } catch (e) {
+    //   return;
+    // }
   };
 
   const SelectedDays = () => {
@@ -114,7 +151,7 @@ const BookingForm = () => {
             </Button>
             {loggedInUser ? (
               // Primary
-              <Button onClick={submitBooking}>Skicka förfrågan</Button>
+              <Button onClick={handleSubmit}>Skicka förfrågan</Button>
             ) : (
               <Text>
                 Du måste vara inloggad för att skicka en bokningsförfrågan

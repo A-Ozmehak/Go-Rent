@@ -21,8 +21,6 @@ export async function getStaticProps() {
   }
 }
 
-
-
 export default function Index(props : any) {
   let listings : listingInterface[] = props.listings
   return (  

@@ -10,3 +10,12 @@ export interface listingInterface {
         name: string
     }
 }
+
+
+export interface ListingDoc {
+    title: string;
+    description: string;
+    category: string;
+    media: string;
+    price: number;
+}
