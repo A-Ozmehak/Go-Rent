@@ -12,10 +12,19 @@ export interface listingInterface {
 }
 
 
+export interface profileInterface {
+    image?: string;
+    username?: string;
+    location?: string;
+    bio?: string;
+    id?: string;
+}
+
 export interface ListingDoc {
     title: string;
     description: string;
     category: string;
     media: string;
     price: number;
+
 }

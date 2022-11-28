@@ -1,5 +1,6 @@
 import React from "react";
 import { useRouter } from 'next/router'
+import ProfileCard from "../../components/cards/ProfileCard";
 
 const ProfilePage = () => {
    const {
@@ -10,6 +11,7 @@ const ProfilePage = () => {
     return(
         <div>
             <h1>{profile}</h1>
+            <ProfileCard />
         </div>
     )
 };
