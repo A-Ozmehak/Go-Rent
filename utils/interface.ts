@@ -18,7 +18,7 @@ export interface profileInterface {
     location?: string;
     bio?: string;
     id?: string;
-
+}
 
 export interface ListingDoc {
     title: string;
