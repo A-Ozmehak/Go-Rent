@@ -1,9 +1,49 @@
-import { Flex, Spacer, Box, Center, Button, Container } from "@chakra-ui/react";
+import {
+  Flex,
+  Spacer,
+  Box,
+  Center,
+  Button,
+  Container,
+  Popover,
+  PopoverTrigger,
+  PopoverCloseButton,
+  PopoverHeader,
+  PopoverBody,
+  PopoverContent,
+  PopoverArrow,
+  Text,
+  PopoverFooter,
+} from "@chakra-ui/react";
 import Link from "next/link";
-import UserStatusButton from "./buttons/UserStatusButton";
 import SubHeader from "./subHeader";
+import SearchIcon from "@mui/icons-material/Search";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { getAuth, signOut } from "firebase/auth";
+import { app } from "../firebase/firebaseConfig";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useRouter } from "next/router";
+import SearchField from "./inputs/SearchField";
+import { useState } from "react";
 
 export default function Navbar() {
+  const auth = getAuth(app);
+  const [user, loading] = useAuthState(auth);
+  const [search, setSearch] = useState(false);
+  const router = useRouter();
+  const logOut = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        // alert("Sign out successful!");
+        router.push("/login");
+      })
+      .catch((error) => {
+        // An error happened.
+        alert("An error has occurred please try again.");
+      });
+  };
+
   const addButtonStyle = {
     boxShadow: "3px 3px 16px 3px rgba(0, 0, 0, 0.1)",
     borderRadius: "12px",
@@ -32,13 +72,63 @@ export default function Navbar() {
           </Center>
           <Spacer />
           <Center>
-            <Box>
-              <Flex>
-                <h1>icon</h1>
-                <h1>icon</h1>
-                <UserStatusButton />
-              </Flex>
-            </Box>
+            <Flex>
+              {!search ? (
+                <SearchIcon
+                  style={{
+                    marginRight: "1rem",
+                    fontSize: "2rem",
+                    cursor: "pointer",
+                    color: "#005799",
+                  }}
+                  onClick={() => setSearch(true)}
+                />
+              ) : (
+                <SearchField />
+              )}
+              <Popover>
+                <PopoverTrigger>
+                  <AccountCircleIcon
+                    style={{
+                      fontSize: "2rem",
+                      cursor: "pointer",
+                      color: "#005799",
+                      marginLeft: "1rem",
+                    }}
+                  ></AccountCircleIcon>
+                </PopoverTrigger>
+                <PopoverContent>
+                  <PopoverArrow />
+                  <PopoverCloseButton />
+                  <PopoverBody
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="center"
+                  >
+                    {user && (
+                      <>
+                        <Link href="/profile">
+                          <Text>Min profil</Text>
+                        </Link>
+                        <Link href="/profile">
+                          <Text onClick={logOut}>Logga ut</Text>
+                        </Link>
+                      </>
+                    )}
+                    {!user && (
+                      <>
+                        <Link href="/login">
+                          <Text>Logga in</Text>
+                        </Link>
+                        <Link href="/register">
+                          <Text>Registrera dig</Text>
+                        </Link>
+                      </>
+                    )}
+                  </PopoverBody>
+                </PopoverContent>
+              </Popover>
+            </Flex>
           </Center>
         </Flex>
       </Container>
