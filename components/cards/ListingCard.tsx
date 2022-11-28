@@ -1,21 +1,20 @@
-import React from "react";
-import Image from "next/image";
-import Heading from "../typography/Heading";
 import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Stack,
-  Text,
-  Button,
-  ButtonGroup,
-  Divider,
-  propNames,
-  Box,
+  Box, Button,
+  ButtonGroup, Card, CardBody,
+  CardFooter, Divider, Input, Stack,
+  Text
 } from "@chakra-ui/react";
+import { listingInterface } from "../../utils/interface";
+import Image from "next/image";
+import React from "react";
 
-const ListingCard = () => {
+
+interface props {
+  listing: listingInterface
+}
+
+
+const ListingCard = ({listing} : props) => {
   const profileImageStyle = {
     marginRight: ".5rem",
   };
@@ -71,53 +70,48 @@ const ListingCard = () => {
 
   return (
     <Box sx={hideOnDesktop}>
-      <div style={flexColumnCenter as React.CSSProperties}>
+      <Box sx={flexColumnCenter}>
         <Card p={0} backgroundColor="#F0F0F0" sx={cardWidth} maxW="sm">
           <Image
-            src="/mockedListingCardPicture.png"
+            src={listing.imageSrc}
             alt="mocked"
             width="500"
             height="500"
           />
           <CardBody>
             <Stack mt="6" spacing="3">
-              <div style={flexCenter}>
+              <Box sx={flexCenter}>
                 <Image
                   style={profileImageStyle}
-                  src="/monke.png"
+                  src={listing.user.image}
                   alt="profile picture"
                   width="28"
                   height="28"
                 />
-                <Text fontWeight="bold">Monke</Text>
+                <Text fontWeight="bold">{listing.user.name}</Text>
                 <Text fontWeight="bold" sx={priceStyle}>
                   100:- / dygn
                 </Text>
-              </div>
-              <Divider style={dividerStyle} width="132px" />
+              </Box>
+              <Divider sx={dividerStyle} width="132px" />
               <Text fontWeight="bold">Beskrivning</Text>
-              <Text>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Aliquam, hic voluptates dicta totam voluptate necessitatibus
-                autem incidunt odit, consectetur placeat fugiat, recusandae
-                officia repellendus tenetur atque voluptatum id? At, voluptatem?
-              </Text>
+              <Text>{listing.description}</Text>
             </Stack>
-            <Text sx={locationStyle}>Angered</Text>
+            <Text sx={locationStyle}>{listing.location}</Text>
           </CardBody>
-          <div style={dateStyle}>
+          <Box sx={dateStyle}>
             <Text fontWeight="bold">Välj datum:</Text>
-          </div>
-          <CardFooter style={cardFooterStyle}>
+          </Box>
+          <CardFooter sx={cardFooterStyle}>
             <ButtonGroup spacing={20}>
-              <input style={dateInputStyle} type="date" />
-              <Button variant="primary" colorScheme="blue">
+              <Input sx={dateInputStyle} type="date" />
+              <Button variant="Primary" colorScheme="blue">
                 Hyr
               </Button>
             </ButtonGroup>
           </CardFooter>
         </Card>
-      </div>
+      </Box>
     </Box>
   );
 };
