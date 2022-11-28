@@ -9,7 +9,7 @@ import { listingInterface } from "../utils/interface";
 export async function getStaticProps() {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  const res = await fetch('http://localhost:3000/api/mockdata')
+  const res = await fetch('http://localhost:3000/api/listings')
   const listings = await res.json()
 
   // By returning { props: { posts } }, the Blog component
@@ -23,6 +23,7 @@ export async function getStaticProps() {
 
 export default function Index(props : any) {
   let listings : listingInterface[] = props.listings
+  listings.length = 4
   return (  
     <div>
       <Head>

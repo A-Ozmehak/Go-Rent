@@ -73,8 +73,9 @@ const ListingCard = ({listing} : props) => {
     <Box sx={hideOnDesktop}>
       <Box sx={flexColumnCenter}>
         <Card p={0} backgroundColor="#F0F0F0" sx={cardWidth} maxW="sm">
+          <h1>{listing.title}</h1>
           <Image
-            src={listing.imageSrc}
+            src={listing.media}
             alt="mocked"
             width="500"
             height="500"
@@ -84,14 +85,14 @@ const ListingCard = ({listing} : props) => {
               <Box sx={flexCenter}>
                 <Image
                   style={profileImageStyle}
-                  src={listing.user.image}
+                  src="/mockedListingCardPicture.png"
                   alt="profile picture"
                   width="28"
                   height="28"
                 />
-                <Text fontWeight="bold">{listing.user.name}</Text>
+                <Text fontWeight="bold">"Username"</Text>
                 <Text fontWeight="bold" sx={priceStyle}>
-                  100:- / dygn
+                  {listing.price}:- / dygn
                 </Text>
               </Box>
               <Divider sx={dividerStyle} width="132px" />

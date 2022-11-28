@@ -54,7 +54,7 @@ const ListingPreviewCard = ({listings} : props) => {
                   <Text py="2">{listing.location}</Text>
                 </CardBody>
                 <CardFooter>
-                  <Text ml="12rem">{listing.price}</Text>
+                  <Text ml="12rem">{listing.price}:- / dygn</Text>
                 </CardFooter>
               </Stack>
             </Card>
