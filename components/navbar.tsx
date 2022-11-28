@@ -23,13 +23,10 @@ import { getAuth, signOut } from "firebase/auth";
 import { app } from "../firebase/firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
-import SearchField from "./inputs/SearchField";
-import { useState } from "react";
 
 export default function Navbar() {
   const auth = getAuth(app);
   const [user, loading] = useAuthState(auth);
-  const [search, setSearch] = useState(false);
   const router = useRouter();
   const logOut = () => {
     signOut(auth)
@@ -72,63 +69,56 @@ export default function Navbar() {
           </Center>
           <Spacer />
           <Center>
-            <Flex>
-              {!search ? (
-                <SearchIcon
-                  style={{
-                    marginRight: "1rem",
-                    fontSize: "2rem",
-                    cursor: "pointer",
-                    color: "#005799",
-                  }}
-                  onClick={() => setSearch(true)}
-                />
-              ) : (
-                <SearchField />
-              )}
-              <Popover>
-                <PopoverTrigger>
-                  <AccountCircleIcon
+            <Box>
+              <Flex>
+                <Box color="#005799">
+                  <SearchIcon
                     style={{
+                      marginRight: "1rem",
                       fontSize: "2rem",
                       cursor: "pointer",
-                      color: "#005799",
-                      marginLeft: "1rem",
                     }}
-                  ></AccountCircleIcon>
-                </PopoverTrigger>
-                <PopoverContent>
-                  <PopoverArrow />
-                  <PopoverCloseButton />
-                  <PopoverBody
-                    display="flex"
-                    flexDirection="column"
-                    alignItems="center"
-                  >
-                    {user && (
-                      <>
-                        <Link href="/profile">
-                          <Text>Min profil</Text>
-                        </Link>
-                        <Link href="/profile">
-                          <Text onClick={logOut}>Logga ut</Text>
-                        </Link>
-                      </>
-                    )}
-                    {!user && (
-                      <>
-                        <Link href="/login">
-                          <Text>Logga in</Text>
-                        </Link>
-                        <Link href="/register">
-                          <Text>Registrera dig</Text>
-                        </Link>
-                      </>
-                    )}
-                  </PopoverBody>
-                </PopoverContent>
-              </Popover>
-            </Flex>
+                  ></SearchIcon>
+                  <Popover>
+                    <PopoverTrigger>
+                      <AccountCircleIcon
+                        style={{ fontSize: "2rem", cursor: "pointer" }}
+                      ></AccountCircleIcon>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <PopoverArrow />
+                      <PopoverCloseButton />
+                      <PopoverBody
+                        display="flex"
+                        flexDirection="column"
+                        alignItems="center"
+                      >
+                        {user && (
+                          <>
+                            <Link href="/profile">
+                              <Text>Min profil</Text>
+                            </Link>
+                            <Link href="/profile">
+                              <Text onClick={logOut}>Logga ut</Text>
+                            </Link>
+                          </>
+                        )}
+                        {!user && (
+                          <>
+                            <Link href="/login">
+                              <Text>Logga in</Text>
+                            </Link>
+                            <Link href="/register">
+                              <Text>Registrera dig</Text>
+                            </Link>
+                          </>
+                        )}
+                      </PopoverBody>
+                    </PopoverContent>
+                  </Popover>
+                </Box>
+              </Flex>
+            </Box>
           </Center>
         </Flex>
       </Container>
