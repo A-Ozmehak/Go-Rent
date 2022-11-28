@@ -1,13 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import {
     Card,
     CardBody,
-    Stack,
-    Text,
     Box, Image,
 } from "@chakra-ui/react";
-import SearchIcon from "../icons/editIcon";
-
+import EditIcon from "../icons/editIcon";
+import {profile} from "../../pages/profile/mockdata";
 
 const ProfileCard = () => {
     const profileBox = {
@@ -23,11 +21,14 @@ const ProfileCard = () => {
     }
 
     const profileImageStyle = {
-        marginLeft: ".2rem",
-        marginTop: '.2rem',
+        marginLeft: ".3rem",
+        marginTop: '.6rem',
         width: {base: "2rem", md: "3rem", lg: "8rem"},
         height: {base: "2rem", md: "3rem", lg: "8rem"}
     };
+    const container = {
+        display: "flex",
+    }
     const profileContainer = {
         display: "flex",
     }
@@ -36,13 +37,15 @@ const ProfileCard = () => {
         marginTop: '.7rem'
     }
     const userBio = {
-        width: {base: '10rem', md: '30rem'},
+        width: {base: '100%', md: '30rem'},
         marginLeft: '1rem',
         padding: '0',
         display: 'flex',
         justifyContent: 'space-evenly',
         background: {base: '#EDEDED', xl: '#DDDDDD'}
     }
+
+    const [loggedIn, setLoggedIn] = useState(false)
 
     return (
         <Box sx={profileBox}>
@@ -52,22 +55,30 @@ const ProfileCard = () => {
                 overflow='hidden'
                 variant='outline'
             >
-                <div style={profileContainer}>
-                    <Image
-                        sx={profileImageStyle}
-                        src="/monke.png"
-                        alt="profile picture"
-                    />
-                    <div style={userName}>
-                        <h3>Monke</h3>
-                        <p>Angered</p>
-                    </div>
-                </div>
+                {profile.map((profileInfo) => (
+                    <div style={container} key={profileInfo.id}>
+                        <div style={profileContainer}>
+                            <Image
+                                sx={profileImageStyle}
+                                src={profileInfo.image}
+                                alt="profile picture"
+                            />
 
-                <CardBody sx={userBio}>
-                    <p>Jag har för mycket prylar i mitt garage... Kan leverera inom en 1 mils radie.</p>
-                    <SearchIcon />
-                </CardBody>
+                            <div style={userName}>
+                                <h3>{profileInfo.username}</h3>
+                                <p>{profileInfo.location}</p>
+                            </div>
+                        </div>
+
+                        <CardBody sx={userBio}>
+                            <p>{profileInfo.bio}</p>
+                            {loggedIn ? <EditIcon /> : ''}
+
+                        </CardBody>
+                    </div>
+
+                ))}
+
 
             </Card>
         </Box>

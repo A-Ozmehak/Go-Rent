@@ -10,3 +10,11 @@ export interface listingInterface {
         name: string
     }
 }
+
+export interface profileInterface {
+    image?: string;
+    username?: string;
+    location?: string;
+    bio?: string;
+    id?: string;
+}
