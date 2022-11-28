@@ -1,9 +1,7 @@
 import React from "react";
-import {Formik} from "formik";
-import {FormControl, FormErrorMessage, FormLabel, Input} from "@chakra-ui/react";
+import { Formik } from "formik";
+import { Box, Button, FormControl, FormErrorMessage, FormLabel, Input, Text } from "@chakra-ui/react";
 import TextInput from "../inputs/TextInput";
-import PrimaryButton from "../buttons/PrimaryButton";
-import Paragraph from "../typography/Paragraph";
 
 const LoginForm = () => {
     const btnDiv = {
@@ -21,10 +19,9 @@ const LoginForm = () => {
                     password: "",
                 }}
                 onSubmit={(values) => {
-
                 }}
             >
-                {({handleSubmit, errors, touched}) => (
+                {({ handleSubmit, errors, touched }) => (
                     <form onSubmit={handleSubmit}>
                         <FormControl isInvalid={!!errors.email && touched.email}>
                             <FormLabel htmlFor="email">Email</FormLabel>
@@ -63,10 +60,10 @@ const LoginForm = () => {
                             <FormErrorMessage>{errors.password}</FormErrorMessage>
                         </FormControl>
 
-                        <Paragraph text="Glömt ditt lösenord?"/>
-                        <div style={btnDiv}>
-                            <PrimaryButton title="Logga in" type="submit"/>
-                        </div>
+                        <Text>Glömt ditt lösenord?</Text>
+                        <Box sx={btnDiv}>
+                            <Button variant="Primary" type="submit">Logga in</Button>
+                        </Box>
                     </form>
                 )}
             </Formik>

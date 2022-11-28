@@ -1,8 +1,7 @@
 import React from "react";
 import {Formik} from "formik";
 import TextInput from "../inputs/TextInput";
-import {FormControl, FormLabel, FormErrorMessage, Input} from "@chakra-ui/react";
-import PrimaryButton from "../buttons/PrimaryButton";
+import {FormControl, FormLabel, FormErrorMessage, Input, Button} from "@chakra-ui/react";
 
 const SignupForm = () => {
   return (
@@ -94,7 +93,7 @@ const SignupForm = () => {
                     <FormErrorMessage>{errors.password}</FormErrorMessage>
                   </FormControl>
 
-                  <PrimaryButton title="Registrera dig" type="submit"/>
+                  <Button variant="Primary" type="submit">Registrera dig</Button>
                 </form>
             )}
           </Formik>
