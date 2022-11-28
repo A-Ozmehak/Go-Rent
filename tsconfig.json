@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "firebase.env.local", "config/firebase.env.local", "config/firebase.env.local", "firebase.env.local"],
   "exclude": ["node_modules"]
 }
