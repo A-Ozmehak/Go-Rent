@@ -7,6 +7,7 @@ import {
 import { listingInterface } from "../../utils/interface";
 import Image from "next/image";
 import React from "react";
+import BookingForm from "../forms/BookingForm";
 
 
 interface props {
@@ -99,7 +100,8 @@ const ListingCard = ({listing} : props) => {
             </Stack>
             <Text sx={locationStyle}>{listing.location}</Text>
           </CardBody>
-          <Box sx={dateStyle}>
+          <BookingForm listing={listing} />
+          {/* <Box sx={dateStyle}>
             <Text fontWeight="bold">Välj datum:</Text>
           </Box>
           <CardFooter sx={cardFooterStyle}>
@@ -109,7 +111,7 @@ const ListingCard = ({listing} : props) => {
                 Hyr
               </Button>
             </ButtonGroup>
-          </CardFooter>
+          </CardFooter> */}
         </Card>
       </Box>
     </Box>
