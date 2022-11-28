@@ -54,7 +54,7 @@ const ListingForm = () => {
 
     try {
       const result = await addDoc(dbInstance, values);
-      router.push(`listing/${result.id}`);
+      router.push(`listings/${result.id}`);
     } catch (e) {
       return;
     }
