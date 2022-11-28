@@ -1,11 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { collection, query, getDocs, DocumentData, limit, limitToLast } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { db } from '../../config/firebase';
 
 const listingsCollection = collection(db, "listing");
 
-const getListings = async () => {
+export const getListings = async () => {
     const documents = await getDocs(listingsCollection)
     let listings : any = []
     documents.forEach(doc => {
@@ -19,11 +19,13 @@ const getListings = async () => {
 
 
 
-export default async function mockDatahandler(
+export default async function listingsDatahandler(
   req: NextApiRequest,
   res: NextApiResponse<[]>
 ) {
+    /**
+     * Get all listings from database
+     */
     let listings = await getListings()
-    console.log(listings)
     res.status(200).json(listings)
 }
