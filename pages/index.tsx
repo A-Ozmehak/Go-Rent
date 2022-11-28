@@ -1,7 +1,6 @@
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import Head from "next/head";
 import ListingPreviewCard from "../components/cards/ListingPreviewCard";
-import CategoryCarousel from "../components/inputs/CategoryCarousel";
 
 
 export default function Index() {
@@ -12,7 +11,6 @@ export default function Index() {
         <meta name="description" content="Go:Rent Uthyrning" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-        <CategoryCarousel />
         <Box m="auto" maxW="1200px">
           <Box className="hero">
             <Box pt="8rem" px="3rem" className="hero-box">
@@ -20,7 +18,7 @@ export default function Index() {
                 En klimatsatsning från Göteborgs stad, lär dig hur du kan göra
                 skillnad.
               </h1>
-              <Button variant="primary">Läs mer</Button>
+              <Button variant="Primary">Läs mer</Button>
             </Box>
           </Box>
           <Text fontSize="2rem" pt="4rem" pl="2rem">

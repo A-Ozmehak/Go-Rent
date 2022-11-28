@@ -1,5 +1,6 @@
 import { Flex, Spacer, Box, Center, Button, Container } from "@chakra-ui/react";
 import Link from "next/link";
+import SubHeader from "./subHeader";
 
 export default function Navbar() {
   const addButtonStyle = {
@@ -35,6 +36,7 @@ export default function Navbar() {
           </Center>
         </Flex>
       </Container>
+      <SubHeader />
     </Box>
   );
 }
