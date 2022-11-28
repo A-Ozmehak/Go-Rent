@@ -14,10 +14,8 @@ import { Select } from "@chakra-ui/select";
 import {
   collection,
   addDoc,
-  getDoc,
   DocumentData,
   query,
-  QueryDocumentSnapshot,
   getDocs,
 } from "firebase/firestore";
 
@@ -26,10 +24,6 @@ import router from "next/router";
 import UploadMedia from "./UploadMedia";
 
 const ListingForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [message, setMessage] = useState("");
-
   interface ListingDoc {
     title: string;
     description: string;
@@ -38,9 +32,7 @@ const ListingForm = () => {
     price: number;
   }
 
-  const [categories, setCategories] = useState<
-    QueryDocumentSnapshot<DocumentData>[]
-  >([]);
+  const [categories, setCategories] = useState<DocumentData[]>([]);
 
   const [loading, setLoading] = useState<boolean>(true);
   const categoriesCollection = collection(db, "category");
@@ -48,10 +40,10 @@ const ListingForm = () => {
   const getCategories = async () => {
     const categoriesQuery = query(categoriesCollection);
     const querySnapshot = await getDocs(categoriesQuery);
-
-    const result: QueryDocumentSnapshot<DocumentData>[] = [];
+    const result: DocumentData[] = [];
     querySnapshot.forEach((snapshot) => {
-      result.push(snapshot);
+      const data = snapshot.data();
+      result.push(data);
     });
 
     setCategories(result);
@@ -89,7 +81,7 @@ const ListingForm = () => {
         handleSubmit(values);
       }}
     >
-      {({ handleSubmit, errors, touched, values, handleChange }) => {
+      {({ errors, touched, values, handleChange, setFieldValue }) => {
         return (
           <Form>
             <h1>Skapa annons</h1>
@@ -121,17 +113,18 @@ const ListingForm = () => {
                   placeholder="Välj en kategori"
                 >
                   {categories.map((category) => {
-                    return (
-                      <option key={category.id}>{/* {category.name} */}</option>
-                    );
+                    return <option key={category.id}>{category.name}</option>;
                   })}
                 </Select>
                 <FormErrorMessage>{errors.category}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={!!errors.media && touched.media}>
-                <Button>
-                  <UploadMedia />
-                </Button>
+                <FormLabel htmlFor="text">Bild</FormLabel>
+                <UploadMedia
+                  id="media"
+                  updateField={setFieldValue}
+                  value={values.media}
+                />
               </FormControl>
               <FormControl isInvalid={!!errors.price && touched.price}>
                 <FormLabel htmlFor="text">Pris per dygn</FormLabel>
