@@ -27,9 +27,8 @@ interface props {
 }
 
 const BookingForm = ({ listing }: props) => {
-
   // TODO: Ändra sen, är om en användare är inloggad
-  const [loggedInUser, setLoggedInUser] = useState("");
+  const loggedInUser = true;
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -49,7 +48,6 @@ const BookingForm = ({ listing }: props) => {
 
   const handleSubmit = async () => {
     const dbInstance = collection(db, "bookings");
-
     let totalDays = dayjs(endDate).diff(dayjs(startDate), "days");
     let totalPrice = totalDays * listing.price;
     let value = {
