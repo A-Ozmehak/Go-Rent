@@ -23,14 +23,13 @@ import { db } from "../../config/firebase";
 import router from "next/router";
 import UploadMedia from "./UploadMedia";
 import { ListingDoc } from "../../utils/interface";
+import { useUserContext } from "../../utils/userContext";
 
 const ListingForm = () => {
   const [categories, setCategories] = useState<DocumentData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const categoriesCollection = collection(db, "category");
-
-  // this should be the context
-  const [loggedInUser, setLoggedInUser] = useState("");
+  const loggedInUser = useUserContext()
 
   const getCategories = async () => {
     const categoriesQuery = query(categoriesCollection);
@@ -72,7 +71,7 @@ const ListingForm = () => {
         category: "",
         media: "",
         price: 0,
-        username: loggedInUser,
+        username: loggedInUser.loggedInUsername,
       }}
       onSubmit={(values) => {
         handleSubmit(values);

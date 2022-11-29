@@ -1,23 +1,18 @@
 import {
   Box,
-  Button,
-  ButtonGroup,
   Card,
   CardBody,
-  CardFooter,
   Divider,
-  Input,
-  Link,
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { listingDoc } from "../../utils/interface";
+import { listingInterface } from "../../utils/interface";
 import Image from "next/image";
-import React from "react";
 import BookingForm from "../forms/BookingForm";
+import Link from "next/link";
 
 interface props {
-  listing: listingDoc;
+  listing: listingInterface;
 }
 
 const ListingCard = ({ listing }: props) => {
@@ -90,9 +85,11 @@ const ListingCard = ({ listing }: props) => {
                   width="28"
                   height="28"
                 />
-                <Link href="/profile">
-                  <Text fontWeight="bold">Username</Text>
-                </Link>
+                {/* TODO: use sellers id */}
+                {/* <Link href={`{/profile/${user.id}}`}> */}
+                  {/* TODO: User profile card */}
+                  <Text fontWeight="bold">{listing.username}</Text>
+                {/* </Link> */}
                 <Text fontWeight="bold" sx={priceStyle}>
                   {listing.price}:- / dygn
                 </Text>
@@ -104,17 +101,6 @@ const ListingCard = ({ listing }: props) => {
             <Text sx={locationStyle}>{listing.location}</Text>
           </CardBody>
           <BookingForm listing={listing} />
-          {/* <Box sx={dateStyle}>
-            <Text fontWeight="bold">Välj datum:</Text>
-          </Box>
-          <CardFooter sx={cardFooterStyle}>
-            <ButtonGroup spacing={20}>
-              <Input sx={dateInputStyle} type="date" />
-              <Button variant="Primary" colorScheme="blue">
-                Hyr
-              </Button>
-            </ButtonGroup>
-          </CardFooter> */}
         </Card>
       </Box>
     </Box>

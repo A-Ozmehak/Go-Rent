@@ -16,10 +16,10 @@ import {
   Flex,
   Link,
 } from "@chakra-ui/react";
-import { listingDoc } from "../../utils/interface";
+import { listingInterface } from "../../utils/interface";
 
 interface props {
-  listings: listingDoc[];
+  listings: listingInterface[];
 }
 
 const ListingPreviewCard = ({ listings }: props) => {
