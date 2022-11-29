@@ -71,7 +71,6 @@ const BookingForm = ({ listing }: props) => {
     }
   };
 
-
   const SelectedDays = () => {
     const start = dayjs(selectedStart);
     const end = dayjs(selectedEnd);
