@@ -10,15 +10,18 @@ import 'material-icons/iconfont/material-icons.css';
 import Footer from "../components/layout/Footer";
 import ProfileCard from "../components/cards/ProfileCard";
 import {profile} from "./api/mockdata";
+import UserProvider from "../utils/userContext";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={Theme}>
-      <Box>
-        <Navbar />
-        <Component {...pageProps} />
-      </Box>
-      <Footer />
+      <UserProvider>
+        <Box>
+          <Navbar />
+          <Component {...pageProps} />
+        </Box>
+        <Footer />
+      </UserProvider>
     </ChakraProvider>
   );
 }
