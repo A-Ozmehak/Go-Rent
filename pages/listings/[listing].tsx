@@ -27,7 +27,7 @@ export async function getStaticProps({ params  } : any) {
     };
   }
   export async function getStaticPaths() {
-    const data = await fetch(`http://localhost:3000/api/mockdata`)
+    const data = await fetch(`http://localhost:3000/api/listings`)
     let listings = await data.json()
     const paths = listings.map((listing : listingInterface) => {
       return {
