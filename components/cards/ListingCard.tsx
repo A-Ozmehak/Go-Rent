@@ -4,14 +4,14 @@ import {
   CardFooter, Divider, Input, Stack,
   Text
 } from "@chakra-ui/react";
-import { listingInterface } from "../../utils/interface";
+import { listingDoc } from "../../utils/interface";
 import Image from "next/image";
 import React from "react";
 import BookingForm from "../forms/BookingForm";
 
 
 interface props {
-  listing: listingInterface
+  listing: listingDoc
 }
 
 
@@ -85,7 +85,7 @@ const ListingCard = ({listing} : props) => {
               <Box sx={flexCenter}>
                 <Image
                   style={profileImageStyle}
-                  src="/mockedListingCardPicture.png"
+                  src={listing.media}
                   alt="profile picture"
                   width="28"
                   height="28"

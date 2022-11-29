@@ -3,7 +3,7 @@ export interface listingDoc {
     id: string,
     location: string,
     price: number,
-    imageSrc: string,
+    media: string,
     description: string,
     user: {
         image: string,
