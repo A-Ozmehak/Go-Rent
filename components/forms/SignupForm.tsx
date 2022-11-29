@@ -10,8 +10,10 @@ import {
   Input,
   Button,
 } from "@chakra-ui/react";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateCurrentUser, updateProfile } from "firebase/auth";
 import { useRouter } from "next/router";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../config/firebase";
 
 const SignupForm = () => {
   const router = useRouter();
@@ -20,12 +22,33 @@ const SignupForm = () => {
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
 
-  function register({ email, password }: { email: any; password: any }) {
+  interface userValues {
+    username: string,
+    name: string,
+    lastName: string,
+    email: string,
+    password: string,
+}
+
+
+  function register( values: userValues ) {
+    console.log(values);
     const auth = getAuth(app);
-    createUserWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        
+        updateProfile(user, {
+          // displayName exists on userCredentials along with photoUrl for avatar. 
+          "displayName": values.username,
+        })       
+        setDoc(doc(db, "users", user.uid), {
+          // Things like first & lastname and description does not exist on userCredentials and needs firestore.
+          name: values.name,
+          lastName: values.lastName,
+        });
+
         // alert("Created account successfully!");
         router.push("/login");
         // ...
@@ -41,6 +64,7 @@ const SignupForm = () => {
     <div>
       <Formik
         initialValues={{
+          username: "",
           name: "",
           lastName: "",
           email: "",
@@ -52,6 +76,24 @@ const SignupForm = () => {
       >
         {({ handleSubmit, errors, touched }) => (
           <form onSubmit={handleSubmit}>
+            <FormControl isInvalid={!!errors.username && touched.username}>
+              <FormLabel htmlFor="username">Användarnamn</FormLabel>
+              <TextInput
+                as={Input}
+                id="username"
+                name="username"
+                type="username"
+                variant="filled"
+                validate={(value: string) => {
+                  let error;
+                  if (value.length < 3) {
+                    error = "Skriv in ditt användarnamn";
+                  }
+                  return error;
+                }}
+              />
+              <FormErrorMessage>{errors.username}</FormErrorMessage>
+            </FormControl>
             <FormControl isInvalid={!!errors.name && touched.name}>
               <FormLabel htmlFor="name">Förnamn</FormLabel>
               <TextInput
