@@ -1,27 +1,16 @@
-import React, { useState } from "react";
 import { Formik } from "formik";
 import TextInput from "../inputs/TextInput";
-
-import { app } from "../../firebase/firebaseConfig";
 import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  Input,
-  Button,
+  Button, FormControl, FormErrorMessage, FormLabel, Input
 } from "@chakra-ui/react";
-import { getAuth, createUserWithEmailAndPassword, updateCurrentUser, updateProfile } from "firebase/auth";
-import { useRouter } from "next/router";
+import { createUserWithEmailAndPassword, getAuth, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
+import { app } from "../../firebase/firebaseConfig";
+import signIn from "../../utils/loginFunc";
+
 
 const SignupForm = () => {
-  const router = useRouter();
-  // const [name, setName] = useState("");
-  // const [lastname, setLastname] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-
   interface userValues {
     username: string,
     firstName: string,
@@ -50,7 +39,7 @@ const SignupForm = () => {
         });
 
         // alert("Created account successfully!");
-        router.push("/login");
+        signIn(values)
         // ...
       })
       .catch((error) => {
