@@ -5,15 +5,15 @@ import { getListings } from '../listings';
 
 export default async function listingsIdDataHandler(
   req: NextApiRequest,
-  res: NextApiResponse<listingInterface>
+  res: NextApiResponse<listingInterface[]>
 ) {
   /**
-   * Get specific listing with ID
+   * Get specific listings from a seller
    */
     let listings : listingInterface[] = await getListings()
-    let id = req.query.id
-    let listing = listings.find(item => item.id === id)
-    if(listing) {
-        res.status(200).json(listing)
+    let seller = req.query.seller
+    let filteredListings = listings.filter(item => item.user?.name === seller)
+    if(filteredListings.length) {
+        res.status(200).json(filteredListings)
     }
 }
