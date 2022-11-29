@@ -31,7 +31,7 @@ const LoginForm = () => {
 
   const router = useRouter();
 
-  const signIn = ({ email, password }: { email: any; password: any }) => {
+  const signIn = ({ email, password }: { email: string; password: string }) => {    
     setPersistence(auth, browserSessionPersistence)
       .then(() => {
         // Existing and future Auth states are now persisted in the current
