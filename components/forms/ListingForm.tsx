@@ -29,6 +29,9 @@ const ListingForm = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const categoriesCollection = collection(db, "category");
 
+  // this should be the context
+  const [loggedInUser, setLoggedInUser] = useState("");
+
   const getCategories = async () => {
     const categoriesQuery = query(categoriesCollection);
     const querySnapshot = await getDocs(categoriesQuery);
@@ -68,6 +71,7 @@ const ListingForm = () => {
         category: "",
         media: "",
         price: 0,
+        username: loggedInUser,
       }}
       onSubmit={(values) => {
         handleSubmit(values);
