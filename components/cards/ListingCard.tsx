@@ -4,15 +4,18 @@ import {
   CardFooter, Divider, Input, Stack,
   Text
 } from "@chakra-ui/react";
-import { listingDoc } from "../../utils/interface";
+import {listingDoc, profileInterface} from "../../utils/interface";
 import Image from "next/image";
 import React from "react";
 import BookingForm from "../forms/BookingForm";
+import ProfileCard from "./ProfileCard";
 
 
 interface props {
   listing: listingDoc
+
 }
+
 
 
 const ListingCard = ({listing} : props) => {
@@ -90,7 +93,8 @@ const ListingCard = ({listing} : props) => {
                   width="28"
                   height="28"
                 />
-                <Text fontWeight="bold">"Username"</Text>
+
+                <Text fontWeight="bold">Username</Text>
                 <Text fontWeight="bold" sx={priceStyle}>
                   {listing.price}:- / dygn
                 </Text>

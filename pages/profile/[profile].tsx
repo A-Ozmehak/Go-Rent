@@ -4,8 +4,9 @@ import ProfileCard from "../../components/cards/ProfileCard";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {auth} from "../../config/firebase";
 import { profileInterface } from "../../utils/interface";
+import {Heading} from "@chakra-ui/react";
 
-interface props {
+ export interface props {
     profileInfo: profileInterface[]
 }
 
@@ -18,11 +19,10 @@ const ProfilePage = ({profileInfo}: props) => {
 
     return(
         <div>
-            <p>{user?.email}</p>
-            <p>hej</p>
-            <h1>{profile}</h1>
             <ProfileCard profileInfo={profileInfo} />
-
+            <h3>{user?.displayName}s annonser</h3>
+            <h3>Dina bokningar</h3>
+            <h3>Mottagna förfrågningar</h3>
         </div>
     )
 };

@@ -16,15 +16,17 @@ import {
   Flex,
   Link,
 } from "@chakra-ui/react";
-import { listingDoc } from "../../utils/interface";
+import {listingDoc, profileInterface} from "../../utils/interface";
+import ProfileCard from "./ProfileCard";
 
 
 
 interface props {
   listings : listingDoc[]
+
 }
 
-const ListingPreviewCard = ({listings} : props) => {
+const ListingPreviewCard = ({ listings} : props) => {
   const priceStyle = {
     marginLeft: { sm: "12rem" },
   };

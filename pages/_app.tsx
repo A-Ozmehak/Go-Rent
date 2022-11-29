@@ -8,14 +8,12 @@ import "@fontsource/inter";
 import "@fontsource/josefin-sans";
 import 'material-icons/iconfont/material-icons.css';
 import Footer from "../components/layout/Footer";
-import ProfilePage from "./profile/[profile]";
-import {profile} from "./api/mockdata";
+import React from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={Theme}>
       <Box>
-          <ProfilePage profileInfo={profile}/>
         <Navbar />
         <Component {...pageProps} />
       </Box>

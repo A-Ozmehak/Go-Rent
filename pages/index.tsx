@@ -1,7 +1,9 @@
 import Head from "next/head";
 import { Text, Heading, Box, Flex, Button, Center } from "@chakra-ui/react";
 import ListingPreviewCard from "../components/cards/ListingPreviewCard";
-import { listingDoc } from "../utils/interface";
+import {listingDoc, profileInterface} from "../utils/interface";
+import ProfileCard from "../components/cards/ProfileCard";
+import ProfilePage from "./profile/[profile]";
 
 
 export async function getStaticProps() {
@@ -19,7 +21,10 @@ export async function getStaticProps() {
   }
 }
 
-export default function Index(props : any) {
+interface props {
+    profileInfo: profileInterface[]
+}
+export default function Index(props : any, {profileInfo} :props) {
   let listings : listingDoc[] = props.listings
   listings.length = 4
   return (  
@@ -38,7 +43,10 @@ export default function Index(props : any) {
           <Button variant="Primary">Läs mer</Button>
         </Box>
       </div>
-      <Text fontSize="2rem" pt="4rem" pl="2rem">
+      <ProfilePage profileInfo={profileInfo} />
+        {/*<ProfileCard profileInfo={profileInfo} />*/}
+
+        <Text fontSize="2rem" pt="4rem" pl="2rem">
         Senast upplagt
       </Text>
       <ListingPreviewCard listings={listings} />
