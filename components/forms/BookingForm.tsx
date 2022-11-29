@@ -22,27 +22,22 @@ import { collection, addDoc } from "firebase/firestore";
 import router from "next/router";
 import { db } from "../../config/firebase";
 
-
 interface props {
-  listing : listingInterface
+  listing: listingInterface;
 }
 
-
-const BookingForm = ({listing} : props) => {
-
-
-  
+const BookingForm = ({ listing }: props) => {
   // TODO: Ändra sen, är om en användare är inloggad
   const loggedInUser = true;
-  
+
   const { isOpen, onOpen, onClose } = useDisclosure();
-  
+
   const [selectedStart, setSelectedStart] = useState(dayjs());
   const [selectedEnd, setSelectedEnd] = useState(dayjs());
-  
+
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
-  
+
   const setDate = (dates: [any, any]) => {
     const [start, end] = dates;
     setStartDate(start);
@@ -52,21 +47,21 @@ const BookingForm = ({listing} : props) => {
   };
   const handleSubmit = async () => {
     const dbInstance = collection(db, "bookings");
-    console.log(startDate, endDate)
-    let totalDays = dayjs(endDate).diff(dayjs(startDate), "days")
-    let totalPrice = totalDays * listing.price
+    console.log(startDate, endDate);
+    let totalDays = dayjs(endDate).diff(dayjs(startDate), "days");
+    let totalPrice = totalDays * listing.price;
     let value = {
-      "Seller": listing.user.name,
-      "Buyer": "testBuyer", // LOGGED IN USER 
-      "Status": "Pending", // PENDING AS START VALUE
-      "bookingDetails": {
-        "bookingStartDate": startDate,
-        "bookingEndDate": endDate, 
-        "totalDays": totalDays,
-        "totalPrice": totalPrice
-      }
-    }
-    console.log(value)
+      Seller: listing.user.name,
+      Buyer: "testBuyer", // LOGGED IN USER
+      Status: "Pending", // PENDING AS START VALUE
+      bookingDetails: {
+        bookingStartDate: startDate,
+        bookingEndDate: endDate,
+        totalDays: totalDays,
+        totalPrice: totalPrice,
+      },
+    };
+    console.log(value);
     // AV KOMMENTERA NÄR DATABAS ÄR SETUP ^^
     // try {
     //   const result = await addDoc(dbInstance, value);
@@ -124,7 +119,6 @@ const BookingForm = ({listing} : props) => {
 
   return (
     <>
-      <Text>Välj datum:</Text>
       <Button onClick={onOpen} rightIcon={<CalendarIcon />}>
         Välj datum
       </Button>
