@@ -16,12 +16,12 @@ import {
   Flex,
   Link,
 } from "@chakra-ui/react";
-import { listingInterface } from "../../utils/interface";
+import { listingDoc } from "../../utils/interface";
 
 
 
 interface props {
-  listings : listingInterface[]
+  listings : listingDoc[]
 }
 
 const ListingPreviewCard = ({listings} : props) => {
@@ -54,7 +54,7 @@ const ListingPreviewCard = ({listings} : props) => {
                   <Text py="2">{listing.location}</Text>
                 </CardBody>
                 <CardFooter>
-                  <Text ml="12rem">{listing.price}</Text>
+                  <Text ml="12rem">{listing.price}:- / dygn</Text>
                 </CardFooter>
               </Stack>
             </Card>

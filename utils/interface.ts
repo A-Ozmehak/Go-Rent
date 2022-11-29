@@ -1,9 +1,9 @@
-export interface listingInterface {
+export interface listingDoc {
     title: string,
     id: string,
     location: string,
     price: number,
-    imageSrc: string,
+    media: string,
     description: string,
     user: {
         image: string,
@@ -26,5 +26,12 @@ export interface ListingDoc {
     category: string;
     media: string;
     price: number;
+}
 
+
+export interface CategoryDoc {
+    id: string,
+    icon: string,
+    name: string,
+    url: string
 }
