@@ -12,7 +12,6 @@ export interface listingInterface {
     }
 }
 
-
 export interface profileInterface {
     image?: string;
     username?: string;
