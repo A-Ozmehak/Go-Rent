@@ -2,10 +2,13 @@ import React, {useState} from "react";
 import {
     Card,
     CardBody,
-    Box, Image,
+    Box, Image, Button,
 } from "@chakra-ui/react";
 import EditIcon from "../icons/editIcon";
-import {profileInterface} from "../../utils/interface";
+import { profileInterface } from "../../utils/interface";
+import {useAuthState} from "react-firebase-hooks/auth";
+import {auth} from "../../config/firebase";
+import {useRouter} from "next/router";
 
 interface props {
     profileInfo: profileInterface[]
@@ -49,7 +52,7 @@ const ProfileCard = ({profileInfo}: props) => {
         background: {base: '#EDEDED', xl: '#DDDDDD'}
     }
 
-    const [loggedIn, setLoggedIn] = useState(false)
+    const [user] = useAuthState(auth);
 
     return (
         <Box sx={profileBox}>
@@ -59,24 +62,25 @@ const ProfileCard = ({profileInfo}: props) => {
                 overflow='hidden'
                 variant='outline'
             >
-                {profileInfo.map((profileInfo) => (
-                    <div style={container} key={profileInfo.id}>
+                {profileInfo.map((profile) => (
+                    <div style={container} key={profile.id}>
                         <div style={profileContainer}>
                             <Image
                                 sx={profileImageStyle}
-                                src={profileInfo.image}
+                                src={profile.image}
                                 alt="profile picture"
                             />
 
                             <div style={userName}>
-                                <h3>{profileInfo.username}</h3>
-                                <p>{profileInfo.location}</p>
+                                <h3>{profile.username}</h3>
+                                <p>{profile.location}</p>
+                                {!user?.uid && <Button>Kontakta säljaren</Button>}
                             </div>
                         </div>
 
                         <CardBody sx={userBio}>
-                            <p>{profileInfo.bio}</p>
-                            {loggedIn ? <EditIcon /> : ''}
+                            <p>{profile.bio}</p>
+                            {user?.uid && <EditIcon />}
 
                         </CardBody>
                     </div>
