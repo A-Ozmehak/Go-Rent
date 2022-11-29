@@ -25,6 +25,12 @@ export const Theme = extendTheme({
             fontWeight: 'light',
             color: "black"
           },
+          h4: {
+            fontFamily: "Josefin Sans",
+            fontWeight: 'bold',
+            fontSize: '1.1rem',
+            color: "black"
+          },
           p: {
             color: "black",
             fontFamily: "Inter",
@@ -96,3 +102,4 @@ export const Theme = extendTheme({
     }
 })
 // Josefin Sans (bold, semi bold, regular), Inter (extra bold, bold, semi bold, regular, thin),
+
