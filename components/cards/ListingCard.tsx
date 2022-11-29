@@ -1,21 +1,22 @@
 import {
-  Box, Button,
-  ButtonGroup, Card, CardBody,
-  CardFooter, Divider, Input, Stack,
-  Text
+  Box,
+  Card,
+  CardBody,
+  Divider,
+  Stack,
+  Text,
 } from "@chakra-ui/react";
-import { listingDoc } from "../../utils/interface";
+import { listingInterface } from "../../utils/interface";
 import Image from "next/image";
-import React from "react";
 import BookingForm from "../forms/BookingForm";
 
-
 interface props {
-  listing: listingDoc
+  listing: listingInterface;
 }
 
+const ListingCard = ({ listing }: props) => {
 
-const ListingCard = ({listing} : props) => {
+
   const profileImageStyle = {
     marginRight: ".5rem",
   };
@@ -74,12 +75,7 @@ const ListingCard = ({listing} : props) => {
       <Box sx={flexColumnCenter}>
         <Card p={0} backgroundColor="#F0F0F0" sx={cardWidth} maxW="sm">
           <h1>{listing.title}</h1>
-          <Image
-            src={listing.media}
-            alt="mocked"
-            width="500"
-            height="500"
-          />
+          <Image src={listing.media} alt="mocked" width="500" height="500" />
           <CardBody>
             <Stack mt="6" spacing="3">
               <Box sx={flexCenter}>
@@ -90,7 +86,8 @@ const ListingCard = ({listing} : props) => {
                   width="28"
                   height="28"
                 />
-                <Text fontWeight="bold">"Username"</Text>
+                {/* TODO: Should be profile card */}
+                <Text>{listing.username}</Text>
                 <Text fontWeight="bold" sx={priceStyle}>
                   {listing.price}:- / dygn
                 </Text>
@@ -102,17 +99,6 @@ const ListingCard = ({listing} : props) => {
             <Text sx={locationStyle}>{listing.location}</Text>
           </CardBody>
           <BookingForm listing={listing} />
-          {/* <Box sx={dateStyle}>
-            <Text fontWeight="bold">Välj datum:</Text>
-          </Box>
-          <CardFooter sx={cardFooterStyle}>
-            <ButtonGroup spacing={20}>
-              <Input sx={dateInputStyle} type="date" />
-              <Button variant="Primary" colorScheme="blue">
-                Hyr
-              </Button>
-            </ButtonGroup>
-          </CardFooter> */}
         </Card>
       </Box>
     </Box>
