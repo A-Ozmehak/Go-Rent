@@ -102,3 +102,4 @@ export const Theme = extendTheme({
     }
 })
 // Josefin Sans (bold, semi bold, regular), Inter (extra bold, bold, semi bold, regular, thin),
+
