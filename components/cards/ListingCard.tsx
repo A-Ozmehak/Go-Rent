@@ -4,11 +4,11 @@ import {
   CardFooter, Divider, Input, Stack,
   Text
 } from "@chakra-ui/react";
-import {listingDoc, profileInterface} from "../../utils/interface";
+import {listingDoc} from "../../utils/interface";
 import Image from "next/image";
 import React from "react";
 import BookingForm from "../forms/BookingForm";
-import ProfileCard from "./ProfileCard";
+
 
 
 interface props {

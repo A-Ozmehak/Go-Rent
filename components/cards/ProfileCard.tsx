@@ -2,19 +2,20 @@ import React, {useState} from "react";
 import {
     Card,
     CardBody,
-    Box, Image, Button,
+    Box, Image, Button, useDisclosure,
 } from "@chakra-ui/react";
 import EditIcon from "../icons/editIcon";
 import { profileInterface } from "../../utils/interface";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {auth} from "../../config/firebase";
 import {getAuth} from "firebase/auth";
+import ContactModal from "../inputs/ContactModal";
 
 interface props {
     profileInfo: profileInterface[]
 }
 
-const ProfileCard = ({profileInfo}: props) => {
+const ProfileCard = ({profileInfo }: props) => {
     const profileBox = {
         width:  '100%',
         height: {base: '8em', lg: '10rem'},
@@ -56,6 +57,9 @@ const ProfileCard = ({profileInfo}: props) => {
     const authAUser = getAuth()
     const currentUsername = auth.currentUser
     const [edit, setEdit] = useState(false)
+    const [showModal, setShowModal] = useState(false)
+    const {isOpen, onOpen, onClose} = useDisclosure()
+
 
     const handleEdit = () => {
         setEdit(true)
@@ -77,11 +81,16 @@ const ProfileCard = ({profileInfo}: props) => {
                                 src='image'
                                 alt="profile picture"
                             />
-
+                            <ContactModal isOpen={isOpen} onClose={onClose}  />
                             <div style={userName}>
                                 <h3>{user?.displayName}</h3>
                                 <p>location</p>
-                                {!currentUsername && !user?.uid ? <Button variant='Primary'>Kontakta säljaren</Button> : ''}
+                                {!currentUsername && !user?.uid ?
+                                    <Button
+                                        onClick={onOpen}
+                                        variant='Primary'>Kontakta säljaren</Button>
+                                    : ''}
+
                             </div>
                         </div>
 

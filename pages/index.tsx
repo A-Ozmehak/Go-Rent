@@ -23,6 +23,7 @@ export async function getStaticProps() {
 
 interface props {
     profileInfo: profileInterface[]
+    listing: listingDoc
 }
 export default function Index(props : any, {profileInfo} :props) {
   let listings : listingDoc[] = props.listings
@@ -43,8 +44,8 @@ export default function Index(props : any, {profileInfo} :props) {
           <Button variant="Primary">Läs mer</Button>
         </Box>
       </div>
-      <ProfilePage profileInfo={profileInfo} />
-        {/*<ProfileCard profileInfo={profileInfo} />*/}
+      <ProfileCard profileInfo={profileInfo} />
+
 
         <Text fontSize="2rem" pt="4rem" pl="2rem">
         Senast upplagt
