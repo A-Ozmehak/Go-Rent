@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {
   Box,
   Button,
+  Flex,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -17,32 +18,27 @@ import {
 import { CalendarIcon } from "@chakra-ui/icons";
 import dayjs from "dayjs";
 import "dayjs/locale/sv";
-import { ListingDoc, listingInterface } from "../../utils/interface";
+import { listingInterface } from "../../utils/interface";
 import { collection, addDoc } from "firebase/firestore";
-import router from "next/router";
-import { db } from "../../config/firebase";
-
+import { auth, db } from "../../config/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 interface props {
-  listing : listingInterface
+  listing: listingInterface;
 }
 
-
-const BookingForm = ({listing} : props) => {
-
-
-  
-  // TODO: Ändra sen, är om en användare är inloggad
-  const loggedInUser = true;
+const BookingForm = ({ listing }: props) => {
+  const [loggedInUser] = useAuthState(auth);
+  const user = loggedInUser?.uid
   
   const { isOpen, onOpen, onClose } = useDisclosure();
-  
+
   const [selectedStart, setSelectedStart] = useState(dayjs());
   const [selectedEnd, setSelectedEnd] = useState(dayjs());
-  
-  const [startDate, setStartDate] = useState(new Date());
+
+  const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  
+
   const setDate = (dates: [any, any]) => {
     const [start, end] = dates;
     setStartDate(start);
@@ -50,29 +46,28 @@ const BookingForm = ({listing} : props) => {
     setSelectedEnd(end);
     setSelectedStart(start);
   };
+
   const handleSubmit = async () => {
     const dbInstance = collection(db, "bookings");
-    console.log(startDate, endDate)
-    let totalDays = dayjs(endDate).diff(dayjs(startDate), "days")
-    let totalPrice = totalDays * listing.price
+    let totalDays = dayjs(endDate).diff(dayjs(startDate), "days");
+    let totalPrice = totalDays * listing.price;
     let value = {
-      "Seller": listing.user.name,
-      "Buyer": "testBuyer", // LOGGED IN USER 
-      "Status": "Pending", // PENDING AS START VALUE
-      "bookingDetails": {
-        "bookingStartDate": startDate,
-        "bookingEndDate": endDate, 
-        "totalDays": totalDays,
-        "totalPrice": totalPrice
-      }
+      Seller: listing.seller,
+      Buyer: user, // LOGGED IN USER
+      Status: "Pending", // PENDING AS START VALUE
+      bookingDetails: {
+        bookingStartDate: startDate,
+        bookingEndDate: endDate,
+        totalDays: totalDays,
+        totalPrice: totalPrice,
+      },
+    };
+    try {
+      const result = await addDoc(dbInstance, value);
+      submitBooking();
+    } catch (e) {
+      return;
     }
-    console.log(value)
-    // AV KOMMENTERA NÄR DATABAS ÄR SETUP ^^
-    // try {
-    //   const result = await addDoc(dbInstance, value);
-    // } catch (e) {
-    //   return;
-    // }
   };
 
   const SelectedDays = () => {
@@ -84,17 +79,22 @@ const BookingForm = ({listing} : props) => {
 
       return result + 1;
     };
-    // TODO: Calculate based on the price of the listing
+
+    const calculatePrice = () => {
+      const totalDays = calculateDays();
+      let result = totalDays * listing.price;
+      return result;
+    };
+
     const days = calculateDays();
+    const price = calculatePrice();
+
     return (
       <Box>
-        <Text>Valda Datum:</Text>
         <Text>
-          {dayjs(selectedStart).locale("sv").format("ddd D MMMM")} {" - "}
-          {dayjs(selectedEnd).locale("sv").format("ddd D MMMM")}
+          {" "}
+          {days} dagar, kostnad: {price} kr{" "}
         </Text>
-        {/* TODO: Ska vara totalpris som visas här med sen. */}
-        <Text>Totalt antal dagar:{days} </Text>
       </Box>
     );
   };
@@ -108,7 +108,6 @@ const BookingForm = ({listing} : props) => {
   });
 
   const submitBooking = () => {
-    // TODO: Skicka data till firebase.
     toast({
       title: "Bokningsförfrågan skickad",
       description:
@@ -117,21 +116,22 @@ const BookingForm = ({listing} : props) => {
       duration: 9000,
       isClosable: true,
     });
-
-    // close modal on submit
     onClose();
   };
 
   return (
     <>
-      <Text>Välj datum:</Text>
+      <Box padding={2}>
+        <h4>Välj datum</h4>
+      </Box>
       <Button onClick={onOpen} rightIcon={<CalendarIcon />}>
-        Välj datum
+        Öppna boka
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalContent alignItems="center">
           <ModalHeader>Välj de datum du vill boka</ModalHeader>
+          <Text>Kostnad per dygn: {listing.price} kr </Text>
           <ModalCloseButton />
           <ModalBody>
             <DatePicker

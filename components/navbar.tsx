@@ -26,6 +26,8 @@ import { useRouter } from "next/router";
 import SearchField from "./inputs/SearchField";
 import { useState } from "react";
 
+
+
 export default function Navbar() {
   const auth = getAuth(app);
   const [user, loading] = useAuthState(auth);

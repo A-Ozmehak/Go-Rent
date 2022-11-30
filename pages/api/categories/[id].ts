@@ -1,23 +1,23 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { ListingDoc } from '../../../utils/interface'
+import { CategoryDoc} from '../../../utils/interface'
+import { getCategories } from '../categories';
 import { getListings } from '../listings';
 
 
 export default async function categoriesNameDataHandler(
   req: NextApiRequest,
-  res: NextApiResponse<ListingDoc[]>
+  res: NextApiResponse<CategoryDoc>
 ) {
   /**
    * Get listings from a specific category name
    */
-    let listings : ListingDoc[] = await getListings()
-    let name = req.query.name
-    listings = listings.filter(item => item.category === name)
+    let categories : CategoryDoc[] = await getCategories()
+    let id = req.query.id
+    categories = categories.filter(item => item.id === id)
     // const {id} = req.query
     // console.log(id)
-    if(listings.length) {
-        console.log(listings)
-        res.status(200).json(listings)
+    if(categories.length) {
+        res.status(200).json(categories[0])
     }
 }
