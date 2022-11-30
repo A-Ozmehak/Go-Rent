@@ -94,14 +94,14 @@ export default function Navbar() {
                       <>
                         <Button onClick={() => router.push("/profile")}>Min profil</Button>
                         <Button onClick={() => { router.push("/"); logOut(); }}>Logga ut</Button>
-                        <Button onClick={() => router.push("/createListing")}>Lägg upp annons</Button>
+                        <Button sx={{ display: { sm: "none" } }} onClick={() => router.push("/createListing")}>Lägg upp annons</Button>
                       </>
                     )}
                     {!user && (
                       <>
                         <Button onClick={() => router.push("/login")}>Logga in</Button>
                         <Button onClick={() => router.push("/register")}>Registrera dig</Button>
-                        <Button sx={{display: {sm: "none"}}} onClick={() => router.push("/createListing")}>Lägg upp annons</Button>
+                        <Button sx={{ display: { sm: "none" } }} onClick={() => router.push("/createListing")}>Lägg upp annons</Button>
                       </>
                     )}
                   </PopoverBody>
