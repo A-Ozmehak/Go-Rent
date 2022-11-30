@@ -20,16 +20,17 @@ import dayjs from "dayjs";
 import "dayjs/locale/sv";
 import { listingInterface } from "../../utils/interface";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../../config/firebase";
-import { useUserContext } from "../../utils/userContext";
+import { auth, db } from "../../config/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 interface props {
   listing: listingInterface;
 }
 
 const BookingForm = ({ listing }: props) => {
-  const loggedInUser = useUserContext();
-
+  const [loggedInUser] = useAuthState(auth);
+  const user = loggedInUser?.uid
+  
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [selectedStart, setSelectedStart] = useState(dayjs());
@@ -52,7 +53,7 @@ const BookingForm = ({ listing }: props) => {
     let totalPrice = totalDays * listing.price;
     let value = {
       Seller: listing.seller,
-      Buyer: loggedInUser, // LOGGED IN USER
+      Buyer: user, // LOGGED IN USER
       Status: "Pending", // PENDING AS START VALUE
       bookingDetails: {
         bookingStartDate: startDate,
