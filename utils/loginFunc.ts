@@ -39,7 +39,7 @@ export default function signIn({
       const user = userCredential.user;
       console.log(user);
       // alert("Successfully signed in!");
-      router.push("/profile");
+      router.push("/profile/" + user.uid);
       // ...
     })
     .catch((error) => {
