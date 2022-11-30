@@ -4,7 +4,7 @@ import {
     CardBody,
     Box, Image, Button, useDisclosure,
 } from "@chakra-ui/react";
-import { profileInterface } from "../../utils/interface";
+import { userInterface } from "../../utils/interface";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {auth} from "../../config/firebase";
 import {getAuth} from "firebase/auth";
@@ -13,7 +13,7 @@ import { EditIcon } from "@chakra-ui/icons";
 
 
 interface props {
-    profileInfo: profileInterface[]
+    profileInfo: userInterface[]
 
 }
 

@@ -3,12 +3,12 @@ import { useRouter } from 'next/router'
 import ProfileCard from "../../components/cards/ProfileCard";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {auth} from "../../config/firebase";
-import {listingProfile, profileInterface} from "../../utils/interface";
+import {listingProfile, userInterface} from "../../utils/interface";
 import ListingProfile from "../../components/cards/ListingProfile";
 
 
  export interface props {
-    profileInfo: profileInterface[]
+    profileInfo: userInterface[]
      listing: listingProfile[]
 }
 
@@ -18,8 +18,6 @@ const ProfilePage = ({profileInfo, listing}: props) => {
     } = useRouter()
 
     const [user] = useAuthState(auth);
-
-
 
     return(
         <div>

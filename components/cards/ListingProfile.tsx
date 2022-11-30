@@ -4,7 +4,7 @@ import {useAuthState} from "react-firebase-hooks/auth";
 import {auth} from "../../config/firebase";
 import Link from "next/link";
 import {useState} from "react";
-import EditIcon from "../icons/editIcon";
+import {EditIcon} from "@chakra-ui/icons";
 
 interface props {
     listing: listingProfile[];
