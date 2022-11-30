@@ -1,6 +1,3 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
 import {
   Box,
   Flex,
@@ -8,13 +5,8 @@ import {
   IconButton,
   SystemStyleObject,
   Text,
-  useMediaQuery,
+  useMediaQuery
 } from "@chakra-ui/react";
-import { Navigation } from "swiper";
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import { getCategories } from "../pages/api/categories";
-import { CategoryDoc } from "../utils/interface";
 import {
   Celebration,
   Checkroom,
@@ -23,8 +15,16 @@ import {
   House,
   NavigateNext,
   Smartphone,
-  SportsTennis,
+  SportsTennis
 } from "@mui/icons-material";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { Navigation } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { getCategories } from "../pages/api/categories";
+import { CategoryDoc } from "../utils/interface";
 
 const icons = {
   Celebration,
@@ -97,7 +97,26 @@ const SubHeader = () => {
           slidesPerView={4}
           spaceBetween={-20}
           className="swiperStyle"
-        ></Swiper>
+        >
+          {categories.map((category) => (
+            <SwiperSlide key={category.name} className="swiperSlide">
+              <Link
+                href={`/categories/${category.id}`}
+                className="swiperSlide"
+              >
+                <Box className="swiperSlide">
+                  <IconButton
+                    mt={2}
+                    aria-label={"Category select"}
+                    icon={getIcon(category.icon)}
+                    variant="iconBg"
+                  />
+                  <Text sx={catTextStyle}>{category.name}</Text>
+                </Box>
+              </Link>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       ) : (
         <Flex w="100%" justifyContent="center" className="swiperStyle">
           <Box>
@@ -128,7 +147,6 @@ const SubHeader = () => {
                       icon={getIcon(category.icon)}
                       variant="iconBg"
                     />
-
                     <Text sx={catTextStyle}>{category.name}</Text>
                   </Box>
                 </Link>
