@@ -9,8 +9,8 @@ const RegisterPage = () => {
         <ShadowContainer>
             <Heading>Registrera dig</Heading>
             <Heading>för att också bli en klimathjälte!</Heading>
-            <SignupForm/>
-            <Text>Har du redan ett konto? <Link href="/login">Logga in!</Link></Text>
+            <SignupForm />
+            <Text>Har du redan ett konto? <Link className='inTextLink' href="/login">Logga in!</Link></Text>
         </ShadowContainer>
     )
 };
