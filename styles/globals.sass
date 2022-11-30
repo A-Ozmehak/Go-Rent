@@ -67,12 +67,14 @@ footer
   height: 60vh
 
 .hero:before
+  filter: drop-shadow(-5px 7px 5px rgba(0, 0, 0, 0.34))
+  border-radius: 5px
   opacity: .4
   content: ""
   background-image: url('https://images.squarespace-cdn.com/content/v1/55467dc6e4b0ebaf8fab24a0/38d5834c-d9b0-40fe-b46b-85a1afa96ebb/Rendering.jpg')
   background-position: 1000px
   position: absolute
-  right: -10rem
+  right: -4rem
   width: 100%
   height: 60vh
 
@@ -86,3 +88,9 @@ footer
 
 .listing-preview-card:nth-child(odd)
   background-color: #f0f0f0
+
+$breakpoint-tablet: 30em //- 30 em = "sm" breakpoint in chakra
+@media (min-width: $breakpoint-tablet)
+  .hero:before
+    background-position: 0px
+    right: -10rem
