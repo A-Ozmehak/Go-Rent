@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { Text, Heading, Box, Flex, Button, Center } from "@chakra-ui/react";
 import ListingPreviewCard from "../components/cards/ListingPreviewCard";
-import { listingDoc } from "../utils/interface";
+import { listingInterface } from "../utils/interface";
 
 
 export async function getStaticProps() {
@@ -20,7 +20,7 @@ export async function getStaticProps() {
 }
 
 export default function Index(props : any) {
-  let listings : listingDoc[] = props.listings
+  let listings : listingInterface[] = props.listings
   listings.length = 4
   return (  
     <div>

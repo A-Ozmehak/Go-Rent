@@ -20,14 +20,6 @@ export interface profileInterface {
     id?: string;
 }
 
-export interface ListingDoc {
-    title: string;
-    username: string;
-    description: string;
-    category: string;
-    media: string;
-    price: number;
-}
 
 
 export interface CategoryDoc {
