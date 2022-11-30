@@ -13,17 +13,19 @@ import { Select } from "@chakra-ui/select";
 
 import { collection, addDoc } from "firebase/firestore";
 
-import { db } from "../../config/firebase";
+import { auth, db } from "../../config/firebase";
 import router from "next/router";
 import UploadMedia from "./UploadMedia";
 import { CategoryDoc, listingInterface } from "../../utils/interface";
-import { useUserContext } from "../../utils/userContext";
 import { getCategories } from "../../pages/api/categories";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const ListingForm = () => {
   const [loading, setLoading] = useState<boolean>(true);
-  const loggedInUser = useUserContext();
+  const [loggedInUser] = useAuthState(auth);
   const [categories, setCategories] = useState<CategoryDoc[]>([]);
+
+  const user = loggedInUser?.uid
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -55,7 +57,7 @@ const ListingForm = () => {
         category: "",
         media: "",
         price: 0,
-        seller: loggedInUser.loggedInUser,
+        seller: user,
       }}
       onSubmit={(values) => {
         handleSubmit(values);

@@ -1,12 +1,12 @@
 import { Button, Flex, Text } from "@chakra-ui/react";
 import Link from "next/link";
+import { useAuthState } from "react-firebase-hooks/auth";
 import ListingForm from "../components/forms/ListingForm";
 import ShadowContainer from "../components/layout/ShadowContainer";
-import { useUserContext } from "../utils/userContext";
+import { auth } from "../config/firebase";
 
 const CreateListingPage = () => {
-  const user = useUserContext();
-  const loggedInUser = user.loggedInUsername;
+  const loggedInUser = useAuthState(auth);
 
   return (
     <ShadowContainer>
