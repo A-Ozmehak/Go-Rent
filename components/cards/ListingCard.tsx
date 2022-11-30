@@ -10,6 +10,7 @@ import { listingInterface } from "../../utils/interface";
 import Image from "next/image";
 import BookingForm from "../forms/BookingForm";
 import Link from "next/link";
+import ProfileCard from "./ProfileCard";
 
 interface props {
   listing: listingInterface;
@@ -88,8 +89,10 @@ const ListingCard = ({ listing }: props) => {
                 {/* TODO: use sellers id */}
                 {/* <Link href={`{/profile/${user.id}}`}> */}
                   {/* TODO: User profile card */}
-                  <Text fontWeight="bold">{listing.username}</Text>
-                {/* </Link> */}
+
+                  <Link href={`/profile/${listing.seller}`}>
+                    {/* <ProfileCard userInfo={listing.seller} /> */}
+                </Link>
                 <Text fontWeight="bold" sx={priceStyle}>
                   {listing.price}:- / dygn
                 </Text>

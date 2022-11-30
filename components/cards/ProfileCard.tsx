@@ -4,11 +4,12 @@ import {
     CardBody,
     Box, Image,
 } from "@chakra-ui/react";
-import EditIcon from "../icons/editIcon";
-import {profileInterface} from "../../utils/interface";
+// import EditIcon from "../icons/editIcon";
+import {userInterface} from "../../utils/interface";
+import { EditIcon } from "@chakra-ui/icons";
 
 interface props {
-    profileInfo: profileInterface[]
+    profileInfo: userInterface[]
 }
 
 const ProfileCard = ({profileInfo}: props) => {

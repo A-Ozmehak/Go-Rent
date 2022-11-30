@@ -20,16 +20,17 @@ import dayjs from "dayjs";
 import "dayjs/locale/sv";
 import { listingInterface } from "../../utils/interface";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../../config/firebase";
+import { auth, db } from "../../config/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 interface props {
   listing: listingInterface;
 }
 
 const BookingForm = ({ listing }: props) => {
-  // TODO: Ändra sen, är om en användare är inloggad
-  const loggedInUser = true;
-
+  const [loggedInUser] = useAuthState(auth);
+  const user = loggedInUser?.uid
+  
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [selectedStart, setSelectedStart] = useState(dayjs());
@@ -51,8 +52,8 @@ const BookingForm = ({ listing }: props) => {
     let totalDays = dayjs(endDate).diff(dayjs(startDate), "days");
     let totalPrice = totalDays * listing.price;
     let value = {
-      Seller: listing.username,
-      Buyer: loggedInUser, // LOGGED IN USER
+      Seller: listing.seller,
+      Buyer: user, // LOGGED IN USER
       Status: "Pending", // PENDING AS START VALUE
       bookingDetails: {
         bookingStartDate: startDate,
@@ -62,8 +63,8 @@ const BookingForm = ({ listing }: props) => {
       },
     };
     try {
-      const result = await addDoc(dbInstance, value); 
-      submitBooking()
+      const result = await addDoc(dbInstance, value);
+      submitBooking();
     } catch (e) {
       return;
     }
@@ -82,15 +83,18 @@ const BookingForm = ({ listing }: props) => {
     const calculatePrice = () => {
       const totalDays = calculateDays();
       let result = totalDays * listing.price;
-      return result 
-    }
+      return result;
+    };
 
     const days = calculateDays();
     const price = calculatePrice();
 
     return (
       <Box>
-         <Text> {days} dagar, kostnad: {price} kr </Text>
+        <Text>
+          {" "}
+          {days} dagar, kostnad: {price} kr{" "}
+        </Text>
       </Box>
     );
   };
@@ -117,7 +121,9 @@ const BookingForm = ({ listing }: props) => {
 
   return (
     <>
-      <Box padding={2}><h4>Välj datum</h4></Box>
+      <Box padding={2}>
+        <h4>Välj datum</h4>
+      </Box>
       <Button onClick={onOpen} rightIcon={<CalendarIcon />}>
         Öppna boka
       </Button>
