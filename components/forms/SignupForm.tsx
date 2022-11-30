@@ -1,4 +1,4 @@
-import { Formik } from "formik";
+import { ErrorMessage, Formik } from "formik";
 import TextInput from "../inputs/TextInput";
 import {
   Button,
@@ -17,6 +17,7 @@ import { db } from "../../config/firebase";
 import { app } from "../../firebase/firebaseConfig";
 import signIn from "../../utils/loginFunc";
 import { useState, useEffect } from "react";
+
 
 const SignupForm = () => {
   interface userValues {

@@ -16,36 +16,25 @@ export default function signIn({
   email: string;
   password: string;
 }) {
-  console.log(email, password);
-
   setPersistence(auth, browserSessionPersistence)
     .then(() => {
-      // Existing and future Auth states are now persisted in the current
-      // session only. Closing the window would clear any existing state even
-      // if a user forgets to sign out.
-      // ...
-      // New sign-in will be persisted with session persistence.
       return signInWithEmailAndPassword(auth, email, password);
     })
     .catch((error) => {
-      // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
     });
 
+
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      // Signed in
       const user = userCredential.user;
       console.log(user);
-      // alert("Successfully signed in!");
-      router.push("/");
-      // ...
+      router.push("/profile/" + user.uid);
     })
     .catch((error) => {
       const errorCode = error.code;
-
-      if (errorCode === "auth/wrong-password") {
+        if (errorCode === "auth/wrong-password") {
         alert("Fel lösenord");
       } else if (errorCode === "auth/user-not-found") {
         alert("Fel email");

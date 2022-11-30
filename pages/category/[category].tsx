@@ -1,44 +1,35 @@
+import {  Container } from "@chakra-ui/react";
+import { CategoryDoc } from "../../utils/interface";
+import { getCategories } from "../api/categories";
 
-import { Box, Button, Container, Flex, Link } from "@chakra-ui/react";
-import Image from "next/image";
-import React from 'react'
-import ListingCard from "../../components/cards/ListingCard";
-import BookingForm from "../../components/forms/BookingForm";
-import { CategoryDoc, listingInterface } from '../../utils/interface'
+const CategoryPage = ({ category }: any) => {
+  return (
+    <Container>
+      <h1>{category.name}</h1>
+    </Container>
+  );
+};
+export default CategoryPage;
 
+export async function getStaticProps({ params }: any) {
+  const category = await getCategories();
 
-const CategoryPage = ({category} : any) => {
-    return(
-      <Container>
-        <h1>{category.name}</h1>
-      </Container>
-    )
+  return {
+    props: { category },
+  };
 }
-export default CategoryPage
-
-
-
-
-export async function getStaticProps({ params  } : any) {
-    const data = await fetch(`http://localhost:3000/api/categories/${params.category}`)
-    let category = await data.json()
+export async function getStaticPaths() {
+  const categories = await getCategories();
+  const paths = categories.map((category: CategoryDoc) => {
     return {
-      props: { category },
+      params: {
+        category: category.id,
+      },
     };
-  }
-  export async function getStaticPaths() {
-    const data = await fetch(`http://localhost:3000/api/categories`)
-    let categories = await data.json()
-    const paths = categories.map((category : CategoryDoc) => {
-      return {
-        params: {
-          category: category.id,
-        },
-      };
-    });
+  });
 
-    return {
-      paths,
-      fallback: false,
-    };
-  }
+  return {
+    paths,
+    fallback: false,
+  };
+}

@@ -11,47 +11,34 @@ import { VStack } from "@chakra-ui/layout";
 import { Button, Textarea } from "@chakra-ui/react";
 import { Select } from "@chakra-ui/select";
 
-import {
-  collection,
-  addDoc,
-  DocumentData,
-  query,
-  getDocs,
-} from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 
-import { db } from "../../config/firebase";
+import { auth, db } from "../../config/firebase";
 import router from "next/router";
 import UploadMedia from "./UploadMedia";
-import { ListingDoc } from "../../utils/interface";
-import { useUserContext } from "../../utils/userContext";
+import { CategoryDoc, listingInterface } from "../../utils/interface";
+import { getCategories } from "../../pages/api/categories";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const ListingForm = () => {
-  const [categories, setCategories] = useState<DocumentData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const categoriesCollection = collection(db, "category");
-  const loggedInUser = useUserContext()
+  const [loggedInUser] = useAuthState(auth);
+  const [categories, setCategories] = useState<CategoryDoc[]>([]);
 
-  const getCategories = async () => {
-    const categoriesQuery = query(categoriesCollection);
-    const querySnapshot = await getDocs(categoriesQuery);
-    const result: DocumentData[] = [];
-    querySnapshot.forEach((snapshot) => {
-      const data = snapshot.data();
-      result.push(data);
-    });
-
-    setCategories(result);
-  };
+  const user = loggedInUser?.uid
 
   useEffect(() => {
-    getCategories();
-
+    const fetchCategories = async () => {
+      const categories = await getCategories();
+      setCategories(categories);
+    };
+    fetchCategories();
     setTimeout(() => {
       setLoading(false);
     }, 2000);
   }, []);
 
-  const handleSubmit = async (values: ListingDoc) => {
+  const handleSubmit = async (values: listingInterface) => {
     const dbInstance = collection(db, "listing");
 
     try {
@@ -62,7 +49,6 @@ const ListingForm = () => {
     }
   };
 
-  
   return (
     <Formik
       initialValues={{
@@ -71,7 +57,7 @@ const ListingForm = () => {
         category: "",
         media: "",
         price: 0,
-        username: loggedInUser.loggedInUsername,
+        seller: user,
       }}
       onSubmit={(values) => {
         handleSubmit(values);
