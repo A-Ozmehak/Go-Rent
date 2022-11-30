@@ -8,12 +8,7 @@ export interface listingInterface {
     media: string,
     description: string,
     category: string,
-    // seller id
-    seller: string,
-    // user?: {
-    //     image: string,
-    //     name: string
-    // }
+    seller: any,
 }
 
 export interface userInterface extends DocumentData {
