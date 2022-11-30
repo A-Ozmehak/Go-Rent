@@ -16,8 +16,6 @@ export default function signIn({
   email: string;
   password: string;
 }) {
-  console.log(email, password);
-
   setPersistence(auth, browserSessionPersistence)
     .then(() => {
       // Existing and future Auth states are now persisted in the current
