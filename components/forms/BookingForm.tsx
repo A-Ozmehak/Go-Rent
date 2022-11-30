@@ -21,14 +21,14 @@ import "dayjs/locale/sv";
 import { listingInterface } from "../../utils/interface";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
+import { useUserContext } from "../../utils/userContext";
 
 interface props {
   listing: listingInterface;
 }
 
 const BookingForm = ({ listing }: props) => {
-  // TODO: Ändra sen, är om en användare är inloggad
-  const loggedInUser = true;
+  const loggedInUser = useUserContext();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -51,7 +51,7 @@ const BookingForm = ({ listing }: props) => {
     let totalDays = dayjs(endDate).diff(dayjs(startDate), "days");
     let totalPrice = totalDays * listing.price;
     let value = {
-      Seller: listing.username,
+      Seller: listing.seller,
       Buyer: loggedInUser, // LOGGED IN USER
       Status: "Pending", // PENDING AS START VALUE
       bookingDetails: {
@@ -62,8 +62,8 @@ const BookingForm = ({ listing }: props) => {
       },
     };
     try {
-      const result = await addDoc(dbInstance, value); 
-      submitBooking()
+      const result = await addDoc(dbInstance, value);
+      submitBooking();
     } catch (e) {
       return;
     }
@@ -82,15 +82,18 @@ const BookingForm = ({ listing }: props) => {
     const calculatePrice = () => {
       const totalDays = calculateDays();
       let result = totalDays * listing.price;
-      return result 
-    }
+      return result;
+    };
 
     const days = calculateDays();
     const price = calculatePrice();
 
     return (
       <Box>
-         <Text> {days} dagar, kostnad: {price} kr </Text>
+        <Text>
+          {" "}
+          {days} dagar, kostnad: {price} kr{" "}
+        </Text>
       </Box>
     );
   };
@@ -117,7 +120,9 @@ const BookingForm = ({ listing }: props) => {
 
   return (
     <>
-      <Box padding={2}><h4>Välj datum</h4></Box>
+      <Box padding={2}>
+        <h4>Välj datum</h4>
+      </Box>
       <Button onClick={onOpen} rightIcon={<CalendarIcon />}>
         Öppna boka
       </Button>
