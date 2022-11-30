@@ -19,10 +19,6 @@ import signIn from "../../utils/loginFunc";
 import { useState, useEffect } from "react";
 
 const SignupForm = () => {
-  const [firebaseError, setFirebaseError] = useState("");
-  let errorCode;
-  let errorMessage;
-
   interface userValues {
     username: string;
     firstName: string;
@@ -58,7 +54,6 @@ const SignupForm = () => {
 
         if (errorCode === "auth/email-already-in-use") {
           alert("Email adressen finns redan!");
-          setFirebaseError(errorCode);
         }
       });
   }
@@ -69,8 +64,6 @@ const SignupForm = () => {
       error = "Fyll i din email adress";
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
       error = "Ogiltig email adress";
-    } else if (firebaseError) {
-      error = "Email adressen finns redan";
     }
     return error;
   };
