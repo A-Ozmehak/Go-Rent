@@ -23,9 +23,7 @@ const ProfilePage = ({profileInfo, listing}: props) => {
         <div>
             <ProfileCard profileInfo={profileInfo} />
             <h3>{user?.displayName}s annonser</h3>
-
                 <ListingProfile listing={listing} />
-
             <h3>Dina bokningar</h3>
             <h3>Mottagna förfrågningar</h3>
         </div>

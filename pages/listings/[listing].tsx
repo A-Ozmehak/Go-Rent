@@ -1,43 +1,37 @@
-
-import { Box, Button, Container, Flex, Link } from "@chakra-ui/react";
-import Image from "next/image";
-import React from 'react'
+import { Container } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import ListingCard from "../../components/cards/ListingCard";
-import BookingForm from "../../components/forms/BookingForm";
-import { listingInterface } from '../../utils/interface'
+import { listingInterface } from "../../utils/interface";
+import { getListings } from "../api/listings";
 
+const ListingPage = ({listing}: any) => {
+  
+  return (
+    <Container>{listing && <ListingCard listing={listing} />}</Container>
+  );
+};
+export default ListingPage;
 
-const ListingPage = ({listing} : any) => {
-    return(
-      <Container>
-        <ListingCard listing={listing} />
-      </Container>
-    )
+export async function getStaticProps({ params }: any) {
+  const listings = await getListings();
+
+  return {
+    props: { listings },
+  };
 }
-export default ListingPage
 
-
-
-export async function getStaticProps({ params  } : any) {
-    const data = await fetch(`http://localhost:3000/api/listings/${params.listing}`)
-    let listing = await data.json()
+export async function getStaticPaths() {
+  const listings = await getListings();
+  const paths = listings.map((listing: listingInterface) => {
     return {
-      props: { listing },
+      params: {
+        listing: listing.id,
+      },
     };
-  }
-  export async function getStaticPaths() {
-    const data = await fetch(`http://localhost:3000/api/listings`)
-    let listings = await data.json()
-    const paths = listings.map((listing : listingInterface) => {
-      return {
-        params: {
-          listing: listing.id,
-        },
-      };
-    });
+  });
 
-    return {
-      paths,
-      fallback: false,
-    };
-  }
+  return {
+    paths,
+    fallback: false,
+  };
+}

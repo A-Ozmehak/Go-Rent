@@ -25,7 +25,14 @@ export interface userInterface extends DocumentData {
 
 export interface CategoryDoc extends DocumentData {
     id: string,
-    icon: string,
+    icon:
+    "Celebration" |
+    "House" |
+    "DirectionsCar" |
+    "Construction" |
+    "SportsTennis" |
+    "Checkroom" |
+    "Smartphone",
     name: string,
     url: string
 }

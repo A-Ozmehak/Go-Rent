@@ -1,24 +1,30 @@
-import { Formik } from "formik";
+import { ErrorMessage, Formik } from "formik";
 import TextInput from "../inputs/TextInput";
 import {
-  Button, FormControl, FormErrorMessage, FormLabel, Input
+  Button,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
 } from "@chakra-ui/react";
-import { createUserWithEmailAndPassword, getAuth, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  updateProfile,
+} from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { app } from "../../firebase/firebaseConfig";
 import signIn from "../../utils/loginFunc";
 
-
 const SignupForm = () => {
   interface userValues {
-    username: string,
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
+    username: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
   }
-
 
   function register(values: userValues) {
     console.log(values);
@@ -29,9 +35,9 @@ const SignupForm = () => {
         const user = userCredential.user;
 
         updateProfile(user, {
-          // displayName exists on userCredentials along with photoUrl for avatar. 
-          "displayName": values.username,
-        })
+          // displayName exists on userCredentials along with photoUrl for avatar.
+          displayName: values.username,
+        });
         setDoc(doc(db, "users", user.uid), {
           // Things like first & lastname and description does not exist on userCredentials and needs firestore.
           firstName: capitalize(values.firstName),
@@ -39,7 +45,7 @@ const SignupForm = () => {
         });
 
         // alert("Created account successfully!");
-        signIn(values)
+        signIn(values);
         // ...
       })
       .catch((error) => {
