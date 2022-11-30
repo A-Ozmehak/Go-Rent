@@ -2,17 +2,22 @@ import React, {useState} from "react";
 import {
     Card,
     CardBody,
-    Box, Image,
+    Box, Image, Button, useDisclosure,
 } from "@chakra-ui/react";
-// import EditIcon from "../icons/editIcon";
-import {userInterface} from "../../utils/interface";
+import { userInterface } from "../../utils/interface";
+import {useAuthState} from "react-firebase-hooks/auth";
+import {auth} from "../../config/firebase";
+import {getAuth} from "firebase/auth";
+import ContactModal from "../inputs/ContactModal";
 import { EditIcon } from "@chakra-ui/icons";
+
 
 interface props {
     profileInfo: userInterface[]
+
 }
 
-const ProfileCard = ({profileInfo}: props) => {
+const ProfileCard = ({profileInfo }: props) => {
     const profileBox = {
         width:  '100%',
         height: {base: '8em', lg: '10rem'},
@@ -50,7 +55,17 @@ const ProfileCard = ({profileInfo}: props) => {
         background: {base: '#EDEDED', xl: '#DDDDDD'}
     }
 
-    const [loggedIn, setLoggedIn] = useState(false)
+    const [user] = useAuthState(auth);
+    const authAUser = getAuth()
+    const currentUsername = auth.currentUser
+    const [edit, setEdit] = useState(false)
+    const [showModal, setShowModal] = useState(false)
+    const {isOpen, onOpen, onClose} = useDisclosure()
+
+
+    const handleEdit = () => {
+        setEdit(true)
+    }
 
     return (
         <Box sx={profileBox}>
@@ -60,28 +75,34 @@ const ProfileCard = ({profileInfo}: props) => {
                 overflow='hidden'
                 variant='outline'
             >
-                {profileInfo.map((profileInfo) => (
-                    <div style={container} key={profileInfo.id}>
+                {/*{profileInfo.map((profile) => (*/}
+                    <div style={container} key='id'>
                         <div style={profileContainer}>
                             <Image
                                 sx={profileImageStyle}
-                                src={profileInfo.image}
+                                src='image'
                                 alt="profile picture"
                             />
-
+                            <ContactModal isOpen={isOpen} onClose={onClose}  />
                             <div style={userName}>
-                                <h3>{profileInfo.username}</h3>
-                                <p>{profileInfo.location}</p>
+                                <h3>{user?.displayName}</h3>
+                                <p>location</p>
+                                {!currentUsername && !user?.uid ?
+                                    <Button
+                                        onClick={onOpen}
+                                        variant='Primary'>Kontakta säljaren</Button>
+                                    : ''}
+
                             </div>
                         </div>
 
                         <CardBody sx={userBio}>
-                            <p>{profileInfo.bio}</p>
-                            {loggedIn ? <EditIcon /> : ''}
+                            <p>user bio</p>
+                            {user?.uid && currentUsername ? <Button bg='#DDDDDD' onClick={handleEdit}><EditIcon /></Button> : ''}
 
                         </CardBody>
                     </div>
-                ))}
+                {/*))}*/}
             </Card>
         </Box>
     )

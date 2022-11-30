@@ -36,3 +36,8 @@ export interface CategoryDoc extends DocumentData {
     name: string,
     url: string
 }
+
+export interface listingProfile {
+    media: string;
+    id: string;
+}
