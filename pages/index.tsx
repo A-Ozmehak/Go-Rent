@@ -3,21 +3,21 @@ import { Text, Box, Flex, Button } from "@chakra-ui/react";
 import ListingPreviewCard from "../components/cards/ListingPreviewCard";
 import { listingInterface } from "../utils/interface";
 import { getListings } from "./api/listings";
-
+import Link from "next/link";
 
 export async function getStaticProps() {
-  const listings = await getListings()
+  const listings = await getListings();
   return {
     props: {
       listings,
     },
-  }
+  };
 }
 
-export default function Index(props : any) {
-  let listings : listingInterface[] = props.listings
-  listings.length = 4
-  return (  
+export default function Index(props: any) {
+  let listings: listingInterface[] = props.listings;
+  listings.length = 4;
+  return (
     <div>
       <Head>
         <title>Go:Rent</title>
@@ -55,9 +55,11 @@ export default function Index(props : any) {
             <Text color="white" fontSize="2rem">
               Trångt i garaget?
             </Text>
-            <Button fontSize="1rem" variant="secondary" ml="2rem">
-              Lägg upp annons
-            </Button>
+            <Link href="/createListing">
+              <Button fontSize="1rem" variant="secondary" ml="2rem">
+                Lägg upp annons
+              </Button>
+            </Link>
           </Flex>
         </Flex>
       </div>
