@@ -1,27 +1,37 @@
 import { Formik } from "formik";
 import TextInput from "../inputs/TextInput";
 import {
-  Button, FormControl, FormErrorMessage, FormLabel, Input
+  Button,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
 } from "@chakra-ui/react";
-import { createUserWithEmailAndPassword, getAuth, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  updateProfile,
+} from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { app } from "../../firebase/firebaseConfig";
 import signIn from "../../utils/loginFunc";
-
+import { useState, useEffect } from "react";
 
 const SignupForm = () => {
+  const [firebaseError, setFirebaseError] = useState("");
+  let errorCode;
+  let errorMessage;
+
   interface userValues {
-    username: string,
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
+    username: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
   }
 
-
   function register(values: userValues) {
-    console.log(values);
     const auth = getAuth(app);
     createUserWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredential) => {
@@ -29,9 +39,9 @@ const SignupForm = () => {
         const user = userCredential.user;
 
         updateProfile(user, {
-          // displayName exists on userCredentials along with photoUrl for avatar. 
-          "displayName": values.username,
-        })
+          // displayName exists on userCredentials along with photoUrl for avatar.
+          displayName: values.username,
+        });
         setDoc(doc(db, "users", user.uid), {
           // Things like first & lastname and description does not exist on userCredentials and needs firestore.
           firstName: capitalize(values.firstName),
@@ -39,15 +49,31 @@ const SignupForm = () => {
         });
 
         // alert("Created account successfully!");
-        signIn(values)
+        signIn(values);
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        // ..
+
+        if (errorCode === "auth/email-already-in-use") {
+          alert("Email adressen finns redan!");
+          setFirebaseError(errorCode);
+        }
       });
   }
+
+  const validateEmail = (value: string) => {
+    let error;
+    if (!value) {
+      error = "Fyll i din email adress";
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+      error = "Ogiltig email adress";
+    } else if (firebaseError) {
+      error = "Email adressen finns redan";
+    }
+    return error;
+  };
 
   function capitalize(text: string) {
     return text[0].toUpperCase() + text.slice(1);
@@ -63,6 +89,8 @@ const SignupForm = () => {
           email: "",
           password: "",
         }}
+        validateOnBlur={false}
+        validateOnChange={false}
         onSubmit={(values) => {
           register(values);
         }}
@@ -80,7 +108,7 @@ const SignupForm = () => {
                 validate={(value: string) => {
                   let error;
                   if (value && value.length < 3) {
-                    error = "Skriv in ditt användarnamn";
+                    error = "Användarnamnet måste innehålla minst 3 tecken";
                   }
                   return error;
                 }}
@@ -98,7 +126,7 @@ const SignupForm = () => {
                 validate={(value: string) => {
                   let error;
                   if (value && value.length < 2) {
-                    error = "Skriv in ditt namn";
+                    error = "Förnamnet måste innehålla minst 2 tecken";
                   }
                   return error;
                 }}
@@ -116,7 +144,7 @@ const SignupForm = () => {
                 validate={(value: string) => {
                   let error;
                   if (value && value.length < 2) {
-                    error = "Skriv in ditt efternamn";
+                    error = "Efternamnet måste innehålla minst 2 tecken";
                   }
                   return error;
                 }}
@@ -131,13 +159,7 @@ const SignupForm = () => {
                 name="email"
                 type="email"
                 variant="filled"
-                validate={(value: string) => {
-                  let error;
-                  if (value && value.length < 5) {
-                    error = "Skriv in din email";
-                  }
-                  return error;
-                }}
+                validate={validateEmail}
               />
               <FormErrorMessage>{errors.email}</FormErrorMessage>
             </FormControl>
@@ -152,7 +174,7 @@ const SignupForm = () => {
                 validate={(value: string) => {
                   let error;
                   if (value && value.length < 6) {
-                    error = "Skriv in ditt lösenord";
+                    error = "Lösenordet måste innehålla minst 6 tecken";
                   }
                   return error;
                 }}
