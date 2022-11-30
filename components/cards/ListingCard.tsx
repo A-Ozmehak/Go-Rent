@@ -9,14 +9,10 @@ import Image from "next/image";
 import React from "react";
 import BookingForm from "../forms/BookingForm";
 
-
-
 interface props {
   listing: listingDoc
 
 }
-
-
 
 const ListingCard = ({listing} : props) => {
   const profileImageStyle = {

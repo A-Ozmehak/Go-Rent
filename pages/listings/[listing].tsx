@@ -18,7 +18,6 @@ export default ListingPage
 
 
 
-
 export async function getStaticProps({ params  } : any) {
     const data = await fetch(`http://localhost:3000/api/listings/${params.listing}`)
     let listing = await data.json()

@@ -35,3 +35,8 @@ export interface CategoryDoc {
     name: string,
     url: string
 }
+
+export interface listingProfile {
+    media: string;
+    id: string;
+}
