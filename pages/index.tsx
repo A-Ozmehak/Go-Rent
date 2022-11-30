@@ -22,6 +22,11 @@ export default function Index(props: any) {
   let listings: listingInterface[] = props.listings
   listings.length = 4
 
+  const readMoreBtn: SystemStyleObject = {
+    alignSelf: { base: "end", sm: "center" },
+    padding: { base: "none", sm: "0 3rem" }
+  }
+
   const CTAboxOuter: SystemStyleObject = {
     width: "100%",
     height: "min-content",
@@ -53,15 +58,15 @@ export default function Index(props: any) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Box maxW="1200px" m="auto">
-        <Box className="hero">
-          <Box pt="2rem" px="3rem" className="hero-box">
-            <Heading>
+        <Flex className="hero">
+          <Flex sx={{ width: { base: "100%", sm: "650px" } }} gap="1rem" pt="2rem" px="1rem" flexDirection="column">
+            <Heading sx={{ fontSize: {base: "2rem", sm: "3rem" } }} variant="h2">
               En klimatsatsning från Göteborgs stad, lär dig hur du kan göra
               skillnad.
             </Heading>
-            <Button variant="Primary">Läs mer</Button>
-          </Box>
-        </Box>
+            <Button sx={readMoreBtn} variant="Primary">Läs mer</Button>
+          </Flex>
+        </Flex>
         <Text fontSize="2rem" pt="4rem" pl="2rem">
           Senast upplagt
         </Text>

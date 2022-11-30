@@ -99,12 +99,9 @@ export default function Navbar() {
                     )}
                     {!user && (
                       <>
-                        <Button onClick={() => router.push("/login")}>
-                          Logga in
-                        </Button>
-                        <Button onClick={() => router.push("/register")}>
-                          Registrera dig
-                        </Button>
+                        <Button onClick={() => router.push("/login")}>Logga in</Button>
+                        <Button onClick={() => router.push("/register")}>Registrera dig</Button>
+                        <Button sx={{display: {sm: "none"}}} onClick={() => router.push("/createListing")}>Lägg upp annons</Button>
                       </>
                     )}
                   </PopoverBody>
