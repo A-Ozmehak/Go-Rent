@@ -1,17 +1,12 @@
 import Head from "next/head";
-import { Text, Heading, Box, Flex, Button, Center } from "@chakra-ui/react";
+import { Text, Box, Flex, Button } from "@chakra-ui/react";
 import ListingPreviewCard from "../components/cards/ListingPreviewCard";
 import { listingInterface } from "../utils/interface";
+import { getListings } from "./api/listings";
 
 
 export async function getStaticProps() {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  const listingsResponse = await fetch('http://localhost:3000/api/listings')
-  const listings = await listingsResponse.json()
-
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
+  const listings = await getListings()
   return {
     props: {
       listings,

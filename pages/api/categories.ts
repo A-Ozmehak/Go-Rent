@@ -29,6 +29,6 @@ export default async function categoriesDatahandler(
      * Get all categories from database
      */
     let categories = await getCategories()
-    console.log(categories)
+    //console.log(categories)
     res.status(200).json(categories)
 }
