@@ -1,36 +1,29 @@
+import { DocumentData } from "firebase/firestore";
+
 export interface listingInterface {
     title: string,
-    id: string,
-    location: string,
+    id?: string,
+    location?: string,
     price: number,
     media: string,
     description: string,
-    username: string,
-    user?: {
-        image: string,
-        name: string
-    }
+    category: string,
+    seller: any,
 }
 
-export interface profileInterface {
+export interface userInterface extends DocumentData {
     image?: string;
     username?: string;
+    firstName?: string;
+    lastName?: string;
     location?: string;
     bio?: string;
     id?: string;
 }
 
-export interface ListingDoc {
-    title: string;
-    username: string;
-    description: string;
-    category: string;
-    media: string;
-    price: number;
-}
 
 
-export interface CategoryDoc {
+export interface CategoryDoc extends DocumentData {
     id: string,
     icon: string,
     name: string,

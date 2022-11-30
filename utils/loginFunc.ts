@@ -25,6 +25,7 @@ export default function signIn({
       const errorMessage = error.message;
     });
 
+
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
