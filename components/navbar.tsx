@@ -1,5 +1,17 @@
 import {
-  Box, Button, Center, Container, Flex, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverTrigger, Spacer, SystemStyleObject
+  Box,
+  Button,
+  Center,
+  Container,
+  Flex,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverTrigger,
+  Spacer,
+  SystemStyleObject,
 } from "@chakra-ui/react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SearchIcon from "@mui/icons-material/Search";
@@ -8,11 +20,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { app } from "../firebase/firebaseConfig";
+import { app } from "../config/firebase";
 import SearchField from "./inputs/SearchField";
 import SubHeader from "./subHeader";
-
-
 
 export default function Navbar() {
   const auth = getAuth(app);
@@ -20,12 +30,11 @@ export default function Navbar() {
   const [search, setSearch] = useState(false);
   const router = useRouter();
   const logOut = () => {
-    signOut(auth)
-      .catch((error) => {
-        // An error happened.
-        console.log(error)
-        alert("An error has occurred please try again.");
-      });
+    signOut(auth).catch((error) => {
+      // An error happened.
+      console.log(error);
+      alert("An error has occurred please try again.");
+    });
   };
 
   const addButtonStyle: SystemStyleObject = {
@@ -48,7 +57,11 @@ export default function Navbar() {
           <Spacer />
           <Center>
             <Box>
-              <Button onClick={() => router.push("/createListing")} sx={addButtonStyle} variant="Secondary">
+              <Button
+                onClick={() => router.push("/createListing")}
+                sx={addButtonStyle}
+                variant="Secondary"
+              >
                 Lägg upp annons
               </Button>
             </Box>
@@ -92,16 +105,39 @@ export default function Navbar() {
                   >
                     {user && (
                       <>
-                        <Button onClick={() => router.push("/profile")}>Min profil</Button>
-                        <Button onClick={() => { router.push("/"); logOut(); }}>Logga ut</Button>
-                        <Button sx={{ display: { sm: "none" } }} onClick={() => router.push("/createListing")}>Lägg upp annons</Button>
+                        <Button onClick={() => router.push("/profile")}>
+                          Min profil
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            router.push("/");
+                            logOut();
+                          }}
+                        >
+                          Logga ut
+                        </Button>
+                        <Button
+                          sx={{ display: { sm: "none" } }}
+                          onClick={() => router.push("/createListing")}
+                        >
+                          Lägg upp annons
+                        </Button>
                       </>
                     )}
                     {!user && (
                       <>
-                        <Button onClick={() => router.push("/login")}>Logga in</Button>
-                        <Button onClick={() => router.push("/register")}>Registrera dig</Button>
-                        <Button sx={{ display: { sm: "none" } }} onClick={() => router.push("/createListing")}>Lägg upp annons</Button>
+                        <Button onClick={() => router.push("/login")}>
+                          Logga in
+                        </Button>
+                        <Button onClick={() => router.push("/register")}>
+                          Registrera dig
+                        </Button>
+                        <Button
+                          sx={{ display: { sm: "none" } }}
+                          onClick={() => router.push("/createListing")}
+                        >
+                          Lägg upp annons
+                        </Button>
                       </>
                     )}
                   </PopoverBody>
@@ -110,8 +146,8 @@ export default function Navbar() {
             </Flex>
           </Center>
         </Flex>
-      </Container >
+      </Container>
       <SubHeader />
-    </Box >
+    </Box>
   );
 }
