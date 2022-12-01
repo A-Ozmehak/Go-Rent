@@ -1,7 +1,7 @@
 import { Formik } from "formik";
 import {
-  Button,
-  FormControl,
+  Box,
+  Button, Center, FormControl,
   FormErrorMessage,
   FormLabel,
   Input,
@@ -11,12 +11,6 @@ import signIn from "../../utils/loginFunc";
 import TextInput from "../inputs/TextInput";
 
 const LoginForm = () => {
-  const btnDiv = {
-    display: "flex",
-    justifyContent: "center",
-    marginTop: "1rem",
-    marginBottom: "1rem",
-  };
 
   const validateEmail = (value: string) => {
     let error;
@@ -30,7 +24,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
+    <Box>
       <Formik
         initialValues={{
           email: "",
@@ -74,15 +68,15 @@ const LoginForm = () => {
             </FormControl>
 
             <Text>Glömt ditt lösenord?</Text>
-            <div style={btnDiv}>
+            <Center py="1rem">
               <Button variant="Primary" type="submit">
                 Logga in
               </Button>
-            </div>
+            </Center>
           </form>
         )}
       </Formik>
-    </div>
+    </Box>
   );
 };
 

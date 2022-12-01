@@ -22,7 +22,6 @@ export async function getStaticProps({ params }: any) {
 
 export async function getStaticPaths() {
   const listings = await getListings();
-
   const paths = listings.map((listing: listingInterface) => {
     return {
       params: {
