@@ -34,7 +34,11 @@ export default function signIn({
     })
     .catch((error) => {
       const errorCode = error.code;
-      alert(errorCode);
+        if (errorCode === "auth/wrong-password") {
+        alert("Fel lösenord");
+      } else if (errorCode === "auth/user-not-found") {
+        alert("Fel email");
+      }
       //   const errorMessage = error.message;
     });
 }

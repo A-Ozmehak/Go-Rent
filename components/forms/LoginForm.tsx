@@ -4,13 +4,24 @@ import {
   Button, Center, FormControl,
   FormErrorMessage,
   FormLabel,
-  Input, Text
+  Input,
+  Text,
 } from "@chakra-ui/react";
 import signIn from "../../utils/loginFunc";
 import TextInput from "../inputs/TextInput";
 
-
 const LoginForm = () => {
+
+  const validateEmail = (value: string) => {
+    let error;
+    if (!value) {
+      error = "Fyll i din email adress";
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+      error = "Ogiltig email adress";
+    }
+
+    return error;
+  };
 
   return (
     <Box>
@@ -33,13 +44,7 @@ const LoginForm = () => {
                 name="email"
                 type="email"
                 variant="filled"
-                validate={(value: string) => {
-                  let error;
-                  if (value.length < 5) {
-                    error = "Skriv in en email";
-                  }
-                  return error;
-                }}
+                validate={validateEmail}
               />
               <FormErrorMessage>{errors.email}</FormErrorMessage>
             </FormControl>
@@ -54,7 +59,7 @@ const LoginForm = () => {
                 validate={(value: string) => {
                   let error;
                   if (value.length < 5) {
-                    error = "Lösenordet måste vara längre än 6 karaktärer";
+                    error = "Lösenordet måste vara minst 6 tecken";
                   }
                   return error;
                 }}
