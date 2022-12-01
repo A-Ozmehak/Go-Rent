@@ -1,5 +1,8 @@
 import { ErrorMessage, Formik } from "formik";
 import TextInput from "../inputs/TextInput";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import {
   Box,
   Button,
@@ -20,7 +23,6 @@ import { db } from "../../config/firebase";
 import { app } from "../../firebase/firebaseConfig";
 import signIn from "../../utils/loginFunc";
 import { useState, useEffect } from "react";
-
 
 const SignupForm = () => {
   interface userValues {
@@ -57,7 +59,17 @@ const SignupForm = () => {
         const errorMessage = error.message;
 
         if (errorCode === "auth/email-already-in-use") {
-          alert("Email adressen finns redan!");
+          // alert("Email adressen finns redan!");
+          toast.error("Emailen finns redan", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
         }
       });
   }
@@ -78,6 +90,7 @@ const SignupForm = () => {
 
   return (
     <Box>
+      <ToastContainer />
       <Formik
         initialValues={{
           username: "",
@@ -186,8 +199,8 @@ const SignupForm = () => {
           </form>
         )}
       </Formik>
-    </Box >
-  )
+    </Box>
+  );
 };
 
 export default SignupForm;
