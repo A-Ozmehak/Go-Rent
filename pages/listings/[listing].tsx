@@ -4,8 +4,10 @@ import ListingCard from "../../components/cards/ListingCard";
 import { listingInterface } from "../../utils/interface";
 import { getListings } from "../api/listings";
 
-const ListingPage = ({listing}: any) => {
-  
+const ListingPage = () => {
+  const {
+    query: { listing },
+  } = useRouter();
   return (
     <Container>{listing && <ListingCard listing={listing} />}</Container>
   );
