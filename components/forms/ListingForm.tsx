@@ -8,7 +8,7 @@ import {
 import { Input } from "@chakra-ui/input";
 import TextInput from "../inputs/TextInput";
 import { VStack } from "@chakra-ui/layout";
-import { Button, Textarea } from "@chakra-ui/react";
+import { Button, Center, Textarea } from "@chakra-ui/react";
 import { Select } from "@chakra-ui/select";
 
 import { collection, addDoc } from "firebase/firestore";
@@ -146,9 +146,11 @@ const ListingForm = () => {
                 />
                 <FormErrorMessage>{errors.description}</FormErrorMessage>
               </FormControl>
-              <Button variant="Primary" type="submit">
-                Skapa annons
-              </Button>
+              <Center w="100%" py="1rem">
+                <Button variant="Primary" type="submit">
+                  Skapa annons
+                </Button>
+              </Center>
             </VStack>
           </Form>
         );

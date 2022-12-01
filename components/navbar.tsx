@@ -1,30 +1,16 @@
 import {
-  Flex,
-  Spacer,
-  Box,
-  Center,
-  Button,
-  Container,
-  Popover,
-  PopoverTrigger,
-  PopoverCloseButton,
-  PopoverHeader,
-  PopoverBody,
-  PopoverContent,
-  PopoverArrow,
-  Text,
-  PopoverFooter,
+  Box, Button, Center, Container, Flex, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverTrigger, Spacer, SystemStyleObject
 } from "@chakra-ui/react";
-import Link from "next/link";
-import SubHeader from "./subHeader";
-import SearchIcon from "@mui/icons-material/Search";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import SearchIcon from "@mui/icons-material/Search";
 import { getAuth, signOut } from "firebase/auth";
-import { app } from "../firebase/firebaseConfig";
-import { useAuthState } from "react-firebase-hooks/auth";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import SearchField from "./inputs/SearchField";
 import { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { app } from "../firebase/firebaseConfig";
+import SearchField from "./inputs/SearchField";
+import SubHeader from "./subHeader";
 
 
 
@@ -35,25 +21,22 @@ export default function Navbar() {
   const router = useRouter();
   const logOut = () => {
     signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        // alert("Sign out successful!");
-        router.push("/login");
-      })
       .catch((error) => {
         // An error happened.
+        console.log(error)
         alert("An error has occurred please try again.");
       });
   };
 
-  const addButtonStyle = {
+  const addButtonStyle: SystemStyleObject = {
+    display: { base: "none", sm: "block" },
     boxShadow: "3px 3px 16px 3px rgba(0, 0, 0, 0.1)",
     borderRadius: "12px",
   };
 
   return (
     <Box sx={{ backgroundColor: "var(--chakra-colors-brand-lightGray)" }}>
-      <Container maxW="1200px" p="1rem">
+      <Container maxW="1200px" maxH="80px">
         <Flex>
           <Center>
             <Box textStyle="logoText">
@@ -65,11 +48,9 @@ export default function Navbar() {
           <Spacer />
           <Center>
             <Box>
-              <Link href="/createListing">
-                <Button sx={addButtonStyle} variant="Secondary">
-                  Lägg upp annons
-                </Button>
-              </Link>
+              <Button onClick={() => router.push("/createListing")} sx={addButtonStyle} variant="Secondary">
+                Lägg upp annons
+              </Button>
             </Box>
           </Center>
           <Spacer />
@@ -77,7 +58,7 @@ export default function Navbar() {
             <Flex>
               {!search ? (
                 <SearchIcon
-                  style={{
+                  sx={{
                     marginRight: "1rem",
                     fontSize: "2rem",
                     cursor: "pointer",
@@ -91,7 +72,7 @@ export default function Navbar() {
               <Popover>
                 <PopoverTrigger>
                   <AccountCircleIcon
-                    style={{
+                    sx={{
                       fontSize: "2rem",
                       cursor: "pointer",
                       color: "#005799",
@@ -99,32 +80,28 @@ export default function Navbar() {
                     }}
                   ></AccountCircleIcon>
                 </PopoverTrigger>
-                <PopoverContent>
+                <PopoverContent w="min-content">
                   <PopoverArrow />
                   <PopoverCloseButton />
                   <PopoverBody
                     display="flex"
+                    gap="0.5rem"
                     flexDirection="column"
                     alignItems="center"
+                    m="1rem"
                   >
                     {user && (
                       <>
-                        <Link href="/profile">
-                          <Text>Min profil</Text>
-                        </Link>
-                        <Link href="/profile">
-                          <Text onClick={logOut}>Logga ut</Text>
-                        </Link>
+                        <Button onClick={() => router.push("/profile")}>Min profil</Button>
+                        <Button onClick={() => { router.push("/"); logOut(); }}>Logga ut</Button>
+                        <Button sx={{ display: { sm: "none" } }} onClick={() => router.push("/createListing")}>Lägg upp annons</Button>
                       </>
                     )}
                     {!user && (
                       <>
-                        <Link href="/login">
-                          <Text>Logga in</Text>
-                        </Link>
-                        <Link href="/register">
-                          <Text>Registrera dig</Text>
-                        </Link>
+                        <Button onClick={() => router.push("/login")}>Logga in</Button>
+                        <Button onClick={() => router.push("/register")}>Registrera dig</Button>
+                        <Button sx={{ display: { sm: "none" } }} onClick={() => router.push("/createListing")}>Lägg upp annons</Button>
                       </>
                     )}
                   </PopoverBody>
@@ -133,8 +110,8 @@ export default function Navbar() {
             </Flex>
           </Center>
         </Flex>
-      </Container>
+      </Container >
       <SubHeader />
-    </Box>
+    </Box >
   );
 }
