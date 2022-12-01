@@ -20,7 +20,7 @@ export default function Index(props: any) {
   const router = useRouter();
 
   let listings: listingInterface[] = props.listings
-  listings.length = 4
+  listings.length = 5
 
   const readMoreBtn: SystemStyleObject = {
     alignSelf: { base: "end", sm: "center" },

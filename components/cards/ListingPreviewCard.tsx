@@ -1,63 +1,43 @@
-import React from "react";
-import Image from "next/image";
 import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Stack,
-  Text,
-  Button,
-  ButtonGroup,
-  Divider,
-  propNames,
-  Box,
-  Heading,
-  Flex,
-  Link,
+  Box, Card, CardBody, Heading, Img, Link, Stack,
+  Text
 } from "@chakra-ui/react";
 import { listingInterface } from "../../utils/interface";
 
+
+
 interface props {
-  listings: listingInterface[];
+  listings: listingInterface[]
+
 }
 
 const ListingPreviewCard = ({ listings }: props) => {
-  const priceStyle = {
-    marginLeft: { sm: "12rem" },
-  };
+
   return (
     <Box>
       {listings.map((listing) => (
-        <Link key={listing.id} href={`/listings/${listing.id}`}>
-          <Box w="100%" className="listing-preview-card" key={listing.id}>
+        <Box className="listing-preview-card">
+          <Link key={listing.id} href={`/listings/${listing}`}>
             <Card
+              h="121px"
               w="100%"
-              direction={{ base: "column", sm: "row" }}
+              display="flex"
+              direction="row"
               overflow="hidden"
-              //   variant="filled"
             >
-              <Image
-                objectFit="cover"
+              <Img
+                className="listingImage"
                 src={listing.media}
-                alt="Caffe Latte"
-                width={250}
-                height={250}
+                alt="Listing image"
               />
-
-              <Stack>
-                <CardBody>
-                  <Heading size="md">{listing.title}</Heading>
-
-                  <Text py="2">{listing.location}</Text>
-                </CardBody>
-                <CardFooter>
-                  <Text ml="12rem">{listing.price}:- / dygn</Text>
-                </CardFooter>
-              </Stack>
+              <CardBody display="flex" flexDirection="column" p="1rem">
+                <Heading as="h4">{listing.title}</Heading>
+                <Text>{listing.description}</Text>
+                <Text mr={{ base: 0, sm: "2rem", md: "5rem" }} alignSelf="end">{listing.price}kr / dygn</Text>
+              </CardBody>
             </Card>
-          </Box>
-        </Link>
+          </Link>
+        </Box>
       ))}
     </Box>
   );

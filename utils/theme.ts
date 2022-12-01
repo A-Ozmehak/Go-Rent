@@ -26,8 +26,8 @@ export const Theme = extendTheme({
             color: "black"
           },
           h4: {
-            fontFamily: "Josefin Sans",
-            fontWeight: 'bold',
+            fontFamily: "Josefin Sans !important",
+            fontWeight: 'bold !important',
             fontSize: '1.1rem',
             color: "black"
           },

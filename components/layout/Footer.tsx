@@ -24,7 +24,7 @@ const Footer = () => {
           </Link>
           <span>/ </span>
           <Link href="/register">
-            <span>Registrera</span>
+            <span>Registrera dig</span>
           </Link>
         </Text>
         <Text pb=".3rem">Vanliga frågor</Text>
