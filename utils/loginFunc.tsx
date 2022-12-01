@@ -35,9 +35,6 @@ export default function signIn({
     })
     .catch((error) => {
       const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode);
-      console.log(errorMessage);
       if (errorCode === "auth/wrong-password") {
         // alert("Fel lösenord");
         toast.error("Felaktigt lösenord!", {
@@ -50,7 +47,6 @@ export default function signIn({
           progress: undefined,
           theme: "colored",
         });
-        console.log(errorCode);
       } else if (errorCode === "auth/user-not-found") {
         toast.error("Felaktig email!", {
           position: "top-right",
@@ -62,8 +58,22 @@ export default function signIn({
           progress: undefined,
           theme: "colored",
         });
-        console.log(errorCode);
+
         // alert("Fel email");
+      } else if (errorCode === "auth/too-many-requests") {
+        toast.error(
+          "För många felaktiga inloggningsförsök, försök igen senare",
+          {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          }
+        );
       }
       //   const errorMessage = error.message;
     });
