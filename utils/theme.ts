@@ -21,8 +21,8 @@ export const Theme = extendTheme({
             fontWeight: "medium"
           },
           h3: {
-            fontFamily: "Josefin Sans",
-            fontWeight: 'light',
+            fontFamily: "Josefin Sans !important",
+            fontWeight: 'light !important',
             color: "black"
           },
           h4: {

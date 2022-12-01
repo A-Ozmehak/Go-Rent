@@ -67,9 +67,9 @@ export default function Index(props: any) {
             <Button sx={readMoreBtn} variant="Primary">Läs mer</Button>
           </Flex>
         </Flex>
-        <Text fontSize="2rem" pt="4rem" pl="2rem">
+        <Heading size="md" as="h3" p="4rem 0 0.5rem 0" pl="1rem">
           Senast upplagt
-        </Text>
+        </Heading>
         <ListingPreviewCard listings={listings} />
         <Flex
           className="placeholder"
