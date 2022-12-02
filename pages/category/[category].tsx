@@ -1,6 +1,6 @@
 import {  Container } from "@chakra-ui/react";
 import { CategoryDoc } from "../../utils/interface";
-import { getCategories } from "../api/categories";
+import { getCategories, getCategory } from "../api/categories";
 
 const CategoryPage = ({ category }: any) => {
   return (
@@ -12,7 +12,7 @@ const CategoryPage = ({ category }: any) => {
 export default CategoryPage;
 
 export async function getStaticProps({ params }: any) {
-  const category = await getCategories();
+  const category = await getCategory(params.category);
 
   return {
     props: { category },

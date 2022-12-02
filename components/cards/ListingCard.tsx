@@ -3,29 +3,15 @@ import { listingInterface, userInterface } from "../../utils/interface";
 import Image from "next/image";
 import BookingForm from "../forms/BookingForm";
 import Link from "next/link";
-import { getUser } from "../../pages/api/users/[id]";
 import { useEffect, useState } from "react";
 import MinimalProfileCard from "./MinimalProfileCard.";
+import { getUser } from "../../pages/api/users";
 
 interface props {
   listing: listingInterface;
 }
 
 const ListingCard = ({ listing }: props) => {
-  const [seller, setSeller] = useState<userInterface>();
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const seller = await getUser(listing.seller);
-      setSeller(seller);
-    };
-
-    fetchUser();
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, [listing.seller]);
 
   return (
     <Box sx={hideOnDesktop}>
@@ -37,7 +23,7 @@ const ListingCard = ({ listing }: props) => {
             <Stack mt="6" spacing="3">
               <Box sx={flexCenter}>
                 <Link href={`/profile/${listing.seller}`}>
-                  {seller && <MinimalProfileCard profile={seller} />}
+                  {listing.seller && <MinimalProfileCard profile={listing.seller} />}
                 </Link>
                 <Text fontWeight="bold" sx={priceStyle}>
                   {listing.price}:- / dygn

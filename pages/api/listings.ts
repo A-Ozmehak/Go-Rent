@@ -2,6 +2,8 @@
 import { collection, getDocs } from 'firebase/firestore';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { db } from '../../config/firebase';
+import { listingInterface } from '../../utils/interface';
+import { getUser } from './users';
 
 const listingsCollection = collection(db, "listing");
 
@@ -11,13 +13,14 @@ export const getListings = async () => {
     documents.forEach(doc => {
         let listing = doc.data()
         listing = {...listing, "id": doc.id}
+        listing.seller = JSON.stringify(getUser(listing.seller))
         listings.push(listing)
     });
     return listings
 };
 
 
-export async function getListingsByUser(id : string) {
+export const getListingsByUser = async (id : string) => {
     let listings = await getListings()
     let userListings : any = []
     for(let listing of listings) {
@@ -28,16 +31,9 @@ export async function getListingsByUser(id : string) {
     return userListings
 }
 
-
-
-
-export default async function listingsDatahandler(
-  req: NextApiRequest,
-  res: NextApiResponse<[]>
-) {
-    /**
-     * Get all listings from database
-     */
-    let listings = await getListings()
-    res.status(200).json(listings)
+export const getListing = async (id : string) => {
+    let listings : listingInterface[] = await getListings()
+    let listing = listings.find(item => item.id === id)
+    return listing
 }
+
