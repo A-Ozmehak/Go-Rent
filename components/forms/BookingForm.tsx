@@ -29,8 +29,8 @@ interface props {
 
 const BookingForm = ({ listing }: props) => {
   const [loggedInUser] = useAuthState(auth);
-  const user = loggedInUser?.uid
-  
+  const user = loggedInUser?.uid;
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [selectedStart, setSelectedStart] = useState(dayjs());
@@ -55,6 +55,10 @@ const BookingForm = ({ listing }: props) => {
       Seller: listing.seller,
       Buyer: user, // LOGGED IN USER
       Status: "Pending", // PENDING AS START VALUE
+      listing: {
+        title: listing.title,
+        media: listing.media,
+      },
       bookingDetails: {
         bookingStartDate: startDate,
         bookingEndDate: endDate,

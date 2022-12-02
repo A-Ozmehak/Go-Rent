@@ -1,4 +1,4 @@
-import { DocumentData } from "firebase/firestore";
+import { DocumentData, Timestamp } from "firebase/firestore";
 
 export interface listingInterface {
     title: string,
@@ -22,6 +22,22 @@ export interface userInterface {
 }
 
 
+export interface bookingInterface {
+    Buyer: string;
+    Seller: userInterface;
+    Status: string;
+    listing: {
+        media: string;
+        title: string;
+    };
+    bookingDetails: {
+        bookingEndDate: number;
+        bookingStartDate: number;
+        totalDays: number;
+        totalPrice: number;
+    };
+    id?: string;
+}
 
 export interface CategoryDoc extends DocumentData {
     id: string,
