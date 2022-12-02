@@ -17,7 +17,7 @@ const ListingPreviewCard = ({ listings }: props) => {
     <Box>
       {listings.map((listing) => (
         <Box key={listing.id} className="listing-preview-card">
-          <Link href={`/listings/${listing}`}>
+          <Link href={`/listings/${listing.id}`}>
             <Card
               h="121px"
               w="100%"
