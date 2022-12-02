@@ -3,9 +3,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../config/firebase";
 import { userInterface } from "../../utils/interface";
 import ListingProfile from "../../components/cards/ListingProfile";
-import { getUsers } from "../api/users";
+import { getUser, getUsers } from "../api/users";
 import { Box } from "@chakra-ui/react";
-import { getUser } from "../api/users/[id]";
 import { getListingsByUser } from "../api/listings";
 
 const ProfilePage = ({ user, userListings }: any) => {
