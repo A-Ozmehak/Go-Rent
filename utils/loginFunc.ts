@@ -30,13 +30,11 @@ export default function signIn({
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      console.log(user);
       router.push("/profile/" + user.uid);
     })
     .catch((error) => {
       const errorCode = error.code;
       if (errorCode === "auth/wrong-password") {
-        // alert("Fel lösenord");
         toast.error("Felaktigt lösenord!", {
           position: "top-right",
           autoClose: 5000,
@@ -58,8 +56,6 @@ export default function signIn({
           progress: undefined,
           theme: "colored",
         });
-
-        // alert("Fel email");
       } else if (errorCode === "auth/too-many-requests") {
         toast.error(
           "För många felaktiga inloggningsförsök, försök igen senare",
