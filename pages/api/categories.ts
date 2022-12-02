@@ -14,7 +14,7 @@ export const getCategories = async () => {
         category = { ...category, "id": doc.id }
         categories.push(category)
     });
-    console.log(categories)
+
     return categories
 };
 
