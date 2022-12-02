@@ -3,6 +3,14 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { listingInterface} from '../../../utils/interface'
 import { getListings } from '../listings';
 
+
+export async function getListing(id : string) {
+  let listings : listingInterface[] = await getListings()
+  let listing = listings.find(item => item.id === id)
+  return listing
+}
+
+
 export default async function listingsIdDataHandler(
   req: NextApiRequest,
   res: NextApiResponse<listingInterface>

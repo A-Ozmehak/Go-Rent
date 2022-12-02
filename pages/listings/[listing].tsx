@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import ListingCard from "../../components/cards/ListingCard";
 import { listingInterface } from "../../utils/interface";
 import { getListings } from "../api/listings";
+import { getListing } from "../api/listings/[id]";
 
 const ListingPage = ({listing}: any) => {
   
@@ -13,10 +14,10 @@ const ListingPage = ({listing}: any) => {
 export default ListingPage;
 
 export async function getStaticProps({ params }: any) {
-  const listings = await getListings();
+  const listing = await getListing(params.listing);
 
   return {
-    props: { listings },
+    props: { listing },
   };
 }
 
