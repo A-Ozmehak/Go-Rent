@@ -5,13 +5,16 @@ import { userInterface } from "../../utils/interface";
 import ListingProfile from "../../components/cards/ListingProfile";
 import { getUsers } from "../api/users";
 import { Box } from "@chakra-ui/react";
+import { getUser } from "../api/users/[id]";
+import { getListingsByUser } from "../api/listings";
 
-const ProfilePage = ({ profile, listing }: any) => {
+const ProfilePage = ({ user, userListings }: any) => {
   const loggedInUser = useAuthState(auth);
+
   return (
     <Box>
-      <ProfileCard profile={profile} />
-      <ListingProfile listing={listing} />
+      <ProfileCard profile={user} />
+      <ListingProfile listing={userListings} />
       {/* {loggedInUser === profile && ( */}
         <Box>
           <h3>Dina bokningar</h3>
@@ -23,16 +26,16 @@ const ProfilePage = ({ profile, listing }: any) => {
 };
 
 export async function getStaticProps({ params }: any) {
-  const users:[] = await getUsers();
-
+  const user = await getUser(params.profile);
+  const userListings = await getListingsByUser(params.profile)
+  
   return {
-    props: { users },
+    props: { user, userListings },
   };
 }
 
 export async function getStaticPaths() {
-  const users:[] = await getUsers();
-
+  const users = await getUsers();
   const paths = users.map((user: userInterface) => {
     return {
       params: {
@@ -46,5 +49,6 @@ export async function getStaticPaths() {
     fallback: false,
   };
 }
+
 
 export default ProfilePage;

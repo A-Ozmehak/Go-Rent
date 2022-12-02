@@ -17,6 +17,18 @@ export const getListings = async () => {
 };
 
 
+export async function getListingsByUser(id : string) {
+    let listings = await getListings()
+    let userListings : any = []
+    for(let listing of listings) {
+        if(listing.seller === id) {
+            userListings.push(listing)
+        }
+    }
+    return userListings
+}
+
+
 
 
 export default async function listingsDatahandler(
