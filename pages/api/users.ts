@@ -2,16 +2,15 @@
 import { collection, getDocs } from 'firebase/firestore';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { db } from '../../config/firebase';
-import { userInterface } from '../../utils/interface';
 
 const usersCollection = collection(db, "users");
 
 export const getUsers = async () => {
     const documents = await getDocs(usersCollection)
-    let users : userInterface[] = []
+    let users: any = []
     documents.forEach(doc => {
-        let user = doc.data() as userInterface
-        user = {...user, "id": doc.id}
+        let user = doc.data()
+        user = { ...user, "id": doc.id }
         users.push(user)
     });
     return users
@@ -21,8 +20,8 @@ export const getUsers = async () => {
 
 
 export default async function usersDatahandler(
-  req: NextApiRequest,
-  res: NextApiResponse<userInterface[]>
+    req: NextApiRequest,
+    res: NextApiResponse<[]>
 ) {
     /**
      * Get all users from database

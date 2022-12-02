@@ -1,5 +1,5 @@
 import Image from "next/image";
-import {listingProfile} from "../../utils/interface";
+import {listingInterface} from "../../utils/interface";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {auth} from "../../config/firebase";
 import Link from "next/link";
@@ -7,7 +7,7 @@ import {useState} from "react";
 import {EditIcon} from "@chakra-ui/icons";
 
 interface props {
-    listing: listingProfile[];
+    listing: listingInterface[];
 }
 
 const ListingProfile = ({listing} : props) => {
@@ -33,11 +33,12 @@ const ListingProfile = ({listing} : props) => {
                             key={listing.id}
                             src={listing.media}
                             alt='listing'
-                            width={15}
-                            height={15}
+                            width={55}
+                            height={55}
                             onMouseOver={handleMouseOver}
                             onMouseOut={handleMouseOut}
                         />
+                        <h1>{listing.id}</h1>
                     </Link>
                 ))}
             {hovering &&

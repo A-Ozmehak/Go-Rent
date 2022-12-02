@@ -27,6 +27,7 @@ import SubHeader from "./subHeader";
 export default function Navbar() {
   const auth = getAuth(app);
   const [user, loading] = useAuthState(auth);
+
   const [search, setSearch] = useState(false);
   const router = useRouter();
   const logOut = () => {
@@ -105,7 +106,7 @@ export default function Navbar() {
                   >
                     {user && (
                       <>
-                        <Button onClick={() => router.push("/profile")}>
+                        <Button onClick={() => router.push(`/profile/${user?.uid}`)}>
                           Min profil
                         </Button>
                         <Button

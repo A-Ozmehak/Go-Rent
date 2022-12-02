@@ -3,6 +3,13 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { userInterface } from '../../../utils/interface'
 import { getUsers } from '../users';
 
+export async function getUser(id: string) {
+    let users: userInterface[] = await getUsers()
+    let user = users.find(item => item.id === id)
+    return user
+}
+
+
 export default async function usersIdDataHandler(
     req: NextApiRequest,
     res: NextApiResponse<userInterface>
