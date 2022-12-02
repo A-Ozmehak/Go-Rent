@@ -1,74 +1,31 @@
-import {
-  Box,
-  Card,
-  CardBody,
-  Divider,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
-import { listingInterface } from "../../utils/interface";
+import { Box, Card, CardBody, Divider, Stack, Text } from "@chakra-ui/react";
+import { listingInterface, userInterface } from "../../utils/interface";
 import Image from "next/image";
 import BookingForm from "../forms/BookingForm";
 import Link from "next/link";
-import ProfileCard from "./ProfileCard";
+import { getUser } from "../../pages/api/users/[id]";
+import { useEffect, useState } from "react";
+import MinimalProfileCard from "./MinimalProfileCard.";
 
 interface props {
   listing: listingInterface;
 }
 
 const ListingCard = ({ listing }: props) => {
-  const profileImageStyle = {
-    marginRight: ".5rem",
-  };
+  const [seller, setSeller] = useState<userInterface>();
+  const [loading, setLoading] = useState<boolean>(true);
 
-  const locationStyle = {
-    marginLeft: "12.8rem",
-  };
+  useEffect(() => {
+    const fetchUser = async () => {
+      const seller = await getUser(listing.seller);
+      setSeller(seller);
+    };
 
-  const priceStyle = {
-    marginLeft: { base: "7rem" },
-  };
-
-  const dateStyle = {
-    marginLeft: "1.2rem",
-  };
-
-  const cardFooterStyle = {
-    padding: "0",
-    marginBottom: "1rem",
-    marginLeft: "1.2rem",
-  };
-
-  const flexColumnCenter = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  };
-
-  const flexCenter = {
-    display: "flex",
-    alignItems: "center",
-  };
-
-  const headingStyle = {
-    marginBottom: "1rem",
-  };
-
-  const dividerStyle = {
-    borderColor: "black",
-  };
-
-  const cardWidth = {
-    width: { sm: "300px" },
-  };
-
-  const hideOnDesktop = {
-    display: { md: "none" },
-  };
-
-  const dateInputStyle = {
-    backgroundColor: "#F0F0F0",
-  };
+    fetchUser();
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, [listing.seller]);
 
   return (
     <Box sx={hideOnDesktop}>
@@ -79,19 +36,8 @@ const ListingCard = ({ listing }: props) => {
           <CardBody>
             <Stack mt="6" spacing="3">
               <Box sx={flexCenter}>
-                <Image
-                  style={profileImageStyle}
-                  src={"/monke.png"}
-                  alt="profile picture"
-                  width="28"
-                  height="28"
-                />
-                {/* TODO: use sellers id */}
-                {/* <Link href={`{/profile/${user.id}}`}> */}
-                  {/* TODO: User profile card */}
-
-                  <Link href={`/profile/${listing.seller}`}>
-                    {/* <ProfileCard userInfo={listing.seller} /> */}
+                <Link href={`/profile/${listing.seller}`}>
+                  {seller && <MinimalProfileCard profile={seller} />}
                 </Link>
                 <Text fontWeight="bold" sx={priceStyle}>
                   {listing.price}:- / dygn
@@ -108,6 +54,59 @@ const ListingCard = ({ listing }: props) => {
       </Box>
     </Box>
   );
+};
+
+const profileImageStyle = {
+  marginRight: ".5rem",
+};
+
+const locationStyle = {
+  marginLeft: "12.8rem",
+};
+
+const priceStyle = {
+  marginLeft: { base: "7rem" },
+};
+
+const dateStyle = {
+  marginLeft: "1.2rem",
+};
+
+const cardFooterStyle = {
+  padding: "0",
+  marginBottom: "1rem",
+  marginLeft: "1.2rem",
+};
+
+const flexColumnCenter = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+};
+
+const flexCenter = {
+  display: "flex",
+  alignItems: "center",
+};
+
+const headingStyle = {
+  marginBottom: "1rem",
+};
+
+const dividerStyle = {
+  borderColor: "black",
+};
+
+const cardWidth = {
+  width: { sm: "300px" },
+};
+
+const hideOnDesktop = {
+  display: { md: "none" },
+};
+
+const dateInputStyle = {
+  backgroundColor: "#F0F0F0",
 };
 
 export default ListingCard;

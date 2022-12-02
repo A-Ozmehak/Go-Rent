@@ -11,11 +11,11 @@ export interface listingInterface {
     seller: any,
 }
 
-export interface userInterface extends DocumentData {
+export interface userInterface {
     image?: string;
-    username?: string;
-    firstName?: string;
-    lastName?: string;
+    username: string;
+    firstname?: string;
+    lastname?: string;
     location?: string;
     bio?: string;
     id?: string;
