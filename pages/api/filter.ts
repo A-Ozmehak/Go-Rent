@@ -16,13 +16,13 @@ async function filterData() {
 }
 
 
-export default async function listingsDatahandler(
-  req: NextApiRequest,
-  res: NextApiResponse<{}>
-) {
-    /**
-     * Get all listings from database
-     */
-    let data = await filterData()
-    res.status(200).json(data)
-}
+// export default async function listingsDatahandler(
+//   req: NextApiRequest,
+//   res: NextApiResponse<{}>
+// ) {
+//     /**
+//      * Get all listings from database
+//      */
+//     let data = await filterData()
+//     res.status(200).json(data)
+// }

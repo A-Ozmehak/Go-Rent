@@ -1,7 +1,7 @@
 import { Container } from "@chakra-ui/react";
 import ListingCard from "../../components/cards/ListingCard";
 import { listingInterface } from "../../utils/interface";
-import { getListings } from "../api/listings";
+import { getListing, getListings } from "../api/listings";
 
 const ListingPage = ({listing}: any) => {
   return (
@@ -11,10 +11,10 @@ const ListingPage = ({listing}: any) => {
 export default ListingPage;
 
 export async function getStaticProps({ params }: any) {
-  const listings:[] = await getListings();
+  const listing = await getListing(params.listing);
 
   return {
-    props: { listings },
+    props: { listing },
   };
 }
 
