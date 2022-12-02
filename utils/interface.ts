@@ -14,8 +14,8 @@ export interface listingInterface {
 export interface userInterface {
     image?: string;
     username: string;
-    firstname?: string;
-    lastname?: string;
+    firstName?: string;
+    lastName?: string;
     location?: string;
     bio?: string;
     id?: string;
