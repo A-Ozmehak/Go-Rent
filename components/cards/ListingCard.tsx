@@ -1,18 +1,15 @@
 import { Box, Card, CardBody, Divider, Stack, Text } from "@chakra-ui/react";
-import { listingInterface, userInterface } from "../../utils/interface";
+import { listingInterface } from "../../utils/interface";
 import Image from "next/image";
 import BookingForm from "../forms/BookingForm";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import MinimalProfileCard from "./MinimalProfileCard.";
-import { getUser } from "../../pages/api/users";
 
 interface props {
   listing: listingInterface;
 }
 
 const ListingCard = ({ listing }: props) => {
-
   return (
     <Box sx={hideOnDesktop}>
       <Box sx={flexColumnCenter}>
@@ -22,8 +19,8 @@ const ListingCard = ({ listing }: props) => {
           <CardBody>
             <Stack mt="6" spacing="3">
               <Box sx={flexCenter}>
-                <Link href={`/profile/${listing.seller}`}>
-                  {listing.seller && <MinimalProfileCard profile={listing.seller} />}
+                <Link href={`/profile/${listing.seller.id}`}>
+                  <MinimalProfileCard profile={listing.seller} />
                 </Link>
                 <Text fontWeight="bold" sx={priceStyle}>
                   {listing.price}:- / dygn
