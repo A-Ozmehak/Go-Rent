@@ -16,9 +16,7 @@ const EditForm = ({profileImage}: Props) => {
                 location: '',
                 image: '',
                 bio: ''
-            }} onSubmit={(values) => {
-
-            }}
+            }} onSubmit={(values) => {}}
             >
                 {({handleSubmit}) => (
                     <form onSubmit={handleSubmit}>
