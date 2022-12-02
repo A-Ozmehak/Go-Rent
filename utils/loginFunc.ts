@@ -5,7 +5,7 @@ import {
   getAuth,
 } from "firebase/auth";
 import router from "next/router";
-import { app } from "../firebase/firebaseConfig";
+import { app } from "../config/firebase";
 
 const auth = getAuth(app);
 
@@ -25,7 +25,6 @@ export default function signIn({
       const errorMessage = error.message;
     });
 
-
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
@@ -34,7 +33,7 @@ export default function signIn({
     })
     .catch((error) => {
       const errorCode = error.code;
-        if (errorCode === "auth/wrong-password") {
+      if (errorCode === "auth/wrong-password") {
         alert("Fel lösenord");
       } else if (errorCode === "auth/user-not-found") {
         alert("Fel email");
