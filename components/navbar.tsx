@@ -44,6 +44,11 @@ export default function Navbar() {
     borderRadius: "12px",
   };
 
+  let showSubHeader = router.pathname !== "/login"
+  let showSubHeader1 = router.pathname !== "/register";
+  let showSubHeader2 = router.pathname !== "/createListing";
+  let showSubHeader3 = router.pathname !== `/profile/${user?.uid}`;
+
   return (
     <Box sx={{ backgroundColor: "var(--chakra-colors-brand-lightGray)" }}>
       <Container maxW="1200px" maxH="80px">
@@ -148,7 +153,8 @@ export default function Navbar() {
           </Center>
         </Flex>
       </Container>
-      <SubHeader />
+      {showSubHeader && showSubHeader1 && showSubHeader2 && showSubHeader3 &&  <SubHeader />}
+
     </Box>
   );
 }
