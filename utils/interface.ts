@@ -11,9 +11,9 @@ export interface listingInterface {
     seller: any,
 }
 
-export interface userInterface extends DocumentData {
+export interface userInterface {
     image?: string;
-    username?: string;
+    username: string;
     firstName?: string;
     lastName?: string;
     location?: string;
@@ -35,9 +35,4 @@ export interface CategoryDoc extends DocumentData {
     "Smartphone",
     name: string,
     url: string
-}
-
-export interface listingProfile {
-    media: string;
-    id: string;
 }
