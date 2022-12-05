@@ -1,43 +1,46 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { collection, getDocs } from 'firebase/firestore';
-import type { NextApiRequest, NextApiResponse } from 'next'
+
+import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../config/firebase';
+import { listingInterface } from '../../utils/interface';
+import { getUser } from './users';
 
 const listingsCollection = collection(db, "listing");
 
 export const getListings = async () => {
     const documents = await getDocs(listingsCollection)
-    let listings : any = []
-    documents.forEach(doc => {
+    let listings: any = []
+
+    for (const doc of documents.docs) {
         let listing = doc.data()
-        listing = {...listing, "id": doc.id}
+        listing = { ...listing, "id": doc.id }
+        listing.seller = await getUser(listing.seller)
         listings.push(listing)
-    });
+    }
     return listings
 };
 
+// * Get bookings by seller
+export const getListingsByUser = async (id: string) => {
+    const q = query(listingsCollection, where("seller", "==", id))
+    let listings: listingInterface[] = []
+    const querySnapshot = await getDocs(q)
+    querySnapshot.forEach((doc) => {
+        const listingData = doc.data() as listingInterface
+        const listing = { ...listingData, "id": doc.id }
+        listings.push(listing)
+    })
 
-export async function getListingsByUser(id : string) {
-    let listings = await getListings()
-    let userListings : any = []
-    for(let listing of listings) {
-        if(listing.seller === id) {
-            userListings.push(listing)
-        }
+    return listings
+}
+
+export const getListing = async (id: string) => {
+    const listingDocRef = doc(db, "listing", id);
+    const docSnap = await getDoc(listingDocRef)
+    if (docSnap.exists()) {
+        const listing = docSnap.data()
+        const seller = await getUser(listing.seller)
+        return { ...listing, "id": docSnap.id, seller }
     }
-    return userListings
+    else { return null }
 }
 
-
-
-
-export default async function listingsDatahandler(
-  req: NextApiRequest,
-  res: NextApiResponse<[]>
-) {
-    /**
-     * Get all listings from database
-     */
-    let listings = await getListings()
-    res.status(200).json(listings)
-}

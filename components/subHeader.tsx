@@ -101,7 +101,7 @@ const SubHeader = () => {
           {categories.map((category) => (
             <SwiperSlide key={category.name} className="swiperSlide">
               <Link
-                href={`/categories/${category.id}`}
+                href={`/category/${category.id}`}
                 className="swiperSlide"
               >
                 <Box className="swiperSlide">
@@ -136,7 +136,7 @@ const SubHeader = () => {
             <Box sx={categoriesLarge}>
               {categories.map((category) => (
                 <Link
-                  href={`/categories/${category.id}`}
+                  href={`/category/${category.id}`}
                   key={category.name}
                   className="swiperSlide"
                 >
