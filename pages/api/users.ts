@@ -1,27 +1,14 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { collection, getDocs } from 'firebase/firestore';
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import { userInterface } from '../../utils/interface';
 
-const usersCollection = collection(db, "users");
-
-export const getUsers = async () => {
-    const documents = await getDocs(usersCollection)
-    let users: any = []
-    documents.forEach(doc => {
-        let user = doc.data()
-        user = { ...user, "id": doc.id }
-        users.push(user)
-    });
-    return users
-};
-
-
-export const getUser = async (id : string) => {
-    let users: userInterface[] = await getUsers()
-    let user = users.find(item => item.id === id)
-    return user
+export const getUser = async (id: string) => {
+    const userDocRef = doc(db, "users", id);
+    const docSnap = await getDoc(userDocRef)
+    if (docSnap.exists()) {
+        const user = docSnap.data()
+        console.log(user)
+        return { ...user, "id": docSnap.id }
+    }
+    else { return null }
 }
-
-

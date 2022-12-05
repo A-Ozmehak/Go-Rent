@@ -1,31 +1,35 @@
 import Head from "next/head";
-import { Text, Box, Flex, Button, Heading, SystemStyleFunction, SystemStyleObject, Container } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Button,
+  Heading,
+  SystemStyleObject,
+} from "@chakra-ui/react";
 import ListingPreviewCard from "../components/cards/ListingPreviewCard";
 import { listingInterface } from "../utils/interface";
 import { getListings } from "./api/listings";
 import { useRouter } from "next/router";
-import { height } from "@mui/system";
 
-
-export async function getStaticProps() {
-  const listings = await getListings()
+export async function getServerSideProps() {
+  const listings = await getListings();
   return {
     props: {
       listings,
     },
-  }
+  };
 }
 
 export default function Index(props: any) {
   const router = useRouter();
 
-  let listings: listingInterface[] = props.listings
-  listings.length = 5
+  let listings: listingInterface[] = props.listings;
+  listings.length = 5;
 
   const readMoreBtn: SystemStyleObject = {
     alignSelf: { base: "end", sm: "center" },
-    padding: { base: "none", sm: "0 3rem" }
-  }
+    padding: { base: "none", sm: "0 3rem" },
+  };
 
   const CTAboxOuter: SystemStyleObject = {
     width: "100%",
@@ -33,13 +37,13 @@ export default function Index(props: any) {
     background: "rgba(0, 0, 0, 0.46)",
     padding: "0.5rem",
     justifyContent: "center",
-  }
+  };
 
   const CTAboxInner: SystemStyleObject = {
     width: { base: "100%", sm: "450px" },
     flexDirection: { base: "row", sm: "column" },
-    gap: "0.5rem"
-  }
+    gap: "0.5rem",
+  };
 
   const CTAbtn: SystemStyleObject = {
     alignSelf: "flex-end",
@@ -48,7 +52,7 @@ export default function Index(props: any) {
     borderRadius: 0,
     color: "#234B9A",
     padding: "0 2rem",
-  }
+  };
 
   return (
     <Box>
@@ -59,24 +63,30 @@ export default function Index(props: any) {
       </Head>
       <Box maxW="1200px" m="auto">
         <Flex className="hero">
-          <Flex sx={{ width: { base: "100%", sm: "650px" } }} gap="1rem" pt="2rem" px="1rem" flexDirection="column">
-            <Heading sx={{ fontSize: {base: "2rem", sm: "3rem" } }} variant="h2">
+          <Flex
+            sx={{ width: { base: "100%", sm: "650px" } }}
+            gap="1rem"
+            pt="2rem"
+            px="1rem"
+            flexDirection="column"
+          >
+            <Heading
+              sx={{ fontSize: { base: "2rem", sm: "3rem" } }}
+              variant="h2"
+            >
               En klimatsatsning från Göteborgs stad, lär dig hur du kan göra
               skillnad.
             </Heading>
-            <Button sx={readMoreBtn} variant="Primary">Läs mer</Button>
+            <Button sx={readMoreBtn} variant="Primary">
+              Läs mer
+            </Button>
           </Flex>
         </Flex>
         <Heading size="md" as="h3" p="4rem 0 0.5rem 0" pl="1rem">
           Senast upplagt
         </Heading>
         <ListingPreviewCard listings={listings} />
-        <Flex
-          className="placeholder"
-          w="100%"
-          h="100%"
-          alignItems="center"
-        >
+        <Flex className="placeholder" w="100%" h="100%" alignItems="center">
           <Flex sx={CTAboxOuter}>
             <Flex sx={CTAboxInner}>
               <Heading variant="h2" color="white">

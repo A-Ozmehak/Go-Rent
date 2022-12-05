@@ -29,7 +29,7 @@ interface props {
 
 const BookingForm = ({ listing }: props) => {
   const [loggedInUser] = useAuthState(auth);
-  const user = loggedInUser?.uid
+  const user = loggedInUser?.uid;
   
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -52,9 +52,13 @@ const BookingForm = ({ listing }: props) => {
     let totalDays = dayjs(endDate).diff(dayjs(startDate), "days");
     let totalPrice = totalDays * listing.price;
     let value = {
-      Seller: listing.seller,
-      Buyer: user, // LOGGED IN USER
-      Status: "Pending", // PENDING AS START VALUE
+      seller: listing.seller,
+      buyer: user,  // LOGGED IN USER, TODO: look over to fetch only id/username/image without a fetch...
+      status: "pending", // PENDING AS START VALUE
+      listing: {
+        title: listing.title,
+        media: listing.media,
+      },
       bookingDetails: {
         bookingStartDate: startDate,
         bookingEndDate: endDate,
