@@ -70,8 +70,9 @@ const EditForm = ({ profileImage }: Props) => {
             <FormLabel htmlFor="image">Profil bild</FormLabel>
             <UploadMedia id="id" value="value" updateField={() => {}} />
             <Box sx={btnBox}>
-              <Button>Spara</Button>
-              <Button>Ta bort konto</Button>
+              <Button variant="Accept">Spara</Button>
+              {/* TODO: open up modal with "are you sure you want to remove your account." */}
+              <Button variant="Reject">Ta bort konto</Button>
             </Box>
           </form>
         )}
