@@ -45,6 +45,7 @@ const ProfilePage = ({
 export async function getServerSideProps({ params }: any) {
   const user = await getUser(params.profile);
   const userListings = await getListingsByUser(params.profile);
+  console.log(userListings)
   let bookings = await getBookingsBySeller(params.profile)
 
   const pendingBookings = bookings.filter((booking) => booking.status === "pending")
