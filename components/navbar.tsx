@@ -22,9 +22,7 @@ export default function Navbar() {
   const logOut = () => {
     signOut(auth)
       .catch((error) => {
-        // An error happened.
         console.log(error)
-        alert("An error has occurred please try again.");
       });
   };
 

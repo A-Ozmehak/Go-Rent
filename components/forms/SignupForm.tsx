@@ -49,17 +49,13 @@ const SignupForm = () => {
           firstName: capitalize(values.firstName),
           lastName: capitalize(values.lastName),
         });
-
-        // alert("Created account successfully!");
         signIn(values);
-        // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
 
         if (errorCode === "auth/email-already-in-use") {
-          // alert("Email adressen finns redan!");
           toast.error("Emailen finns redan", {
             position: "top-right",
             autoClose: 5000,
