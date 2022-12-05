@@ -14,4 +14,3 @@ export async function getServerSideProps({ params }: any) {
     props: { listing },
   };
 }
-

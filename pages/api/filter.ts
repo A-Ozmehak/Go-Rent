@@ -1,5 +1,5 @@
-import { getCategories } from './categories';
-import { getListings } from './listings';
+import { getCategories } from "./categories";
+import { getListings } from "./listings";
 
 async function filterData() {
   let categories = await getListings();

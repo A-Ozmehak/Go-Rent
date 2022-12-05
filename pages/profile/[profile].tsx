@@ -46,11 +46,17 @@ const ProfilePage = ({
 export async function getServerSideProps({ params }: any) {
   const user = await getUser(params.profile);
   const userListings = await getListingsByUser(params.profile);
-  let bookings = await getBookingsBySeller(params.profile)
+  let bookings = await getBookingsBySeller(params.profile);
 
-  const pendingBookings = bookings.filter((booking) => booking.status === "pending")
-  const acceptedBookings = bookings.filter((booking) => booking.status === "accepted")
-  const declinedBookings = bookings.filter((booking) => booking.status === "declined")
+  const pendingBookings = bookings.filter(
+    (booking) => booking.status === "pending"
+  );
+  const acceptedBookings = bookings.filter(
+    (booking) => booking.status === "accepted"
+  );
+  const declinedBookings = bookings.filter(
+    (booking) => booking.status === "declined"
+  );
   return {
     props: {
       user,

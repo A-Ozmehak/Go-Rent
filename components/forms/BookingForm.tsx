@@ -52,7 +52,7 @@ const BookingForm = ({ listing }: props) => {
     let totalPrice = totalDays * listing.price;
     let value = {
       seller: listing.seller,
-      buyer: user,  // LOGGED IN USER, TODO: look over to fetch only id/username/image without a fetch...
+      buyer: user, // LOGGED IN USER, TODO: look over to fetch only id/username/image without a fetch...
       status: "pending", // PENDING AS START VALUE
       listing: {
         title: listing.title,

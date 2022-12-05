@@ -100,10 +100,7 @@ const SubHeader = () => {
         >
           {categories.map((category) => (
             <SwiperSlide key={category.name} className="swiperSlide">
-              <Link
-                href={`/category/${category.id}`}
-                className="swiperSlide"
-              >
+              <Link href={`/category/${category.id}`} className="swiperSlide">
                 <Box className="swiperSlide">
                   <IconButton
                     mt={2}
