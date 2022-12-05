@@ -1,4 +1,3 @@
-
 import { Container } from "@chakra-ui/react";
 import { getCategory } from "../api/categories";
 

@@ -25,7 +25,7 @@ const ListingForm = () => {
   const [loggedInUser] = useAuthState(auth);
   const [categories, setCategories] = useState<CategoryDoc[]>([]);
 
-  const user = loggedInUser?.uid
+  const user = loggedInUser?.uid;
 
   useEffect(() => {
     const fetchCategories = async () => {

@@ -106,7 +106,9 @@ export default function Navbar() {
                   >
                     {user && (
                       <>
-                        <Button onClick={() => router.push(`/profile/${user?.uid}`)}>
+                        <Button
+                          onClick={() => router.push(`/profile/${user?.uid}`)}
+                        >
                           Min profil
                         </Button>
                         <Button

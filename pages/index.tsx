@@ -4,7 +4,9 @@ import {
   Flex,
   Button,
   Heading,
+  SystemStyleFunction,
   SystemStyleObject,
+  Container,
 } from "@chakra-ui/react";
 import ListingPreviewCard from "../components/cards/ListingPreviewCard";
 import { listingInterface } from "../utils/interface";

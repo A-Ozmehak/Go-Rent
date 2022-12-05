@@ -1,27 +1,26 @@
 import React from "react";
-import {Field} from "formik"
+import { Field } from "formik";
 
 type Props = {
-    as: object;
-    id: string;
-    name: string;
-    type: any;
-    variant: string;
-    validate: (value: string | number | any) => void;
-}
+  as: object;
+  id: string;
+  name: string;
+  type: any;
+  variant: string;
+  validate: (value: string | number | any) => void;
+};
 
-const TextInput = ({ as, id, name, type, variant, validate}: Props) => {
-
+const TextInput = ({ as, id, name, type, variant, validate }: Props) => {
   return (
-        <Field
-            as={as}
-            id={id}
-            name={name}
-            type={type}
-            variant={variant}
-            validate={validate}
-        />
-  )
+    <Field
+      as={as}
+      id={id}
+      name={name}
+      type={type}
+      variant={variant}
+      validate={validate}
+    />
+  );
 };
 
 export default TextInput;
