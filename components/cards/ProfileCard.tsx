@@ -19,7 +19,7 @@ interface props {
 
 const ProfileCard = ({ profile }: props) => {
   const [loggedInUser] = useAuthState(auth);
-//   const authAUser = getAuth();
+  //   const authAUser = getAuth();
   const loggedInUsername = auth.currentUser;
 
   const [edit, setEdit] = useState(false);
@@ -47,7 +47,6 @@ const ProfileCard = ({ profile }: props) => {
             />
             <ContactModal isOpen={isOpen} onClose={onClose} />
             <div style={userName}>
-               
               <h3>{profile.username}</h3>
               <p>{profile.location}</p>
               {!loggedInUsername && !loggedInUser?.uid ? (

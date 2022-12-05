@@ -15,10 +15,10 @@ const ProfilePage = ({ user, userListings }: any) => {
       <ProfileCard profile={user} />
       <ListingProfile listing={userListings} />
       {/* {loggedInUser === profile && ( */}
-        <Box>
-          <h3>Dina bokningar</h3>
-          <h3>Mottagna förfrågningar</h3>
-        </Box>
+      <Box>
+        <h3>Dina bokningar</h3>
+        <h3>Mottagna förfrågningar</h3>
+      </Box>
       {/* )} */}
     </Box>
   );
@@ -26,8 +26,8 @@ const ProfilePage = ({ user, userListings }: any) => {
 
 export async function getStaticProps({ params }: any) {
   const user = await getUser(params.profile);
-  const userListings = await getListingsByUser(params.profile)
-  
+  const userListings = await getListingsByUser(params.profile);
+
   return {
     props: { user, userListings },
   };
@@ -48,6 +48,5 @@ export async function getStaticPaths() {
     fallback: false,
   };
 }
-
 
 export default ProfilePage;

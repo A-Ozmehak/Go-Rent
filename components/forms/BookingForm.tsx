@@ -29,8 +29,8 @@ interface props {
 
 const BookingForm = ({ listing }: props) => {
   const [loggedInUser] = useAuthState(auth);
-  const user = loggedInUser?.uid
-  
+  const user = loggedInUser?.uid;
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [selectedStart, setSelectedStart] = useState(dayjs());

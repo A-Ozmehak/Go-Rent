@@ -1,4 +1,4 @@
-import {  Container } from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
 import { CategoryDoc } from "../../utils/interface";
 import { getCategories, getCategory } from "../api/categories";
 

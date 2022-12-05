@@ -1,7 +1,9 @@
 import { Formik } from "formik";
 import {
   Box,
-  Button, Center, FormControl,
+  Button,
+  Center,
+  FormControl,
   FormErrorMessage,
   FormLabel,
   Input,
@@ -11,7 +13,6 @@ import signIn from "../../utils/loginFunc";
 import TextInput from "../inputs/TextInput";
 
 const LoginForm = () => {
-
   const validateEmail = (value: string) => {
     let error;
     if (!value) {
