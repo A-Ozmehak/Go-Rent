@@ -23,9 +23,9 @@ export interface userInterface {
 
 
 export interface bookingInterface {
-    Buyer: string;
-    Seller: userInterface;
-    Status: string;
+    buyer: string;
+    seller: userInterface;
+    status: string;
     listing: {
         media: string;
         title: string;

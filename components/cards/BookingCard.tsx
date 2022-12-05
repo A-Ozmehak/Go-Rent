@@ -29,7 +29,7 @@ const BookingCard = ({ booking }: BookingCardProps) => {
 //     const setAccept = async () => {
 //       if (booking.id)
 //         await setDoc(doc(db, "bookings", booking.id), {
-//           Status: "Accepted",
+//           Status: "accepted",
 //         });
 //       toast({
 //         title: "Du har godkänt bokningen!",
@@ -46,7 +46,7 @@ const BookingCard = ({ booking }: BookingCardProps) => {
 //     const setReject = async () => {
 //       if (booking.id)
 //         await setDoc(doc(db, "bookings", booking.id), {
-//           Status: "Rejected",
+//           Status: "rejected",
 //         });
 //       toast({
 //         title: "Du har nekat bokningen!",
@@ -62,7 +62,7 @@ const BookingCard = ({ booking }: BookingCardProps) => {
   return (
     <Flex gap={10} padding={2} justifyContent={"space-between"}>
       <Flex direction={"column"}>
-        <MinimalProfileCard profile={booking.Seller} />
+        <MinimalProfileCard profile={booking.seller} />
         <Image
           src={booking.listing.media}
           alt="listing picture"

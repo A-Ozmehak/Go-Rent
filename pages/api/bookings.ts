@@ -24,7 +24,7 @@ export const getBookingsBySeller = async (userID: string) => {
     let bookings = await getBookings()
     let userBookings: bookingInterface[] = []
     for (let booking of bookings) {
-        if (booking.Seller.id === userID) {
+        if (booking.seller.id === userID) {
             userBookings.push(booking)
         }
     }
@@ -38,7 +38,7 @@ export const getBookingsByBuyer = async (userID: string) => {
     let userBookings: bookingInterface[] = []
 
     for (let booking of bookings) {
-        if (booking.Buyer === userID) {
+        if (booking.buyer === userID) {
             userBookings.push(booking)
         }
     }
@@ -52,7 +52,7 @@ export const getBookingsByStatus = async (userID:string) => {
     let statusBookings: any = []
 
     for (let booking of bookings) {
-        if (booking.Status === "Pending") {
+        if (booking.status === "pending") {
             statusBookings.push(booking)
         }
     }
