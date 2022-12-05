@@ -22,81 +22,85 @@ const BookingCard = ({ booking }: BookingCardProps) => {
 
   const toast = useToast();
 
-  const [accStatus, setAccStatus] = useState(false)
-  const [rejStatus, setRejStatus] = useState(false)
+  const [accStatus, setAccStatus] = useState(false);
+  const [rejStatus, setRejStatus] = useState(false);
 
-//   useEffect(() => {
-//     const setAccept = async () => {
-//       if (booking.id)
-//         await setDoc(doc(db, "bookings", booking.id), {
-//           Status: "accepted",
-//         });
-//       toast({
-//         title: "Du har godkänt bokningen!",
-//         status: "success",
-//         duration: 9000,
-//         isClosable: true,
-//       });
-//     };
-//     setAccStatus(true)
-//     setAccept();
-//   }, []);
+  //   useEffect(() => {
+  //     const setAccept = async () => {
+  //       if (booking.id)
+  //         await setDoc(doc(db, "bookings", booking.id), {
+  //           Status: "accepted",
+  //         });
+  //       toast({
+  //         title: "Du har godkänt bokningen!",
+  //         status: "success",
+  //         duration: 9000,
+  //         isClosable: true,
+  //       });
+  //     };
+  //     setAccStatus(true)
+  //     setAccept();
+  //   }, []);
 
-//   useEffect(() => {
-//     const setReject = async () => {
-//       if (booking.id)
-//         await setDoc(doc(db, "bookings", booking.id), {
-//           Status: "rejected",
-//         });
-//       toast({
-//         title: "Du har nekat bokningen!",
-//         status: "error",
-//         duration: 9000,
-//         isClosable: true,
-//       });
-//     };
-//     setRejStatus(true)
-//     setReject();
-//   }, []);
+  //   useEffect(() => {
+  //     const setReject = async () => {
+  //       if (booking.id)
+  //         await setDoc(doc(db, "bookings", booking.id), {
+  //           Status: "rejected",
+  //         });
+  //       toast({
+  //         title: "Du har nekat bokningen!",
+  //         status: "error",
+  //         duration: 9000,
+  //         isClosable: true,
+  //       });
+  //     };
+  //     setRejStatus(true)
+  //     setReject();
+  //   }, []);
 
   return (
-    <Flex gap={10} padding={2} justifyContent={"space-between"}>
-      <Flex direction={"column"}>
-        <MinimalProfileCard profile={booking.seller} />
-        <Image
-          src={booking.listing.media}
-          alt="listing picture"
-          width={180}
-          objectFit={"cover"}
-          sx={{ borderRadius: "0.5rem" }}
-          height={20}
-        />
-      </Flex>
-
-      <Flex direction={"column"} gap={5}>
-        <Flex gap={10}>
+    <>
+      {booking ? (
+        <Flex gap={10} padding={2} justifyContent={"space-between"}>
           <Flex direction={"column"}>
-            <h4>{booking.listing.title}</h4>
-            <p>Totalpris: {booking.bookingDetails.totalPrice} kr</p>
+            <MinimalProfileCard profile={booking.seller} />
+            <Image
+              src={booking.listing.media}
+              alt="listing picture"
+              width={180}
+              objectFit={"cover"}
+              sx={{ borderRadius: "0.5rem" }}
+              height={20}
+            />
           </Flex>
-          <Flex direction={"column"}>
-            <h4>datum</h4>
-            <p>
-              {startDate} - {endDate}
-            </p>
+
+          <Flex direction={"column"} gap={5}>
+            <Flex gap={10}>
+              <Flex direction={"column"}>
+                <h4>{booking.listing.title}</h4>
+                <p>Totalpris: {booking.bookingDetails.totalPrice} kr</p>
+              </Flex>
+              <Flex direction={"column"}>
+                <h4>datum</h4>
+                <p>
+                  {startDate} - {endDate}
+                </p>
+              </Flex>
+            </Flex>
+
+            <ButtonGroup gap={10}>
+              <Button variant="Accept" onClick={() => setAccStatus}>
+                Acceptera
+              </Button>
+              <Button variant="Reject" onClick={() => setRejStatus}>
+                Neka
+              </Button>
+            </ButtonGroup>
           </Flex>
         </Flex>
-
-        <ButtonGroup gap={10}>
-          <Button variant="Accept" onClick={()=> setAccStatus}>
-            Acceptera
-          </Button>
-          <Button variant="Reject" onClick={() => setRejStatus}>
-            Neka
-          </Button>
-        </ButtonGroup>
-      </Flex>
-    </Flex>
+      ) : null}
+    </>
   );
 };
 export default BookingCard;
