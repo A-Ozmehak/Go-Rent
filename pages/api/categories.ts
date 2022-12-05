@@ -1,6 +1,4 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { collection, DocumentData, getDocs } from 'firebase/firestore';
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import { CategoryDoc } from '../../utils/interface';
 
@@ -19,8 +17,14 @@ export const getCategories = async () => {
 };
 
 
-export const getCategory = async (id : string) => {
-    let categories : CategoryDoc[] = await getCategories()
-    let category = categories.filter(item => item.id === id)
-    return category
+export const getCategory = async (id: string) => {
+    const categoryDocRef = doc(db, "category", id);
+    const docSnap = await getDoc(categoryDocRef)
+    if (docSnap.exists()) {
+        const category = docSnap.data()
+        console.log(category)
+        return { ...category, "id": docSnap.id }
+    }
+    else { return null }
 }
+
