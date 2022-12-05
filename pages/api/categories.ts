@@ -14,21 +14,13 @@ export const getCategories = async () => {
         category = { ...category, "id": doc.id }
         categories.push(category)
     });
-    console.log(categories)
+
     return categories
 };
 
 
-
-
-export default async function categoriesDatahandler(
-    req: NextApiRequest,
-    res: NextApiResponse<CategoryDoc[]>
-) {
-    /**
-     * Get all categories from database
-     */
-    let categories = await getCategories()
-    //console.log(categories)
-    res.status(200).json(categories)
+export const getCategory = async (id : string) => {
+    let categories : CategoryDoc[] = await getCategories()
+    let category = categories.filter(item => item.id === id)
+    return category
 }

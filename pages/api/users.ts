@@ -8,25 +8,20 @@ const usersCollection = collection(db, "users");
 
 export const getUsers = async () => {
     const documents = await getDocs(usersCollection)
-    let users : userInterface[] = []
+    let users: any = []
     documents.forEach(doc => {
-        let user = doc.data() as userInterface
-        user = {...user, "id": doc.id}
+        let user = doc.data()
+        user = { ...user, "id": doc.id }
         users.push(user)
     });
     return users
 };
 
 
-
-
-export default async function usersDatahandler(
-  req: NextApiRequest,
-  res: NextApiResponse<userInterface[]>
-) {
-    /**
-     * Get all users from database
-     */
-    let users = await getUsers()
-    res.status(200).json(users)
+export const getUser = async (id : string) => {
+    let users: userInterface[] = await getUsers()
+    let user = users.find(item => item.id === id)
+    return user
 }
+
+

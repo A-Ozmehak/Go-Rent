@@ -20,7 +20,7 @@ import {
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
-import { app } from "../../firebase/firebaseConfig";
+import { app } from "../../config/firebase";
 import signIn from "../../utils/loginFunc";
 import { useState, useEffect } from "react";
 
