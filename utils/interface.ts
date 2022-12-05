@@ -21,6 +21,24 @@ export interface userInterface {
   id?: string;
 }
 
+export interface bookingInterface {
+    buyer: string;
+    seller: userInterface;
+    status: string;
+    listing: {
+        media: string;
+        title: string;
+    };
+    bookingDetails: {
+        bookingEndDate: number;
+        bookingStartDate: number;
+        totalDays: number;
+        totalPrice: number;
+    };
+    id?: string;
+}
+
+
 export interface CategoryDoc extends DocumentData {
   id: string;
   icon:

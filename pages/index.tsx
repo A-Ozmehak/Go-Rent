@@ -1,6 +1,5 @@
 import Head from "next/head";
 import {
-  Text,
   Box,
   Flex,
   Button,
@@ -13,9 +12,8 @@ import ListingPreviewCard from "../components/cards/ListingPreviewCard";
 import { listingInterface } from "../utils/interface";
 import { getListings } from "./api/listings";
 import { useRouter } from "next/router";
-import { height } from "@mui/system";
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const listings = await getListings();
   return {
     props: {
