@@ -4,6 +4,7 @@ import { auth } from "../../config/firebase";
 import ListingProfile from "../../components/cards/ListingProfile";
 import { getUser } from "../api/users";
 import { Box, Flex } from "@chakra-ui/react";
+
 import { getListingsByUser } from "../api/listings";
 import BookingCard from "../../components/cards/BookingCard";
 import { getBookingsBySeller } from "../api/bookings";

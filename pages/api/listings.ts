@@ -1,3 +1,4 @@
+
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import { listingInterface } from '../../utils/interface';
@@ -22,7 +23,6 @@ export const getListings = async () => {
 export const getListingsByUser = async (id: string) => {
     const q = query(listingsCollection, where("seller", "==", id))
     let listings: listingInterface[] = []
-
     const querySnapshot = await getDocs(q)
     querySnapshot.forEach((doc) => {
         const listingData = doc.data() as listingInterface

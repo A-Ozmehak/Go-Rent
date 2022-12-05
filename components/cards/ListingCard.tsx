@@ -10,7 +10,6 @@ interface props {
 }
 
 const ListingCard = ({ listing }: props) => {
-  console.log(listing)
   return (
     <Box sx={hideOnDesktop}>
       <Box sx={flexColumnCenter}>

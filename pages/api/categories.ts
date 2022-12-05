@@ -16,15 +16,11 @@ export const getCategories = async () => {
     return categories
 };
 
-
 export const getCategory = async (id: string) => {
     const categoryDocRef = doc(db, "category", id);
     const docSnap = await getDoc(categoryDocRef)
     if (docSnap.exists()) {
         const category = docSnap.data()
-        console.log(category)
         return { ...category, "id": docSnap.id }
     }
     else { return null }
-}
-

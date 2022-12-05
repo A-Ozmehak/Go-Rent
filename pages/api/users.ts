@@ -1,5 +1,6 @@
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../config/firebase';
+import { userInterface } from '../../utils/interface';
 
 export const getUser = async (id: string) => {
     const userDocRef = doc(db, "users", id);
