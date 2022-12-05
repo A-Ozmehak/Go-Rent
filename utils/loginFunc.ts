@@ -5,9 +5,10 @@ import {
   getAuth,
 } from "firebase/auth";
 import router from "next/router";
-import { app } from "../firebase/firebaseConfig";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { app } from "../config/firebase";
 
 const auth = getAuth(app);
 
