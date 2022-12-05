@@ -24,3 +24,4 @@ export const getCategory = async (id: string) => {
         return { ...category, "id": docSnap.id }
     }
     else { return null }
+}
