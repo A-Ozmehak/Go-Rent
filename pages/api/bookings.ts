@@ -46,7 +46,7 @@ export const getBookingsByBuyer = async (userID: string) => {
 }
 
 // ! NEEDS TO BE WORKED ON
-export const getBookingsByStatus = async (userID:string) => {
+export const getBookingsByStatus = async (userID: string) => {
     let bookings = await getBookingsBySeller(userID)
 
     let statusBookings: any = []

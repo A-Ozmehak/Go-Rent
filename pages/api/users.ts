@@ -1,6 +1,4 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { collection, getDocs } from 'firebase/firestore';
-import type { NextApiRequest, NextApiResponse } from 'next'
 import { db } from '../../config/firebase';
 import { userInterface } from '../../utils/interface';
 
@@ -17,11 +15,8 @@ export const getUsers = async () => {
     return users
 };
 
-
-export const getUser = async (id : string) => {
+export const getUser = async (id: string) => {
     let users: userInterface[] = await getUsers()
     let user = users.find(item => item.id === id)
     return user
 }
-
-
