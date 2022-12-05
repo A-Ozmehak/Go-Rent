@@ -11,6 +11,8 @@ import {
 } from "@chakra-ui/react";
 import signIn from "../../utils/loginFunc";
 import TextInput from "../inputs/TextInput";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginForm = () => {
   const validateEmail = (value: string) => {
@@ -26,6 +28,7 @@ const LoginForm = () => {
 
   return (
     <Box>
+      <ToastContainer />
       <Formik
         initialValues={{
           email: "",
