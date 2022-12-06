@@ -124,9 +124,6 @@ const BookingForm = ({ listing }: props) => {
 
   return (
     <>
-      <Box padding={2}>
-        <h4>Välj datum</h4>
-      </Box>
       <Button onClick={onOpen} rightIcon={<CalendarIcon />}>
         Öppna boka
       </Button>
