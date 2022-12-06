@@ -76,11 +76,10 @@ export default function Index(props: any) {
               sx={{ fontSize: { base: "2rem", sm: "3rem" } }}
               variant="h2"
             >
-              En klimatsatsning från Göteborgs stad, lär dig hur du kan göra
-              skillnad.
+              Gratis hemsida för Göteborgare, hyr & hyr ut alla möjliga prylar!
             </Heading>
             <Button sx={readMoreBtn} variant="Primary">
-              Läs mer
+              Skapa konto
             </Button>
           </Flex>
         </Flex>
