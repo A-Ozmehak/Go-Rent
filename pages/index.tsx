@@ -80,9 +80,9 @@ export default function Index(props: any) {
               Gratis hemsida för Göteborgare, hyr & hyr ut alla möjliga prylar!
             </Heading>
             <Link href={"/register"}>
-            <Button sx={readMoreBtn} variant="Primary">
-              Skapa konto
-            </Button>
+              <Button sx={readMoreBtn} variant="Primary">
+                Skapa konto
+              </Button>
             </Link>
           </Flex>
         </Flex>
