@@ -7,7 +7,6 @@ export const getUser = async (id: string) => {
   const docSnap = await getDoc(userDocRef);
   if (docSnap.exists()) {
     const user = docSnap.data();
-    console.log(user);
     return { ...user, id: docSnap.id };
   } else {
     return null;
