@@ -32,9 +32,7 @@ export default function Navbar() {
   const router = useRouter();
   const logOut = () => {
     signOut(auth).catch((error) => {
-      // An error happened.
       console.log(error);
-      alert("An error has occurred please try again.");
     });
   };
 
@@ -111,7 +109,9 @@ export default function Navbar() {
                   >
                     {user && (
                       <>
-                        <Button onClick={() => router.push(`/profile/${user?.uid}`)}>
+                        <Button
+                          onClick={() => router.push(`/profile/${user?.uid}`)}
+                        >
                           Min profil
                         </Button>
                         <Button

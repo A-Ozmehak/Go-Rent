@@ -1,15 +1,11 @@
 import { DownloadIcon } from "@chakra-ui/icons";
-import {
-  Flex,
-  InputGroup,
-  InputRightElement,
-} from "@chakra-ui/react";
+import { Flex, InputGroup, InputRightElement } from "@chakra-ui/react";
 import FilePicker from "chakra-ui-file-picker";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useState } from "react";
 import { storage } from "../../config/firebase";
 
-interface MediaProps {
+export interface MediaProps {
   id: string;
   updateField: (field: string, value: any, shouldValidate?: boolean) => void;
   value: string;
@@ -46,7 +42,9 @@ const UploadMedia = ({ id, value, updateField }: MediaProps) => {
   return (
     <Flex>
       <InputGroup>
-        <InputRightElement><DownloadIcon /></InputRightElement>
+        <InputRightElement>
+          <DownloadIcon />
+        </InputRightElement>
         <FilePicker
           placeholder={"Lägg till bild"}
           onFileChange={(files) => handleSelectedFile(files)}
