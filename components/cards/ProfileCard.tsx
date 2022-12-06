@@ -26,7 +26,6 @@ const ProfileCard = ({ profile, profileImage }: props) => {
   //   const authAUser = getAuth();
   const loggedInUsername = auth.currentUser;
 
-
   const [hovering, setHovering] = useState(false);
   const [edit, setEdit] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -82,7 +81,6 @@ const ProfileCard = ({ profile, profileImage }: props) => {
               {hovering && loggedInUser?.uid && currentProfile && (
                 <Button bg="#DDDDDD" onClick={handleEdit}>
                   <EditIcon />
-
                 </Button>
               )}
             </CardBody>
