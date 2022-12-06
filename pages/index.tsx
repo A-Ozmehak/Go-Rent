@@ -12,6 +12,7 @@ import ListingPreviewCard from "../components/cards/ListingPreviewCard";
 import { listingInterface } from "../utils/interface";
 import { getListings } from "./api/listings";
 import { useRouter } from "next/router";
+import Navbar from "../components/navbar";
 
 export async function getServerSideProps() {
   const listings = await getListings();
@@ -64,6 +65,7 @@ export default function Index(props: any) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Box maxW="1200px" m="auto">
+      <Navbar />
         <Flex className="hero">
           <Flex
             sx={{ width: { base: "100%", sm: "650px" } }}
