@@ -1,13 +1,13 @@
 import ProfileCard from "../../components/cards/ProfileCard";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../config/firebase";
-import ListingProfile from "../../components/cards/ListingProfile";
 import { getUser } from "../api/users";
-import { Box, Flex } from "@chakra-ui/react";
+import { Container, Flex, Grid, GridItem } from "@chakra-ui/react";
 
 import { getListingsByUser } from "../api/listings";
 import BookingCard from "../../components/cards/BookingCard";
 import { getBookingsBySeller } from "../api/bookings";
+import MinimalListingCard from "../../components/cards/MinimalListingCard";
 
 const ProfilePage = ({
   user,
@@ -18,11 +18,21 @@ const ProfilePage = ({
 }: any) => {
   const [loggedInUser] = useAuthState(auth);
   const userID = loggedInUser?.uid;
-
   return (
-    <Box>
+    <Container>
       <ProfileCard profile={user} profileImage={user.media} />
-      <ListingProfile listing={userListings} />
+      {userID === user.id ? (
+        <h3>dina annonser</h3>
+        ):(
+        <h3>{user.username}s annonser</h3>
+      )}
+      <Grid templateColumns='repeat(3, 1fr)' gap={6}>
+      {userListings.map((item: any) => (
+        <GridItem key={item.id}>
+          <MinimalListingCard listing={item} />
+        </GridItem>
+      ))}
+      </Grid>
       {userID === user.id && (
         <Flex direction="column">
           <h3>Dina accepterade bokningar</h3>
@@ -39,7 +49,7 @@ const ProfilePage = ({
           ))}
         </Flex>
       )}
-    </Box>
+    </Container>
   );
 };
 
