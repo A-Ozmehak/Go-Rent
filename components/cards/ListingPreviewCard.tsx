@@ -5,7 +5,6 @@ import {
   Heading,
   Img,
   Link,
-  Stack,
   Text,
 } from "@chakra-ui/react";
 import { listingInterface } from "../../utils/interface";
@@ -15,6 +14,7 @@ interface props {
 }
 
 const ListingPreviewCard = ({ listings }: props) => {
+
   return (
     <Box>
       {listings.map((listing) => (
