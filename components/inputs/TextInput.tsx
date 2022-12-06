@@ -7,7 +7,7 @@ type Props = {
   name: string;
   type: any;
   variant: string;
-  validate: (value: string | number | any) => void;
+  validate?: (value: string | number | any) => void;
 };
 
 const TextInput = ({ as, id, name, type, variant, validate }: Props) => {

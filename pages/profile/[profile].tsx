@@ -21,7 +21,7 @@ const ProfilePage = ({
 
   return (
     <Box>
-      <ProfileCard profile={user} />
+      <ProfileCard profile={user} profileImage={user.media} />
       <ListingProfile listing={userListings} />
       {userID === user.id && (
         <Flex direction="column">

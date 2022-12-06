@@ -5,7 +5,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useState } from "react";
 import { storage } from "../../config/firebase";
 
-interface MediaProps {
+export interface MediaProps {
   id: string;
   updateField: (field: string, value: any, shouldValidate?: boolean) => void;
   value: string;
