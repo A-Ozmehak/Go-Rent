@@ -14,10 +14,17 @@ const MinimalProfileCard = ({ profile }: MinimalProfileCardProps) => {
       overflow="hidden"
       variant="outline"
     >
-    {profile.image?.length
-    ? <Image sx={profileImageStyle} src={profile.image} alt="profile picture" />
-    : <Text sx={{p: "1rem", bg: "lightGray"}}>{profile.firstName?.charAt(0)}</Text>
-    }
+      {profile.image?.length ? (
+        <Image
+          sx={profileImageStyle}
+          src={profile.image}
+          alt="profile picture"
+        />
+      ) : (
+        <Text sx={{ p: "1rem", bg: "lightGray" }}>
+          {profile.firstName?.charAt(0)}
+        </Text>
+      )}
       <h3>{profile.username}</h3>
     </Card>
   );

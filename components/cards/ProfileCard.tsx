@@ -60,14 +60,17 @@ const ProfileCard = ({ profile, profileImage }: props) => {
         >
           <div style={container} key="id">
             <div style={profileContainer}>
-            {profile.image?.length
-            ? <Image
-                sx={profileImageStyle}
-                src={profile.image}
-                alt="profile picture"
-              />
-            : <Text sx={{p: "2rem", bg: "lightGray"}}>{profile.firstName?.charAt(0)}</Text>
-            }
+              {profile.image?.length ? (
+                <Image
+                  sx={profileImageStyle}
+                  src={profile.image}
+                  alt="profile picture"
+                />
+              ) : (
+                <Text sx={{ p: "2rem", bg: "lightGray" }}>
+                  {profile.firstName?.charAt(0)}
+                </Text>
+              )}
               {/* <Image
                 sx={profileImageStyle}
                 src={profile.image}
