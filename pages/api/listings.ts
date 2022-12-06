@@ -20,8 +20,8 @@ export const getListings = async () => {
     let listing = doc.data();
     listing = { ...listing, id: doc.id };
     listing.seller = await getUser(listing.seller);
-    if(!listing.media.length) {
-      listing.media = "/images/fallback.jpg"
+    if (!listing.media.length) {
+      listing.media = "/images/fallback.jpg";
     }
     listings.push(listing);
   }
@@ -35,8 +35,8 @@ export const getListingsByUser = async (id: string) => {
   querySnapshot.forEach((doc) => {
     const listingData = doc.data() as listingInterface;
     const listing = { ...listingData, id: doc.id };
-    if(!listing.media.length) {
-      listing.media = "/images/fallback.jpg"
+    if (!listing.media.length) {
+      listing.media = "/images/fallback.jpg";
     }
     listings.push(listing);
   });
@@ -50,8 +50,8 @@ export const getListing = async (id: string) => {
   if (docSnap.exists()) {
     const listing = docSnap.data();
     const seller = await getUser(listing.seller);
-    if(!listing.media.length) {
-      listing.media = "/images/fallback.jpg"
+    if (!listing.media.length) {
+      listing.media = "/images/fallback.jpg";
     }
     return { ...listing, id: docSnap.id, seller };
   } else {
