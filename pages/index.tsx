@@ -12,6 +12,7 @@ import ListingPreviewCard from "../components/cards/ListingPreviewCard";
 import { listingInterface } from "../utils/interface";
 import { getListings } from "./api/listings";
 import { useRouter } from "next/router";
+import SearchField from "../components/inputs/SearchField";
 
 export async function getServerSideProps() {
   const listings = await getListings();
@@ -84,6 +85,7 @@ export default function Index(props: any) {
             </Button>
           </Flex>
         </Flex>
+        <SearchField />
         <Heading size="md" as="h3" p="4rem 0 0.5rem 0" pl="1rem">
           Senast upplagt
         </Heading>
