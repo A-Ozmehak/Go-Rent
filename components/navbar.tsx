@@ -42,10 +42,7 @@ export default function Navbar() {
     borderRadius: "12px",
   };
 
-  let removeHeaderLogin = router.pathname !== "/login"
-  let removeHeaderRegister = router.pathname !== "/register";
-  let removeHeaderListing = router.pathname !== "/createListing";
-  let removeHeaderProfile = router.pathname !== `/profile/${user?.uid}`;
+  let removeSubHeader = router.pathname ===  "/profile/[id]" && "/createListing" && "/login" && "/register"
 
   return (
     <Box sx={{ backgroundColor: "var(--chakra-colors-brand-lightGray)" }}>
@@ -153,7 +150,7 @@ export default function Navbar() {
           </Center>
         </Flex>
       </Container>
-      {removeHeaderLogin && removeHeaderRegister && removeHeaderListing && removeHeaderProfile &&  <SubHeader />}
+      {removeSubHeader &&  <SubHeader />}
 
     </Box>
   );
