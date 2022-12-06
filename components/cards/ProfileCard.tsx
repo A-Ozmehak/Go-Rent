@@ -66,7 +66,7 @@ const ProfileCard = ({ profile, profileImage }: props) => {
               />
               <ContactModal isOpen={isOpen} onClose={onClose} />
               <div style={userName}>
-                <h3>{profile.username}</h3>
+                <h3>{loggedInUser?.displayName}</h3>
                 <p>{profile.location}</p>
                 {!!loggedInUser?.uid && currentProfile !== loggedInUser.uid && (
                   <Button onClick={onOpen} variant="Primary">
