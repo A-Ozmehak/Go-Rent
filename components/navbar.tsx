@@ -32,7 +32,7 @@ export default function Navbar() {
   const router = useRouter();
   const logOut = () => {
     signOut(auth).catch((error) => {
-      console.log(error);
+      console.error(error);
     });
   };
 
