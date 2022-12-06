@@ -1,6 +1,5 @@
-import { Card, Image } from "@chakra-ui/react";
+import { Box, Divider, Flex, Image } from "@chakra-ui/react";
 import { userInterface } from "../../utils/interface";
-import { profileImageStyle, card } from "./ProfileCard";
 
 interface MinimalProfileCardProps {
   profile: userInterface;
@@ -8,15 +7,37 @@ interface MinimalProfileCardProps {
 
 const MinimalProfileCard = ({ profile }: MinimalProfileCardProps) => {
   return (
-    <Card
-      sx={card}
-      direction={{ base: "row", sm: "row" }}
-      overflow="hidden"
-      variant="outline"
-    >
-      <Image sx={profileImageStyle} src={profile.image} alt="profile picture" />
-      <h3>{profile.username}</h3>
-    </Card>
+    <Box>
+      <Divider 
+        mb={2} 
+        borderWidth={1} 
+        width= "100%"
+        borderColor="black"
+        display={['none', 'none','block']}
+      />
+      <Flex 
+        direction="row"
+        alignItems="center"
+        gap={3}
+        overflow="hidden"
+      > 
+        <Image 
+          objectFit="cover"
+          h={[8,12]}
+          w={[8,12]}
+          borderRadius="20rem"
+          src={profile.image} 
+          alt={profile.username} 
+        /> 
+        <h4>{profile.username}</h4>
+      </Flex>
+      <Divider 
+        display={['block', 'block','none']}
+        mt={2} 
+        borderWidth={1} 
+        width="100%" 
+        borderColor="black"/>
+    </Box>
   );
 };
 
