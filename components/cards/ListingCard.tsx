@@ -1,6 +1,5 @@
-import { Box, Card, CardBody, Divider, Stack, Text } from "@chakra-ui/react";
+import { Box, Card, CardBody, Divider, Stack, Text, Image, Flex } from "@chakra-ui/react";
 import { listingInterface } from "../../utils/interface";
-import Image from "next/image";
 import BookingForm from "../forms/BookingForm";
 import Link from "next/link";
 import MinimalProfileCard from "./MinimalProfileCard.";
@@ -11,85 +10,38 @@ interface props {
 
 const ListingCard = ({ listing }: props) => {
   return (
-    <Box sx={hideOnDesktop}>
-      <Box sx={flexColumnCenter}>
-        <h1>{listing.title}</h1>
-        <Card p={0} backgroundColor="#F0F0F0" sx={cardWidth} maxW="sm">
-          <Image src={listing.media} alt="mocked" width="500" height="500" />
-          <CardBody>
-            <Stack mt="6" spacing="3">
-              <Box sx={flexCenter}>
+    <Flex direction={["column","column","row"]} alignContent="center" marginTop={5}>
+      <Image src={listing.media} alt="mocked" h={"100%"} display={["none","none", "block"]} />
+      <Box>
+        <Text textAlign="center" fontFamily={"Josefin Sans !important"} fontSize={[40, 50]}>{listing.title}</Text>
+          <Image src={listing.media} alt={listing.title} display={["block", "block" , "none"]} objectFit={"cover"} w={"100%"} h={[180, 230]} />
+            <Stack mt="6" spacing="3">       
+              <Flex justifyContent={"space-between"} >
+              <Box>
                 <Link href={`/profile/${listing.seller.id}`}>
                   <MinimalProfileCard profile={listing.seller} />
                 </Link>
-                <Text fontWeight="bold" sx={priceStyle}>
+                <Divider mt={5} width={"100%"} borderColor={"black"}/>
+                </Box>
+                <h4>
                   {listing.price}:- / dygn
-                </Text>
-              </Box>
-              <Divider sx={dividerStyle} width="132px" />
-              <Text fontWeight="bold">Beskrivning</Text>
+                </h4>
+              </Flex>
+              <h4>Beskrivning</h4>
               <Text>{listing.description}</Text>
+              <Text 
+                fontFamily="Josefin Sans !important"
+                fontSize="1.1rem" 
+                textAlign={"right"}>
+                 {listing.location}Angered
+              </Text>
+              <BookingForm listing={listing} />
             </Stack>
-            <Text sx={locationStyle}>{listing.location}</Text>
-          </CardBody>
-          <BookingForm listing={listing} />
-        </Card>
-      </Box>
-    </Box>
+            
+          
+        </Box>
+    </Flex>
   );
-};
-
-const profileImageStyle = {
-  marginRight: ".5rem",
-};
-
-const locationStyle = {
-  marginLeft: "12.8rem",
-};
-
-const priceStyle = {
-  marginLeft: { base: "7rem" },
-};
-
-const dateStyle = {
-  marginLeft: "1.2rem",
-};
-
-const cardFooterStyle = {
-  padding: "0",
-  marginBottom: "1rem",
-  marginLeft: "1.2rem",
-};
-
-const flexColumnCenter = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-};
-
-const flexCenter = {
-  display: "flex",
-  alignItems: "center",
-};
-
-const headingStyle = {
-  marginBottom: "1rem",
-};
-
-const dividerStyle = {
-  borderColor: "black",
-};
-
-const cardWidth = {
-  width: { sm: "300px" },
-};
-
-const hideOnDesktop = {
-  display: { md: "none" },
-};
-
-const dateInputStyle = {
-  backgroundColor: "#F0F0F0",
 };
 
 export default ListingCard;
