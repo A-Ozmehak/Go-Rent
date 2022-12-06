@@ -13,7 +13,7 @@ import {
     Spacer,
     SystemStyleObject,
     Text,
-    Show, Hide
+    Show, Hide, Image
 } from "@chakra-ui/react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SearchIcon from "@mui/icons-material/Search";
@@ -25,10 +25,16 @@ import {useAuthState} from "react-firebase-hooks/auth";
 import {app} from "../config/firebase";
 import SearchField from "./inputs/SearchField";
 import SubHeader from "./subHeader";
+import {userInterface} from "../utils/interface";
 
-export default function Navbar() {
+interface MinimalProfileCardProps {
+    profile: userInterface;
+}
+
+export default function Navbar({profile}: MinimalProfileCardProps) {
     const auth = getAuth(app);
     const [user, loading] = useAuthState(auth);
+    const [profileImage, seProfileImage] = useState(false)
 
     const [search, setSearch] = useState(false);
     const router = useRouter();
@@ -43,6 +49,15 @@ export default function Navbar() {
         boxShadow: "3px 3px 16px 3px rgba(0, 0, 0, 0.1)",
         borderRadius: "12px",
     };
+
+    const altImage = {
+
+        marginRight: "0.5rem",
+        border: "1px white solid",
+        borderRadius: "20rem",
+        h: 10,
+        w: 10,
+    }
 
     return (
         <Box sx={{backgroundColor: "var(--chakra-colors-brand-lightGray)"}}>
@@ -84,22 +99,25 @@ export default function Navbar() {
                                 <SearchField/>
                             )}
                             <Popover>
-                                <Hide above='sm'>
-                                    <Text>{user?.displayName?.charAt(0)} </Text>
-                                </Hide>
+
                                 <PopoverTrigger>
-
-                                    <AccountCircleIcon
-                                        sx={{
-                                            fontSize: "2rem",
-                                            cursor: "pointer",
-                                            color: "#005799",
-                                            marginLeft: "1rem",
-                                        }}
-                                    ></AccountCircleIcon>
-
+                                    <Flex direction="row" alignItems="center" gap={3} overflow="hidden" justifyItems="center">
+                                    {!profileImage ? <Text
+                                            sx={altImage}
+                                        >
+                                            {user?.displayName?.charAt(0)}</Text>
+                                        : <Image
+                                            objectFit="cover"
+                                            h={[8, 12]}
+                                            w={[8, 12]}
+                                            borderRadius="20rem"
+                                            src={profile?.image}
+                                            alt={profile?.username}
+                                        />
+                                    }
+                                    </Flex>
                                 </PopoverTrigger>
-                                <Text></Text>
+
                                 <Hide below='md'>
                                     <Text>{user?.displayName}</Text>
                                 </Hide>
