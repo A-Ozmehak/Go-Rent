@@ -19,7 +19,7 @@ export async function getServerSideProps() {
   };
 }
 
-export default function Index({listings}: any) {
+export default function Index({ listings }: any) {
   const router = useRouter();
 
   const readMoreBtn: SystemStyleObject = {
@@ -81,8 +81,8 @@ export default function Index({listings}: any) {
         <Heading size="md" as="h3" p="4rem 0 0.5rem 0" pl="1rem">
           Senast upplagt
         </Heading>
-         <ListingPreviewCard listings={listings} />
-        
+        <ListingPreviewCard listings={listings} />
+
         <Flex className="placeholder" w="100%" h="100%" alignItems="center">
           <Flex sx={CTAboxOuter}>
             <Flex sx={CTAboxInner}>

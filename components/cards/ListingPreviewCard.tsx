@@ -14,7 +14,6 @@ interface props {
 }
 
 const ListingPreviewCard = ({ listings }: props) => {
-
   return (
     <Box>
       {listings.map((listing) => (

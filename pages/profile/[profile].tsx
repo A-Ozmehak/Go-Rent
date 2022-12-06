@@ -23,15 +23,15 @@ const ProfilePage = ({
       <ProfileCard profile={user} profileImage={user.media} />
       {userID === user.id ? (
         <h3>dina annonser</h3>
-        ):(
+      ) : (
         <h3>{user.username}s annonser</h3>
       )}
-      <Grid templateColumns='repeat(3, 1fr)' gap={6}>
-      {userListings.map((item: any) => (
-        <GridItem key={item.id}>
-          <MinimalListingCard listing={item} />
-        </GridItem>
-      ))}
+      <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+        {userListings.map((item: any) => (
+          <GridItem key={item.id}>
+            <MinimalListingCard listing={item} />
+          </GridItem>
+        ))}
       </Grid>
       {userID === user.id && (
         <Flex direction="column">
