@@ -10,35 +10,94 @@ interface props {
 
 const ListingCard = ({ listing }: props) => {
   return (
-    <Flex direction={["column","column","row"]} alignContent="center" marginTop={5}>
-      <Image src={listing.media} alt="mocked" h={"100%"} display={["none","none", "block"]} />
-      <Box>
-        <Text textAlign="center" fontFamily={"Josefin Sans !important"} fontSize={[40, 50]}>{listing.title}</Text>
-          <Image src={listing.media} alt={listing.title} display={["block", "block" , "none"]} objectFit={"cover"} w={"100%"} h={[180, 230]} />
-            <Stack mt="6" spacing="3">       
-              <Flex justifyContent={"space-between"} >
-              <Box>
-                <Link href={`/profile/${listing.seller.id}`}>
-                  <MinimalProfileCard profile={listing.seller} />
-                </Link>
-                <Divider mt={5} width={"100%"} borderColor={"black"}/>
-                </Box>
+    <Flex 
+      gap={[0,0,20]}
+      direction={["column","column","row"]} 
+      marginTop={[5,10,20]} 
+      justifyContent='center'
+      height='100%'
+      maxW={1100}
+      
+      >
+        {/* DESKTOP IMAGE */}
+      <Image src={listing.media} 
+        alt={listing.title} 
+        width="50%"
+        height={[0,0,400]}
+        objectFit="cover"
+        display={["none","none", "block"]} 
+      />
+
+      <Box w={['100%','100%','50%']} >
+          <Text 
+            textAlign="center" 
+            fontFamily="Josefin Sans !important" 
+            fontSize={[40, 50]}
+            >
+              {listing.title}
+          </Text>
+          {/* MOBILE IMAGE */}
+          <Image 
+            src={listing.media} 
+            alt={listing.title} 
+            display={["block", "block" , "none"]} 
+            objectFit={"cover"} 
+            w={"100%"} 
+            h={[180, 230]} 
+            mb={4}
+          />
+          <Flex minHeight="20rem" 
+          direction='column'
+          justifyContent={'space-between'}
+          >   
+              {/* MOBILE / TABLET */}
+              <Flex 
+                direction='row' 
+                justifyContent='space-between'
+                display={['flex','flex', 'none']}> 
+                <Box>
+                  <h4>
+                    {listing.location}Angered
+                  </h4>
+                      <Link href={`/profile/${listing.seller.id}`}>
+                        <MinimalProfileCard profile={listing.seller} />
+                      </Link>    
+                </Box>  
                 <h4>
-                  {listing.price}:- / dygn
-                </h4>
+                    {listing.price}:- / dygn
+                </h4> 
               </Flex>
-              <h4>Beskrivning</h4>
-              <Text>{listing.description}</Text>
-              <Text 
-                fontFamily="Josefin Sans !important"
-                fontSize="1.1rem" 
-                textAlign={"right"}>
-                 {listing.location}Angered
-              </Text>
-              <BookingForm listing={listing} />
-            </Stack>
+
+              <Box>
+                <h4>Beskrivning</h4>
+                <Text>
+                  {listing.description}
+                </Text>
+              </Box>
+              {/* DESKTOP */}
+              <Flex direction="row" display={['none','none', 'flex']} justifyContent='space-between'>
+                <h4>
+                    {listing.price}:- / dygn
+                </h4> 
+                <Box>
+                  <h4>
+                    {listing.location}Angered
+                  </h4>
+                  <Box>
+                      <Link href={`/profile/${listing.seller.id}`}>
+                        <MinimalProfileCard profile={listing.seller} />
+                      </Link>    
+                  </Box>   
+                </Box>
+              </Flex>
+              <Flex direction={'column'} gap={1}>
+                <h4>Välj datum</h4>
+                <BookingForm 
+                  listing={listing} 
+                />   
+              </Flex>
             
-          
+            </Flex>
         </Box>
     </Flex>
   );

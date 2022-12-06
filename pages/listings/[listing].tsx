@@ -3,7 +3,7 @@ import ListingCard from "../../components/cards/ListingCard";
 import { getListing } from "../api/listings";
 
 const ListingPage = ({ listing }: any) => {
-  return <Container>{listing && <ListingCard listing={listing} />}</Container>;
+  return <Container maxW={1000}>{listing && <ListingCard listing={listing} />}</Container>;
 };
 export default ListingPage;
 
