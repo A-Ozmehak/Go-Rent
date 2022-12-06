@@ -3,7 +3,6 @@ import ListingPreviewCard from "../../components/cards/ListingPreviewCard";
 import { listingInterface } from "../../utils/interface";
 import { getListings } from "../api/listings";
 
-
 const ListingIndex = ({ listings }: any) => {
   return (
     <Box pt="1rem" maxW="1200px" m="auto">
@@ -12,8 +11,8 @@ const ListingIndex = ({ listings }: any) => {
       </Heading>
       <ListingPreviewCard listings={listings} />
     </Box>
-  )
-}
+  );
+};
 
 export async function getServerSideProps() {
   const listings = await getListings();
