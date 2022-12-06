@@ -23,6 +23,9 @@ interface props {
 const ProfileCard = ({ profile, profileImage }: props) => {
   const [loggedInUser] = useAuthState(auth);
   const currentProfile = profile.id;
+  //   const authAUser = getAuth();
+  const loggedInUsername = auth.currentUser;
+
 
   const [hovering, setHovering] = useState(false);
   const [edit, setEdit] = useState(false);
@@ -79,6 +82,7 @@ const ProfileCard = ({ profile, profileImage }: props) => {
               {hovering && loggedInUser?.uid && currentProfile && (
                 <Button bg="#DDDDDD" onClick={handleEdit}>
                   <EditIcon />
+
                 </Button>
               )}
             </CardBody>

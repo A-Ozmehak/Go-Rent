@@ -5,7 +5,7 @@ import {
   IconButton,
   SystemStyleObject,
   Text,
-  useMediaQuery
+  useMediaQuery,
 } from "@chakra-ui/react";
 import {
   Celebration,
@@ -15,7 +15,7 @@ import {
   House,
   NavigateNext,
   Smartphone,
-  SportsTennis
+  SportsTennis,
 } from "@mui/icons-material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -100,10 +100,7 @@ const SubHeader = () => {
         >
           {categories.map((category) => (
             <SwiperSlide key={category.name} className="swiperSlide">
-              <Link
-                href={`/category/${category.id}`}
-                className="swiperSlide"
-              >
+              <Link href={`/category/${category.id}`} className="swiperSlide">
                 <Box className="swiperSlide">
                   <IconButton
                     mt={2}

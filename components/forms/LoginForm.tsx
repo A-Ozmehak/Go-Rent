@@ -1,7 +1,9 @@
 import { Formik } from "formik";
 import {
   Box,
-  Button, Center, FormControl,
+  Button,
+  Center,
+  FormControl,
   FormErrorMessage,
   FormLabel,
   Input,
@@ -9,9 +11,10 @@ import {
 } from "@chakra-ui/react";
 import signIn from "../../utils/loginFunc";
 import TextInput from "../inputs/TextInput";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginForm = () => {
-
   const validateEmail = (value: string) => {
     let error;
     if (!value) {
@@ -25,6 +28,7 @@ const LoginForm = () => {
 
   return (
     <Box>
+      <ToastContainer />
       <Formik
         initialValues={{
           email: "",
