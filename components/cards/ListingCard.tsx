@@ -57,7 +57,7 @@ const ListingCard = ({ listing }: props) => {
                 display={['flex','flex', 'none']}> 
                 <Box>
                   <h4>
-                    {listing.location}Angered
+                    {listing.location}
                   </h4>
                       <Link href={`/profile/${listing.seller.id}`}>
                         <MinimalProfileCard profile={listing.seller} />
@@ -81,7 +81,7 @@ const ListingCard = ({ listing }: props) => {
                 </h4> 
                 <Box>
                   <h4>
-                    {listing.location}Angered
+                    {listing.location}
                   </h4>
                   <Box>
                       <Link href={`/profile/${listing.seller.id}`}>
