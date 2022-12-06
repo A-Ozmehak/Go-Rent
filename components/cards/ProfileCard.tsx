@@ -6,6 +6,7 @@ import {
   Image,
   Button,
   useDisclosure,
+  Text,
 } from "@chakra-ui/react";
 import { userInterface } from "../../utils/interface";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -59,11 +60,22 @@ const ProfileCard = ({ profile, profileImage }: props) => {
         >
           <div style={container} key="id">
             <div style={profileContainer}>
-              <Image
+              {profile.image?.length ? (
+                <Image
+                  sx={profileImageStyle}
+                  src={profile.image}
+                  alt="profile picture"
+                />
+              ) : (
+                <Text sx={{ p: "2rem", bg: "lightGray" }}>
+                  {profile.firstName?.charAt(0)}
+                </Text>
+              )}
+              {/* <Image
                 sx={profileImageStyle}
                 src={profile.image}
                 alt="profile picture"
-              />
+              /> */}
               <ContactModal isOpen={isOpen} onClose={onClose} />
               <div style={userName}>
                 <h3>{profile.username}</h3>
