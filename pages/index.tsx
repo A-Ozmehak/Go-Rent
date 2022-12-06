@@ -65,7 +65,7 @@ export default function Index(props: any) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Box maxW="1200px" m="auto">
-      <Navbar />
+        <Navbar />
         <Flex className="hero">
           <Flex
             sx={{ width: { base: "100%", sm: "650px" } }}

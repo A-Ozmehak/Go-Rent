@@ -31,10 +31,9 @@ export default function Navbar() {
   const [search, setSearch] = useState(false);
   const router = useRouter();
   const logOut = () => {
-    signOut(auth)
-      .catch((error) => {
-        console.log(error)
-      });
+    signOut(auth).catch((error) => {
+      console.log(error);
+    });
   };
 
   const addButtonStyle: SystemStyleObject = {
