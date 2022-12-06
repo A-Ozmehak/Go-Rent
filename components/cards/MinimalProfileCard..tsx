@@ -8,35 +8,31 @@ interface MinimalProfileCardProps {
 const MinimalProfileCard = ({ profile }: MinimalProfileCardProps) => {
   return (
     <Box>
-      <Divider 
-        mb={2} 
-        borderWidth={1} 
-        width= "100%"
+      <Divider
+        mb={2}
+        borderWidth={1}
+        width="100%"
         borderColor="black"
-        display={['none', 'none','block']}
+        display={["none", "none", "block"]}
       />
-      <Flex 
-        direction="row"
-        alignItems="center"
-        gap={3}
-        overflow="hidden"
-      > 
-        <Image 
+      <Flex direction="row" alignItems="center" gap={3} overflow="hidden">
+        <Image
           objectFit="cover"
-          h={[8,12]}
-          w={[8,12]}
+          h={[8, 12]}
+          w={[8, 12]}
           borderRadius="20rem"
-          src={profile.image} 
-          alt={profile.username} 
-        /> 
+          src={profile.image}
+          alt={profile.username}
+        />
         <h4>{profile.username}</h4>
       </Flex>
-      <Divider 
-        display={['block', 'block','none']}
-        mt={2} 
-        borderWidth={1} 
-        width="100%" 
-        borderColor="black"/>
+      <Divider
+        display={["block", "block", "none"]}
+        mt={2}
+        borderWidth={1}
+        width="100%"
+        borderColor="black"
+      />
     </Box>
   );
 };
