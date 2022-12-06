@@ -8,12 +8,14 @@ import "@fontsource/josefin-sans";
 import "material-icons/iconfont/material-icons.css";
 import Footer from "../components/layout/Footer";
 import UserProvider from "../utils/userContext";
+import Navbar from "../components/navbar";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={Theme}>
       <UserProvider>
         <Box>
+          <Navbar/>
           <Component {...pageProps} />
         </Box>
         <Footer />
