@@ -78,16 +78,18 @@ const SearchField = () => {
       <MenuList pos={"absolute"} left={"-73rem"} zIndex={"3"}>
         {filterListings.length ? (
           filterListings.map((f: any) => (
-            <MenuItem minW={"20rem"} minH="40px">
-              <Image
-                boxSize="2rem"
-                borderRadius="full"
-                src={f.media}
-                alt="listingImage"
-                mr="12px"
-              />
-              <span>{f.title}</span>
-            </MenuItem>
+            <Link key={f.id} href={`/listings/${f.id}`}>
+              <MenuItem minW={"20rem"} minH="40px">
+                <Image
+                  boxSize="2rem"
+                  borderRadius="full"
+                  src={f.media}
+                  alt="listingImage"
+                  mr="12px"
+                />
+                <span>{f.title}</span>
+              </MenuItem>
+            </Link>
           ))
         ) : (
           <Text textAlign={"center"}>Inga listningar hittades</Text>
