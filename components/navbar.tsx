@@ -42,7 +42,11 @@ export default function Navbar() {
     borderRadius: "12px",
   };
 
-  let removeSubHeader = router.pathname ===  "/profile/[id]" && "/createListing" && "/login" && "/register"
+  let removeSubHeader =
+    router.pathname === "/profile/[id]" &&
+    "/createListing" &&
+    "/login" &&
+    "/register";
 
   return (
     <Box sx={{ backgroundColor: "var(--chakra-colors-brand-lightGray)" }}>
@@ -150,8 +154,7 @@ export default function Navbar() {
           </Center>
         </Flex>
       </Container>
-      {removeSubHeader &&  <SubHeader />}
-
+      {removeSubHeader && <SubHeader />}
     </Box>
   );
 }
