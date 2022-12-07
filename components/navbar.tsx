@@ -18,7 +18,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { getAuth, signOut } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { app } from "../config/firebase";
 import SearchField from "./inputs/SearchField";
@@ -35,6 +35,25 @@ export default function Navbar() {
       console.error(error);
     });
   };
+
+  const [scrollHeight, setScrollHeight] = useState(1);
+
+  useEffect(() => {
+    if (window !== undefined) {
+      window.onscroll = () => {
+        const newScrollHeight = Math.ceil(window.scrollY / 50) * 50;
+        if (newScrollHeight > 50) {
+          setScrollHeight(0);
+        } else {
+          setScrollHeight(1);
+        }
+        // if (scrollHeight != newScrollHeight) {
+        //   setScrollHeight(newScrollHeight);
+        // }
+        console.log(scrollHeight);
+      };
+    }
+  });
 
   const addButtonStyle: SystemStyleObject = {
     display: { base: "none", sm: "block" },
@@ -56,7 +75,11 @@ export default function Navbar() {
   console.log(removeSubHeader);
 
   return (
-    <Box sx={{ backgroundColor: "var(--chakra-colors-brand-lightGray)" }}>
+    <Box
+      opacity={scrollHeight}
+      transition={".2s ease-in-out"}
+      sx={{ backgroundColor: "var(--chakra-colors-brand-lightGray)" }}
+    >
       <Container maxW="1200px" maxH="80px">
         <Flex>
           <Center>
