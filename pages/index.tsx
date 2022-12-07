@@ -10,7 +10,6 @@ import ListingPreviewCard from "../components/cards/ListingPreviewCard";
 import { getListings } from "./api/listings";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import SearchField from "../components/inputs/SearchField";
 
 export async function getServerSideProps() {
   const listings = await getListings();

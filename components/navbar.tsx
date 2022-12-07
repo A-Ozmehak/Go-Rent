@@ -42,7 +42,6 @@ export default function Navbar() {
     if (window !== undefined) {
       window.onscroll = () => {
         const newScrollHeight = Math.ceil(window.scrollY / 50) * 50;
-        console.log(newScrollHeight);
         if (newScrollHeight > 50) {
           setScrollHeight(0);
         } else {
