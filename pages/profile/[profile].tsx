@@ -5,7 +5,7 @@ import { getUser } from "../api/users";
 import { Container, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
 import { getListingsByUser } from "../api/listings";
 import BookingCard from "../../components/cards/BookingCard";
-import { getBookingsByUser } from "../api/bookings";
+import { getBookingsBySeller, getBookingsByUser } from "../api/bookings";
 import MinimalListingCard from "../../components/cards/MinimalListingCard";
 import { useRouter } from "next/router";
 
@@ -106,13 +106,13 @@ const ProfilePage = ({
               key={item.id}
             />
           ))}
-          {pendingBuyerBookings.map((item: any) => (
+          {/* {pendingBuyerBookings.map((item: any) => (
             <BookingCard
               refreshData={refreshData}
               booking={item}
               key={item.id}
             />
-          ))}
+          ))} */}
         </Flex>
       )}
     </Container>
@@ -124,11 +124,11 @@ export async function getServerSideProps({ params }: any) {
   const userListings = await getListingsByUser(params.profile);
 
   let bookings = await getBookingsByUser(params.profile);
+  let sellerBookings = await getBookingsBySeller(params.profile);
 
-  const pendingSellerBookings = bookings.filter(
-    (booking) =>
-      booking.status === "pending" && booking.seller === params.profile
-  );
+  const pendingSellerBookings = sellerBookings.filter(
+    (booking) => booking.status === "pending");
+
   const pendingBuyerBookings = bookings.filter(
     (booking) =>
       booking.status === "pending" && booking.buyer === params.profile

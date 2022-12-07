@@ -13,6 +13,7 @@ import dayjs from "dayjs";
 import { doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { profile } from "console";
 
 interface BookingCardProps {
   booking: bookingInterface;
@@ -71,10 +72,10 @@ const BookingCard = ({ booking, refreshData }: BookingCardProps) => {
 
   return (
     <>
-      {booking ? (
+      {loggedInUser && booking ? (
         <Flex gap={10} padding={2} justifyContent={"space-between"}>
           <Flex direction={"column"}>
-            {booking.buyer !== loggedInUser?.uid && (
+            {booking.buyer !== loggedInUser.uid && (
               <MinimalProfileCard profile={booking.seller} />
             )}
             <Image
@@ -85,7 +86,7 @@ const BookingCard = ({ booking, refreshData }: BookingCardProps) => {
               sx={{ borderRadius: "0.5rem" }}
               height={20}
             />
-            {booking.buyer === loggedInUser?.uid ? (
+            {booking.seller.id !== loggedInUser.uid ? (
               <Badge
                 mt={1}
                 p={0.5}
@@ -122,7 +123,8 @@ const BookingCard = ({ booking, refreshData }: BookingCardProps) => {
               </Flex>
             </Flex>
             {booking.status === "pending" &&
-              booking.buyer !== loggedInUser?.uid && (
+              booking.seller.id === loggedInUser.uid && 
+              (
                 <form onSubmit={onSubmit}>
                   <ButtonGroup gap={10}>
                     <Button
