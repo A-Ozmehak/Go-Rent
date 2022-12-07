@@ -1,9 +1,17 @@
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
   Button,
   Input,
   InputGroup,
   InputRightElement,
   Box,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
+  Image,
+  FormControl,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import router from "next/router";
@@ -15,15 +23,11 @@ import { CategoryDoc, listingInterface } from "../../utils/interface";
 const SearchField = () => {
   const [listings, setListings] = useState([]);
   const [filterListings, setFilterListings] = useState<String[]>([]);
-  const [filterCategories, setFilterCategories] = useState<CategoryDoc[]>([]);
-  const [categories, setCategories] = useState<CategoryDoc[]>([]);
 
   useEffect(() => {
     const getData = async () => {
       let listingsData = await getListings();
       setListings(listingsData);
-      let categoriesData = await getCategories();
-      setCategories(categoriesData);
     };
     getData();
   }, []);
@@ -37,64 +41,61 @@ const SearchField = () => {
         f.title.toLowerCase().includes(search.toLowerCase()) &&
         search.length > 1
     );
-    let filterCategoriesList = categories.filter(
-      (f: any) =>
-        f.name.toLowerCase().includes(search.toLowerCase()) && search.length > 1
-    );
-    setFilterCategories(filterCategoriesList);
     setFilterListings(filterListingList);
+    console.log(filterListings);
   }
 
-  const handleSearch = (search: string) => {
-    const query = search;
-    try {
-      router.push(`/filter/${query}`);
-    } catch (e) {
-      return;
-    }
-  };
+  // const handleSearch = (search: string) => {
+  //   const query = search;
+  //   try {
+  //     router.push(`/filter/${query}`);
+  //   } catch (e) {
+  //     return;
+  //   }
+  // };
 
   return (
-    <InputGroup size="md">
-      <Input
-        pos={"relative"}
-        pr="4.5rem"
-        type={"text"}
-        placeholder="Sök"
-        value={search}
-        onChange={(e) => handleChange(e)}
-      />
-      <InputRightElement width="4.5rem">
-        <Button h="1.75rem" size="sm" onClick={() => handleSearch(search)}>
-          {"Sök"}
-        </Button>
-      </InputRightElement>
-      <Box
-        p={"1rem"}
-        zIndex={"5"}
-        top={"2.5rem"}
-        bg={"red"}
-        width={"100%"}
-        position={"absolute"}
-      >
-        <p>Listings ({filterListings.length})</p>
-        <ul>
-          {filterListings.map((f: any) => (
+    <Menu>
+      <FormControl>
+        <Input
+          pos={"relative"}
+          pr="4.5rem"
+          type={"text"}
+          placeholder="Sök"
+          value={search}
+          onChange={(e) => handleChange(e)}
+        />
+        <MenuButton
+          zIndex={"5"}
+          top={"5px"}
+          right={"8px"}
+          position={"absolute"}
+        >
+          Sök
+        </MenuButton>
+      </FormControl>
+
+      <MenuList pos={"absolute"} left={"-73rem"} zIndex={"3"}>
+        {filterListings.length ? (
+          filterListings.map((f: any) => (
             <Link key={f.id} href={`/listings/${f.id}`}>
-              <li>{f.title}</li>
+              <MenuItem minW={"20rem"} minH="40px">
+                <Image
+                  boxSize="2rem"
+                  borderRadius="full"
+                  src={f.media}
+                  alt="listingImage"
+                  mr="12px"
+                />
+                <span>{f.title}</span>
+              </MenuItem>
             </Link>
-          ))}
-        </ul>
-        <p>Categories ({filterCategories.length})</p>
-        <ul>
-          {filterCategories.map((f: any) => (
-            <Link key={f.id} href={`/category/${f.id}`}>
-              <li>{f.name}</li>
-            </Link>
-          ))}
-        </ul>
-      </Box>
-    </InputGroup>
+          ))
+        ) : (
+          <Text textAlign={"center"}>Inga listningar hittades</Text>
+        )}
+      </MenuList>
+    </Menu>
   );
 };
 
