@@ -123,8 +123,7 @@ const BookingCard = ({ booking, refreshData }: BookingCardProps) => {
               </Flex>
             </Flex>
             {booking.status === "pending" &&
-              booking.seller.id === loggedInUser.uid && 
-              (
+              booking.seller.id === loggedInUser.uid && (
                 <form onSubmit={onSubmit}>
                   <ButtonGroup gap={10}>
                     <Button
