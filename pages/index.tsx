@@ -81,7 +81,6 @@ export default function Index({ listings }: any) {
             </Link>
           </Flex>
         </Flex>
-        <SearchField />
         <Heading size="md" as="h3" p="4rem 0 0.5rem 0" pl="1rem">
           Senast upplagt
         </Heading>
