@@ -42,6 +42,12 @@ export default function Navbar() {
     borderRadius: "12px",
   };
 
+  let removeSubHeader =
+    router.pathname === "/profile/[id]" &&
+    "/createListing" &&
+    "/login" &&
+    "/register";
+
   return (
     <Box sx={{ backgroundColor: "var(--chakra-colors-brand-lightGray)" }}>
       <Container maxW="1200px" maxH="80px">
@@ -68,7 +74,7 @@ export default function Navbar() {
           <Spacer />
           <Center>
             <Flex>
-              {!search ? (
+              <Link href={"/listings"}>
                 <SearchIcon
                   sx={{
                     marginRight: "1rem",
@@ -76,11 +82,8 @@ export default function Navbar() {
                     cursor: "pointer",
                     color: "#005799",
                   }}
-                  onClick={() => setSearch(true)}
                 />
-              ) : (
-                <SearchField />
-              )}
+              </Link>
               <Popover>
                 <PopoverTrigger>
                   <AccountCircleIcon
@@ -148,7 +151,7 @@ export default function Navbar() {
           </Center>
         </Flex>
       </Container>
-      <SubHeader />
+      {removeSubHeader && <SubHeader />}
     </Box>
   );
 }

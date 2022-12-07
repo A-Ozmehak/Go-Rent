@@ -4,15 +4,13 @@ import {
   Flex,
   Button,
   Heading,
-  SystemStyleFunction,
   SystemStyleObject,
-  Container,
 } from "@chakra-ui/react";
 import ListingPreviewCard from "../components/cards/ListingPreviewCard";
-import { listingInterface } from "../utils/interface";
 import { getListings } from "./api/listings";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import SearchField from "../components/inputs/SearchField";
 
 export async function getServerSideProps() {
   const listings = await getListings();
@@ -23,11 +21,8 @@ export async function getServerSideProps() {
   };
 }
 
-export default function Index(props: any) {
+export default function Index({ listings }: any) {
   const router = useRouter();
-
-  let listings: listingInterface[] = props.listings;
-  listings.length = 5;
 
   const readMoreBtn: SystemStyleObject = {
     alignSelf: { base: "end", sm: "center" },
@@ -86,10 +81,12 @@ export default function Index(props: any) {
             </Link>
           </Flex>
         </Flex>
+        <SearchField />
         <Heading size="md" as="h3" p="4rem 0 0.5rem 0" pl="1rem">
           Senast upplagt
         </Heading>
         <ListingPreviewCard listings={listings} />
+
         <Flex className="placeholder" w="100%" h="100%" alignItems="center">
           <Flex sx={CTAboxOuter}>
             <Flex sx={CTAboxInner}>
