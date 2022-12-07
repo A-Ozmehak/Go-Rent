@@ -106,13 +106,13 @@ const ProfilePage = ({
               key={item.id}
             />
           ))}
-          {/* {pendingBuyerBookings.map((item: any) => (
+          {pendingBuyerBookings.map((item: any) => (
             <BookingCard
               refreshData={refreshData}
               booking={item}
               key={item.id}
             />
-          ))} */}
+          ))}
         </Flex>
       )}
     </Container>
