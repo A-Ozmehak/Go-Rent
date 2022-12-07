@@ -20,7 +20,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { getAuth, signOut } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { app } from "../config/firebase";
 import SearchField from "./inputs/SearchField";
@@ -45,11 +45,31 @@ export default function Navbar({profile, profileImage}: props) {
     });
   };
 
-    const addButtonStyle: SystemStyleObject = {
-        display: {base: "none", sm: "block"},
-        boxShadow: "3px 3px 16px 3px rgba(0, 0, 0, 0.1)",
-        borderRadius: "12px",
-    };
+
+  const [scrollHeight, setScrollHeight] = useState(1);
+
+  useEffect(() => {
+    if (window !== undefined) {
+      window.onscroll = () => {
+        const newScrollHeight = Math.ceil(window.scrollY / 50) * 50;
+        if (newScrollHeight > 50) {
+          setScrollHeight(0);
+        } else {
+          setScrollHeight(1);
+        }
+        // if (scrollHeight != newScrollHeight) {
+        //   setScrollHeight(newScrollHeight);
+        // }
+        console.log(scrollHeight);
+      };
+    }
+  });
+
+  const addButtonStyle: SystemStyleObject = {
+    display: { base: "none", sm: "block" },
+    boxShadow: "3px 3px 16px 3px rgba(0, 0, 0, 0.1)",
+    borderRadius: "12px",
+  };
 
     let removeSubHeader = false;
 
@@ -111,6 +131,7 @@ export default function Navbar({profile, profileImage}: props) {
                                                 {user?.displayName?.charAt(0)}
                                             </Text>
                                         )}
+
                 </PopoverTrigger>
                 <Hide below='md'>
                   <Text>{user?.displayName}</Text>
