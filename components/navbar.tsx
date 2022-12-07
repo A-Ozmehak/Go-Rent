@@ -1,19 +1,21 @@
 import {
-    Box,
-    Button,
-    Center,
-    Container,
-    Flex,
-    Popover,
-    PopoverArrow,
-    PopoverBody,
-    PopoverCloseButton,
-    PopoverContent,
-    PopoverTrigger,
-    Spacer,
-    SystemStyleObject,
-    Text,
-    Show, Hide, Image
+  Box,
+  Button,
+  Center,
+  Container,
+  Flex,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverTrigger,
+  Spacer,
+  SystemStyleObject,
+  Text,
+  Show,
+  Hide,
+  Image,
 } from "@chakra-ui/react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SearchIcon from "@mui/icons-material/Search";
@@ -25,17 +27,17 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { app } from "../config/firebase";
 import SearchField from "./inputs/SearchField";
 import SubHeader from "./subHeader";
-import {userInterface} from "../utils/interface";
-import {profileImageStyle} from "./cards/ProfileCard";
-import {MediaProps} from "./forms/UploadMedia";
+import { userInterface } from "../utils/interface";
+import { profileImageStyle } from "./cards/ProfileCard";
+import { MediaProps } from "./forms/UploadMedia";
 
 export interface props {
-    profile: userInterface;
+  profile: userInterface;
 }
 
-export default function Navbar({profile}: props) {
-    const auth = getAuth(app);
-    const [user, loading] = useAuthState(auth);
+export default function Navbar({ profile }: props) {
+  const auth = getAuth(app);
+  const [user, loading] = useAuthState(auth);
 
   const router = useRouter();
   const logOut = () => {
@@ -69,16 +71,16 @@ export default function Navbar({profile}: props) {
     borderRadius: "12px",
   };
 
-    let removeSubHeader = false;
+  let removeSubHeader = false;
 
-    if (
-        router.pathname === "/profile/[profile]" ||
-        router.pathname === "/createListing" ||
-        router.pathname === "/login" ||
-        router.pathname === "/register"
-    ) {
-        removeSubHeader = true;
-    }
+  if (
+    router.pathname === "/profile/[profile]" ||
+    router.pathname === "/createListing" ||
+    router.pathname === "/login" ||
+    router.pathname === "/register"
+  ) {
+    removeSubHeader = true;
+  }
 
   return (
     <Box sx={{ backgroundColor: "var(--chakra-colors-brand-lightGray)" }}>
