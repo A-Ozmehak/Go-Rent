@@ -74,7 +74,7 @@ export default function Navbar() {
           <Spacer />
           <Center>
             <Flex>
-              {!search ? (
+              <Link href={"/listings"}>
                 <SearchIcon
                   sx={{
                     marginRight: "1rem",
@@ -82,11 +82,8 @@ export default function Navbar() {
                     cursor: "pointer",
                     color: "#005799",
                   }}
-                  onClick={() => setSearch(true)}
                 />
-              ) : (
-                <SearchField />
-              )}
+              </Link>
               <Popover>
                 <PopoverTrigger>
                   <AccountCircleIcon
