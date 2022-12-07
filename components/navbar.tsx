@@ -6,16 +6,11 @@ import {
     Flex,
     Menu,
     MenuItem,
-    PopoverArrow,
-    PopoverBody,
-    PopoverCloseButton,
-    PopoverContent,
     Spacer,
     SystemStyleObject,
     Text,
-    Show, Hide, Image, Wrap, WrapItem, Avatar, MenuButton, MenuList
+     Hide, Wrap, WrapItem, Avatar, MenuButton, MenuList
 } from "@chakra-ui/react";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SearchIcon from "@mui/icons-material/Search";
 import {ChevronDownIcon} from "@chakra-ui/icons";
 import {getAuth, signOut} from "firebase/auth";
@@ -24,12 +19,8 @@ import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {app} from "../config/firebase";
-import SearchField from "./inputs/SearchField";
 import SubHeader from "./subHeader";
 import {userInterface} from "../utils/interface";
-import {profileImageStyle} from "./cards/ProfileCard";
-import {MediaProps} from "./forms/UploadMedia";
-import {display} from "@mui/system";
 
 export interface props {
     profile: userInterface;
