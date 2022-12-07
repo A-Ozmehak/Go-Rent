@@ -2,62 +2,62 @@ import { bookingInterface } from "../../utils/interface";
 import MinimalProfileCard from "./MinimalProfileCard.";
 import { Image, Flex, ButtonGroup, Button, useToast } from "@chakra-ui/react";
 import dayjs from "dayjs";
-import { borderRadius } from "@mui/system";
-import { useEffect, useState } from "react";
-import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 
 interface BookingCardProps {
   booking: bookingInterface;
+  refreshData: () => void
 }
 
-const BookingCard = ({ booking }: BookingCardProps) => {
-  //   const [status, setStatus] = useState("");
+const BookingCard = ({ booking , refreshData}: BookingCardProps) => {
+
   const startDate = dayjs(booking.bookingDetails.bookingStartDate).format(
     "YYYY-MM-DD"
   );
   const endDate = dayjs(booking.bookingDetails.bookingEndDate).format(
     "YYYY-MM-DD"
   );
-
   const toast = useToast();
 
-  const [accStatus, setAccStatus] = useState(false);
-  const [rejStatus, setRejStatus] = useState(false);
+  const status = {
+    button: "",
+  };
 
-  //   useEffect(() => {
-  //     const setAccept = async () => {
-  //       if (booking.id)
-  //         await setDoc(doc(db, "bookings", booking.id), {
-  //           Status: "accepted",
-  //         });
-  //       toast({
-  //         title: "Du har godkänt bokningen!",
-  //         status: "success",
-  //         duration: 9000,
-  //         isClosable: true,
-  //       });
-  //     };
-  //     setAccStatus(true)
-  //     setAccept();
-  //   }, []);
+  const onSubmit = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    if (booking.id) {
+      const statusRef = doc(db, "bookings", booking.id);
 
-  //   useEffect(() => {
-  //     const setReject = async () => {
-  //       if (booking.id)
-  //         await setDoc(doc(db, "bookings", booking.id), {
-  //           Status: "rejected",
-  //         });
-  //       toast({
-  //         title: "Du har nekat bokningen!",
-  //         status: "error",
-  //         duration: 9000,
-  //         isClosable: true,
-  //       });
-  //     };
-  //     setRejStatus(true)
-  //     setReject();
-  //   }, []);
+      if (status.button === "accept") {
+        await updateDoc(statusRef, {
+          status: "accepted",
+        });
+
+        toast({
+          title: "Du har godkänt bokningen!",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
+        refreshData()
+      }
+
+      if (status.button === "reject") {
+        await updateDoc(statusRef, {
+          status: "rejected",
+        });
+
+        toast({
+          title: "Du har nekat bokningen!",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+        refreshData()
+      }
+    }
+  };
 
   return (
     <>
@@ -88,15 +88,28 @@ const BookingCard = ({ booking }: BookingCardProps) => {
                 </p>
               </Flex>
             </Flex>
-
-            <ButtonGroup gap={10}>
-              <Button variant="Accept" onClick={() => setAccStatus}>
-                Acceptera
-              </Button>
-              <Button variant="Reject" onClick={() => setRejStatus}>
-                Neka
-              </Button>
-            </ButtonGroup>
+            {booking.status === "pending" &&
+            <form onSubmit={onSubmit}>
+              <ButtonGroup gap={10}>
+                <Button
+                  variant="Accept"
+                  type="submit"
+                  name="acceptButton"
+                  onClick={() => (status.button = "accept")}
+                >
+                  Acceptera
+                </Button>
+                <Button
+                  variant="Reject"
+                  type="submit"
+                  name="rejectButton"
+                  onClick={() => (status.button = "reject")}
+                >
+                  Neka
+                </Button>
+              </ButtonGroup>
+            </form>
+            }
           </Flex>
         </Flex>
       ) : null}
