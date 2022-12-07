@@ -20,7 +20,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { getAuth, signOut } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { app } from "../config/firebase";
 import SearchField from "./inputs/SearchField";
@@ -44,22 +44,41 @@ export default function Navbar({profile}: props) {
     });
   };
 
-    const addButtonStyle: SystemStyleObject = {
-        display: {base: "none", sm: "block"},
-        boxShadow: "3px 3px 16px 3px rgba(0, 0, 0, 0.1)",
-        borderRadius: "12px",
-    };
+  const [scrollHeight, setScrollHeight] = useState(1);
 
-    let removeSubHeader = false;
-
-    if (
-        router.pathname === "/profile/[profile]" ||
-        router.pathname === "/createListing" ||
-        router.pathname === "/login" ||
-        router.pathname === "/register"
-    ) {
-        removeSubHeader = true;
+  useEffect(() => {
+    if (window !== undefined) {
+      window.onscroll = () => {
+        const newScrollHeight = Math.ceil(window.scrollY / 50) * 50;
+        if (newScrollHeight > 50) {
+          setScrollHeight(0);
+        } else {
+          setScrollHeight(1);
+        }
+        // if (scrollHeight != newScrollHeight) {
+        //   setScrollHeight(newScrollHeight);
+        // }
+        console.log(scrollHeight);
+      };
     }
+  });
+
+  const addButtonStyle: SystemStyleObject = {
+    display: { base: "none", sm: "block" },
+    boxShadow: "3px 3px 16px 3px rgba(0, 0, 0, 0.1)",
+    borderRadius: "12px",
+  };
+
+  let removeSubHeader = false;
+
+  if (
+    router.pathname === "/profile/[profile]" ||
+    router.pathname === "/createListing" ||
+    router.pathname === "/login" ||
+    router.pathname === "/register"
+  ) {
+    removeSubHeader = true;
+  }
 
     return (
         <Box sx={{backgroundColor: "var(--chakra-colors-brand-lightGray)"}}>
