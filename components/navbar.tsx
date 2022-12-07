@@ -58,11 +58,18 @@ export default function Navbar({profile}: MinimalProfileCardProps) {
     w: 10,
   }
 
-  let removeSubHeader =
-    router.pathname === "/profile/[id]" &&
-    "/createListing" &&
-    "/login" &&
-    "/register";
+  let removeSubHeader = false;
+
+  if (
+    router.pathname === "/profile/[profile]" ||
+    router.pathname === "/createListing" ||
+    router.pathname === "/login" ||
+    router.pathname === "/register"
+  ) {
+    removeSubHeader = true;
+  }
+
+  console.log(removeSubHeader);
 
   return (
     <Box sx={{ backgroundColor: "var(--chakra-colors-brand-lightGray)" }}>
@@ -90,7 +97,7 @@ export default function Navbar({profile}: MinimalProfileCardProps) {
           <Spacer />
           <Center>
             <Flex>
-              {!search ? (
+              <Link href={"/listings"}>
                 <SearchIcon
                   sx={{
                     marginRight: "1rem",
@@ -98,11 +105,8 @@ export default function Navbar({profile}: MinimalProfileCardProps) {
                     cursor: "pointer",
                     color: "#005799",
                   }}
-                  onClick={() => setSearch(true)}
                 />
-              ) : (
-                <SearchField />
-              )}
+              </Link>
               <Popover>
                 <PopoverTrigger>
                   <Flex direction="row" alignItems="center" gap={3} overflow="hidden" justifyItems="center">
@@ -181,7 +185,7 @@ export default function Navbar({profile}: MinimalProfileCardProps) {
           </Center>
         </Flex>
       </Container>
-      {removeSubHeader && <SubHeader />}
+      {!removeSubHeader && <SubHeader />}
     </Box>
   );
 }

@@ -9,6 +9,8 @@ import {
 import ListingPreviewCard from "../components/cards/ListingPreviewCard";
 import { getListings } from "./api/listings";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import SearchField from "../components/inputs/SearchField";
 
 export async function getServerSideProps() {
   const listings = await getListings();
@@ -70,14 +72,16 @@ export default function Index({ listings }: any) {
               sx={{ fontSize: { base: "2rem", sm: "3rem" } }}
               variant="h2"
             >
-              En klimatsatsning från Göteborgs stad, lär dig hur du kan göra
-              skillnad.
+              Gratis hemsida för Göteborgare, hyr & hyr ut alla möjliga prylar!
             </Heading>
-            <Button sx={readMoreBtn} variant="Primary">
-              Läs mer
-            </Button>
+            <Link href={"/register"}>
+              <Button sx={readMoreBtn} variant="Primary">
+                Skapa konto
+              </Button>
+            </Link>
           </Flex>
         </Flex>
+        <SearchField />
         <Heading size="md" as="h3" p="4rem 0 0.5rem 0" pl="1rem">
           Senast upplagt
         </Heading>
