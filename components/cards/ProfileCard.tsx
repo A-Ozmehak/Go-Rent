@@ -47,8 +47,13 @@ const ProfileCard = ({ profile, profileImage }: props) => {
 
   return (
     <Box sx={profileBox}>
+      <Button onClick={handleEdit}>edit</Button>
       {edit ? (
-        <EditForm profileImage={profileImage} />
+        <EditForm
+          setEdit={setEdit}
+          profile={profile}
+          profileImage={profileImage}
+        />
       ) : (
         <Card
           onMouseOver={handleMouseOver}
