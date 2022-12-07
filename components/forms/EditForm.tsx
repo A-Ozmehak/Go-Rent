@@ -14,8 +14,7 @@ interface Props {
 }
 
 const EditForm = ({ profileImage, profile, setEdit }: Props) => {
-
-  const [media, setMedia] = useState("")
+  const [media, setMedia] = useState("");
 
   const router = useRouter();
   const refreshData = () => {
@@ -32,7 +31,7 @@ const EditForm = ({ profileImage, profile, setEdit }: Props) => {
           bio: "",
         }}
         onSubmit={async (values) => {
-          values.image = media
+          values.image = media;
           await updateUser(profile.id!, values, setEdit, refreshData);
         }}
       >
