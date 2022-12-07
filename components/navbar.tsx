@@ -29,12 +29,11 @@ import {userInterface} from "../utils/interface";
 import {profileImageStyle} from "./cards/ProfileCard";
 import {MediaProps} from "./forms/UploadMedia";
 
-interface props {
+export interface props {
     profile: userInterface;
-    profileImage: MediaProps;
 }
 
-export default function Navbar({profile, profileImage}: props) {
+export default function Navbar({profile}: props) {
     const auth = getAuth(app);
     const [user, loading] = useAuthState(auth);
 
