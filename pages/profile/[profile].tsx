@@ -126,8 +126,8 @@ export async function getServerSideProps({ params }: any) {
   let bookings = await getBookingsByUser(params.profile);
 
   const pendingSellerBookings = bookings.filter(
-    (booking) => 
-    booking.status === "pending" && booking.seller.id === params.profile
+    (booking) =>
+      booking.status === "pending" && booking.seller.id === params.profile
   );
 
   const pendingBuyerBookings = bookings.filter(
