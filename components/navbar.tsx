@@ -44,15 +44,16 @@ export default function Navbar() {
 
   let removeSubHeader = false;
 
-  if (router.pathname === "/profile/[id]" ||
+  if (
+    router.pathname === "/profile/[id]" ||
     router.pathname === "/createListing" ||
     router.pathname === "/login" ||
-    router.pathname === "/register") {
+    router.pathname === "/register"
+  ) {
     removeSubHeader = true;
   }
 
   console.log(removeSubHeader);
-
 
   return (
     <Box sx={{ backgroundColor: "var(--chakra-colors-brand-lightGray)" }}>
