@@ -11,6 +11,21 @@ import { bookingInterface } from "../../utils/interface";
 
 const bookingsCollection = collection(db, "bookings");
 
+export const getBookingsByUser = async (userID: string) => {
+  let sellerBookings = await getBookingsBySeller(userID);
+  let buyerBookings = await getBookingsByBuyer(userID);
+
+  const bookings = new Map<string, bookingInterface>();
+
+  sellerBookings.forEach((booking) => {
+    if (booking.id) bookings.set(booking.id, booking);
+  });
+  buyerBookings.forEach((booking) => {
+    if (booking.id) bookings.set(booking.id, booking);
+  });
+  return Array.from(bookings.values());
+};
+
 // * Get bookings by seller
 export const getBookingsBySeller = async (userID: string) => {
   const q = query(bookingsCollection, where("seller.id", "==", userID));
