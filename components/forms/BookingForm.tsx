@@ -132,6 +132,7 @@ const BookingForm = ({ listing }: props) => {
         <ModalContent alignItems="center">
           <ModalHeader>Välj de datum du vill boka</ModalHeader>
           <Text>Kostnad per dygn: {listing.price} kr </Text>
+          <Text>Upphämtning: {listing.location} </Text>
           <ModalCloseButton />
           <ModalBody>
             <DatePicker
