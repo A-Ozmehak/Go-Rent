@@ -26,15 +26,18 @@ import { app } from "../config/firebase";
 import SearchField from "./inputs/SearchField";
 import SubHeader from "./subHeader";
 import {userInterface} from "../utils/interface";
+import {profileImageStyle} from "./cards/ProfileCard";
+import {MediaProps} from "./forms/UploadMedia";
 
-interface MinimalProfileCardProps {
+interface props {
     profile: userInterface;
+    profileImage: MediaProps;
 }
 
-export default function Navbar({profile}: MinimalProfileCardProps) {
+export default function Navbar({profile, profileImage}: props) {
     const auth = getAuth(app);
     const [user, loading] = useAuthState(auth);
-    const [profileImage, seProfileImage] = useState(false)
+
 
   const [search, setSearch] = useState(false);
   const router = useRouter();
@@ -44,86 +47,84 @@ export default function Navbar({profile}: MinimalProfileCardProps) {
     });
   };
 
-  const addButtonStyle: SystemStyleObject = {
-    display: { base: "none", sm: "block" },
-    boxShadow: "3px 3px 16px 3px rgba(0, 0, 0, 0.1)",
-    borderRadius: "12px",
-  };
-  const altImage = {
+    const addButtonStyle: SystemStyleObject = {
+        display: {base: "none", sm: "block"},
+        boxShadow: "3px 3px 16px 3px rgba(0, 0, 0, 0.1)",
+        borderRadius: "12px",
+    };
+    const altImage = {
+        marginRight: "0.5rem",
+        border: "1px white solid",
+        borderRadius: "20rem",
+        h: 12,
+        w: 12,
+        fontSize: '1.8rem',
+        textAlign: 'center'
+    }
 
-    marginRight: "0.5rem",
-    border: "1px white solid",
-    borderRadius: "20rem",
-    h: 10,
-    w: 10,
-  }
+    let removeSubHeader = false;
 
-  let removeSubHeader = false;
+    if (
+        router.pathname === "/profile/[profile]" ||
+        router.pathname === "/createListing" ||
+        router.pathname === "/login" ||
+        router.pathname === "/register"
+    ) {
+        removeSubHeader = true;
+    }
 
-  if (
-    router.pathname === "/profile/[profile]" ||
-    router.pathname === "/createListing" ||
-    router.pathname === "/login" ||
-    router.pathname === "/register"
-  ) {
-    removeSubHeader = true;
-  }
+    console.log(removeSubHeader);
 
-  console.log(removeSubHeader);
+    return (
+        <Box sx={{backgroundColor: "var(--chakra-colors-brand-lightGray)"}}>
+            <Container maxW="1200px" maxH="80px">
+                <Flex>
+                    <Center>
+                        <Box textStyle="logoText">
+                            <h1>
+                                <Link href="/">GO:RENT</Link>
+                            </h1>
+                        </Box>
+                    </Center>
+                    <Spacer/>
+                    <Center>
+                        <Box>
+                            <Button
+                                onClick={() => router.push("/createListing")}
+                                sx={addButtonStyle}
+                                variant="Secondary"
+                            >
+                                Lägg upp annons
+                            </Button>
+                        </Box>
+                    </Center>
+                    <Spacer/>
+                    <Center>
+                        <Flex>
+                            <Link href={"/listings"}>
+                                <SearchIcon
+                                    sx={{
+                                        marginRight: "1rem",
+                                        fontSize: "2rem",
+                                        cursor: "pointer",
+                                        color: "#005799",
+                                    }}
+                                />
+                            </Link>
+                            <Popover>
+                                <PopoverTrigger>
 
-  return (
-    <Box sx={{ backgroundColor: "var(--chakra-colors-brand-lightGray)" }}>
-      <Container maxW="1200px" maxH="80px">
-        <Flex>
-          <Center>
-            <Box textStyle="logoText">
-              <h1>
-                <Link href="/">GO:RENT</Link>
-              </h1>
-            </Box>
-          </Center>
-          <Spacer />
-          <Center>
-            <Box>
-              <Button
-                onClick={() => router.push("/createListing")}
-                sx={addButtonStyle}
-                variant="Secondary"
-              >
-                Lägg upp annons
-              </Button>
-            </Box>
-          </Center>
-          <Spacer />
-          <Center>
-            <Flex>
-              <Link href={"/listings"}>
-                <SearchIcon
-                  sx={{
-                    marginRight: "1rem",
-                    fontSize: "2rem",
-                    cursor: "pointer",
-                    color: "#005799",
-                  }}
-                />
-              </Link>
-              <Popover>
-                <PopoverTrigger>
-                  <Flex direction="row" alignItems="center" gap={3} overflow="hidden" justifyItems="center">
-                    {!profileImage ? <Text
-                            sx={altImage}
-                        >
-                          {user?.displayName?.charAt(0)}</Text>
-                        : <Image
-                            objectFit="cover"
-                            h={[8, 12]}
-                            w={[8, 12]}
-                            borderRadius="20rem"
-                            src={profile?.image}
-                            alt={profile?.username}
-                        />
-                    }
-                  </Flex>
+                                        {profile?.image?.length ? (
+                                            <Image
+                                                sx={profileImageStyle}
+                                                src={profile.image}
+                                                alt="profile picture"
+                                            />
+                                        ) : (
+                                            <Text sx={{ p: "1.3rem", bg: "lightGray" }}>
+                                                {user?.displayName?.charAt(0)}
+                                            </Text>
+                                        )}
 
                 </PopoverTrigger>
                 <Hide below='md'>
