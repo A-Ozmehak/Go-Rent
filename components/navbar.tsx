@@ -28,7 +28,7 @@ export interface props {
 
 export default function Navbar({profile}: props) {
     const auth = getAuth(app);
-    const [user, loading] = useAuthState(auth);
+    const [user] = useAuthState(auth);
 
     const router = useRouter();
     const logOut = () => {
