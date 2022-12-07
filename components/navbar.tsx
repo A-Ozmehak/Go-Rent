@@ -38,8 +38,6 @@ export default function Navbar({profile, profileImage}: props) {
     const auth = getAuth(app);
     const [user, loading] = useAuthState(auth);
 
-
-  const [search, setSearch] = useState(false);
   const router = useRouter();
   const logOut = () => {
     signOut(auth).catch((error) => {
@@ -52,15 +50,6 @@ export default function Navbar({profile, profileImage}: props) {
         boxShadow: "3px 3px 16px 3px rgba(0, 0, 0, 0.1)",
         borderRadius: "12px",
     };
-    const altImage = {
-        marginRight: "0.5rem",
-        border: "1px white solid",
-        borderRadius: "20rem",
-        h: 12,
-        w: 12,
-        fontSize: '1.8rem',
-        textAlign: 'center'
-    }
 
     let removeSubHeader = false;
 
@@ -72,8 +61,6 @@ export default function Navbar({profile, profileImage}: props) {
     ) {
         removeSubHeader = true;
     }
-
-    console.log(removeSubHeader);
 
     return (
         <Box sx={{backgroundColor: "var(--chakra-colors-brand-lightGray)"}}>
@@ -113,7 +100,6 @@ export default function Navbar({profile, profileImage}: props) {
                             </Link>
                             <Popover>
                                 <PopoverTrigger>
-
                                         {profile?.image?.length ? (
                                             <Image
                                                 sx={profileImageStyle}
@@ -121,11 +107,10 @@ export default function Navbar({profile, profileImage}: props) {
                                                 alt="profile picture"
                                             />
                                         ) : (
-                                            <Text sx={{ p: "1.3rem", bg: "lightGray" }}>
+                                            <Text sx={{ p: "1rem", bg: "lightGray" }}>
                                                 {user?.displayName?.charAt(0)}
                                             </Text>
                                         )}
-
                 </PopoverTrigger>
                 <Hide below='md'>
                   <Text>{user?.displayName}</Text>
