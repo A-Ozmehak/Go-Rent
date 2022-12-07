@@ -1,16 +1,26 @@
 import { bookingInterface } from "../../utils/interface";
 import MinimalProfileCard from "./MinimalProfileCard.";
-import { Image, Flex, ButtonGroup, Button, useToast } from "@chakra-ui/react";
+import {
+  Image,
+  Flex,
+  ButtonGroup,
+  Button,
+  useToast,
+  Badge,
+  Divider,
+} from "@chakra-ui/react";
 import dayjs from "dayjs";
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../config/firebase";
+import { auth, db } from "../../config/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 interface BookingCardProps {
   booking: bookingInterface;
-  refreshData: () => void
+  refreshData: () => void;
 }
 
-const BookingCard = ({ booking , refreshData}: BookingCardProps) => {
+const BookingCard = ({ booking, refreshData }: BookingCardProps) => {
+  const [loggedInUser] = useAuthState(auth);
 
   const startDate = dayjs(booking.bookingDetails.bookingStartDate).format(
     "YYYY-MM-DD"
@@ -40,7 +50,7 @@ const BookingCard = ({ booking , refreshData}: BookingCardProps) => {
           duration: 9000,
           isClosable: true,
         });
-        refreshData()
+        refreshData();
       }
 
       if (status.button === "reject") {
@@ -54,7 +64,7 @@ const BookingCard = ({ booking , refreshData}: BookingCardProps) => {
           duration: 9000,
           isClosable: true,
         });
-        refreshData()
+        refreshData();
       }
     }
   };
@@ -64,7 +74,9 @@ const BookingCard = ({ booking , refreshData}: BookingCardProps) => {
       {booking ? (
         <Flex gap={10} padding={2} justifyContent={"space-between"}>
           <Flex direction={"column"}>
-            <MinimalProfileCard profile={booking.seller} />
+            {booking.buyer !== loggedInUser?.uid && (
+              <MinimalProfileCard profile={booking.seller} />
+            )}
             <Image
               src={booking.listing.media}
               alt="listing picture"
@@ -73,6 +85,27 @@ const BookingCard = ({ booking , refreshData}: BookingCardProps) => {
               sx={{ borderRadius: "0.5rem" }}
               height={20}
             />
+            {booking.buyer === loggedInUser?.uid ? (
+              <Badge
+                mt={1}
+                p={0.5}
+                borderRadius={5}
+                textAlign="center"
+                colorScheme="purple"
+              >
+                Köpare
+              </Badge>
+            ) : (
+              <Badge
+                mt={1}
+                p={0.5}
+                borderRadius={5}
+                textAlign="center"
+                colorScheme="green"
+              >
+                Uthyrare
+              </Badge>
+            )}
           </Flex>
 
           <Flex direction={"column"} gap={5}>
@@ -89,30 +122,34 @@ const BookingCard = ({ booking , refreshData}: BookingCardProps) => {
               </Flex>
             </Flex>
             {booking.status === "pending" &&
-            <form onSubmit={onSubmit}>
-              <ButtonGroup gap={10}>
-                <Button
-                  variant="Accept"
-                  type="submit"
-                  name="acceptButton"
-                  onClick={() => (status.button = "accept")}
-                >
-                  Acceptera
-                </Button>
-                <Button
-                  variant="Reject"
-                  type="submit"
-                  name="rejectButton"
-                  onClick={() => (status.button = "reject")}
-                >
-                  Neka
-                </Button>
-              </ButtonGroup>
-            </form>
-            }
+              booking.buyer !== loggedInUser?.uid && (
+                <form onSubmit={onSubmit}>
+                  <ButtonGroup gap={10}>
+                    <Button
+                      variant="Accept"
+                      type="submit"
+                      name="acceptButton"
+                      onClick={() => (status.button = "accept")}
+                    >
+                      Acceptera
+                    </Button>
+                    <Button
+                      variant="Reject"
+                      type="submit"
+                      name="rejectButton"
+                      onClick={() => (status.button = "reject")}
+                    >
+                      Neka
+                    </Button>
+                  </ButtonGroup>
+                </form>
+              )}
+              
           </Flex>
+          
         </Flex>
       ) : null}
+    <Divider borderWidth={1} borderColor={"blackAlpha.200"} />
     </>
   );
 };
