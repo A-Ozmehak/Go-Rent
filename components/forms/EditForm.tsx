@@ -1,6 +1,7 @@
 import { Box, Button, FormLabel, Input, Text } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { updateUser } from "../../pages/api/users";
 import { userInterface } from "../../utils/interface";
 import TextInput from "../inputs/TextInput";
@@ -13,6 +14,9 @@ interface Props {
 }
 
 const EditForm = ({ profileImage, profile, setEdit }: Props) => {
+
+  const [media, setMedia] = useState("")
+
   const router = useRouter();
   const refreshData = () => {
     router.replace(router.asPath);
@@ -24,10 +28,11 @@ const EditForm = ({ profileImage, profile, setEdit }: Props) => {
         initialValues={{
           username: "",
           location: "",
-          image: "",
+          image: media,
           bio: "",
         }}
         onSubmit={async (values) => {
+          values.image = media
           await updateUser(profile.id!, values, setEdit, refreshData);
         }}
       >
@@ -79,7 +84,7 @@ const EditForm = ({ profileImage, profile, setEdit }: Props) => {
               }}
             />
             <FormLabel htmlFor="image">Profil bild</FormLabel>
-            <UploadMedia id="id" value="value" updateField={() => {}} />
+            <UploadMedia id="id" value="value" updateField={setMedia} />
             <Box sx={btnBox}>
               <Button type="submit" variant="Accept">
                 Spara
