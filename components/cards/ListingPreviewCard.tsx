@@ -5,7 +5,6 @@ import {
   Heading,
   Img,
   Link,
-  Stack,
   Text,
 } from "@chakra-ui/react";
 import { listingInterface } from "../../utils/interface";
