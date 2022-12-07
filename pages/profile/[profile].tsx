@@ -5,9 +5,7 @@ import { getUser } from "../api/users";
 import { Container, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
 import { getListingsByUser } from "../api/listings";
 import BookingCard from "../../components/cards/BookingCard";
-import {
-  getBookingsByUser,
-} from "../api/bookings";
+import { getBookingsByUser } from "../api/bookings";
 import MinimalListingCard from "../../components/cards/MinimalListingCard";
 import { useRouter } from "next/router";
 

@@ -15,18 +15,16 @@ export const getBookingsByUser = async (userID: string) => {
   let sellerBookings = await getBookingsBySeller(userID);
   let buyerBookings = await getBookingsByBuyer(userID);
 
-  const bookings = new Map<string, bookingInterface>()
+  const bookings = new Map<string, bookingInterface>();
 
-  sellerBookings.forEach(booking => {
-    if (booking.id)
-      bookings.set(booking.id, booking)
-  })
-  buyerBookings.forEach(booking => {
-    if (booking.id)
-      bookings.set(booking.id, booking)
-  })
-  return Array.from(bookings.values())
-}
+  sellerBookings.forEach((booking) => {
+    if (booking.id) bookings.set(booking.id, booking);
+  });
+  buyerBookings.forEach((booking) => {
+    if (booking.id) bookings.set(booking.id, booking);
+  });
+  return Array.from(bookings.values());
+};
 
 // * Get bookings by seller
 export const getBookingsBySeller = async (userID: string) => {

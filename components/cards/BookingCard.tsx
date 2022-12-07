@@ -144,12 +144,10 @@ const BookingCard = ({ booking, refreshData }: BookingCardProps) => {
                   </ButtonGroup>
                 </form>
               )}
-              
           </Flex>
-          
         </Flex>
       ) : null}
-    <Divider borderWidth={1} borderColor={"blackAlpha.200"} />
+      <Divider borderWidth={1} borderColor={"blackAlpha.200"} />
     </>
   );
 };
