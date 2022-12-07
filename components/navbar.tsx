@@ -45,7 +45,7 @@ export default function Navbar() {
   let removeSubHeader = false;
 
   if (
-    router.pathname === "/profile/[id]" ||
+    router.pathname === "/profile/[profile]" ||
     router.pathname === "/createListing" ||
     router.pathname === "/login" ||
     router.pathname === "/register"
