@@ -253,7 +253,14 @@ const MinimalListingCard = ({ listing }: props) => {
             </Text>
           ) : (
             <Link href={`/listings/${listing.id}`}>
-              <Text>Visa Annons</Text>
+              <Text
+                cursor="pointer"
+                color="white"
+                fontWeight="bold"
+                fontSize={20}
+              >
+                Visa Annons
+              </Text>
             </Link>
           ))}
       </Flex>

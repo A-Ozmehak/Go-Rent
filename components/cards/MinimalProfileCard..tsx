@@ -1,4 +1,5 @@
 import { Box, Divider, Flex, Image } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { userInterface } from "../../utils/interface";
 
 interface MinimalProfileCardProps {
@@ -6,15 +7,19 @@ interface MinimalProfileCardProps {
 }
 
 const MinimalProfileCard = ({ profile }: MinimalProfileCardProps) => {
+  const router = useRouter();
+
   return (
     <Box>
-      <Divider
-        mb={2}
-        borderWidth={1}
-        width="100%"
-        borderColor="black"
-        display={["none", "none", "block"]}
-      />
+      {router.pathname !== "/profile/[profile]" && (
+        <Divider
+          mb={2}
+          borderWidth={1}
+          width="100%"
+          borderColor="black"
+          display={["none", "none", "block"]}
+        />
+      )}
       <Flex direction="row" alignItems="center" gap={3} overflow="hidden">
         <Image
           objectFit="cover"
@@ -26,13 +31,15 @@ const MinimalProfileCard = ({ profile }: MinimalProfileCardProps) => {
         />
         <h4>{profile.username}</h4>
       </Flex>
-      <Divider
-        display={["block", "block", "none"]}
-        mt={2}
-        borderWidth={1}
-        width="100%"
-        borderColor="black"
-      />
+      {router.pathname !== "/profile/[profile]" && (
+        <Divider
+          display={["block", "block", "none"]}
+          mt={2}
+          borderWidth={1}
+          width="100%"
+          borderColor="black"
+        />
+      )}
     </Box>
   );
 };
