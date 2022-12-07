@@ -91,36 +91,22 @@ const ProfilePage = ({
               key={item.id}
             />
           ))}
-          {!!pendingBuyerBookings.length && (
-            <Text
-              mt={5}
-              fontFamily="Josefin Sans !important"
-              fontWeight="semi-bold"
-              fontSize={20}
-            >
-              Dina väntande förfrågningar
-            </Text>
-          )}
-          {pendingBuyerBookings.map((item: any) => (
-            <BookingCard
-              refreshData={refreshData}
-              booking={item}
-              key={item.id}
-            />
-          ))}
           <Text
             mt={5}
             fontFamily="Josefin Sans !important"
             fontWeight="semi-bold"
             fontSize={20}
           >
-            Mottagna förfrågningar
+            Förfrågningar
           </Text>
-          {pendingBuyerBookings.length ||
-            (pendingSellerBookings < 1 && (
-              <Text>Du har inga väntande förfrågningar.</Text>
-            ))}
           {pendingSellerBookings.map((item: any) => (
+            <BookingCard
+              refreshData={refreshData}
+              booking={item}
+              key={item.id}
+            />
+          ))}
+          {pendingBuyerBookings.map((item: any) => (
             <BookingCard
               refreshData={refreshData}
               booking={item}
