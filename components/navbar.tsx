@@ -69,68 +69,68 @@ export default function Navbar({profile}: props) {
     borderRadius: "12px",
   };
 
-  let removeSubHeader = false;
+    let removeSubHeader = false;
 
-  if (
-    router.pathname === "/profile/[profile]" ||
-    router.pathname === "/createListing" ||
-    router.pathname === "/login" ||
-    router.pathname === "/register"
-  ) {
-    removeSubHeader = true;
-  }
+    if (
+        router.pathname === "/profile/[profile]" ||
+        router.pathname === "/createListing" ||
+        router.pathname === "/login" ||
+        router.pathname === "/register"
+    ) {
+        removeSubHeader = true;
+    }
 
-    return (
-        <Box sx={{backgroundColor: "var(--chakra-colors-brand-lightGray)"}}>
-            <Container maxW="1200px" maxH="80px">
-                <Flex>
-                    <Center>
-                        <Box textStyle="logoText">
-                            <h1>
-                                <Link href="/">GO:RENT</Link>
-                            </h1>
-                        </Box>
-                    </Center>
-                    <Spacer/>
-                    <Center>
-                        <Box>
-                            <Button
-                                onClick={() => router.push("/createListing")}
-                                sx={addButtonStyle}
-                                variant="Secondary"
-                            >
-                                Lägg upp annons
-                            </Button>
-                        </Box>
-                    </Center>
-                    <Spacer/>
-                    <Center>
-                        <Flex>
-                            <Link href={"/listings"}>
-                                <SearchIcon
-                                    sx={{
-                                        marginRight: "1rem",
-                                        fontSize: "2rem",
-                                        cursor: "pointer",
-                                        color: "#005799",
-                                    }}
-                                />
-                            </Link>
-                            <Popover>
-                                <PopoverTrigger>
-                                        {profile?.image?.length ? (
-                                            <Image
-                                                sx={profileImageStyle}
-                                                src={profile.image}
-                                                alt="profile picture"
-                                            />
-                                        ) : (
-                                            <Text sx={{ p: "1rem", bg: "lightGray" }}>
-                                                {user?.displayName?.charAt(0)}
-                                            </Text>
-                                        )}
+  return (
+    <Box sx={{ backgroundColor: "var(--chakra-colors-brand-lightGray)" }}>
+      <Container maxW="1200px" maxH="80px">
+        <Flex>
+          <Center>
+            <Box textStyle="logoText">
+              <h1>
+                <Link href="/">GO:RENT</Link>
+              </h1>
+            </Box>
+          </Center>
+          <Spacer />
+          <Center>
+            <Box>
+              <Button
+                onClick={() => router.push("/createListing")}
+                sx={addButtonStyle}
+                variant="Secondary"
+              >
+                Lägg upp annons
+              </Button>
+            </Box>
+          </Center>
+          <Spacer />
+          <Center>
+            <Flex>
+              <Link href={"/listings"}>
+                <SearchIcon
+                  sx={{
+                    marginRight: "1rem",
+                    fontSize: "2rem",
+                    cursor: "pointer",
+                    color: "#005799",
+                  }}
+                />
+              </Link>
+              <Popover>
+                <PopoverTrigger>
+                  {profile?.image?.length ? (
+                    <Image
+                      sx={profileImageStyle}
+                      src={profile.image}
+                      alt="profile picture"
+                    />
+                  ) : (
+                    <Text sx={{ p: "1rem", bg: "lightGray" }}>
+                      {user?.displayName?.charAt(0)}
+                    </Text>
+                  )}
                 </PopoverTrigger>
-                <Hide below='md'>
+                <Hide below="md">
                   <Text>{user?.displayName}</Text>
                 </Hide>
                 <PopoverContent w="min-content">
