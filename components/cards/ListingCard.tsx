@@ -1,14 +1,10 @@
 import {
   Box,
-  Card,
-  CardBody,
-  Divider,
-  Stack,
   Text,
   Image,
   Flex,
 } from "@chakra-ui/react";
-import { listingInterface } from "../../utils/interface";
+import {listingInterface} from "../../utils/interface";
 import BookingForm from "../forms/BookingForm";
 import Link from "next/link";
 import MinimalProfileCard from "./MinimalProfileCard.";
@@ -97,7 +93,7 @@ const ListingCard = ({ listing }: props) => {
           </Flex>
           <Flex direction={"column"} gap={1}>
             <h4>Välj datum</h4>
-            <BookingForm listing={listing} />
+            <BookingForm listing={listing} profile={listing.seller} />
           </Flex>
         </Flex>
       </Box>
