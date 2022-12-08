@@ -137,14 +137,16 @@ export default function Navbar({ profile }: props) {
                   {user && (
                     <>
                       <MenuItem>
-                        <Button variant="iconTransparent"
+                        <Button
+                          variant="iconTransparent"
                           onClick={() => router.push(`/profile/${user?.uid}`)}
                         >
                           Min profil
                         </Button>
                       </MenuItem>
                       <MenuItem>
-                        <Button variant="iconTransparent"
+                        <Button
+                          variant="iconTransparent"
                           onClick={() => {
                             router.push("/");
                             logOut();
@@ -158,12 +160,18 @@ export default function Navbar({ profile }: props) {
                   {!user && (
                     <>
                       <MenuItem>
-                        <Button variant="iconTransparent" onClick={() => router.push("/login")}>
+                        <Button
+                          variant="iconTransparent"
+                          onClick={() => router.push("/login")}
+                        >
                           Logga in
                         </Button>
                       </MenuItem>
                       <MenuItem>
-                        <Button variant="iconTransparent" onClick={() => router.push("/register")}>
+                        <Button
+                          variant="iconTransparent"
+                          onClick={() => router.push("/register")}
+                        >
                           Registrera dig
                         </Button>
                       </MenuItem>
