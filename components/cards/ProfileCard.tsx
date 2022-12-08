@@ -47,8 +47,9 @@ const ProfileCard = ({ profile, profileImage }: props) => {
 
   return (
     <Box sx={profileBox}>
+      <Button onClick={handleEdit}>edit</Button>
       {edit ? (
-        <EditForm profileImage={profileImage} />
+        <EditForm setEdit={setEdit} profile={profile} />
       ) : (
         <Card
           onMouseOver={handleMouseOver}
@@ -78,7 +79,9 @@ const ProfileCard = ({ profile, profileImage }: props) => {
               /> */}
               <ContactModal isOpen={isOpen} onClose={onClose} />
               <div style={userName}>
-                <h3>{loggedInUser?.displayName}</h3>
+                <h3>
+                  {profile?.firstName} {profile.lastName}
+                </h3>
                 <p>{profile.location}</p>
                 {!!loggedInUser?.uid && currentProfile !== loggedInUser.uid && (
                   <Button onClick={onOpen} variant="Primary">

@@ -4,31 +4,37 @@ import {
   Center,
   Container,
   Flex,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverTrigger,
+  Menu,
+  MenuItem,
   Spacer,
   SystemStyleObject,
+  Text,
+  Hide,
+  Wrap,
+  WrapItem,
+  Avatar,
+  MenuButton,
+  MenuList,
 } from "@chakra-ui/react";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SearchIcon from "@mui/icons-material/Search";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import { getAuth, signOut } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { app } from "../config/firebase";
-import SearchField from "./inputs/SearchField";
 import SubHeader from "./subHeader";
+import { userInterface } from "../utils/interface";
 
-export default function Navbar() {
+export interface props {
+  profile: userInterface;
+}
+
+export default function Navbar({ profile }: props) {
   const auth = getAuth(app);
-  const [user, loading] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
-  const [search, setSearch] = useState(false);
   const router = useRouter();
   const logOut = () => {
     signOut(auth).catch((error) => {
@@ -72,14 +78,8 @@ export default function Navbar() {
     removeSubHeader = true;
   }
 
-  console.log(removeSubHeader);
-
   return (
-    <Box
-      opacity={scrollHeight}
-      transition={".2s ease-in-out"}
-      sx={{ backgroundColor: "var(--chakra-colors-brand-lightGray)" }}
-    >
+    <Box sx={{ backgroundColor: "var(--chakra-colors-brand-lightGray)" }}>
       <Container maxW="1200px" maxH="80px">
         <Flex>
           <Center>
@@ -114,35 +114,39 @@ export default function Navbar() {
                   }}
                 />
               </Link>
-              <Popover>
-                <PopoverTrigger>
-                  <AccountCircleIcon
-                    sx={{
-                      fontSize: "2rem",
-                      cursor: "pointer",
-                      color: "#005799",
-                      marginLeft: "1rem",
-                    }}
-                  ></AccountCircleIcon>
-                </PopoverTrigger>
-                <PopoverContent w="min-content">
-                  <PopoverArrow />
-                  <PopoverCloseButton />
-                  <PopoverBody
-                    display="flex"
-                    gap="0.5rem"
-                    flexDirection="column"
-                    alignItems="center"
-                    m="1rem"
-                  >
-                    {user && (
-                      <>
+              <Menu>
+                <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                  <Wrap>
+                    <WrapItem>
+                      <Avatar
+                        size="sm"
+                        name={profile.firstName}
+                        src={profile.image}
+                      />
+                      <Hide below="md">
+                        <Text
+                          sx={{ marginLeft: "0.5rem", marginTop: "0.5rem" }}
+                        >
+                          {user?.displayName}
+                        </Text>
+                      </Hide>
+                    </WrapItem>
+                  </Wrap>
+                </MenuButton>
+                <MenuList zIndex="4">
+                  {user && (
+                    <>
+                      <MenuItem>
                         <Button
+                          variant="iconTransparent"
                           onClick={() => router.push(`/profile/${user?.uid}`)}
                         >
                           Min profil
                         </Button>
+                      </MenuItem>
+                      <MenuItem>
                         <Button
+                          variant="iconTransparent"
                           onClick={() => {
                             router.push("/");
                             logOut();
@@ -150,33 +154,37 @@ export default function Navbar() {
                         >
                           Logga ut
                         </Button>
+                      </MenuItem>
+                    </>
+                  )}
+                  {!user && (
+                    <>
+                      <MenuItem>
                         <Button
-                          sx={{ display: { sm: "none" } }}
-                          onClick={() => router.push("/createListing")}
+                          variant="iconTransparent"
+                          onClick={() => router.push("/login")}
                         >
-                          Lägg upp annons
-                        </Button>
-                      </>
-                    )}
-                    {!user && (
-                      <>
-                        <Button onClick={() => router.push("/login")}>
                           Logga in
                         </Button>
-                        <Button onClick={() => router.push("/register")}>
+                      </MenuItem>
+                      <MenuItem>
+                        <Button
+                          variant="iconTransparent"
+                          onClick={() => router.push("/register")}
+                        >
                           Registrera dig
                         </Button>
-                        <Button
-                          sx={{ display: { sm: "none" } }}
-                          onClick={() => router.push("/createListing")}
-                        >
-                          Lägg upp annons
-                        </Button>
-                      </>
-                    )}
-                  </PopoverBody>
-                </PopoverContent>
-              </Popover>
+                      </MenuItem>
+                    </>
+                  )}
+                </MenuList>
+              </Menu>
+              <Button
+                sx={{ display: { sm: "none" } }}
+                onClick={() => router.push("/createListing")}
+              >
+                Lägg upp annons
+              </Button>
             </Flex>
           </Center>
         </Flex>
