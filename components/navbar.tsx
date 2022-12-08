@@ -25,7 +25,7 @@ import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { app } from "../config/firebase";
 import SubHeader from "./subHeader";
-import { userInterface } from '../utils/interface';
+import { userInterface } from "../utils/interface";
 
 interface props {
   profile: userInterface;

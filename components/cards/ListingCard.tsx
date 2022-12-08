@@ -1,10 +1,5 @@
-import {
-  Box,
-  Text,
-  Image,
-  Flex,
-} from "@chakra-ui/react";
-import {listingInterface} from "../../utils/interface";
+import { Box, Text, Image, Flex } from "@chakra-ui/react";
+import { listingInterface } from "../../utils/interface";
 import BookingForm from "../forms/BookingForm";
 import Link from "next/link";
 import MinimalProfileCard from "./MinimalProfileCard.";

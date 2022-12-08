@@ -17,7 +17,7 @@ import {
 import { CalendarIcon } from "@chakra-ui/icons";
 import dayjs from "dayjs";
 import "dayjs/locale/sv";
-import {listingInterface, userInterface} from "../../utils/interface";
+import { listingInterface, userInterface } from "../../utils/interface";
 import { collection, addDoc } from "firebase/firestore";
 import { auth, db } from "../../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
