@@ -52,7 +52,6 @@ const ProfileCard = ({ profile, profileImage }: props) => {
         <EditForm
           setEdit={setEdit}
           profile={profile}
-          profileImage={profileImage}
         />
       ) : (
         <Card
