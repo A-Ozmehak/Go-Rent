@@ -7,7 +7,7 @@ import { storage } from "../../config/firebase";
 
 export interface MediaProps {
   id: string;
-  updateField: (field: string, value: any, shouldValidate?: boolean) => void;
+  updateField: any;
   value: string;
 }
 
@@ -31,9 +31,8 @@ const UploadMedia = ({ id, value, updateField }: MediaProps) => {
       const uploadSnapshot = await uploadBytesResumable(storageRef, imageFile);
 
       const url = await getDownloadURL(uploadSnapshot.ref);
-      setDownloadURL(url);
-
-      updateField("media", url, false);
+      await setDownloadURL(url);
+      await updateField(url);
     } else {
       console.error("File not found");
     }

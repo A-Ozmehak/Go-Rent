@@ -1,27 +1,50 @@
-import { Box, Button, FormLabel, Input, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  FormLabel,
+  Image,
+  Input,
+  Text,
+  Textarea,
+} from "@chakra-ui/react";
 import { Formik } from "formik";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { updateUser } from "../../pages/api/users";
+import { userInterface } from "../../utils/interface";
 import TextInput from "../inputs/TextInput";
-import UploadMedia, { MediaProps } from "./UploadMedia";
+import UploadMedia from "./UploadMedia";
 
 interface Props {
-  profileImage: MediaProps;
+  profile: userInterface;
+  setEdit: any;
 }
 
-const EditForm = ({ profileImage }: Props) => {
+const EditForm = ({ profile, setEdit }: Props) => {
+  const [media, setMedia] = useState("");
+
+  const router = useRouter();
+  const refreshData = () => {
+    router.replace(router.asPath);
+  };
   return (
     <Box>
-      <Text sx={title}>Redigera din profil</Text>
       <Formik
         initialValues={{
-          username: "",
-          location: "",
-          image: "",
-          bio: "",
+          username: profile.username || "",
+          location: profile.location || "",
+          image: profile.image || media,
+          bio: profile.bio || "",
         }}
-        onSubmit={(values) => {}}
+        onSubmit={async (values) => {
+          values.image = media;
+          await updateUser(profile.id!, values, setEdit, refreshData);
+        }}
       >
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
+            <FormLabel fontSize={20}>Redigera din profil</FormLabel>
             <FormLabel htmlFor="username">Användarnamn</FormLabel>
             <TextInput
               as={Input}
@@ -54,10 +77,10 @@ const EditForm = ({ profileImage }: Props) => {
             />
             <FormLabel htmlFor="bio">Beskrivning</FormLabel>
             <TextInput
-              as={Input}
+              as={Textarea}
               id="bio"
               name="bio"
-              type="bio"
+              type="text"
               variant="filled"
               validate={(value: string) => {
                 let error;
@@ -67,13 +90,28 @@ const EditForm = ({ profileImage }: Props) => {
                 return error;
               }}
             />
-            <FormLabel htmlFor="image">Profil bild</FormLabel>
-            <UploadMedia id="id" value="value" updateField={() => {}} />
-            <Box sx={btnBox}>
-              <Button variant="Accept">Spara</Button>
+            <FormLabel htmlFor="image">Profilbild</FormLabel>
+            {profile.image && (
+              <>
+                <FormLabel>Nuvarande profilbild: </FormLabel>
+                <Image
+                  w={120}
+                  objectFit="cover"
+                  src={profile.image}
+                  alt={profile.firstName}
+                  mb={5}
+                />
+              </>
+            )}
+
+            <UploadMedia id="id" value="value" updateField={setMedia} />
+            <ButtonGroup mt={5} gap={5}>
+              <Button type="submit" variant="Accept">
+                Spara
+              </Button>
               {/* TODO: open up modal with "are you sure you want to remove your account." */}
               <Button variant="Reject">Ta bort konto</Button>
-            </Box>
+            </ButtonGroup>
           </form>
         )}
       </Formik>
@@ -82,13 +120,3 @@ const EditForm = ({ profileImage }: Props) => {
 };
 
 export default EditForm;
-
-const title = {
-  marginBottom: "1rem",
-};
-
-const btnBox = {
-  display: "flex",
-  justifyContent: "space-around",
-  marginTop: "1rem",
-};
