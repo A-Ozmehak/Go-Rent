@@ -138,8 +138,8 @@ export default function Navbar({ profile }: props) {
                     <>
                       <MenuItem>
                         <Button
-                            sx={{ display: { base: "block", sm: "none" } }}
-                            onClick={() => router.push("/createListing")}
+                          sx={{ display: { base: "block", sm: "none" } }}
+                          onClick={() => router.push("/createListing")}
                         >
                           Lägg upp annons
                         </Button>
@@ -187,7 +187,6 @@ export default function Navbar({ profile }: props) {
                   )}
                 </MenuList>
               </Menu>
-
             </Flex>
           </Center>
         </Flex>
