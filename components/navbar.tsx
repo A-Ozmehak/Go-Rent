@@ -138,6 +138,14 @@ export default function Navbar({ profile }: props) {
                     <>
                       <MenuItem>
                         <Button
+                            sx={{ display: { base: "block", sm: "none" } }}
+                            onClick={() => router.push("/createListing")}
+                        >
+                          Lägg upp annons
+                        </Button>
+                      </MenuItem>
+                      <MenuItem>
+                        <Button
                           variant="iconTransparent"
                           onClick={() => router.push(`/profile/${user?.uid}`)}
                         >
@@ -179,12 +187,7 @@ export default function Navbar({ profile }: props) {
                   )}
                 </MenuList>
               </Menu>
-              <Button
-                sx={{ display: { sm: "none" } }}
-                onClick={() => router.push("/createListing")}
-              >
-                Lägg upp annons
-              </Button>
+
             </Flex>
           </Center>
         </Flex>
