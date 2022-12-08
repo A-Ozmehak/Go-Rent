@@ -133,18 +133,18 @@ export default function Navbar({ profile }: props) {
                     </WrapItem>
                   </Wrap>
                 </MenuButton>
-                <MenuList>
+                <MenuList zIndex="4">
                   {user && (
                     <>
                       <MenuItem>
-                        <Button
+                        <Button variant="iconTransparent"
                           onClick={() => router.push(`/profile/${user?.uid}`)}
                         >
                           Min profil
                         </Button>
                       </MenuItem>
                       <MenuItem>
-                        <Button
+                        <Button variant="iconTransparent"
                           onClick={() => {
                             router.push("/");
                             logOut();
@@ -158,12 +158,12 @@ export default function Navbar({ profile }: props) {
                   {!user && (
                     <>
                       <MenuItem>
-                        <Button onClick={() => router.push("/login")}>
+                        <Button variant="iconTransparent" onClick={() => router.push("/login")}>
                           Logga in
                         </Button>
                       </MenuItem>
                       <MenuItem>
-                        <Button onClick={() => router.push("/register")}>
+                        <Button variant="iconTransparent" onClick={() => router.push("/register")}>
                           Registrera dig
                         </Button>
                       </MenuItem>
