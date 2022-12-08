@@ -113,7 +113,7 @@ const SignupForm = () => {
                 variant="filled"
                 validate={(value: string) => {
                   let error;
-                  if (value && value.length < 3) {
+                  if (!value && value.length < 3) {
                     error = "Användarnamnet måste innehålla minst 3 tecken";
                   }
                   return error;
@@ -131,7 +131,7 @@ const SignupForm = () => {
                 variant="filled"
                 validate={(value: string) => {
                   let error;
-                  if (value && value.length < 2) {
+                  if (!value && value.length < 2) {
                     error = "Förnamnet måste innehålla minst 2 tecken";
                   }
                   return error;
@@ -149,7 +149,7 @@ const SignupForm = () => {
                 variant="filled"
                 validate={(value: string) => {
                   let error;
-                  if (value && value.length < 2) {
+                  if (!value && value.length < 2) {
                     error = "Efternamnet måste innehålla minst 2 tecken";
                   }
                   return error;
@@ -179,7 +179,7 @@ const SignupForm = () => {
                 variant="filled"
                 validate={(value: string) => {
                   let error;
-                  if (value && value.length < 6) {
+                  if (!value && value.length < 6) {
                     error = "Lösenordet måste innehålla minst 6 tecken";
                   }
                   return error;
