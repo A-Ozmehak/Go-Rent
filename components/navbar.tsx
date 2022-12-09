@@ -27,7 +27,7 @@ import { app } from "../config/firebase";
 import SubHeader from "./subHeader";
 import { userInterface } from "../utils/interface";
 
-export interface props {
+interface props {
   profile: userInterface;
 }
 
