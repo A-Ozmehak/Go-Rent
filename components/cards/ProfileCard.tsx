@@ -7,6 +7,8 @@ import {
   Button,
   useDisclosure,
   Text,
+  Flex,
+  AspectRatio,
 } from "@chakra-ui/react";
 import { userInterface } from "../../utils/interface";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -15,6 +17,7 @@ import ContactModal from "../inputs/ContactModal";
 import { EditIcon } from "@chakra-ui/icons";
 import EditForm from "../forms/EditForm";
 import { MediaProps } from "../forms/UploadMedia";
+const bioBackground = "../../assets/bioBackground";
 
 interface props {
   profile: userInterface;
@@ -46,101 +49,83 @@ const ProfileCard = ({ profile, profileImage }: props) => {
   };
 
   return (
-    <Box sx={profileBox}>
-      <Button onClick={handleEdit}>edit</Button>
+    <Box
+      position="relative"
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
+    >
+      {hovering && loggedInUser?.uid && currentProfile && (
+        <Button
+          position="absolute"
+          background="transparent"
+          onClick={handleEdit}
+          _hover={{
+            background: "transparent",
+          }}
+        >
+          <EditIcon fontSize={30} />
+        </Button>
+      )}
       {edit ? (
         <EditForm setEdit={setEdit} profile={profile} />
       ) : (
-        <Card
-          onMouseOver={handleMouseOver}
-          onMouseOut={handleMouseOut}
-          sx={card}
-          direction={{ base: "row", sm: "row" }}
-          overflow="hidden"
-          variant="outline"
+        <Flex
+          width="100%"
+          justifyContent="space-between"
+          direction={["column", "column", "row"]}
+          alignItems="center"
+          backgroundColor="#EEEEEE"
         >
-          <div style={container} key="id">
-            <div style={profileContainer}>
-              {profile.image?.length ? (
+          <Flex
+            direction="column"
+            overflow="hidden"
+            gap={3}
+            p={[2, 5]}
+            flexShrink={0}
+            flex={1}
+          >
+            <Flex
+              direction={["column", "column", "column", "row"]}
+              alignItems="center"
+            >
+              {!!profile.image?.length ? (
                 <Image
-                  sx={profileImageStyle}
+                  objectFit="cover"
+                  width={[20, 100, 150]}
+                  height={[20, 100, 150]}
+                  borderRadius={1000}
                   src={profile.image}
                   alt="profile picture"
+                  mr={[0, 3]}
                 />
               ) : (
-                <Text sx={{ p: "2rem", bg: "lightGray" }}>
+                <Text p={2} textAlign="center" bg="lightGray">
                   {profile.firstName?.charAt(0)}
                 </Text>
               )}
-              {/* <Image
-                sx={profileImageStyle}
-                src={profile.image}
-                alt="profile picture"
-              /> */}
               <ContactModal isOpen={isOpen} onClose={onClose} />
-              <div style={userName}>
-                <h3>
-                  {profile?.firstName} {profile.lastName}
-                </h3>
-                <p>{profile.location}</p>
-                {!!loggedInUser?.uid && currentProfile !== loggedInUser.uid && (
-                  <Button onClick={onOpen} variant="Primary">
-                    Kontakta säljaren
-                  </Button>
-                )}
-              </div>
-            </div>
-
-            <CardBody sx={userBio}>
-              <p>{profile.bio}</p>
-              {hovering && loggedInUser?.uid && currentProfile && (
-                <Button bg="#DDDDDD" onClick={handleEdit}>
-                  <EditIcon />
-                </Button>
-              )}
-            </CardBody>
-          </div>
-        </Card>
+              <Box>
+                <Text mb={-3} fontSize={[25, 30]}>
+                  {profile.username}
+                </Text>
+                <Text fontSize={[15, 20]}>{profile.location}</Text>
+              </Box>
+            </Flex>
+            {!!loggedInUser?.uid && currentProfile !== loggedInUser.uid && (
+              <Button onClick={onOpen} variant="Primary">
+                Kontakta säljaren
+              </Button>
+            )}{" "}
+          </Flex>
+          <Box flex={2} flexShrink={1} textAlign="center">
+            <Text backgroundColor="white" p={[2, 10]}>
+              {profile.bio}
+            </Text>
+          </Box>
+        </Flex>
       )}
     </Box>
   );
-};
-
-const profileBox = {
-  width: "100%",
-  background: { base: "#DDDDDD", xl: "#EDEDED" },
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-};
-
-export const card = {
-  width: { base: "100%", lg: "75%" },
-};
-
-export const profileImageStyle = {
-  marginLeft: ".3rem",
-  marginTop: ".6rem",
-  width: { base: "2rem", md: "3rem", lg: "8rem" },
-  height: { base: "2rem", md: "3rem", lg: "8rem" },
-};
-const container = {
-  display: "flex",
-};
-const profileContainer = {
-  display: "flex",
-};
-const userName = {
-  marginLeft: ".5rem",
-  marginTop: ".7rem",
-};
-const userBio = {
-  width: { base: "100%", md: "30rem" },
-  marginLeft: "1rem",
-  padding: "0",
-  display: "flex",
-  justifyContent: "space-evenly",
-  background: { base: "#EDEDED", xl: "#DDDDDD" },
 };
 
 export default ProfileCard;

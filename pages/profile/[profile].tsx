@@ -27,7 +27,7 @@ const ProfilePage = ({
   };
 
   return (
-    <Container>
+    <Container maxW={1000}>
       <ProfileCard profile={user} profileImage={user.media} />
       {userID === user.id ? (
         <Text
