@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../config/firebase";
 
 interface UserContextInterface {
@@ -15,14 +15,16 @@ export const UserContext = createContext<UserContextInterface>({
 export default function UserProvider(props: any) {
   const [loggedInUsername, setLoggedInUsername] = useState("");
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      //User is logged in
-      user.displayName ? setLoggedInUsername(user.displayName) : null;
-    } else {
-      // User is signed out
-      // setLoggedInUsername("") Breaks log out function, try to not render username in component / element when there is no user with conditional rendering
-    }
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        //User is logged in
+        user.displayName ? setLoggedInUsername(user.displayName) : null;
+      } else {
+        // User is signed out
+        // setLoggedInUsername("") Breaks log out function, try to not render username in component / element when there is no user with conditional rendering
+      }
+    });
   });
 
   return (
