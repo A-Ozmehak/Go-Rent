@@ -1,34 +1,26 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
-  Card,
-  CardBody,
   Box,
   Image,
   Button,
   useDisclosure,
   Text,
   Flex,
-  AspectRatio,
 } from "@chakra-ui/react";
 import { userInterface } from "../../utils/interface";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../config/firebase";
 import ContactModal from "../inputs/ContactModal";
-import { EditIcon } from "@chakra-ui/icons";
+import { CloseIcon, EditIcon } from "@chakra-ui/icons";
 import EditForm from "../forms/EditForm";
-import { MediaProps } from "../forms/UploadMedia";
-const bioBackground = "../../assets/bioBackground";
 
 interface props {
   profile: userInterface;
-  profileImage: MediaProps;
 }
 
-const ProfileCard = ({ profile, profileImage }: props) => {
+const ProfileCard = ({ profile }: props) => {
   const [loggedInUser] = useAuthState(auth);
   const currentProfile = profile.id;
-  //   const authAUser = getAuth();
-  const loggedInUsername = auth.currentUser;
 
   const [hovering, setHovering] = useState(false);
   const [edit, setEdit] = useState(false);
@@ -39,7 +31,9 @@ const ProfileCard = ({ profile, profileImage }: props) => {
   };
 
   const handleMouseOver = () => {
-    if (loggedInUser?.uid && currentProfile) {
+    if (edit) {
+      return;
+    } else if (loggedInUser?.uid && currentProfile) {
       setHovering(true);
     }
   };
@@ -57,6 +51,7 @@ const ProfileCard = ({ profile, profileImage }: props) => {
       {hovering && loggedInUser?.uid && currentProfile && (
         <Button
           position="absolute"
+          right="0"
           background="transparent"
           onClick={handleEdit}
           _hover={{
@@ -67,7 +62,16 @@ const ProfileCard = ({ profile, profileImage }: props) => {
         </Button>
       )}
       {edit ? (
-        <EditForm setEdit={setEdit} profile={profile} />
+        <>
+          <CloseIcon
+            cursor="pointer"
+            fontSize={20}
+            right="0"
+            position="absolute"
+            onClick={() => setEdit(false)}
+          />
+          <EditForm setEdit={setEdit} profile={profile} />
+        </>
       ) : (
         <Flex
           width="100%"
