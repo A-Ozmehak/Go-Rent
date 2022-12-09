@@ -6,6 +6,7 @@ import {
   useDisclosure,
   Text,
   Flex,
+  Avatar,
 } from "@chakra-ui/react";
 import { userInterface } from "../../utils/interface";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -99,9 +100,16 @@ const ProfileCard = ({ profile }: props) => {
                   mr={[0, 3]}
                 />
               ) : (
-                <Text p={2} textAlign="center" bg="lightGray">
+                <Avatar
+                  width={[20, 100, 150]}
+                  height={[20, 100, 150]}
+                  bg="lightGray"
+                  icon={<></>}
+                  mr={[0, 3]}
+                  fontSize={50}
+                >
                   {profile.firstName?.charAt(0)}
-                </Text>
+                </Avatar>
               )}
               <ContactModal isOpen={isOpen} onClose={onClose} />
               <Box>

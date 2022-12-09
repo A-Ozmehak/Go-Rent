@@ -15,6 +15,7 @@ import {
   Avatar,
   MenuButton,
   MenuList,
+  Image,
 } from "@chakra-ui/react";
 import SearchIcon from "@mui/icons-material/Search";
 import { ChevronDownIcon } from "@chakra-ui/icons";
@@ -23,19 +24,20 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { app, auth } from "../config/firebase";
+import { auth } from "../config/firebase";
 import SubHeader from "./subHeader";
 import { userInterface } from "../utils/interface";
+import { getUser } from "../pages/api/users";
 
-export interface props {
-  profile: userInterface;
-}
+// export interface props {
+//   profile: userInterface;
+// }
 
-export default function Navbar({ profile }: props) {
-  const [user] = useAuthState(auth);
-  const loggedInUser = user?.uid;
-
+export default function Navbar() {
+  const [userAuth] = useAuthState(auth);
+  const loggedInUser = userAuth?.uid;
   const router = useRouter();
+  const [user, setUser] = useState<userInterface>();
 
   const logOut = () => {
     if (loggedInUser) {
@@ -44,6 +46,16 @@ export default function Navbar({ profile }: props) {
       });
     }
   };
+
+  useEffect(() => {
+    if (loggedInUser) {
+      const fetchUser = async () => {
+        const res = await getUser(loggedInUser);
+        if (res) setUser(res);
+      };
+      fetchUser();
+    }
+  }, [loggedInUser, user]);
 
   const [scrollHeight, setScrollHeight] = useState(1);
 
@@ -112,18 +124,36 @@ export default function Navbar({ profile }: props) {
                 <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
                   <Wrap>
                     <WrapItem>
-                      <Avatar
-                        size="sm"
-                        name={profile.firstName}
-                        src={profile.image}
-                      />
-                      <Hide below="md">
-                        <Text
-                          sx={{ marginLeft: "0.5rem", marginTop: "0.5rem" }}
-                        >
-                          {user?.displayName}
-                        </Text>
-                      </Hide>
+                      {!loggedInUser && <Avatar size="sm" />}
+                      {!!loggedInUser && (
+                        <>
+                          {!!user && (
+                            <>
+                              {user.image?.length ? (
+                                <Avatar
+                                  size="sm"
+                                  name={user.firstName}
+                                  src={user.image}
+                                />
+                              ) : (
+                                <Avatar size="sm" bg="lightGray" icon={<></>}>
+                                  {user.firstName?.charAt(0)}
+                                </Avatar>
+                              )}
+                              <Hide below="md">
+                                <Text
+                                  sx={{
+                                    marginLeft: "0.5rem",
+                                    marginTop: "0.5rem",
+                                  }}
+                                >
+                                  {user?.username}
+                                </Text>
+                              </Hide>
+                            </>
+                          )}
+                        </>
+                      )}
                     </WrapItem>
                   </Wrap>
                 </MenuButton>
@@ -131,7 +161,7 @@ export default function Navbar({ profile }: props) {
                   {!!loggedInUser && (
                     <>
                       <MenuItem
-                        onClick={() => router.push(`/profile/${user?.uid}`)}
+                        onClick={() => router.push(`/profile/${loggedInUser}`)}
                       >
                         Min profil
                       </MenuItem>

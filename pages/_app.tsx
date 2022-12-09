@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <ChakraProvider theme={Theme}>
       <UserProvider>
         <Box>
-          <Navbar profile={pageProps} />
+          <Navbar />
           <Component {...pageProps} />
         </Box>
         <Footer />

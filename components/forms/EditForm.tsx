@@ -90,13 +90,6 @@ const EditForm = ({ profile, setEdit }: Props) => {
               name="username"
               type="username"
               variant="filled"
-              validate={(value: string) => {
-                let error;
-                if (value.length < 2) {
-                  error = "Skriv in ett användarnamn";
-                }
-                return error;
-              }}
             />
             <FormLabel htmlFor="location">Plats</FormLabel>
             <TextInput
@@ -105,13 +98,6 @@ const EditForm = ({ profile, setEdit }: Props) => {
               name="location"
               type="location"
               variant="filled"
-              validate={(value: string) => {
-                let error;
-                if (value.length < 2) {
-                  error = "Skriv in en plats.";
-                }
-                return error;
-              }}
             />
             <FormLabel htmlFor="bio">Beskrivning</FormLabel>
             <TextInput
@@ -120,13 +106,6 @@ const EditForm = ({ profile, setEdit }: Props) => {
               name="bio"
               type="text"
               variant="filled"
-              validate={(value: string) => {
-                let error;
-                if (value.length < 2) {
-                  error = "Skriv in en beskrivning om dig själv.";
-                }
-                return error;
-              }}
             />
             <FormLabel htmlFor="image">Profilbild</FormLabel>
             {profile.image && (

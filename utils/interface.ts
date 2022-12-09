@@ -13,7 +13,7 @@ export interface listingInterface {
 
 export interface userInterface {
   image?: string;
-  username: string;
+  username?: string;
   firstName?: string;
   lastName?: string;
   location?: string;
