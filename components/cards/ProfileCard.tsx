@@ -49,17 +49,13 @@ const ProfileCard = ({ profile }: props) => {
       onMouseOut={handleMouseOut}
     >
       {hovering && loggedInUser?.uid && currentProfile && (
-        <Button
+        <EditIcon
           position="absolute"
           right="0"
           background="transparent"
           onClick={handleEdit}
-          _hover={{
-            background: "transparent",
-          }}
-        >
-          <EditIcon fontSize={30} />
-        </Button>
+          fontSize={30}
+        />
       )}
       {edit ? (
         <>

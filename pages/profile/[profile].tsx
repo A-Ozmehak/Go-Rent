@@ -5,7 +5,7 @@ import { getUser } from "../api/users";
 import { Container, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
 import { getListingsByUser } from "../api/listings";
 import BookingCard from "../../components/cards/BookingCard";
-import { getBookingsBySeller, getBookingsByUser } from "../api/bookings";
+import { getBookingsByUser } from "../api/bookings";
 import MinimalListingCard from "../../components/cards/MinimalListingCard";
 import { useRouter } from "next/router";
 
@@ -28,7 +28,7 @@ const ProfilePage = ({
 
   return (
     <Container maxW={1000}>
-      <ProfileCard profile={user} profileImage={user.media} />
+      <ProfileCard profile={user} />
       {userID === user.id ? (
         <Text
           fontFamily="Josefin Sans !important"
