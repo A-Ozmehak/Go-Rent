@@ -46,9 +46,10 @@ const ProfilePage = ({
           {user.username}s annonser
         </Text>
       )}
-      <Grid 
-      templateColumns={["repeat(1,1fr)","repeat(2,1fr)","repeat(3, 1fr)"]} 
-      gap={6}>
+      <Grid
+        templateColumns={["repeat(1,1fr)", "repeat(2,1fr)", "repeat(3, 1fr)"]}
+        gap={6}
+      >
         {userListings.map((item: any) => (
           <GridItem key={item.id}>
             <MinimalListingCard listing={item} />

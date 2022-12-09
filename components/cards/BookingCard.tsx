@@ -77,7 +77,7 @@ const BookingCard = ({ booking, refreshData }: BookingCardProps) => {
         <Flex
           direction={["column", "column", "row"]}
           justifyContent="space-between"
-          gap={[2,2,10, 20]}
+          gap={[2, 2, 10, 20]}
           pt={2}
           pb={2}
           width="100%"
