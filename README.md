@@ -14,13 +14,15 @@ Uppdraget var att skapa en uthyrningsportal där privatpersoner i Göteborg ka
 - _Github repo_ (https://github.com/A-Ozmehak/Go-Rent)
 
 ## Starting the project
-```shell 
+
+```shell
 $ npm i
 ```
 
 **To install all dependencies.**
 
 **and then:**
+
 ```shell
 $ npm run dev
 ```
@@ -31,16 +33,16 @@ $ npm run dev
 $ yarn dev
 ```
 
-
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the site.
 
 ## Tech stack
-* NextJs
-* Typescript
-* Sass
-* ChakraUI
-* Firebase (Firestore for database, Authentication for users and Storage for files)
-* Vercel for deploy
+
+- NextJs
+- Typescript
+- Sass
+- ChakraUI
+- Firebase (Firestore for database, Authentication for users and Storage for files)
+- Vercel for deploy
 
 ## Deploy on Vercel
 
@@ -57,7 +59,7 @@ This webapplication is deployed on Vercel on [https://go-rent.vercel.app/](https
 
 [ ] En inloggad användare ska kunna lägga upp egna annonser och svara på förfrågningar (godkänna eller neka)
 
-[x] Annonser som läggs upp ska ha en bild (med länk eller genom filuppladdning), titel,  beskrivning och pris (kan även vara gratis)
+[x] Annonser som läggs upp ska ha en bild (med länk eller genom filuppladdning), titel, beskrivning och pris (kan även vara gratis)
 
 [x] Det ska finnas ett kategorisystem för annonserna
 
@@ -65,7 +67,7 @@ This webapplication is deployed on Vercel on [https://go-rent.vercel.app/](https
 
 [ ] Det ska finnas validering på samtliga inputfält
 
- **Övriga önskemål (nice-to-haves):**
+**Övriga önskemål (nice-to-haves):**
 
 [ ] En inloggad användare ska kunna lägga upp en profilbild (med länk eller genom filuppladdning) och en kort text om sig själv, som sedan visas när användarens alla annonser visas
 
@@ -79,7 +81,7 @@ This webapplication is deployed on Vercel on [https://go-rent.vercel.app/](https
 
 [ ] Det ska gå att se hur många gånger ett föremål har varit uthyrt
 
- **Krav för godkänt:**
+**Krav för godkänt:**
 
 [ ] Uppgiften är inlämnad i tid på ItsLearning (zippat repo med kompletta startinstruktioner i README-fil, länk till deployad sida och designskisser)
 
@@ -105,7 +107,7 @@ This webapplication is deployed on Vercel on [https://go-rent.vercel.app/](https
 
 [ ] Minst tre punkter från listan med övriga önskemål har implementerats i projektet (specificera vilka i README-filen)
 
-[ ] Ytterligare två Cypress-tester (totalt minst fyra tester) har skapats för att testa funktionalitet som ändrats/tillkommit efter feedback från opponeringen. 
+[ ] Ytterligare två Cypress-tester (totalt minst fyra tester) har skapats för att testa funktionalitet som ändrats/tillkommit efter feedback från opponeringen.
 Testerna ska baseras på buggar eller brister i funktionaliteten som kommit fram vid opponeringen.
 
 [ ] Projektet har ett CI-flöde (eller CI/CD) som omfattar Prettier, lintning med ESLint och testning med Cypress för samtliga PR:s som görs mot main-branchen
