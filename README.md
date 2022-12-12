@@ -110,6 +110,6 @@ This webapplication is deployed on Vercel on [https://go-rent.vercel.app/](https
 - [ ] Minst tre punkter från listan med övriga önskemål har implementerats i projektet (specificera vilka i README-filen)
 
 - [ ] Ytterligare två Cypress-tester (totalt minst fyra tester) har skapats för att testa funktionalitet som ändrats/tillkommit efter feedback från opponeringen.
-Testerna ska baseras på buggar eller brister i funktionaliteten som kommit fram vid opponeringen.
+      Testerna ska baseras på buggar eller brister i funktionaliteten som kommit fram vid opponeringen.
 
 - [ ] Projektet har ett CI-flöde (eller CI/CD) som omfattar Prettier, lintning med ESLint och testning med Cypress för samtliga PR:s som görs mot main-branchen
