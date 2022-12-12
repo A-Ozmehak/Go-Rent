@@ -167,7 +167,8 @@ export default function Navbar() {
                       </MenuItem>
                       <MenuItem
                         sx={{ display: { base: "block", sm: "none" } }}
-                        onClick={() => router.push("/createListing")}>
+                        onClick={() => router.push("/createListing")}
+                      >
                         Lägg upp annons
                       </MenuItem>
                       <MenuItem
