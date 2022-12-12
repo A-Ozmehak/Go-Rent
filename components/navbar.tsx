@@ -15,32 +15,47 @@ import {
   Avatar,
   MenuButton,
   MenuList,
+  Image,
 } from "@chakra-ui/react";
 import SearchIcon from "@mui/icons-material/Search";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { getAuth, signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { app } from "../config/firebase";
+import { auth } from "../config/firebase";
 import SubHeader from "./subHeader";
 import { userInterface } from "../utils/interface";
+import { getUser } from "../pages/api/users";
 
-interface props {
-  profile: userInterface;
-}
+// export interface props {
+//   profile: userInterface;
+// }
 
-export default function Navbar({ profile }: props) {
-  const auth = getAuth(app);
-  const [user] = useAuthState(auth);
-
+export default function Navbar() {
+  const [userAuth] = useAuthState(auth);
+  const loggedInUser = userAuth?.uid;
   const router = useRouter();
+  const [user, setUser] = useState<userInterface>();
+
   const logOut = () => {
-    signOut(auth).catch((error) => {
-      console.error(error);
-    });
+    if (loggedInUser) {
+      signOut(auth).catch((error) => {
+        console.error(error);
+      });
+    }
   };
+
+  useEffect(() => {
+    if (loggedInUser) {
+      const fetchUser = async () => {
+        const res = await getUser(loggedInUser);
+        if (res) setUser(res);
+      };
+      fetchUser();
+    }
+  }, [loggedInUser, user]);
 
   const [scrollHeight, setScrollHeight] = useState(1);
 
@@ -53,19 +68,10 @@ export default function Navbar({ profile }: props) {
         } else {
           setScrollHeight(1);
         }
-        // if (scrollHeight != newScrollHeight) {
-        //   setScrollHeight(newScrollHeight);
-        // }
         console.log(scrollHeight);
       };
     }
   });
-
-  const addButtonStyle: SystemStyleObject = {
-    display: { base: "none", sm: "block" },
-    boxShadow: "3px 3px 16px 3px rgba(0, 0, 0, 0.1)",
-    borderRadius: "12px",
-  };
 
   let removeSubHeader = false;
 
@@ -118,70 +124,70 @@ export default function Navbar({ profile }: props) {
                 <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
                   <Wrap>
                     <WrapItem>
-                      <Avatar
-                        size="sm"
-                        name={profile.firstName}
-                        src={profile.image}
-                      />
-                      <Hide below="md">
-                        <Text
-                          sx={{ marginLeft: "0.5rem", marginTop: "0.5rem" }}
-                        >
-                          {user?.displayName}
-                        </Text>
-                      </Hide>
+                      {!loggedInUser && <Avatar size="sm" />}
+                      {!!loggedInUser && (
+                        <>
+                          {!!user && (
+                            <>
+                              {user.image?.length ? (
+                                <Avatar
+                                  size="sm"
+                                  name={user.firstName}
+                                  src={user.image}
+                                />
+                              ) : (
+                                <Avatar size="sm" bg="lightGray" icon={<></>}>
+                                  {user.firstName?.charAt(0)}
+                                </Avatar>
+                              )}
+                              <Hide below="md">
+                                <Text
+                                  sx={{
+                                    marginLeft: "0.5rem",
+                                    marginTop: "0.5rem",
+                                  }}
+                                >
+                                  {user?.username}
+                                </Text>
+                              </Hide>
+                            </>
+                          )}
+                        </>
+                      )}
                     </WrapItem>
                   </Wrap>
                 </MenuButton>
                 <MenuList zIndex="4">
-                  {user && (
+                  {!!loggedInUser && (
                     <>
-                      <MenuItem>
-                        <Button
-                          sx={{ display: { base: "block", sm: "none" } }}
-                          onClick={() => router.push("/createListing")}
-                        >
-                          Lägg upp annons
-                        </Button>
+                      <MenuItem
+                        onClick={() => router.push(`/profile/${loggedInUser}`)}
+                      >
+                        Min profil
                       </MenuItem>
-                      <MenuItem>
-                        <Button
-                          variant="iconTransparent"
-                          onClick={() => router.push(`/profile/${user?.uid}`)}
-                        >
-                          Min profil
-                        </Button>
+                      <MenuItem
+                        sx={{ display: { base: "block", sm: "none" } }}
+                        onClick={() => router.push("/createListing")}
+                      >
+                        Lägg upp annons
                       </MenuItem>
-                      <MenuItem>
-                        <Button
-                          variant="iconTransparent"
-                          onClick={() => {
-                            router.push("/");
-                            logOut();
-                          }}
-                        >
-                          Logga ut
-                        </Button>
+                      <MenuItem
+                        onClick={() => {
+                          router.push("/");
+                          logOut();
+                        }}
+                      >
+                        Logga ut
                       </MenuItem>
                     </>
                   )}
-                  {!user && (
+                  {!loggedInUser && (
                     <>
-                      <MenuItem>
-                        <Button
-                          variant="iconTransparent"
-                          onClick={() => router.push("/login")}
-                        >
-                          Logga in
-                        </Button>
+                      <MenuItem onClick={() => router.push("/login")}>
+                        Logga in
                       </MenuItem>
-                      <MenuItem>
-                        <Button
-                          variant="iconTransparent"
-                          onClick={() => router.push("/register")}
-                        >
-                          Registrera dig
-                        </Button>
+                      <MenuItem onClick={() => router.push("/register")}>
+                        Registrera dig
                       </MenuItem>
                     </>
                   )}
@@ -195,3 +201,9 @@ export default function Navbar({ profile }: props) {
     </Box>
   );
 }
+
+const addButtonStyle: SystemStyleObject = {
+  display: { base: "none", sm: "block" },
+  boxShadow: "3px 3px 16px 3px rgba(0, 0, 0, 0.1)",
+  borderRadius: "12px",
+};

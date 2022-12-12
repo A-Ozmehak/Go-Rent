@@ -8,12 +8,13 @@ import {
   useToast,
   Badge,
   Divider,
+  Text,
+  Box,
 } from "@chakra-ui/react";
 import dayjs from "dayjs";
 import { doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { profile } from "console";
 
 interface BookingCardProps {
   booking: bookingInterface;
@@ -73,15 +74,18 @@ const BookingCard = ({ booking, refreshData }: BookingCardProps) => {
   return (
     <>
       {loggedInUser && booking ? (
-        <Flex gap={10} padding={2} justifyContent={"space-between"}>
-          <Flex direction={"column"}>
-            {booking.buyer !== loggedInUser.uid && (
-              <MinimalProfileCard profile={booking.seller} />
-            )}
+        <Flex
+          direction={["column", "column", "row"]}
+          justifyContent="space-between"
+          gap={[2, 2, 10, 20]}
+          pt={2}
+          pb={2}
+          width="100%"
+        >
+          <Flex flex="1" alignContent="center" direction={"column"}>
             <Image
               src={booking.listing.media}
               alt="listing picture"
-              width={180}
               objectFit={"cover"}
               sx={{ borderRadius: "0.5rem" }}
               height={20}
@@ -109,45 +113,62 @@ const BookingCard = ({ booking, refreshData }: BookingCardProps) => {
             )}
           </Flex>
 
-          <Flex direction={"column"} gap={5}>
-            <Flex gap={10}>
+          <Flex flex="2" justifyContent="space-between" direction={"column"}>
+            <Flex justifyContent="space-between" direction="row">
               <Flex direction={"column"}>
                 <h4>{booking.listing.title}</h4>
-                <p>Totalpris: {booking.bookingDetails.totalPrice} kr</p>
+                <Box>
+                  <Text fontSize={[13, 16]}>
+                    Totalpris:
+                    {booking.bookingDetails.totalPrice} kr
+                  </Text>
+                </Box>
               </Flex>
+
               <Flex direction={"column"}>
                 <h4>datum</h4>
-                <p>
-                  {startDate} - {endDate}
-                </p>
+                <Flex>
+                  <Text fontSize={[13, 16]}>{startDate} -</Text>
+                  <Text fontSize={[13, 16]}>{endDate}</Text>
+                </Flex>
               </Flex>
             </Flex>
-            {booking.status === "pending" &&
-              booking.seller.id === loggedInUser.uid && (
-                <form onSubmit={onSubmit}>
-                  <ButtonGroup gap={10}>
-                    <Button
-                      variant="Accept"
-                      type="submit"
-                      name="acceptButton"
-                      onClick={() => (status.button = "accept")}
-                    >
-                      Acceptera
-                    </Button>
-                    <Button
-                      variant="Reject"
-                      type="submit"
-                      name="rejectButton"
-                      onClick={() => (status.button = "reject")}
-                    >
-                      Neka
-                    </Button>
-                  </ButtonGroup>
-                </form>
+
+            <Flex justifyContent="space-between" direction={"row"}>
+              {booking.buyer !== loggedInUser.uid && (
+                <MinimalProfileCard profile={booking.seller} />
               )}
+
+              {booking.status === "pending" &&
+                booking.seller.id === loggedInUser.uid && (
+                  <form onSubmit={onSubmit}>
+                    <ButtonGroup>
+                      <Button
+                        fontSize={[13, 15]}
+                        variant="Accept"
+                        type="submit"
+                        name="acceptButton"
+                        onClick={() => (status.button = "accept")}
+                      >
+                        Acceptera
+                      </Button>
+                      <Button
+                        variant="Reject"
+                        fontSize={[13, 15]}
+                        type="submit"
+                        name="rejectButton"
+                        onClick={() => (status.button = "reject")}
+                      >
+                        Neka
+                      </Button>
+                    </ButtonGroup>
+                  </form>
+                )}
+            </Flex>
           </Flex>
         </Flex>
       ) : null}
+
       <Divider borderWidth={1} borderColor={"blackAlpha.200"} />
     </>
   );

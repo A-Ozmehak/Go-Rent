@@ -5,12 +5,24 @@ import {
   FormLabel,
   Image,
   Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Text,
   Textarea,
+  useDisclosure,
 } from "@chakra-ui/react";
+import { getAuth, signOut, deleteUser } from "firebase/auth";
+import { deleteDoc, doc } from "firebase/firestore";
 import { Formik } from "formik";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { app, db } from "../../config/firebase";
 import { updateUser } from "../../pages/api/users";
 import { userInterface } from "../../utils/interface";
 import TextInput from "../inputs/TextInput";
@@ -23,11 +35,37 @@ interface Props {
 
 const EditForm = ({ profile, setEdit }: Props) => {
   const [media, setMedia] = useState("");
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const logOut = () => {
+    signOut(auth).catch((error) => {
+      console.error(error);
+    });
+  };
 
   const router = useRouter();
   const refreshData = () => {
     router.replace(router.asPath);
   };
+  const auth = getAuth(app);
+  const [user] = useAuthState(auth);
+  const userAuth = user?.uid;
+  const currentUser = auth.currentUser;
+
+  const removeAccount = async () => {
+    try {
+      if (userAuth && currentUser) {
+        await deleteDoc(doc(db, "users", userAuth));
+        deleteUser(currentUser);
+        console.log("deleted user");
+        router.push("/");
+        logOut();
+      }
+    } catch (e) {
+      return;
+    }
+  };
+
   return (
     <Box>
       <Formik
@@ -52,13 +90,6 @@ const EditForm = ({ profile, setEdit }: Props) => {
               name="username"
               type="username"
               variant="filled"
-              validate={(value: string) => {
-                let error;
-                if (value.length < 2) {
-                  error = "Skriv in ett användarnamn";
-                }
-                return error;
-              }}
             />
             <FormLabel htmlFor="location">Plats</FormLabel>
             <TextInput
@@ -67,13 +98,6 @@ const EditForm = ({ profile, setEdit }: Props) => {
               name="location"
               type="location"
               variant="filled"
-              validate={(value: string) => {
-                let error;
-                if (value.length < 2) {
-                  error = "Skriv in en plats.";
-                }
-                return error;
-              }}
             />
             <FormLabel htmlFor="bio">Beskrivning</FormLabel>
             <TextInput
@@ -82,13 +106,6 @@ const EditForm = ({ profile, setEdit }: Props) => {
               name="bio"
               type="text"
               variant="filled"
-              validate={(value: string) => {
-                let error;
-                if (value.length < 2) {
-                  error = "Skriv in en beskrivning om dig själv.";
-                }
-                return error;
-              }}
             />
             <FormLabel htmlFor="image">Profilbild</FormLabel>
             {profile.image && (
@@ -110,11 +127,35 @@ const EditForm = ({ profile, setEdit }: Props) => {
                 Spara
               </Button>
               {/* TODO: open up modal with "are you sure you want to remove your account." */}
-              <Button variant="Reject">Ta bort konto</Button>
+              <Button variant="Reject" onClick={onOpen}>
+                Ta bort konto
+              </Button>
             </ButtonGroup>
           </form>
         )}
       </Formik>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Vill du verkligen radera ditt konto?</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text fontStyle="italic">
+              Om du väljer att radera ditt konto så är det permanent och
+              oåterkalleligt.
+            </Text>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button variant="Reject" mr={3} onClick={() => removeAccount()}>
+              Ja, ta bort mitt konto.
+            </Button>
+            <Button variant="Primary" onClick={onClose}>
+              Nej
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 };

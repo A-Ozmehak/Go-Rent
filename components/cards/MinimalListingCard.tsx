@@ -227,41 +227,59 @@ const MinimalListingCard = ({ listing }: props) => {
   return (
     listing && (
       <Flex
-        width={180}
+        width="100%"
         bgImage={listing.media}
+        backgroundSize="100%"
         height={20}
         bgPosition="center"
         bgRepeat="no-repeat"
         borderRadius="0.5rem"
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
-        alignItems="center"
-        justifyContent="center"
       >
         <EditListingModal listing={listing} />
 
         {hovering &&
           (user?.uid && currentUsername ? (
-            <Text
-              cursor="pointer"
-              color="white"
-              fontWeight="bold"
-              fontSize={20}
-              onClick={onOpen}
+            <Flex
+              alignItems="center"
+              justifyContent="center"
+              backgroundColor="#706f6fbf"
+              width="100%"
+              height="100%"
+              borderRadius="0.5rem"
             >
-              Redigera Annons
-            </Text>
-          ) : (
-            <Link href={`/listings/${listing.id}`}>
               <Text
                 cursor="pointer"
                 color="white"
+                textAlign="center"
                 fontWeight="bold"
-                fontSize={20}
+                fontSize={25}
+                onClick={onOpen}
               >
-                Visa Annons
+                Redigera Annons
               </Text>
-            </Link>
+            </Flex>
+          ) : (
+            <Flex
+              alignItems="center"
+              justifyContent="center"
+              backgroundColor="#706f6fbf"
+              width="100%"
+              height="100%"
+              borderRadius="0.5rem"
+            >
+              <Link href={`/listings/${listing.id}`}>
+                <Text
+                  cursor="pointer"
+                  color="white"
+                  fontWeight="bold"
+                  fontSize={25}
+                >
+                  Visa Annons
+                </Text>
+              </Link>
+            </Flex>
           ))}
       </Flex>
     )
