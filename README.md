@@ -41,6 +41,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Typescript
 - Sass
 - ChakraUI
+- MUI-icons
 - Firebase (Firestore for database, Authentication for users and Storage for files)
 - Vercel for deploy
 
