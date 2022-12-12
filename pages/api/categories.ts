@@ -5,24 +5,30 @@ import { CategoryDoc } from "../../utils/interface";
 const categoriesCollection = collection(db, "category");
 
 export const getCategories = async () => {
-  const documents = await getDocs(categoriesCollection);
+  console.log('getCategories')
   let categories: CategoryDoc[] = [];
-  documents.forEach((doc) => {
-    let category = doc.data() as CategoryDoc;
-    category = { ...category, id: doc.id };
-    categories.push(category);
-  });
+  try {
+    const documents = await getDocs(categoriesCollection);
+    documents.forEach((doc) => {
+      let category = doc.data() as CategoryDoc;
+      category = { ...category, id: doc.id };
+      categories.push(category);
+    });
 
-  return categories;
+    return categories;
+  } catch (e) { return categories }
 };
 
 export const getCategory = async (id: string) => {
-  const categoryDocRef = doc(db, "category", id);
-  const docSnap = await getDoc(categoryDocRef);
-  if (docSnap.exists()) {
-    const category = docSnap.data();
-    return { ...category, id: docSnap.id };
-  } else {
-    return null;
-  }
+  console.log('getCategory')
+  try {
+    const categoryDocRef = doc(db, "category", id);
+    const docSnap = await getDoc(categoryDocRef);
+    if (docSnap.exists()) {
+      const category = docSnap.data();
+      return { ...category, id: docSnap.id };
+    } else {
+      return null;
+    }
+  } catch (e) { return null }
 };
