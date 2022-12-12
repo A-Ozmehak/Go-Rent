@@ -47,7 +47,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 This webapplication is deployed on Vercel on [https://go-rent.vercel.app/](https://go-rent.vercel.app/)
 
 ## Kravspecifikation
-[x] Det ska gå att skapa ett konto, logga in och logga ut
+- [x] Det ska gå att skapa ett konto, logga in och logga ut
 
 [x] Den som inte är inloggad ska kunna se befintliga annonser men inte lägga upp annonser eller skicka förfrågan om att hyra
 
