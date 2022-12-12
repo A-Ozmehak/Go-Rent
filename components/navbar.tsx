@@ -68,7 +68,6 @@ export default function Navbar() {
         } else {
           setScrollHeight(1);
         }
-        console.log(scrollHeight);
       };
     }
   });
@@ -85,7 +84,7 @@ export default function Navbar() {
   }
 
   return (
-    <Box sx={{ backgroundColor: "var(--chakra-colors-brand-lightGray)" }}>
+    <Box transition={".2s ease"} opacity={scrollHeight} sx={{ backgroundColor: "var(--chakra-colors-brand-lightGray)" }}>
       <Container maxW="1200px" maxH="80px">
         <Flex>
           <Center>
