@@ -28,7 +28,6 @@ import SubHeader from "./subHeader";
 import { userInterface } from "../utils/interface";
 import { getUser } from "../pages/api/users";
 
-
 export default function Navbar() {
   const [userAuth] = useAuthState(auth);
   const loggedInUser = userAuth?.uid;
@@ -51,7 +50,6 @@ export default function Navbar() {
       };
       fetchUser();
     }
-    
   }, [loggedInUser]);
 
   const [scrollHeight, setScrollHeight] = useState(1);

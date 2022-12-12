@@ -12,30 +12,28 @@ import { bookingInterface } from "../../utils/interface";
 const bookingsCollection = collection(db, "bookings");
 
 export const getBookingsByUser = async (userID: string) => {
-  console.log('getBookingsByUser')
+  console.log("getBookingsByUser");
   const bookings = new Map<string, bookingInterface>();
   try {
     let sellerBookings = await getBookingsBySeller(userID);
     let buyerBookings = await getBookingsByBuyer(userID);
-    
+
     sellerBookings.forEach((booking) => {
       if (booking.id) bookings.set(booking.id, booking);
     });
     buyerBookings.forEach((booking) => {
       if (booking.id) bookings.set(booking.id, booking);
     });
-
-  } catch (e) { }
+  } catch (e) {}
   return Array.from(bookings.values());
 };
 
 // * Get bookings by seller
 export const getBookingsBySeller = async (userID: string) => {
-  console.log('getBookingsBySeller')
+  console.log("getBookingsBySeller");
   let userBookings: bookingInterface[] = [];
   try {
     const q = query(bookingsCollection, where("seller.id", "==", userID));
-
 
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
@@ -47,17 +45,16 @@ export const getBookingsBySeller = async (userID: string) => {
         +bookingData.bookingDetails.bookingStartDate.toDate();
       userBookings.push(booking);
     });
-  } catch (e) { }
+  } catch (e) {}
   return userBookings;
 };
 
 // * Get bookings by buyer
 export const getBookingsByBuyer = async (userID: string) => {
-  console.log('getBookingsByBuyer')
+  console.log("getBookingsByBuyer");
   let userBookings: bookingInterface[] = [];
   try {
     const q = query(bookingsCollection, where("buyer", "==", userID));
-
 
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
@@ -69,12 +66,12 @@ export const getBookingsByBuyer = async (userID: string) => {
         +bookingData.bookingDetails.bookingStartDate.toDate();
       userBookings.push(booking);
     });
-  } catch (e) { }
+  } catch (e) {}
   return userBookings;
 };
 
 export const getBooking = async (id: string) => {
-  console.log('getBooking')
+  console.log("getBooking");
   try {
     const boookingDocRef = doc(db, "bookings", id);
     const docSnap = await getDoc(boookingDocRef);
@@ -89,5 +86,7 @@ export const getBooking = async (id: string) => {
     } else {
       return null;
     }
-  } catch (e) { return null }
+  } catch (e) {
+    return null;
+  }
 };

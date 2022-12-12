@@ -13,7 +13,7 @@ import { getUser } from "./users";
 const listingsCollection = collection(db, "listing");
 
 export const getListings = async () => {
-  console.log('getListings')
+  console.log("getListings");
   let listings: any = [];
   try {
     const documents = await getDocs(listingsCollection);
@@ -34,7 +34,7 @@ export const getListings = async () => {
 };
 
 export const getListingsByUser = async (id: string) => {
-  console.log('getListingsByUser')
+  console.log("getListingsByUser");
   let listings: listingInterface[] = [];
   try {
     const q = query(listingsCollection, where("seller", "==", id));
@@ -48,13 +48,12 @@ export const getListingsByUser = async (id: string) => {
       }
       listings.push(listing);
     });
-
-  } catch (e) { }
+  } catch (e) {}
   return listings;
 };
 
 export const getListingsByCategory = async (id: string) => {
-  console.log('getListingsByCategory')
+  console.log("getListingsByCategory");
   let listings: listingInterface[] = [];
   try {
     const q = query(listingsCollection, where("category", "==", id));
@@ -67,12 +66,12 @@ export const getListingsByCategory = async (id: string) => {
       }
       listings.push(listing);
     });
-  } catch (e) { }
+  } catch (e) {}
   return listings;
-}
+};
 
 export const getListing = async (id: string) => {
-  console.log('getListing')
+  console.log("getListing");
   try {
     const listingDocRef = doc(db, "listing", id);
     const docSnap = await getDoc(listingDocRef);
@@ -86,5 +85,7 @@ export const getListing = async (id: string) => {
     } else {
       return null;
     }
-  } catch (e) { return null }
+  } catch (e) {
+    return null;
+  }
 };
