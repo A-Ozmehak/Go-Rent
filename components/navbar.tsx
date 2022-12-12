@@ -15,7 +15,6 @@ import {
   Avatar,
   MenuButton,
   MenuList,
-  Image,
 } from "@chakra-ui/react";
 import SearchIcon from "@mui/icons-material/Search";
 import { ChevronDownIcon } from "@chakra-ui/icons";
@@ -28,10 +27,6 @@ import { auth } from "../config/firebase";
 import SubHeader from "./subHeader";
 import { userInterface } from "../utils/interface";
 import { getUser } from "../pages/api/users";
-
-// export interface props {
-//   profile: userInterface;
-// }
 
 export default function Navbar() {
   const [userAuth] = useAuthState(auth);
@@ -55,7 +50,7 @@ export default function Navbar() {
       };
       fetchUser();
     }
-  }, [loggedInUser, user]);
+  }, [loggedInUser]);
 
   const [scrollHeight, setScrollHeight] = useState(1);
 
