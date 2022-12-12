@@ -4,7 +4,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import {
   Box,
   Button,
-  Flex,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -18,16 +17,17 @@ import {
 import { CalendarIcon } from "@chakra-ui/icons";
 import dayjs from "dayjs";
 import "dayjs/locale/sv";
-import { listingInterface } from "../../utils/interface";
+import { listingInterface, userInterface } from "../../utils/interface";
 import { collection, addDoc } from "firebase/firestore";
 import { auth, db } from "../../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 interface props {
   listing: listingInterface;
+  profile: userInterface;
 }
 
-const BookingForm = ({ listing }: props) => {
+const BookingForm = ({ listing, profile }: props) => {
   const [loggedInUser] = useAuthState(auth);
   const user = loggedInUser?.uid;
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -132,6 +132,7 @@ const BookingForm = ({ listing }: props) => {
         <ModalContent alignItems="center">
           <ModalHeader>Välj de datum du vill boka</ModalHeader>
           <Text>Kostnad per dygn: {listing.price} kr </Text>
+          <Text>Upphämtning: {profile?.location} </Text>
           <ModalCloseButton />
           <ModalBody>
             <DatePicker

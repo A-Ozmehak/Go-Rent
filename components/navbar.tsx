@@ -166,6 +166,11 @@ export default function Navbar() {
                         Min profil
                       </MenuItem>
                       <MenuItem
+                        sx={{ display: { base: "block", sm: "none" } }}
+                        onClick={() => router.push("/createListing")}>
+                        Lägg upp annons
+                      </MenuItem>
+                      <MenuItem
                         onClick={() => {
                           router.push("/");
                           logOut();
@@ -187,12 +192,6 @@ export default function Navbar() {
                   )}
                 </MenuList>
               </Menu>
-              <Button
-                sx={{ display: { sm: "none" } }}
-                onClick={() => router.push("/createListing")}
-              >
-                Lägg upp annons
-              </Button>
             </Flex>
           </Center>
         </Flex>
