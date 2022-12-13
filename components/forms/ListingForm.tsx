@@ -56,7 +56,7 @@ const ListingForm = () => {
         description: "",
         category: "",
         media: "",
-        location:"",
+        location: "",
         price: 0,
         seller: user,
       }}
