@@ -1,5 +1,6 @@
 import {
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -21,6 +22,11 @@ export const getListings = async () => {
       let listing = doc.data();
       listing = { ...listing, id: doc.id };
       listing.seller = await getUser(listing.seller);
+
+      if (listing.seller === null) {
+        return await getListing(listing.id)
+      }
+
       if (!listing.media.length) {
         listing.media = "/images/fallback.jpg";
       }
@@ -48,7 +54,7 @@ export const getListingsByUser = async (id: string) => {
       }
       listings.push(listing);
     });
-  } catch (e) {}
+  } catch (e) { }
   return listings;
 };
 
@@ -66,7 +72,7 @@ export const getListingsByCategory = async (id: string) => {
       }
       listings.push(listing);
     });
-  } catch (e) {}
+  } catch (e) { }
   return listings;
 };
 
@@ -78,12 +84,15 @@ export const getListing = async (id: string) => {
     if (docSnap.exists()) {
       const listing = docSnap.data();
       const seller = await getUser(listing.seller);
+      if (seller === null) {
+        return await deleteDoc(doc(db, "listing", id));
+      }
       if (!listing.media.length) {
         listing.media = "/images/fallback.jpg";
       }
       return { ...listing, id: docSnap.id, seller };
     } else {
-      return null;
+      return null
     }
   } catch (e) {
     return null;
