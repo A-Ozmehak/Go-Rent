@@ -73,6 +73,7 @@ export const getListingsByCategory = async (id: string) => {
       listings.push(listing);
     });
   } catch (e) {}
+  console.log(listings)
   return listings;
 };
 
