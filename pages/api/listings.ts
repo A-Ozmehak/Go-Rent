@@ -24,7 +24,7 @@ export const getListings = async () => {
       listing.seller = await getUser(listing.seller);
 
       if (listing.seller === null) {
-        return await getListing(listing.id)
+        return await getListing(listing.id);
       }
 
       if (!listing.media.length) {
@@ -54,7 +54,7 @@ export const getListingsByUser = async (id: string) => {
       }
       listings.push(listing);
     });
-  } catch (e) { }
+  } catch (e) {}
   return listings;
 };
 
@@ -72,7 +72,7 @@ export const getListingsByCategory = async (id: string) => {
       }
       listings.push(listing);
     });
-  } catch (e) { }
+  } catch (e) {}
   return listings;
 };
 
@@ -92,7 +92,7 @@ export const getListing = async (id: string) => {
       }
       return { ...listing, id: docSnap.id, seller };
     } else {
-      return null
+      return null;
     }
   } catch (e) {
     return null;
