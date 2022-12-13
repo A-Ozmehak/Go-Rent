@@ -15,11 +15,7 @@ describe('"Log in" and "Create listing" test', () => {
     cy.get('#password').type('testtest')
     cy.get('button[type="submit"]').contains('Logga in').click()
   });
-
-  // Login
-  it('Logs in', () => {
-  })
-
+  
   it('Create a listing', () => {
     // Go to listing and fill in form
     // Waiting for redirect to profile page, wait should not be necessary
