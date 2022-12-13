@@ -58,11 +58,11 @@ export const getListingsByUser = async (id: string) => {
   return listings;
 };
 
-export const getListingsByCategory = async (id: string) => {
+export const getListingsByCategory = async (name: string) => {
   console.log("getListingsByCategory");
   let listings: listingInterface[] = [];
   try {
-    const q = query(listingsCollection, where("category", "==", id));
+    const q = query(listingsCollection, where("category", "==", name));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       const listingData = doc.data() as listingInterface;
