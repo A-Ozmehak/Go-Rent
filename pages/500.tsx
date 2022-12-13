@@ -1,19 +1,7 @@
-import { Box, Button, Heading } from "@chakra-ui/react";
-import router from "next/router";
+import ErrorCard from "../components/cards/Error"
 
-
-export default function BadGate() {
-
+const serverError = () => {
     return (
-        <Box>
-            <Heading as="h3">505, something went wrong!</Heading>
-            <Button
-                variant="Primary"
-                onClick={() => {
-                    router.push("/")
-                }}>
-                Återvänd till hemsidan
-            </Button>
-        </Box>
-    )
+        <ErrorCard errorCode={500}/>
+            )
 }

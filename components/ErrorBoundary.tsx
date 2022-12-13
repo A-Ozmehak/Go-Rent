@@ -1,5 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from "react";
-import BadGate from "../pages/500";
+import ErrorCard from "./cards/Error";
 
 interface Props {
     children: ReactNode;
@@ -7,16 +7,18 @@ interface Props {
 
 interface State {
     hasError: boolean;
+    errorName: string;
 }
 
 class ErrorBoundary extends Component<Props, State> {
     public state: State = {
         hasError: false,
+        errorName: "",
     };
 
-    public static getDerivedStateFromError(_: Error): State {
+    public static getDerivedStateFromError(error: Error): State {
         // Update state so the next render will show the fallback UI.
-        return { hasError: true };
+        return { hasError: true, errorName: error.name };
     }
 
     public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
@@ -25,8 +27,8 @@ class ErrorBoundary extends Component<Props, State> {
 
     public render() {
         if (this.state.hasError) {
-            return <BadGate />;
-        } 
+            return <ErrorCard errorName={this.state.errorName} />;
+        }
 
         return this.props.children;
     }
