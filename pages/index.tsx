@@ -22,6 +22,7 @@ export async function getServerSideProps() {
 
 export default function Index({ listings }: any) {
   const router = useRouter();
+  listings.length = 5
 
   return (
     <Box>
