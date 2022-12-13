@@ -61,8 +61,8 @@ const SearchField = ({ listings }: props) => {
         right={{ base: "5rem", md: "25rem", lg: "40rem", xl: "53rem" }}
         zIndex={"3"}
       >
-        {filterListings.length ? (
-          filterListings.map((f: any) => (
+        {filteredListings.length ? (
+          filteredListings.map((f: any) => (
             <Link key={f.id} href={`/listings/${f.id}`}>
               <MenuItem minW={"20rem"} minH="40px">
                 <Image
