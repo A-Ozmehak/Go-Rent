@@ -102,7 +102,7 @@ const SubHeader = () => {
   };
 
   return (
-    <Box display={(removeSubHeader ? "none" : "block")}>
+    <Box display={removeSubHeader ? "none" : "block"}>
       {mediaQ600 ? (
         <Swiper
           navigation={true}
