@@ -22,7 +22,7 @@ export default function ErrorCard(props: Props) {
         setErrorMessage("Något gick fel");
         break;
     }
-  }, []);
+  }, [props.errorCode]);
 
   return (
     <Center flexDirection="column" p="2rem 1rem" gap="1rem">
