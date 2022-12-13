@@ -3,13 +3,18 @@ import { db } from "../../config/firebase";
 import { userInterface } from "../../utils/interface";
 
 export const getUser = async (id: string): Promise<userInterface | null> => {
-  const userDocRef = doc(db, "users", id);
-  const docSnap = await getDoc(userDocRef);
-  if (docSnap.exists()) {
-    const storedUser = docSnap.data();
-    const user: userInterface = { ...storedUser, id: docSnap.id };
-    return user;
-  } else {
+  console.log("getuser");
+  try {
+    const userDocRef = doc(db, "users", id);
+    const docSnap = await getDoc(userDocRef);
+    if (docSnap.exists()) {
+      const storedUser = docSnap.data();
+      const user: userInterface = { ...storedUser, id: docSnap.id };
+      return user;
+    } else {
+      return null;
+    }
+  } catch (e) {
     return null;
   }
 };
