@@ -56,7 +56,11 @@ const SearchField = ({ listings }: props) => {
         </MenuButton>
       </FormControl>
 
-      <MenuList pos={"absolute"} left={"-73rem"} zIndex={"3"}>
+      <MenuList
+        pos={"absolute"}
+        right={{ base: "5rem", md: "25rem", lg: "40rem", xl: "53rem" }}
+        zIndex={"3"}
+      >
         {filteredListings.length ? (
           filteredListings.map((f: any) => (
             <Link key={f.id} href={`/listings/${f.id}`}>
