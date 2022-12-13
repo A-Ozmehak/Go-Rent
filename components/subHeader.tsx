@@ -18,6 +18,7 @@ import {
   SportsTennis,
 } from "@mui/icons-material";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Navigation } from "swiper";
 import "swiper/css";
@@ -39,6 +40,7 @@ const icons = {
 const SubHeader = () => {
   const [categories, setCategories] = useState<CategoryDoc[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -50,6 +52,17 @@ const SubHeader = () => {
       setLoading(false);
     }, 2000);
   }, []);
+
+  let removeSubHeader = false;
+
+  if (
+    router.pathname === "/profile/[profile]" ||
+    router.pathname === "/createListing" ||
+    router.pathname === "/login" ||
+    router.pathname === "/register"
+  ) {
+    removeSubHeader = true;
+  }
 
   const getIcon = (icon: string) => {
     if (icon === "Celebration") {
@@ -89,7 +102,7 @@ const SubHeader = () => {
   };
 
   return (
-    <>
+    <Box display={(removeSubHeader ? "none" : "block")}>
       {mediaQ600 ? (
         <Swiper
           navigation={true}
@@ -152,7 +165,7 @@ const SubHeader = () => {
           </Box>
         </Flex>
       )}
-    </>
+    </Box>
   );
 };
 

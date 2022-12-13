@@ -68,17 +68,6 @@ export default function Navbar() {
     }
   });
 
-  let removeSubHeader = false;
-
-  if (
-    router.pathname === "/profile/[profile]" ||
-    router.pathname === "/createListing" ||
-    router.pathname === "/login" ||
-    router.pathname === "/register"
-  ) {
-    removeSubHeader = true;
-  }
-
   return (
     <Box sx={{ backgroundColor: "var(--chakra-colors-brand-lightGray)" }}>
       <Container maxW="1200px" maxH="80px">
@@ -192,7 +181,7 @@ export default function Navbar() {
           </Center>
         </Flex>
       </Container>
-      {!removeSubHeader && <SubHeader />}
+      <SubHeader />
     </Box>
   );
 }
