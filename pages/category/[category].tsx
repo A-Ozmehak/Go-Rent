@@ -10,7 +10,11 @@ const CategoryPage = ({ listings, category }: any) => {
       <Heading size="md" as="h3" p="0rem 0 0.5rem 0" pl="1rem">
         {category.name}
       </Heading>
-      <ListingPreviewCard listings={listings} />
+      {listings.length ? (
+        <ListingPreviewCard listings={listings} />
+      ) : (
+        <p>Här var det tomt...</p>
+      )}
     </Box>
   );
 };
@@ -18,7 +22,7 @@ export default CategoryPage;
 
 export async function getServerSideProps({ params }: any) {
   const category = (await getCategory(params.category)) as CategoryDoc;
-  const listings = await getListingsByCategory(params.category);
+  const listings = await getListingsByCategory(category.name);
   if (!category) {
     return { notFound: true };
   }

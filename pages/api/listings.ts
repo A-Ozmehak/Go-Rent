@@ -1,5 +1,6 @@
 import {
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -21,6 +22,11 @@ export const getListings = async () => {
       let listing = doc.data();
       listing = { ...listing, id: doc.id };
       listing.seller = await getUser(listing.seller);
+
+      if (listing.seller === null) {
+        return await getListing(listing.id);
+      }
+
       if (!listing.media.length) {
         listing.media = "/images/fallback.jpg";
       }
@@ -52,11 +58,11 @@ export const getListingsByUser = async (id: string) => {
   return listings;
 };
 
-export const getListingsByCategory = async (id: string) => {
+export const getListingsByCategory = async (name: string) => {
   console.log("getListingsByCategory");
   let listings: listingInterface[] = [];
   try {
-    const q = query(listingsCollection, where("category", "==", id));
+    const q = query(listingsCollection, where("category", "==", name));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       const listingData = doc.data() as listingInterface;
@@ -67,6 +73,7 @@ export const getListingsByCategory = async (id: string) => {
       listings.push(listing);
     });
   } catch (e) {}
+  console.log(listings);
   return listings;
 };
 
@@ -78,6 +85,9 @@ export const getListing = async (id: string) => {
     if (docSnap.exists()) {
       const listing = docSnap.data();
       const seller = await getUser(listing.seller);
+      if (seller === null) {
+        return await deleteDoc(doc(db, "listing", id));
+      }
       if (!listing.media.length) {
         listing.media = "/images/fallback.jpg";
       }

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import {
   Button,
+  ButtonGroup,
   Center,
   Flex,
   FormControl,
@@ -28,7 +29,7 @@ import { Form, Formik } from "formik";
 import UploadMedia from "../forms/UploadMedia";
 import TextInput from "../inputs/TextInput";
 import { getCategories } from "../../pages/api/categories";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, deleteDoc } from "firebase/firestore";
 import router from "next/router";
 
 interface props {
@@ -46,6 +47,18 @@ const MinimalListingCard = ({ listing }: props) => {
       if (listing.id) {
         await setDoc(doc(db, "listing", listing.id), values);
         router.push(`/listings/${listing.id}`);
+      }
+    } catch (e) {
+      return;
+    }
+  };
+
+  const removeListing = async () => {
+    try {
+      if (listing.id) {
+        await deleteDoc(doc(db, "listing", listing.id));
+        console.log("deleted listing");
+        router.push(`/profile/${user?.uid}`);
       }
     } catch (e) {
       return;
@@ -203,15 +216,18 @@ const MinimalListingCard = ({ listing }: props) => {
                             {errors.description}
                           </FormErrorMessage>
                         </FormControl>
-                        <Center w="100%" py="1rem">
-                          {/* TODO: Open modal to remove a listing */}
-                          <Button variant="Reject" mr={3}>
-                            Ta bort
+                        <ButtonGroup w="100%" py="1rem">
+                          <Button
+                            gap={1}
+                            variant="Reject"
+                            onClick={removeListing}
+                          >
+                            Ta bort annons
                           </Button>
                           <Button variant="Primary" mr={3} type="submit">
                             Spara
                           </Button>
-                        </Center>
+                        </ButtonGroup>
                       </VStack>
                     </Form>
                   );

@@ -126,7 +126,6 @@ const EditForm = ({ profile, setEdit }: Props) => {
               <Button type="submit" variant="Accept">
                 Spara
               </Button>
-              {/* TODO: open up modal with "are you sure you want to remove your account." */}
               <Button variant="Reject" onClick={onOpen}>
                 Ta bort konto
               </Button>

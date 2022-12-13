@@ -56,6 +56,7 @@ const ListingForm = () => {
         description: "",
         category: "",
         media: "",
+        location: "",
         price: 0,
         seller: user,
       }}
@@ -80,6 +81,24 @@ const ListingForm = () => {
                     let error;
                     if (value.length < 2) {
                       error = "Skriv in en titel";
+                    }
+                    return error;
+                  }}
+                />
+                <FormErrorMessage>{errors.location}</FormErrorMessage>
+              </FormControl>
+              <FormControl isInvalid={!!errors.location && touched.location}>
+                <FormLabel htmlFor="text">Stadsdel</FormLabel>
+                <TextInput
+                  as={Input}
+                  id="location"
+                  name="location"
+                  type="text"
+                  variant="filled"
+                  validate={(value: string) => {
+                    let error;
+                    if (value.length < 2) {
+                      error = "Skriv in ett område där den här varan finns.";
                     }
                     return error;
                   }}
@@ -118,7 +137,7 @@ const ListingForm = () => {
                   variant="filled"
                   validate={(value: number) => {
                     let error;
-                    if (value < 1) {
+                    if (value < 0) {
                       error = "Skriv in ett pris";
                     }
                     return error;
