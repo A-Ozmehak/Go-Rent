@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -15,6 +19,21 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "firebase.env.local", "config/firebase.env.local", "config/firebase.env.local", "firebase.env.local", "cypress/e2e/spec.cy.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "firebase.env.local",
+    "config/firebase.env.local",
+    "config/firebase.env.local",
+    "firebase.env.local",
+  ],
+  "exclude": [
+    "node_modules",
+    "cypress/e2e/spec.cy.js",
+    "cypress/support/commands.js",
+    "cypress/support/commands.js",
+    "cypress/support/e2e.js",
+    "cypress/support/e2e.js"
+  ]
 }
