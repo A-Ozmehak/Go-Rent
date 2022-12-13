@@ -52,6 +52,7 @@ const ProfileCard = ({ profile }: props) => {
       {hovering && loggedInUser?.uid && currentProfile && (
         <EditIcon
           position="absolute"
+          cursor="pointer"
           right="0"
           background="transparent"
           onClick={handleEdit}
