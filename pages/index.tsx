@@ -23,34 +23,6 @@ export async function getServerSideProps() {
 export default function Index({ listings }: any) {
   const router = useRouter();
 
-  const readMoreBtn: SystemStyleObject = {
-    alignSelf: { base: "end", sm: "center" },
-    padding: { base: "none", sm: "0 3rem" },
-  };
-
-  const CTAboxOuter: SystemStyleObject = {
-    width: "100%",
-    height: "min-content",
-    background: "rgba(0, 0, 0, 0.46)",
-    padding: "0.5rem",
-    justifyContent: "center",
-  };
-
-  const CTAboxInner: SystemStyleObject = {
-    width: { base: "100%", sm: "450px" },
-    flexDirection: { base: "row", sm: "column" },
-    gap: "0.5rem",
-  };
-
-  const CTAbtn: SystemStyleObject = {
-    alignSelf: "flex-end",
-    background: "rgba(255, 255, 255, 0.73)",
-    boxShadow: "4px 4px 4px rgba(0, 0, 0, 0.25)",
-    borderRadius: 0,
-    color: "#234B9A",
-    padding: "0 2rem",
-  };
-
   return (
     <Box>
       <Head>
@@ -101,3 +73,31 @@ export default function Index({ listings }: any) {
     </Box>
   );
 }
+
+const readMoreBtn: SystemStyleObject = {
+  alignSelf: { base: "end", sm: "center" },
+  padding: { base: "none", sm: "0 3rem" },
+};
+
+const CTAboxOuter: SystemStyleObject = {
+  width: "100%",
+  height: "min-content",
+  background: "rgba(0, 0, 0, 0.46)",
+  padding: "0.5rem",
+  justifyContent: "center",
+};
+
+const CTAboxInner: SystemStyleObject = {
+  width: { base: "100%", sm: "450px" },
+  flexDirection: { base: "row", sm: "column" },
+  gap: "0.5rem",
+};
+
+const CTAbtn: SystemStyleObject = {
+  alignSelf: "flex-end",
+  background: "rgba(255, 255, 255, 0.73)",
+  boxShadow: "4px 4px 4px rgba(0, 0, 0, 0.25)",
+  borderRadius: 0,
+  color: "#234B9A",
+  padding: "0 2rem",
+};

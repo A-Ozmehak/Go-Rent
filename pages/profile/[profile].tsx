@@ -5,7 +5,7 @@ import { getUser } from "../api/users";
 import { Container, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
 import { getListingsByUser } from "../api/listings";
 import BookingCard from "../../components/cards/BookingCard";
-import { getBookingsBySeller, getBookingsByUser } from "../api/bookings";
+import { getBookingsByUser } from "../api/bookings";
 import MinimalListingCard from "../../components/cards/MinimalListingCard";
 import { useRouter } from "next/router";
 
@@ -27,8 +27,8 @@ const ProfilePage = ({
   };
 
   return (
-    <Container>
-      <ProfileCard profile={user} profileImage={user.media} />
+    <Container maxW={1000}>
+      <ProfileCard profile={user} />
       {userID === user.id ? (
         <Text
           fontFamily="Josefin Sans !important"
@@ -46,7 +46,10 @@ const ProfilePage = ({
           {user.username}s annonser
         </Text>
       )}
-      <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+      <Grid
+        templateColumns={["repeat(1,1fr)", "repeat(2,1fr)", "repeat(3, 1fr)"]}
+        gap={6}
+      >
         {userListings.map((item: any) => (
           <GridItem key={item.id}>
             <MinimalListingCard listing={item} />
@@ -121,6 +124,10 @@ const ProfilePage = ({
 
 export async function getServerSideProps({ params }: any) {
   const user = await getUser(params.profile);
+  if (!user) {
+    return { notFound: true };
+  }
+
   const userListings = await getListingsByUser(params.profile);
 
   let bookings = await getBookingsByUser(params.profile);

@@ -7,7 +7,7 @@ import { getListings } from "../api/listings";
 const ListingIndex = ({ listings }: any) => {
   return (
     <Box pt="1rem" maxW="1200px" m="auto">
-      <SearchField />
+      <SearchField listings={listings} />
       <Heading mt={"1rem"} size="md" as="h3" p="0rem 0 0.5rem 0" pl="1rem">
         Alla annonser
       </Heading>

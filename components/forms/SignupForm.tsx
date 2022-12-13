@@ -1,4 +1,4 @@
-import { ErrorMessage, Formik } from "formik";
+import { Formik } from "formik";
 import TextInput from "../inputs/TextInput";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,7 +7,6 @@ import {
   Box,
   Button,
   Center,
-  Flex,
   FormControl,
   FormErrorMessage,
   FormLabel,
@@ -22,7 +21,6 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { app } from "../../config/firebase";
 import signIn from "../../utils/loginFunc";
-import { useState, useEffect } from "react";
 
 const SignupForm = () => {
   interface userValues {
@@ -48,6 +46,7 @@ const SignupForm = () => {
           // Things like first & lastname and description does not exist on userCredentials and needs firestore.
           firstName: capitalize(values.firstName),
           lastName: capitalize(values.lastName),
+          username: values.username,
         });
         signIn(values);
       })
@@ -113,7 +112,7 @@ const SignupForm = () => {
                 variant="filled"
                 validate={(value: string) => {
                   let error;
-                  if (value && value.length < 3) {
+                  if (!value && value.length < 3) {
                     error = "Användarnamnet måste innehålla minst 3 tecken";
                   }
                   return error;
@@ -131,7 +130,7 @@ const SignupForm = () => {
                 variant="filled"
                 validate={(value: string) => {
                   let error;
-                  if (value && value.length < 2) {
+                  if (!value && value.length < 2) {
                     error = "Förnamnet måste innehålla minst 2 tecken";
                   }
                   return error;
@@ -149,7 +148,7 @@ const SignupForm = () => {
                 variant="filled"
                 validate={(value: string) => {
                   let error;
-                  if (value && value.length < 2) {
+                  if (!value && value.length < 2) {
                     error = "Efternamnet måste innehålla minst 2 tecken";
                   }
                   return error;
@@ -179,7 +178,7 @@ const SignupForm = () => {
                 variant="filled"
                 validate={(value: string) => {
                   let error;
-                  if (value && value.length < 6) {
+                  if (!value && value.length < 6) {
                     error = "Lösenordet måste innehålla minst 6 tecken";
                   }
                   return error;

@@ -4,37 +4,53 @@ import {
   Center,
   Container,
   Flex,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverTrigger,
+  Menu,
+  MenuItem,
   Spacer,
   SystemStyleObject,
+  Text,
+  Hide,
+  Wrap,
+  WrapItem,
+  Avatar,
+  MenuButton,
+  MenuList,
 } from "@chakra-ui/react";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SearchIcon from "@mui/icons-material/Search";
-import { getAuth, signOut } from "firebase/auth";
+import { ChevronDownIcon } from "@chakra-ui/icons";
+import { signOut } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { app } from "../config/firebase";
-import SearchField from "./inputs/SearchField";
+import { auth } from "../config/firebase";
 import SubHeader from "./subHeader";
+import { userInterface } from "../utils/interface";
+import { getUser } from "../pages/api/users";
 
 export default function Navbar() {
-  const auth = getAuth(app);
-  const [user, loading] = useAuthState(auth);
-
-  const [search, setSearch] = useState(false);
+  const [userAuth] = useAuthState(auth);
+  const loggedInUser = userAuth?.uid;
   const router = useRouter();
+  const [user, setUser] = useState<userInterface>();
+
   const logOut = () => {
-    signOut(auth).catch((error) => {
-      console.error(error);
-    });
+    if (loggedInUser) {
+      signOut(auth).catch((error) => {
+        console.error(error);
+      });
+    }
   };
+
+  useEffect(() => {
+    if (loggedInUser) {
+      const fetchUser = async () => {
+        const res = await getUser(loggedInUser);
+        if (res) setUser(res);
+      };
+      fetchUser();
+    }
+  }, [loggedInUser]);
 
   const [scrollHeight, setScrollHeight] = useState(1);
 
@@ -47,19 +63,10 @@ export default function Navbar() {
         } else {
           setScrollHeight(1);
         }
-        // if (scrollHeight != newScrollHeight) {
-        //   setScrollHeight(newScrollHeight);
-        // }
         console.log(scrollHeight);
       };
     }
   });
-
-  const addButtonStyle: SystemStyleObject = {
-    display: { base: "none", sm: "block" },
-    boxShadow: "3px 3px 16px 3px rgba(0, 0, 0, 0.1)",
-    borderRadius: "12px",
-  };
 
   let removeSubHeader = false;
 
@@ -72,14 +79,8 @@ export default function Navbar() {
     removeSubHeader = true;
   }
 
-  console.log(removeSubHeader);
-
   return (
-    <Box
-      opacity={scrollHeight}
-      transition={".2s ease-in-out"}
-      sx={{ backgroundColor: "var(--chakra-colors-brand-lightGray)" }}
-    >
+    <Box sx={{ backgroundColor: "var(--chakra-colors-brand-lightGray)" }}>
       <Container maxW="1200px" maxH="80px">
         <Flex>
           <Center>
@@ -114,69 +115,79 @@ export default function Navbar() {
                   }}
                 />
               </Link>
-              <Popover>
-                <PopoverTrigger>
-                  <AccountCircleIcon
-                    sx={{
-                      fontSize: "2rem",
-                      cursor: "pointer",
-                      color: "#005799",
-                      marginLeft: "1rem",
-                    }}
-                  ></AccountCircleIcon>
-                </PopoverTrigger>
-                <PopoverContent w="min-content">
-                  <PopoverArrow />
-                  <PopoverCloseButton />
-                  <PopoverBody
-                    display="flex"
-                    gap="0.5rem"
-                    flexDirection="column"
-                    alignItems="center"
-                    m="1rem"
-                  >
-                    {user && (
-                      <>
-                        <Button
-                          onClick={() => router.push(`/profile/${user?.uid}`)}
-                        >
-                          Min profil
-                        </Button>
-                        <Button
-                          onClick={() => {
-                            router.push("/");
-                            logOut();
-                          }}
-                        >
-                          Logga ut
-                        </Button>
-                        <Button
-                          sx={{ display: { sm: "none" } }}
-                          onClick={() => router.push("/createListing")}
-                        >
-                          Lägg upp annons
-                        </Button>
-                      </>
-                    )}
-                    {!user && (
-                      <>
-                        <Button onClick={() => router.push("/login")}>
-                          Logga in
-                        </Button>
-                        <Button onClick={() => router.push("/register")}>
-                          Registrera dig
-                        </Button>
-                        <Button
-                          sx={{ display: { sm: "none" } }}
-                          onClick={() => router.push("/createListing")}
-                        >
-                          Lägg upp annons
-                        </Button>
-                      </>
-                    )}
-                  </PopoverBody>
-                </PopoverContent>
-              </Popover>
+              <Menu>
+                <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                  <Wrap>
+                    <WrapItem>
+                      {!loggedInUser && <Avatar size="sm" />}
+                      {!!loggedInUser && (
+                        <>
+                          {!!user && (
+                            <>
+                              {user.image?.length ? (
+                                <Avatar
+                                  size="sm"
+                                  name={user.firstName}
+                                  src={user.image}
+                                />
+                              ) : (
+                                <Avatar size="sm" bg="lightGray" icon={<></>}>
+                                  {user.firstName?.charAt(0)}
+                                </Avatar>
+                              )}
+                              <Hide below="md">
+                                <Text
+                                  sx={{
+                                    marginLeft: "0.5rem",
+                                    marginTop: "0.5rem",
+                                  }}
+                                >
+                                  {user?.username}
+                                </Text>
+                              </Hide>
+                            </>
+                          )}
+                        </>
+                      )}
+                    </WrapItem>
+                  </Wrap>
+                </MenuButton>
+                <MenuList zIndex="4">
+                  {!!loggedInUser && (
+                    <>
+                      <MenuItem
+                        onClick={() => router.push(`/profile/${loggedInUser}`)}
+                      >
+                        Min profil
+                      </MenuItem>
+                      <MenuItem
+                        sx={{ display: { base: "block", sm: "none" } }}
+                        onClick={() => router.push("/createListing")}
+                      >
+                        Lägg upp annons
+                      </MenuItem>
+                      <MenuItem
+                        onClick={() => {
+                          router.push("/");
+                          logOut();
+                        }}
+                      >
+                        Logga ut
+                      </MenuItem>
+                    </>
+                  )}
+                  {!loggedInUser && (
+                    <>
+                      <MenuItem onClick={() => router.push("/login")}>
+                        Logga in
+                      </MenuItem>
+                      <MenuItem onClick={() => router.push("/register")}>
+                        Registrera dig
+                      </MenuItem>
+                    </>
+                  )}
+                </MenuList>
+              </Menu>
             </Flex>
           </Center>
         </Flex>
@@ -185,3 +196,9 @@ export default function Navbar() {
     </Box>
   );
 }
+
+const addButtonStyle: SystemStyleObject = {
+  display: { base: "none", sm: "block" },
+  boxShadow: "3px 3px 16px 3px rgba(0, 0, 0, 0.1)",
+  borderRadius: "12px",
+};
