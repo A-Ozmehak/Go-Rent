@@ -1,34 +1,115 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Arbetsmetodik för utvecklare - gruppuppgift
 
-## Getting Started
+## Beskrivning av projekt:
 
-First, run the development server:
+Uppdraget var att skapa en uthyrningsportal där privatpersoner i Göteborg kan hyra/låna ut saker till andra, för att främja delningsekonomin i staden.
 
-```bash
-npm run dev
-# or
-yarn dev
+## Utvecklat av:
+
+- _Sabina Andersson_ (https://github.com/sabinaander)
+- _Ella Larsson_ (https://github.com/EllaMiri)
+- _Philip Risberg_ (https://github.com/Prisberg)
+- _Anna Özmehak_ (https://github.com/A-Ozmehak)
+- _Felix Bakkum_ (https://github.com/FrontFelix)
+- _Github repo_ (https://github.com/A-Ozmehak/Go-Rent)
+
+## Starting the project
+
+```shell
+$ npm i
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**To install all dependencies.**
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+**and then:**
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```shell
+$ npm run dev
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+**or**
 
-## Learn More
+```shell
+$ yarn dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the site.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tech stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- NextJs
+- Typescript
+- Sass
+- ChakraUI
+- MUI-icons
+- Firebase (Firestore for database, Authentication for users and Storage for files)
+- Vercel for deploy
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This webapplication is deployed on Vercel on [https://go-rent.vercel.app/](https://go-rent.vercel.app/)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Kravspecifikation
+
+- [x] Det ska gå att skapa ett konto, logga in och logga ut
+
+- [x] Den som inte är inloggad ska kunna se befintliga annonser men inte lägga upp annonser eller skicka förfrågan om att hyra
+
+- [x] Det ska gå att klicka på en användare för att se alla användarens annonser
+
+- [x] En inloggad användare ska kunna gå in på en annons och skicka förfrågan om att hyra
+
+- [ ] En inloggad användare ska kunna lägga upp egna annonser och svara på förfrågningar (godkänna eller neka)
+
+- [x] Annonser som läggs upp ska ha en bild (med länk eller genom filuppladdning), titel, beskrivning och pris (kan även vara gratis)
+
+- [x] Det ska finnas ett kategorisystem för annonserna
+
+- [ ] Sidan ska vara fullt responsiv, men med tyngdpunkten på mobil användning
+
+- [ ] Det ska finnas validering på samtliga inputfält
+
+**Övriga önskemål (nice-to-haves):**
+
+- [ ] En inloggad användare ska kunna lägga upp en profilbild (med länk eller genom filuppladdning) och en kort text om sig själv, som sedan visas när användarens alla annonser visas
+
+- [ ] Användaren ska kunna ta bort och ändra sina egna annonser
+
+- [ ] Annonserna ska även tala om var varje föremål finns (stadsdel)
+
+- [ ] Det ska gå att filtrera annonser för att enbart se det som lånas ut gratis
+
+- [ ] Det ska gå att favoritmarkera annonser, och favoritmarkerade annonser ska visas direkt på startsidan om man är inloggad
+
+- [ ] Det ska gå att se hur många gånger ett föremål har varit uthyrt
+
+**Krav för godkänt:**
+
+- [ ] Uppgiften är inlämnad i tid på ItsLearning (zippat repo med kompletta startinstruktioner i README-fil, länk till deployad sida och designskisser)
+
+- [x] Projektet är deployat på t.ex. Netlify eller Vercel
+
+- [ ] Projektet fungerar tillfredsställande och uppfyller kravspecifikationen
+
+- [x] Genomförd halvtidsavstämning med demo och godkänd opponering
+
+- [ ] Genomförd slutpresentation
+
+- [x] GitHub har använts på ett strukturerat sätt med tydligt formulerade och avgränsade issues, branches, PR:s, branch protection och code reviews
+
+- [x] Ett projektbräde i GitHub Projects har använts aktivt och uppdaterats kontinuerligt under projektets gång
+
+- [x] Ett workflow i GitHub Actions har implementerats i projektet
+
+- [ ] Cypress har implementerats i projektet och minst två tester har skapats för att testa funktionaliteten efter feedback från opponeringen
+
+**Krav för väl godkänt:**
+
+- [ ] Kraven för godkänt är uppfyllda
+
+- [ ] Minst tre punkter från listan med övriga önskemål har implementerats i projektet (specificera vilka i README-filen)
+
+- [ ] Ytterligare två Cypress-tester (totalt minst fyra tester) har skapats för att testa funktionalitet som ändrats/tillkommit efter feedback från opponeringen.
+      Testerna ska baseras på buggar eller brister i funktionaliteten som kommit fram vid opponeringen.
+
+- [ ] Projektet har ett CI-flöde (eller CI/CD) som omfattar Prettier, lintning med ESLint och testning med Cypress för samtliga PR:s som görs mot main-branchen

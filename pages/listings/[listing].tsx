@@ -13,7 +13,9 @@ export default ListingPage;
 
 export async function getServerSideProps({ params }: any) {
   const listing = await getListing(params.listing);
-
+  if (!listing) {
+    return { notFound: true };
+  }
   return {
     props: { listing },
   };

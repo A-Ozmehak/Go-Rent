@@ -124,6 +124,10 @@ const ProfilePage = ({
 
 export async function getServerSideProps({ params }: any) {
   const user = await getUser(params.profile);
+  if (!user) {
+    return { notFound: true };
+  }
+
   const userListings = await getListingsByUser(params.profile);
 
   let bookings = await getBookingsByUser(params.profile);
