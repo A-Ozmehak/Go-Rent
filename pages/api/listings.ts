@@ -13,48 +13,79 @@ import { getUser } from "./users";
 const listingsCollection = collection(db, "listing");
 
 export const getListings = async () => {
-  const documents = await getDocs(listingsCollection);
+  console.log("getListings");
   let listings: any = [];
-
-  for (const doc of documents.docs) {
-    let listing = doc.data();
-    listing = { ...listing, id: doc.id };
-    listing.seller = await getUser(listing.seller);
-    if (!listing.media.length) {
-      listing.media = "/images/fallback.jpg";
+  try {
+    const documents = await getDocs(listingsCollection);
+    for (const doc of documents.docs) {
+      let listing = doc.data();
+      listing = { ...listing, id: doc.id };
+      listing.seller = await getUser(listing.seller);
+      if (!listing.media.length) {
+        listing.media = "/images/fallback.jpg";
+      }
+      listings.push(listing);
     }
-    listings.push(listing);
+  } catch (e) {
+    // console.log(e)
   }
+
   return listings;
 };
 
 export const getListingsByUser = async (id: string) => {
-  const q = query(listingsCollection, where("seller", "==", id));
+  console.log("getListingsByUser");
   let listings: listingInterface[] = [];
-  const querySnapshot = await getDocs(q);
-  querySnapshot.forEach((doc) => {
-    const listingData = doc.data() as listingInterface;
-    const listing = { ...listingData, id: doc.id };
-    if (!listing.media.length) {
-      listing.media = "/images/fallback.jpg";
-    }
-    listings.push(listing);
-  });
+  try {
+    const q = query(listingsCollection, where("seller", "==", id));
 
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      const listingData = doc.data() as listingInterface;
+      const listing = { ...listingData, id: doc.id };
+      if (!listing.media.length) {
+        listing.media = "/images/fallback.jpg";
+      }
+      listings.push(listing);
+    });
+  } catch (e) {}
+  return listings;
+};
+
+export const getListingsByCategory = async (id: string) => {
+  console.log("getListingsByCategory");
+  let listings: listingInterface[] = [];
+  try {
+    const q = query(listingsCollection, where("category", "==", id));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      const listingData = doc.data() as listingInterface;
+      const listing = { ...listingData, id: doc.id };
+      if (!listing.media.length) {
+        listing.media = "/images/fallback.jpg";
+      }
+      listings.push(listing);
+    });
+  } catch (e) {}
   return listings;
 };
 
 export const getListing = async (id: string) => {
-  const listingDocRef = doc(db, "listing", id);
-  const docSnap = await getDoc(listingDocRef);
-  if (docSnap.exists()) {
-    const listing = docSnap.data();
-    const seller = await getUser(listing.seller);
-    if (!listing.media.length) {
-      listing.media = "/images/fallback.jpg";
+  console.log("getListing");
+  try {
+    const listingDocRef = doc(db, "listing", id);
+    const docSnap = await getDoc(listingDocRef);
+    if (docSnap.exists()) {
+      const listing = docSnap.data();
+      const seller = await getUser(listing.seller);
+      if (!listing.media.length) {
+        listing.media = "/images/fallback.jpg";
+      }
+      return { ...listing, id: docSnap.id, seller };
+    } else {
+      return null;
     }
-    return { ...listing, id: docSnap.id, seller };
-  } else {
+  } catch (e) {
     return null;
   }
 };
