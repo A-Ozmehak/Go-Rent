@@ -118,7 +118,7 @@ const ListingForm = () => {
                   variant="filled"
                   validate={(value: number) => {
                     let error;
-                    if (value < 1) {
+                    if (value < 0) {
                       error = "Skriv in ett pris";
                     }
                     return error;
