@@ -1,7 +1,7 @@
 import ErrorCard from "../components/cards/Error"
 
-const serverError = () => {
+export default function _500() {
     return (
-        <ErrorCard errorCode={500}/>
-            )
+        <ErrorCard errorCode={500} />
+    )
 }

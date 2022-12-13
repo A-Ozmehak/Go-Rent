@@ -1,7 +1,7 @@
 import ErrorCard from "../components/cards/Error"
 
-const notFound = () => {
+export default function _404() {
     return (
-        <ErrorCard errorCode={404}/>
-            )
+        <ErrorCard errorCode={404} />
+    )
 }

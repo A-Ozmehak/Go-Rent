@@ -1,6 +1,6 @@
-import { Heading, Button, Center } from "@chakra-ui/react"
+import { Heading, Button, Center, Flex } from "@chakra-ui/react"
 import router from "next/router"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 type Props = {
     errorCode?: number
@@ -10,22 +10,25 @@ type Props = {
 export default function ErrorCard(props: Props) {
     const [errorMessage, setErrorMessage] = useState("")
 
-    switch (props.errorCode) {
-        case 404:
-            setErrorMessage("Sidan kunde inte hittas")
-            break;
-        case 500:
-            setErrorMessage("Internt serverfel")
-            break;
-        default:
-            setErrorMessage("Okänt fel")
-            break;
-    }
+    useEffect(() => {
+        switch (props.errorCode) {
+            case 404:
+                setErrorMessage("Sidan kunde inte hittas")
+                break;
+            case 500:
+                setErrorMessage("Internt serverfel")
+                break;
+            default:
+                setErrorMessage("Något gick fel")
+                break;
+        }
+    }, [])
 
     return (
-        <Center>
+        <Center flexDirection="column" p="2rem 1rem" gap="1rem">
             <Heading as="h3">{props.errorCode ? props.errorCode : props.errorName} | {errorMessage}</Heading>
             <Button
+                w="min-content"
                 variant="Primary"
                 onClick={() => {
                     router.push("/")
