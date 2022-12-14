@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Modal,
   ModalOverlay,
@@ -8,7 +7,6 @@ import {
   ModalBody,
   ModalCloseButton,
   Button,
-  useDisclosure,
   Text,
   Textarea,
 } from "@chakra-ui/react";
@@ -22,13 +20,6 @@ interface props {
 
 const ContactModal = ({ isOpen, onClose }: props) => {
   const [user] = useAuthState(auth);
-
-  // let [value, setValue] = React.useState('')
-  //
-  // let handleInputChange = (e) => {
-  //     let inputValue = e.target.value
-  //     setValue(inputValue)
-  // }
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -38,13 +29,7 @@ const ContactModal = ({ isOpen, onClose }: props) => {
           <ModalCloseButton />
           <ModalBody>
             <Text>Meddelande</Text>
-            <Textarea
-              height="30rem"
-              // value={value}
-              // onChange={handleInputChange}
-              placeholder="Meddelande"
-              size="sm"
-            />
+            <Textarea height="30rem" placeholder="Meddelande" size="sm" />
           </ModalBody>
 
           <ModalFooter>

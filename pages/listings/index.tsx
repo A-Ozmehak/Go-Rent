@@ -1,7 +1,6 @@
 import { Box, Heading } from "@chakra-ui/react";
 import ListingPreviewCard from "../../components/cards/ListingPreviewCard";
 import SearchField from "../../components/inputs/SearchField";
-import { listingInterface } from "../../utils/interface";
 import { getListings } from "../api/listings";
 
 const ListingIndex = ({ listings }: any) => {

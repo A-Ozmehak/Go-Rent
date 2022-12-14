@@ -32,9 +32,7 @@ export const getListings = async () => {
       }
       listings.push(listing);
     }
-  } catch (e) {
-    // console.log(e)
-  }
+  } catch (e) {}
 
   return listings;
 };
@@ -78,7 +76,6 @@ export const getListingsByCategory = async (name: string) => {
 };
 
 export const getListing = async (id: string) => {
-  console.log("getListing");
   try {
     const listingDocRef = doc(db, "listing", id);
     const docSnap = await getDoc(listingDocRef);
