@@ -33,7 +33,7 @@ const ListingPreviewCard = ({ listings }: props) => {
               />
               <CardBody display="flex" flexDirection="column" p="1rem">
                 <Heading as="h4">{listing.title}</Heading>
-                <Text>{listing.description}</Text>
+                <Text noOfLines={1}>{listing.description}</Text>
                 <Text mr={{ base: 0, sm: "2rem", md: "5rem" }} alignSelf="end">
                   {listing.price}kr / dygn
                 </Text>
