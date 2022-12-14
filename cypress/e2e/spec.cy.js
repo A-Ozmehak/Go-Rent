@@ -14,7 +14,7 @@ describe('"Log in" and "Create listing" test', () => {
     cy.get("#email").type("test@mail.se");
     cy.get("#password").type("testtest");
     cy.get('button[type="submit"]').contains("Logga in").click();
-  })
+  });
 
   it("Create a listing", () => {
     // Go to login
