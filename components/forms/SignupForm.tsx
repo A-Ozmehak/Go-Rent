@@ -1,4 +1,4 @@
-import {Formik, FormikErrors} from "formik";
+import { Formik, FormikErrors } from "formik";
 import TextInput from "../inputs/TextInput";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -23,16 +23,14 @@ import { app } from "../../config/firebase";
 import signIn from "../../utils/loginFunc";
 
 interface UserValues {
-    username: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
 }
 
 const SignupForm = (props: UserValues) => {
-
-
   function register(values: UserValues) {
     const auth = getAuth(app);
     createUserWithEmailAndPassword(auth, values.email, values.password)
@@ -96,7 +94,6 @@ const SignupForm = (props: UserValues) => {
           email: "",
           password: "",
         }}
-
         onSubmit={(values) => {
           register(values);
         }}
