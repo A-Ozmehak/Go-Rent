@@ -13,7 +13,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../config/firebase";
 import ContactModal from "../inputs/ContactModal";
 import { CloseIcon, EditIcon } from "@chakra-ui/icons";
-import EditForm from "../forms/EditForm";
+import EditProfileForm from "../forms/EditProfileForm";
 
 interface props {
   profile: userInterface;
@@ -68,7 +68,7 @@ const ProfileCard = ({ profile }: props) => {
             position="absolute"
             onClick={() => setEdit(false)}
           />
-          <EditForm setEdit={setEdit} profile={profile} />
+          <EditProfileForm setEdit={setEdit} profile={profile} />
         </>
       ) : (
         <Flex
