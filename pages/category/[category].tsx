@@ -1,6 +1,6 @@
 import { Box, Heading } from "@chakra-ui/react";
 import ListingPreviewCard from "../../components/cards/ListingPreviewCard";
-import { CategoryDoc } from "../../utils/interface";
+import { CategoryDoc, listingInterface } from "../../utils/interface";
 import { getCategory } from "../api/categories";
 import { getListingsByCategory } from "../api/listings";
 
@@ -10,11 +10,9 @@ const CategoryPage = ({ listings, category }: any) => {
       <Heading size="md" as="h3" p="0rem 0 0.5rem 0" pl="1rem">
         {category.name}
       </Heading>
-      {listings.length ? (
-        <ListingPreviewCard listings={listings} />
-      ) : (
-        <p>Här var det tomt...</p>
-      )}
+      {listings.map((listing: listingInterface) => {
+        <ListingPreviewCard listing={listing} />;
+      })}
     </Box>
   );
 };

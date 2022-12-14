@@ -10,6 +10,7 @@ import ListingPreviewCard from "../components/cards/ListingPreviewCard";
 import { getListings } from "./api/listings";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { listingInterface } from "../utils/interface";
 
 export async function getServerSideProps() {
   const listings = await getListings();
@@ -22,7 +23,6 @@ export async function getServerSideProps() {
 
 export default function Index({ listings }: any) {
   const router = useRouter();
-  listings.length = 5;
 
   return (
     <Box>
@@ -56,7 +56,9 @@ export default function Index({ listings }: any) {
         <Heading size="md" as="h3" p="4rem 0 0.5rem 0" pl="1rem">
           Senast upplagt
         </Heading>
-        <ListingPreviewCard listings={listings} />
+        {listings.slice(0, 5).map((listing: listingInterface) => (
+          <ListingPreviewCard listing={listing} key={listing.id} />
+        ))}
 
         <Flex className="placeholder" w="100%" h="100%" alignItems="center">
           <Flex sx={CTAboxOuter}>

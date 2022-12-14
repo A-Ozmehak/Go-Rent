@@ -11,7 +11,9 @@ const ListingIndex = ({ listings }: any) => {
       <Heading mt={"1rem"} size="md" as="h3" p="0rem 0 0.5rem 0" pl="1rem">
         Alla annonser
       </Heading>
-      <ListingPreviewCard listings={listings} />
+      {listings.map((listing: listingInterface) => {
+        <ListingPreviewCard listing={listing} />;
+      })}
     </Box>
   );
 };
