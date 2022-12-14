@@ -22,15 +22,17 @@ import { db } from "../../config/firebase";
 import { app } from "../../config/firebase";
 import signIn from "../../utils/loginFunc";
 
-interface UserValues {
-  username: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-}
 
-const SignupForm = (props: UserValues) => {
+
+const SignupForm = () => {
+  interface UserValues {
+    username: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+  }
+
   function register(values: UserValues) {
     const auth = getAuth(app);
     createUserWithEmailAndPassword(auth, values.email, values.password)
