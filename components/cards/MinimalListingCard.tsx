@@ -40,10 +40,12 @@ const MinimalListingCard = ({ listing }: props) => {
   const currentUsername = auth.currentUser;
   const [hovering, setHovering] = useState(false);
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const [media, setMedia] = useState("");
 
   const handleSubmit = async (values: listingInterface) => {
     try {
       if (listing.id) {
+        values.media = media;
         await setDoc(doc(db, "listing", listing.id), values);
         router.push(`/listings/${listing.id}`);
       }
@@ -167,8 +169,8 @@ const MinimalListingCard = ({ listing }: props) => {
                           </FormLabel>
                           <UploadMedia
                             id="media"
-                            updateField={setFieldValue}
-                            value={values.media}
+                            updateField={setMedia}
+                            value="value"
                           />
                         </FormControl>
                         <FormControl

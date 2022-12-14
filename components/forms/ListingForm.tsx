@@ -24,6 +24,7 @@ const ListingForm = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [loggedInUser] = useAuthState(auth);
   const [categories, setCategories] = useState<CategoryDoc[]>([]);
+  const [media, setMedia] = useState("");
 
   const user = loggedInUser?.uid;
 
@@ -40,7 +41,7 @@ const ListingForm = () => {
 
   const handleSubmit = async (values: listingInterface) => {
     const dbInstance = collection(db, "listing");
-
+    values.media = media;
     try {
       const result = await addDoc(dbInstance, values);
       router.push(`listings/${result.id}`);
@@ -121,11 +122,7 @@ const ListingForm = () => {
               </FormControl>
               <FormControl isInvalid={!!errors.media && touched.media}>
                 <FormLabel htmlFor="text">Bild</FormLabel>
-                <UploadMedia
-                  id="media"
-                  updateField={setFieldValue}
-                  value={values.media}
-                />
+                <UploadMedia id="media" updateField={setMedia} value="value" />
               </FormControl>
               <FormControl isInvalid={!!errors.price && touched.price}>
                 <FormLabel htmlFor="text">Pris per dygn</FormLabel>
