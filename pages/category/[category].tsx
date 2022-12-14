@@ -10,9 +10,9 @@ const CategoryPage = ({ listings, category }: any) => {
       <Heading size="md" as="h3" p="0rem 0 0.5rem 0" pl="1rem">
         {category.name}
       </Heading>
-      {listings.map((listing: listingInterface) => {
-        <ListingPreviewCard listing={listing} />;
-      })}
+      {listings.map((listing: listingInterface) => (
+        <ListingPreviewCard listing={listing} key={listing.id} />
+      ))}
     </Box>
   );
 };
