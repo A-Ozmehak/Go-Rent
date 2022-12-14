@@ -32,8 +32,7 @@ export const getListings = async () => {
       }
       listings.push(listing);
     }
-  } catch (e) {
-  }
+  } catch (e) {}
 
   return listings;
 };

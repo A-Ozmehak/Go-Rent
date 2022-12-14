@@ -21,7 +21,6 @@ export default function UserProvider(props: any) {
         //User is logged in
         user.displayName ? setLoggedInUsername(user.displayName) : null;
       } else {
-       
       }
     });
   });

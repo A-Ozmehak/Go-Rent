@@ -29,11 +29,7 @@ const ContactModal = ({ isOpen, onClose }: props) => {
           <ModalCloseButton />
           <ModalBody>
             <Text>Meddelande</Text>
-            <Textarea
-              height="30rem"
-              placeholder="Meddelande"
-              size="sm"
-            />
+            <Textarea height="30rem" placeholder="Meddelande" size="sm" />
           </ModalBody>
 
           <ModalFooter>

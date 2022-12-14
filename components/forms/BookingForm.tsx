@@ -52,7 +52,7 @@ const BookingForm = ({ listing, profile }: props) => {
     let totalPrice = totalDays * listing.price;
     let value = {
       seller: listing.seller,
-      buyer: user, 
+      buyer: user,
       status: "pending",
       listing: {
         title: listing.title,
