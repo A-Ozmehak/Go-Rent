@@ -98,7 +98,7 @@ const SubHeader = () => {
 
   const catTextStyle: SystemStyleObject = {
     fontSize: "1rem",
-    color: "#005799", //should get color from theme instead
+    color: "#005799",
   };
 
   return (

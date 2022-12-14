@@ -1,5 +1,4 @@
-import React, { CSSProperties } from "react";
-import { AbsoluteCenter, Box, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../config/firebase";

@@ -21,8 +21,7 @@ export default function UserProvider(props: any) {
         //User is logged in
         user.displayName ? setLoggedInUsername(user.displayName) : null;
       } else {
-        // User is signed out
-        // setLoggedInUsername("") Breaks log out function, try to not render username in component / element when there is no user with conditional rendering
+       
       }
     });
   });
