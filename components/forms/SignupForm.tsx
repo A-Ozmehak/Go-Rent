@@ -22,8 +22,6 @@ import { db } from "../../config/firebase";
 import { app } from "../../config/firebase";
 import signIn from "../../utils/loginFunc";
 
-
-
 const SignupForm = () => {
   interface UserValues {
     username: string;
