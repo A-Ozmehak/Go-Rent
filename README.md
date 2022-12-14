@@ -49,6 +49,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 This webapplication is deployed on Vercel on [https://go-rent.vercel.app/](https://go-rent.vercel.app/)
 
+## Design on Figmna
+
+We started all design via Figma on [Figma.com/Go-Rent](https://www.figma.com/file/IwNmUTI67e0JC0bQimxUBk/GO%3ARENT?node-id=0%3A1&t=K09j9duLHuhKHDJO-0)
+
 ## Kravspecifikation
 
 - [x] Det ska gå att skapa ett konto, logga in och logga ut
@@ -59,23 +63,25 @@ This webapplication is deployed on Vercel on [https://go-rent.vercel.app/](https
 
 - [x] En inloggad användare ska kunna gå in på en annons och skicka förfrågan om att hyra
 
-- [ ] En inloggad användare ska kunna lägga upp egna annonser och svara på förfrågningar (godkänna eller neka)
+- [x] En inloggad användare ska kunna lägga upp egna annonser och svara på förfrågningar (godkänna eller neka)
 
 - [x] Annonser som läggs upp ska ha en bild (med länk eller genom filuppladdning), titel, beskrivning och pris (kan även vara gratis)
 
 - [x] Det ska finnas ett kategorisystem för annonserna
 
-- [ ] Sidan ska vara fullt responsiv, men med tyngdpunkten på mobil användning
+- [x] Sidan ska vara fullt responsiv, men med tyngdpunkten på mobil användning
 
-- [ ] Det ska finnas validering på samtliga inputfält
+- [x] Det ska finnas validering på samtliga inputfält
+
+( AVGRÄNSNING: Validering har valts bort på ställen där det inte är ett krav. Exempelvis på "edit profile" där det är valfria fält.)
 
 **Övriga önskemål (nice-to-haves):**
 
-- [ ] En inloggad användare ska kunna lägga upp en profilbild (med länk eller genom filuppladdning) och en kort text om sig själv, som sedan visas när användarens alla annonser visas
+- [x] En inloggad användare ska kunna lägga upp en profilbild (med länk eller genom filuppladdning) och en kort text om sig själv, som sedan visas när användarens alla annonser visas
 
-- [ ] Användaren ska kunna ta bort och ändra sina egna annonser
+- [x] Användaren ska kunna ta bort och ändra sina egna annonser
 
-- [ ] Annonserna ska även tala om var varje föremål finns (stadsdel)
+- [x] Annonserna ska även tala om var varje föremål finns (stadsdel)
 
 - [ ] Det ska gå att filtrera annonser för att enbart se det som lånas ut gratis
 
@@ -85,15 +91,15 @@ This webapplication is deployed on Vercel on [https://go-rent.vercel.app/](https
 
 **Krav för godkänt:**
 
-- [ ] Uppgiften är inlämnad i tid på ItsLearning (zippat repo med kompletta startinstruktioner i README-fil, länk till deployad sida och designskisser)
+- [x] Uppgiften är inlämnad i tid på ItsLearning (zippat repo med kompletta startinstruktioner i README-fil, länk till deployad sida och designskisser)
 
 - [x] Projektet är deployat på t.ex. Netlify eller Vercel
 
-- [ ] Projektet fungerar tillfredsställande och uppfyller kravspecifikationen
+- [x] Projektet fungerar tillfredsställande och uppfyller kravspecifikationen
 
 - [x] Genomförd halvtidsavstämning med demo och godkänd opponering
 
-- [ ] Genomförd slutpresentation
+- [x] Genomförd slutpresentation
 
 - [x] GitHub har använts på ett strukturerat sätt med tydligt formulerade och avgränsade issues, branches, PR:s, branch protection och code reviews
 
@@ -101,13 +107,15 @@ This webapplication is deployed on Vercel on [https://go-rent.vercel.app/](https
 
 - [x] Ett workflow i GitHub Actions har implementerats i projektet
 
-- [ ] Cypress har implementerats i projektet och minst två tester har skapats för att testa funktionaliteten efter feedback från opponeringen
+- [x] Cypress har implementerats i projektet och minst två tester har skapats för att testa funktionaliteten efter feedback från opponeringen
 
 **Krav för väl godkänt:**
 
-- [ ] Kraven för godkänt är uppfyllda
+- [x] Kraven för godkänt är uppfyllda
 
-- [ ] Minst tre punkter från listan med övriga önskemål har implementerats i projektet (specificera vilka i README-filen)
+- [x] Minst tre punkter från listan med övriga önskemål har implementerats i projektet (specificera vilka i README-filen)
+ 
+ ( se ovan i listan på nice to haves. )
 
 - [ ] Ytterligare två Cypress-tester (totalt minst fyra tester) har skapats för att testa funktionalitet som ändrats/tillkommit efter feedback från opponeringen.
       Testerna ska baseras på buggar eller brister i funktionaliteten som kommit fram vid opponeringen.
