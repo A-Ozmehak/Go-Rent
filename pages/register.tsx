@@ -1,4 +1,3 @@
-import React from "react";
 import ShadowContainer from "../components/layout/ShadowContainer";
 import SignupForm from "../components/forms/SignupForm";
 import { Heading, Text, Flex, Button } from "@chakra-ui/react";
