@@ -114,8 +114,8 @@ We started all design via Figma on [Figma.com/Go-Rent](https://www.figma.com/fil
 - [x] Kraven för godkänt är uppfyllda
 
 - [x] Minst tre punkter från listan med övriga önskemål har implementerats i projektet (specificera vilka i README-filen)
- 
- ( se ovan i listan på nice to haves. )
+
+( se ovan i listan på nice to haves. )
 
 - [ ] Ytterligare två Cypress-tester (totalt minst fyra tester) har skapats för att testa funktionalitet som ändrats/tillkommit efter feedback från opponeringen.
       Testerna ska baseras på buggar eller brister i funktionaliteten som kommit fram vid opponeringen.
