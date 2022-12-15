@@ -19,7 +19,9 @@ interface props {
 }
 
 const SearchField = ({ listings }: props) => {
-  const [filteredListings, setFilteredListings] = useState<listingInterface[]>([]);
+  const [filteredListings, setFilteredListings] = useState<listingInterface[]>(
+    []
+  );
   const [search, setSearch] = useState("");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -44,12 +46,15 @@ const SearchField = ({ listings }: props) => {
     background: "#005799",
     height: "var(--chakra-sizes-10)",
     minWidth: "var(--chakra-sizes-10)",
-  }
+  };
 
   return (
     <Center>
       <Menu>
-        <FormControl pos="relative" w={{ base: "320px", sm: "480px", md: "500px" }}>
+        <FormControl
+          pos="relative"
+          w={{ base: "320px", sm: "480px", md: "500px" }}
+        >
           <Input
             bg="white"
             pr="4.5rem"
@@ -86,11 +91,16 @@ const SearchField = ({ listings }: props) => {
               </Link>
             ))
           ) : (
-            <Text w={{ base: "280px", sm: "440px", md: "460px" }} textAlign={"center"}>Inga listningar hittades</Text>
+            <Text
+              w={{ base: "280px", sm: "440px", md: "460px" }}
+              textAlign={"center"}
+            >
+              Inga listningar hittades
+            </Text>
           )}
         </MenuList>
       </Menu>
-    </Center >
+    </Center>
   );
 };
 

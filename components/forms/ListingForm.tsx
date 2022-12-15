@@ -83,7 +83,7 @@ const ListingForm = () => {
                     if (value.length < 2) {
                       error = "Skriv in en titel";
                     } else if (value.length > 20) {
-                      error = "För lång titel"
+                      error = "För lång titel";
                     }
                     return error;
                   }}
