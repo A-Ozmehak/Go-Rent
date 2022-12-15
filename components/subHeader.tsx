@@ -130,12 +130,12 @@ const SubHeader = () => {
       ) : (
         <Flex w="100%" justifyContent="center" className="swiperStyle">
           <Box>
-            <Flex justifyContent="space-between">
+            <Flex justifyContent="space-between" alignItems="center">
               <Heading as="h4" size="sm">
                 Utforska efter kategori
               </Heading>
               <Link href="listings">
-                <Flex>
+                <Flex alignItems="center">
                   <Heading as="h4" size="sm">
                     Alla annonser
                   </Heading>
