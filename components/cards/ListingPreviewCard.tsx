@@ -14,11 +14,19 @@ interface props {
 }
 
 const ListingPreviewCard = ({ listing }: props) => {
+  let description
+  if (listing.description.length > 50) {
+    description = listing.description.substring(0, 50) + "...";
+  } else {
+    description = listing.description
+  }
+
   return (
     <Box key={listing.id} className="listing-preview-card">
       <Link href={`/listings/${listing.id}`}>
         <Card
-          h="121px"
+          minHeight="min-content"
+          // h="121px"
           w="100%"
           display="flex"
           direction="row"
@@ -31,7 +39,7 @@ const ListingPreviewCard = ({ listing }: props) => {
           />
           <CardBody display="flex" flexDirection="column" p="1rem">
             <Heading as="h4">{listing.title}</Heading>
-            <Text>{listing.description}</Text>
+            <Text>{description}</Text>
             <Text mr={{ base: 0, sm: "2rem", md: "5rem" }} alignSelf="end">
               {listing.price}kr / dygn
             </Text>
