@@ -134,7 +134,7 @@ const SubHeader = () => {
               <Heading as="h4" size="sm">
                 Utforska efter kategori
               </Heading>
-              <Link href="listings">
+              <Link href="/listings">
                 <Flex>
                   <Heading as="h4" size="sm">
                     Alla annonser

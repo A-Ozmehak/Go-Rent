@@ -39,7 +39,7 @@ const EditForm = ({ profile, setEdit }: Props) => {
 
   const logOut = () => {
     signOut(auth).catch((error) => {
-      console.error(error);
+      // console.error(error);
     });
   };
 
@@ -57,7 +57,7 @@ const EditForm = ({ profile, setEdit }: Props) => {
       if (userAuth && currentUser) {
         await deleteDoc(doc(db, "users", userAuth));
         deleteUser(currentUser);
-        console.log("deleted user");
+        // console.log("deleted user");
         router.push("/");
         logOut();
       }

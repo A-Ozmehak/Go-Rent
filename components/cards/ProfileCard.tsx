@@ -49,7 +49,7 @@ const ProfileCard = ({ profile }: props) => {
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
     >
-      {hovering && loggedInUser?.uid && currentProfile && (
+      {hovering && loggedInUser?.uid === currentProfile && (
         <EditIcon
           position="absolute"
           cursor="pointer"

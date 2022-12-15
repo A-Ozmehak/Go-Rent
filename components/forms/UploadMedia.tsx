@@ -34,7 +34,7 @@ const UploadMedia = ({ id, value, updateField }: MediaProps) => {
       await setDownloadURL(url);
       await updateField(url);
     } else {
-      console.error("File not found");
+      // console.error("File not found");
     }
   };
 

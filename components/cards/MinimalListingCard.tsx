@@ -58,7 +58,7 @@ const MinimalListingCard = ({ listing }: props) => {
     try {
       if (listing.id) {
         await deleteDoc(doc(db, "listing", listing.id));
-        console.log("deleted listing");
+        // console.log("deleted listing");
         router.push(`/profile/${user?.uid}`);
       }
     } catch (e) {

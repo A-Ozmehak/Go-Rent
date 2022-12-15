@@ -32,7 +32,7 @@ const SearchField = ({ listings }: props) => {
       setFilteredListings(filterListingList);
       return e.target.value;
     });
-    console.log(filteredListings);
+    // console.log(filteredListings);
   };
 
   return (

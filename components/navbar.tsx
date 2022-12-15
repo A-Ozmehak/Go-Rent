@@ -37,7 +37,7 @@ export default function Navbar() {
   const logOut = () => {
     if (loggedInUser) {
       signOut(auth).catch((error) => {
-        console.error(error);
+        // console.error(error);
       });
     }
   };

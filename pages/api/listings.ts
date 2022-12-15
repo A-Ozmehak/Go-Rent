@@ -14,7 +14,7 @@ import { getUser } from "./users";
 const listingsCollection = collection(db, "listing");
 
 export const getListings = async () => {
-  console.log("getListings");
+  // console.log("getListings");
   let listings: any = [];
   try {
     const documents = await getDocs(listingsCollection);
@@ -38,7 +38,7 @@ export const getListings = async () => {
 };
 
 export const getListingsByUser = async (id: string) => {
-  console.log("getListingsByUser");
+  // console.log("getListingsByUser");
   let listings: listingInterface[] = [];
   try {
     const q = query(listingsCollection, where("seller", "==", id));
@@ -57,7 +57,7 @@ export const getListingsByUser = async (id: string) => {
 };
 
 export const getListingsByCategory = async (name: string) => {
-  console.log("getListingsByCategory");
+  // console.log("getListingsByCategory");
   let listings: listingInterface[] = [];
   try {
     const q = query(listingsCollection, where("category", "==", name));
@@ -71,7 +71,7 @@ export const getListingsByCategory = async (name: string) => {
       listings.push(listing);
     });
   } catch (e) {}
-  console.log(listings);
+  // console.log(listings);
   return listings;
 };
 
