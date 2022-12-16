@@ -7,22 +7,19 @@ import "@fontsource/inter";
 import "@fontsource/josefin-sans";
 import "material-icons/iconfont/material-icons.css";
 import Footer from "../components/layout/Footer";
-import UserProvider from "../utils/userContext";
 import Navbar from "../components/navbar";
 import ErrorBoundary from "../components/ErrorBoundary";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={Theme}>
-      <UserProvider>
-        <Box>
-          <Navbar />
-          <ErrorBoundary>
-            <Component {...pageProps} />
-          </ErrorBoundary>
-        </Box>
-        <Footer />
-      </UserProvider>
+      <Box>
+        <Navbar />
+        <ErrorBoundary>
+          <Component {...pageProps} />
+        </ErrorBoundary>
+      </Box>
+      <Footer />
     </ChakraProvider>
   );
 }
