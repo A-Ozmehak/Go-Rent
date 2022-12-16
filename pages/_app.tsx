@@ -13,13 +13,13 @@ import ErrorBoundary from "../components/ErrorBoundary";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={Theme}>
-        <Box>
-          <Navbar />
-          <ErrorBoundary>
-            <Component {...pageProps} />
-          </ErrorBoundary>
-        </Box>
-        <Footer />
+      <Box>
+        <Navbar />
+        <ErrorBoundary>
+          <Component {...pageProps} />
+        </ErrorBoundary>
+      </Box>
+      <Footer />
     </ChakraProvider>
   );
 }
