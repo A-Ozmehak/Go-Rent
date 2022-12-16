@@ -7,6 +7,7 @@ import {
   Text,
   Flex,
   Avatar,
+  IconButton,
 } from "@chakra-ui/react";
 import { userInterface } from "../../utils/interface";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -49,16 +50,17 @@ const ProfileCard = ({ profile }: props) => {
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
     >
-      {hovering && loggedInUser?.uid && currentProfile && (
-        <EditIcon
+      {!edit && loggedInUser?.uid === currentProfile ? (
+        <IconButton
           position="absolute"
-          cursor="pointer"
           right="0"
-          background="transparent"
+          id="editProfile"
+          icon={<EditIcon />}
           onClick={handleEdit}
           fontSize={30}
+          aria-label={"edit"}
         />
-      )}
+      ) : null}
       {edit ? (
         <>
           <CloseIcon

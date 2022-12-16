@@ -23,6 +23,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { app, db } from "../../config/firebase";
+import { getListingsByUser } from "../../pages/api/listings";
 import { updateUser } from "../../pages/api/users";
 import { userInterface } from "../../utils/interface";
 import TextInput from "../inputs/TextInput";
@@ -39,7 +40,7 @@ const EditForm = ({ profile, setEdit }: Props) => {
 
   const logOut = () => {
     signOut(auth).catch((error) => {
-      console.error(error);
+      // console.error(error);
     });
   };
 
@@ -55,11 +56,16 @@ const EditForm = ({ profile, setEdit }: Props) => {
   const removeAccount = async () => {
     try {
       if (userAuth && currentUser) {
-        await deleteDoc(doc(db, "users", userAuth));
+        //logOut();
         deleteUser(currentUser);
-        console.log("deleted user");
+        await deleteDoc(doc(db, "users", profile.id!));
+        let listings = await getListingsByUser(profile.id!);
+        for (let listing of listings) {
+          console.log(listing);
+          await deleteDoc(doc(db, "listing", listing.id!));
+        }
+        // console.log("deleted user");
         router.push("/");
-        logOut();
       }
     } catch (e) {
       return;

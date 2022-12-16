@@ -12,7 +12,7 @@ import { bookingInterface } from "../../utils/interface";
 const bookingsCollection = collection(db, "bookings");
 
 export const getBookingsByUser = async (userID: string) => {
-  console.log("getBookingsByUser");
+  // console.log("getBookingsByUser");
   const bookings = new Map<string, bookingInterface>();
   try {
     let sellerBookings = await getBookingsBySeller(userID);
@@ -30,7 +30,7 @@ export const getBookingsByUser = async (userID: string) => {
 
 // * Get bookings by seller
 export const getBookingsBySeller = async (userID: string) => {
-  console.log("getBookingsBySeller");
+  // console.log("getBookingsBySeller");
   let userBookings: bookingInterface[] = [];
   try {
     const q = query(bookingsCollection, where("seller.id", "==", userID));
@@ -51,7 +51,7 @@ export const getBookingsBySeller = async (userID: string) => {
 
 // * Get bookings by buyer
 export const getBookingsByBuyer = async (userID: string) => {
-  console.log("getBookingsByBuyer");
+  // console.log("getBookingsByBuyer");
   let userBookings: bookingInterface[] = [];
   try {
     const q = query(bookingsCollection, where("buyer", "==", userID));
@@ -71,7 +71,7 @@ export const getBookingsByBuyer = async (userID: string) => {
 };
 
 export const getBooking = async (id: string) => {
-  console.log("getBooking");
+  // console.log("getBooking");
   try {
     const boookingDocRef = doc(db, "bookings", id);
     const docSnap = await getDoc(boookingDocRef);

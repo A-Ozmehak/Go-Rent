@@ -3,7 +3,7 @@ import { db } from "../../config/firebase";
 import { userInterface } from "../../utils/interface";
 
 export const getUser = async (id: string): Promise<userInterface | null> => {
-  console.log("getuser");
+  // console.log("getuser");
   try {
     const userDocRef = doc(db, "users", id);
     const docSnap = await getDoc(userDocRef);

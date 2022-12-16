@@ -5,7 +5,7 @@ import { CategoryDoc } from "../../utils/interface";
 const categoriesCollection = collection(db, "category");
 
 export const getCategories = async () => {
-  console.log("getCategories");
+  // console.log("getCategories");
   let categories: CategoryDoc[] = [];
   try {
     const documents = await getDocs(categoriesCollection);
@@ -22,7 +22,7 @@ export const getCategories = async () => {
 };
 
 export const getCategory = async (id: string) => {
-  console.log("getCategory");
+  // console.log("getCategory");
   try {
     const categoryDocRef = doc(db, "category", id);
     const docSnap = await getDoc(categoryDocRef);

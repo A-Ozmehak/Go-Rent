@@ -11,9 +11,17 @@ import { getListings } from "./api/listings";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { listingInterface } from "../utils/interface";
+import { useEffect } from "react";
 
 export async function getServerSideProps() {
   const listings = await getListings();
+  if (!listings.length) {
+    return {
+      props: {
+        listings: [],
+      },
+    };
+  }
   return {
     props: {
       listings,
