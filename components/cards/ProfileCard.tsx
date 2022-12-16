@@ -50,7 +50,7 @@ const ProfileCard = ({ profile }: props) => {
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
     >
-      {!edit && loggedInUser?.uid === currentProfile ?
+      {!edit && loggedInUser?.uid === currentProfile ? (
         <IconButton
           position="absolute"
           right="0"
@@ -58,9 +58,9 @@ const ProfileCard = ({ profile }: props) => {
           icon={<EditIcon />}
           onClick={handleEdit}
           fontSize={30}
-          aria-label={"edit"} />
-        : null
-      }
+          aria-label={"edit"}
+        />
+      ) : null}
       {edit ? (
         <>
           <CloseIcon
