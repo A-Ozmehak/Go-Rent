@@ -77,6 +77,8 @@ const MinimalListingCard = ({ listing }: props) => {
   const [categories, setCategories] = useState<CategoryDoc[]>([]);
 
   useEffect(() => {
+    console.log(listing.seller);
+    console.log(currentUsername?.uid);
     const fetchCategories = async () => {
       const categories = await getCategories();
       setCategories(categories);
@@ -257,7 +259,7 @@ const MinimalListingCard = ({ listing }: props) => {
         <EditListingModal listing={listing} />
 
         {hovering &&
-          (user?.uid && currentUsername ? (
+          (listing.seller === currentUsername?.uid ? (
             <Flex
               alignItems="center"
               justifyContent="center"
