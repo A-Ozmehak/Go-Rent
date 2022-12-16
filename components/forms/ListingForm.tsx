@@ -82,11 +82,13 @@ const ListingForm = () => {
                     let error;
                     if (value.length < 2) {
                       error = "Skriv in en titel";
+                    } else if (value.length > 20) {
+                      error = "För lång titel";
                     }
                     return error;
                   }}
                 />
-                <FormErrorMessage>{errors.location}</FormErrorMessage>
+                <FormErrorMessage>{errors.title}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={!!errors.location && touched.location}>
                 <FormLabel htmlFor="text">Stadsdel</FormLabel>
@@ -104,7 +106,7 @@ const ListingForm = () => {
                     return error;
                   }}
                 />
-                <FormErrorMessage>{errors.title}</FormErrorMessage>
+                <FormErrorMessage>{errors.location}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={!!errors.category && touched.category}>
                 <FormLabel htmlFor="text">Kategori</FormLabel>
@@ -135,7 +137,7 @@ const ListingForm = () => {
                   validate={(value: number) => {
                     let error;
                     if (value < 0) {
-                      error = "Skriv in ett pris";
+                      error = "Priset kan inte vara negativt";
                     }
                     return error;
                   }}

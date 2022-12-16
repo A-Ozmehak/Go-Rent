@@ -1,5 +1,6 @@
 import { Component, ErrorInfo, ReactNode } from "react";
 import ErrorCard from "./cards/Error";
+import Router from "next/router";
 
 interface Props {
   children: ReactNode;
@@ -13,7 +14,7 @@ interface State {
 class ErrorBoundary extends Component<Props, State> {
   public state: State = {
     hasError: false,
-    errorName: "",
+    errorName: "Okänt fel",
   };
 
   public static getDerivedStateFromError(error: Error): State {
@@ -23,6 +24,15 @@ class ErrorBoundary extends Component<Props, State> {
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     // console.error("Uncaught error:", error, errorInfo);
+  }
+
+  public componentDidUpdate() {
+    // Reset the error boundary when the user navigates to a different route
+    if (this.state.hasError) {
+      Router.events.on("routeChangeComplete", () => {
+        this.setState({ hasError: false, errorName: "" });
+      });
+    }
   }
 
   public render() {

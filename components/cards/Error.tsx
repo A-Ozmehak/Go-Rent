@@ -19,7 +19,7 @@ export default function ErrorCard(props: Props) {
         setErrorMessage("Internt serverfel");
         break;
       default:
-        setErrorMessage("Något gick fel");
+        setErrorMessage("Ett fel påträffades");
         break;
     }
   }, [props.errorCode]);
