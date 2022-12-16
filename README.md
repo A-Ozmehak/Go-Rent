@@ -117,7 +117,7 @@ We started all design via Figma on [Figma.com/Go-Rent](https://www.figma.com/fil
 
 ( se ovan i listan på nice to haves. )
 
-- [ ] Ytterligare två Cypress-tester (totalt minst fyra tester) har skapats för att testa funktionalitet som ändrats/tillkommit efter feedback från opponeringen.
+- [x] Ytterligare två Cypress-tester (totalt minst fyra tester) har skapats för att testa funktionalitet som ändrats/tillkommit efter feedback från opponeringen.
       Testerna ska baseras på buggar eller brister i funktionaliteten som kommit fram vid opponeringen.
 
-- [ ] Projektet har ett CI-flöde (eller CI/CD) som omfattar Prettier, lintning med ESLint och testning med Cypress för samtliga PR:s som görs mot main-branchen
+- [x] Projektet har ett CI-flöde (eller CI/CD) som omfattar Prettier, lintning med ESLint och testning med Cypress för samtliga PR:s som görs mot main-branchen
