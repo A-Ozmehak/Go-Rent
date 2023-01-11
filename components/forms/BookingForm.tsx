@@ -124,43 +124,46 @@ const BookingForm = ({ listing, profile }: props) => {
 
   return (
     <>
-      <Button onClick={onOpen} rightIcon={<CalendarIcon />}>
-        Öppna boka
-      </Button>
+      {listing.seller.id != user && (
+        <>
+          <Button onClick={onOpen} rightIcon={<CalendarIcon />}>
+            Öppna boka
+          </Button>
+          <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalContent alignItems="center">
+              <ModalHeader>Välj de datum du vill boka</ModalHeader>
+              <Text>Kostnad per dygn: {listing.price} kr </Text>
+              <Text>Upphämtning: {listing.location} </Text>
+              <ModalCloseButton />
+              <ModalBody>
+                <DatePicker
+                  selected={startDate}
+                  onChange={setDate}
+                  startDate={startDate}
+                  endDate={endDate}
+                  selectsRange
+                  inline
+                />
 
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalContent alignItems="center">
-          <ModalHeader>Välj de datum du vill boka</ModalHeader>
-          <Text>Kostnad per dygn: {listing.price} kr </Text>
-          <Text>Upphämtning: {listing.location} </Text>
-          <ModalCloseButton />
-          <ModalBody>
-            <DatePicker
-              selected={startDate}
-              onChange={setDate}
-              startDate={startDate}
-              endDate={endDate}
-              selectsRange
-              inline
-            />
-
-            {endDate && <SelectedDays />}
-          </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="gray" mr={3} onClick={onClose}>
-              Close
-            </Button>
-            {loggedInUser ? (
-              // Primary
-              <Button onClick={handleSubmit}>Skicka förfrågan</Button>
-            ) : (
-              <Text>
-                Du måste vara inloggad för att skicka en bokningsförfrågan
-              </Text>
-            )}
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+                {endDate && <SelectedDays />}
+              </ModalBody>
+              <ModalFooter>
+                <Button colorScheme="gray" mr={3} onClick={onClose}>
+                  Close
+                </Button>
+                {loggedInUser ? (
+                  // Primary
+                  <Button onClick={handleSubmit}>Skicka förfrågan</Button>
+                ) : (
+                  <Text>
+                    Du måste vara inloggad för att skicka en bokningsförfrågan
+                  </Text>
+                )}
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
+        </>
+      )}
     </>
   );
 };
