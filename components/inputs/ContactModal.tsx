@@ -12,20 +12,23 @@ import {
 } from "@chakra-ui/react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../config/firebase";
+import { userInterface } from "../../utils/interface";
 
 interface props {
   isOpen: any;
   onClose: any;
+  profile: userInterface;
 }
 
-const ContactModal = ({ isOpen, onClose }: props) => {
+const ContactModal = ({ isOpen, onClose, profile }: props) => {
+  const currentProfile = profile.username;
   const [user] = useAuthState(auth);
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Kontakta {user?.displayName} via mejl</ModalHeader>
+          <ModalHeader>Kontakta {currentProfile} via mejl</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Text>Meddelande</Text>

@@ -114,7 +114,11 @@ const ProfileCard = ({ profile }: props) => {
                   {profile.firstName?.charAt(0)}
                 </Avatar>
               )}
-              <ContactModal isOpen={isOpen} onClose={onClose} />
+              <ContactModal
+                profile={profile}
+                isOpen={isOpen}
+                onClose={onClose}
+              />
               <Box>
                 <Text mb={-3} fontSize={[25, 30]}>
                   {profile.username}
