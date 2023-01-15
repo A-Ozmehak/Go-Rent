@@ -126,7 +126,10 @@ const MinimalListingCard = ({ listing }: props) => {
                             variant="filled"
                             validate={(value: string) => {
                               let error;
-                              if (typeof value === 'string' && value.length < 2) {
+                              if (
+                                typeof value === "string" &&
+                                value.length < 2
+                              ) {
                                 error = "Skriv in en titel";
                               }
                               return error;
@@ -134,7 +137,9 @@ const MinimalListingCard = ({ listing }: props) => {
                           />
                           <FormErrorMessage>{errors.title}</FormErrorMessage>
                         </FormControl>
-                        <FormControl isInvalid={!!errors.location && touched.location}>
+                        <FormControl
+                          isInvalid={!!errors.location && touched.location}
+                        >
                           <FormLabel htmlFor="text">Stadsdel</FormLabel>
                           <TextInput
                             as={Input}
@@ -144,8 +149,12 @@ const MinimalListingCard = ({ listing }: props) => {
                             variant="filled"
                             validate={(value: string) => {
                               let error;
-                              if (typeof value === 'string' && value.length < 2) {
-                                error = "Skriv in ett område där den här varan finns.";
+                              if (
+                                typeof value === "string" &&
+                                value.length < 2
+                              ) {
+                                error =
+                                  "Skriv in ett område där den här varan finns.";
                               }
                               return error;
                             }}
@@ -177,7 +186,11 @@ const MinimalListingCard = ({ listing }: props) => {
                         >
                           {listing.media && (
                             <>
-                              <Text>{media ? "Uppdaterar till denna bild:" : "Nuvarande bild:"}</Text>
+                              <Text>
+                                {media
+                                  ? "Uppdaterar till denna bild:"
+                                  : "Nuvarande bild:"}
+                              </Text>
                               <Image
                                 h={150}
                                 alt={listing.title}
@@ -228,7 +241,10 @@ const MinimalListingCard = ({ listing }: props) => {
                             variant="filled"
                             validate={(value: string) => {
                               let error;
-                              if (typeof value === 'string' && value.length < 2) {
+                              if (
+                                typeof value === "string" &&
+                                value.length < 2
+                              ) {
                                 error = "Skriv in en beskrivning";
                               }
                               return error;
