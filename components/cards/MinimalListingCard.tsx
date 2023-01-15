@@ -99,6 +99,7 @@ const MinimalListingCard = ({ listing }: props) => {
                 initialValues={{
                   id: listing.id,
                   title: listing.title,
+                  location: listing.location,
                   description: listing.description,
                   category: listing.category,
                   media: listing.media,
@@ -125,13 +126,31 @@ const MinimalListingCard = ({ listing }: props) => {
                             variant="filled"
                             validate={(value: string) => {
                               let error;
-                              if (value.length < 2) {
+                              if (typeof value === 'string' && value.length < 2) {
                                 error = "Skriv in en titel";
                               }
                               return error;
                             }}
                           />
                           <FormErrorMessage>{errors.title}</FormErrorMessage>
+                        </FormControl>
+                        <FormControl isInvalid={!!errors.location && touched.location}>
+                          <FormLabel htmlFor="text">Stadsdel</FormLabel>
+                          <TextInput
+                            as={Input}
+                            id="location"
+                            name="location"
+                            type="text"
+                            variant="filled"
+                            validate={(value: string) => {
+                              let error;
+                              if (typeof value === 'string' && value.length < 2) {
+                                error = "Skriv in ett område där den här varan finns.";
+                              }
+                              return error;
+                            }}
+                          />
+                          <FormErrorMessage>{errors.location}</FormErrorMessage>
                         </FormControl>
                         <FormControl
                           isInvalid={!!errors.category && touched.category}
@@ -209,7 +228,7 @@ const MinimalListingCard = ({ listing }: props) => {
                             variant="filled"
                             validate={(value: string) => {
                               let error;
-                              if (value.length < 2) {
+                              if (typeof value === 'string' && value.length < 2) {
                                 error = "Skriv in en beskrivning";
                               }
                               return error;
