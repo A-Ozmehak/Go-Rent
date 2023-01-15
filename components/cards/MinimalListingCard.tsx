@@ -44,8 +44,8 @@ const MinimalListingCard = ({ listing }: props) => {
 
   const handleSubmit = async (values: listingInterface) => {
     try {
-      if (listing.id && media) {
-        values.media = media;
+      if (listing.id) {
+        if (media) values.media = media;
         await setDoc(doc(db, "listing", listing.id), values);
         router.push(`/listings/${listing.id}`);
       }
