@@ -40,11 +40,11 @@ const MinimalListingCard = ({ listing }: props) => {
   const currentUsername = auth.currentUser;
   const [hovering, setHovering] = useState(false);
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const [media, setMedia] = useState("");
+  const [media, setMedia] = useState<string | undefined>(undefined);
 
   const handleSubmit = async (values: listingInterface) => {
     try {
-      if (listing.id) {
+      if (listing.id && media) {
         values.media = media;
         await setDoc(doc(db, "listing", listing.id), values);
         router.push(`/listings/${listing.id}`);
@@ -177,11 +177,11 @@ const MinimalListingCard = ({ listing }: props) => {
                         >
                           {listing.media && (
                             <>
-                              <Text>Nuvarande bild:</Text>
+                              <Text>{media ? "Uppdaterar till denna bild:" : "Nuvarande bild:"}</Text>
                               <Image
                                 h={150}
                                 alt={listing.title}
-                                src={listing.media}
+                                src={media ? media : listing.media}
                               />
                             </>
                           )}
