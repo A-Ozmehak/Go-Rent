@@ -21,6 +21,7 @@ import { listingInterface, userInterface } from "../../utils/interface";
 import { collection, addDoc } from "firebase/firestore";
 import { auth, db } from "../../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { getUser } from "../../pages/api/users";
 
 interface props {
   listing: listingInterface;
@@ -52,7 +53,7 @@ const BookingForm = ({ listing, profile }: props) => {
     let totalPrice = totalDays * listing.price;
     let value = {
       seller: listing.seller,
-      buyer: user,
+      buyer: await getUser(user!),
       status: "pending",
       listing: {
         title: listing.title,
@@ -65,6 +66,7 @@ const BookingForm = ({ listing, profile }: props) => {
         totalPrice: totalPrice,
       },
     };
+    console.log(value);
     try {
       const result = await addDoc(dbInstance, value);
       submitBooking();

@@ -22,7 +22,7 @@ export interface userInterface {
 }
 
 export interface bookingInterface {
-  buyer: string;
+  buyer: userInterface;
   seller: userInterface;
   status: string;
   listing: {
