@@ -61,10 +61,9 @@ const EditForm = ({ profile, setEdit }: Props) => {
         await deleteDoc(doc(db, "users", profile.id!));
         let listings = await getListingsByUser(profile.id!);
         for (let listing of listings) {
-          console.log(listing);
           await deleteDoc(doc(db, "listing", listing.id!));
         }
-        // console.log("deleted user");
+
         router.push("/");
       }
     } catch (e) {
