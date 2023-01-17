@@ -40,12 +40,12 @@ const MinimalListingCard = ({ listing }: props) => {
   const currentUsername = auth.currentUser;
   const [hovering, setHovering] = useState(false);
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const [media, setMedia] = useState("");
+  const [media, setMedia] = useState<string | undefined>(undefined);
 
   const handleSubmit = async (values: listingInterface) => {
     try {
       if (listing.id) {
-        values.media = media;
+        if (media) values.media = media;
         await setDoc(doc(db, "listing", listing.id), values);
         router.push(`/listings/${listing.id}`);
       }
@@ -84,7 +84,7 @@ const MinimalListingCard = ({ listing }: props) => {
       setCategories(categories);
     };
     fetchCategories();
-  }, []);
+  }, [currentUsername?.uid, listing.seller]);
 
   const EditListingModal = ({ listing }: props) => {
     return (
@@ -99,6 +99,7 @@ const MinimalListingCard = ({ listing }: props) => {
                 initialValues={{
                   id: listing.id,
                   title: listing.title,
+                  location: listing.location,
                   description: listing.description,
                   category: listing.category,
                   media: listing.media,
@@ -125,13 +126,40 @@ const MinimalListingCard = ({ listing }: props) => {
                             variant="filled"
                             validate={(value: string) => {
                               let error;
-                              if (value.length < 2) {
+                              if (
+                                typeof value === "string" &&
+                                value.length < 2
+                              ) {
                                 error = "Skriv in en titel";
                               }
                               return error;
                             }}
                           />
                           <FormErrorMessage>{errors.title}</FormErrorMessage>
+                        </FormControl>
+                        <FormControl
+                          isInvalid={!!errors.location && touched.location}
+                        >
+                          <FormLabel htmlFor="text">Stadsdel</FormLabel>
+                          <TextInput
+                            as={Input}
+                            id="location"
+                            name="location"
+                            type="text"
+                            variant="filled"
+                            validate={(value: string) => {
+                              let error;
+                              if (
+                                typeof value === "string" &&
+                                value.length < 2
+                              ) {
+                                error =
+                                  "Skriv in ett område där den här varan finns.";
+                              }
+                              return error;
+                            }}
+                          />
+                          <FormErrorMessage>{errors.location}</FormErrorMessage>
                         </FormControl>
                         <FormControl
                           isInvalid={!!errors.category && touched.category}
@@ -158,11 +186,15 @@ const MinimalListingCard = ({ listing }: props) => {
                         >
                           {listing.media && (
                             <>
-                              <Text>Nuvarande bild:</Text>
+                              <Text>
+                                {media
+                                  ? "Uppdaterar till denna bild:"
+                                  : "Nuvarande bild:"}
+                              </Text>
                               <Image
                                 h={150}
                                 alt={listing.title}
-                                src={listing.media}
+                                src={media ? media : listing.media}
                               />
                             </>
                           )}
@@ -209,7 +241,10 @@ const MinimalListingCard = ({ listing }: props) => {
                             variant="filled"
                             validate={(value: string) => {
                               let error;
-                              if (value.length < 2) {
+                              if (
+                                typeof value === "string" &&
+                                value.length < 2
+                              ) {
                                 error = "Skriv in en beskrivning";
                               }
                               return error;
