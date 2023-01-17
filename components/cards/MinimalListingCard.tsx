@@ -84,7 +84,7 @@ const MinimalListingCard = ({ listing }: props) => {
       setCategories(categories);
     };
     fetchCategories();
-  }, []);
+  }, [currentUsername?.uid, listing.seller]);
 
   const EditListingModal = ({ listing }: props) => {
     return (
