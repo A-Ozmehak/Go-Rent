@@ -66,7 +66,7 @@ const BookingForm = ({ listing, profile }: props) => {
         totalPrice: totalPrice,
       },
     };
-    console.log(value);
+
     try {
       const result = await addDoc(dbInstance, value);
       submitBooking();

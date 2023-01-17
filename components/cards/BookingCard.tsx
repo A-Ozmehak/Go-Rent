@@ -15,6 +15,7 @@ import dayjs from "dayjs";
 import { doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import Link from "next/link";
 
 interface BookingCardProps {
   booking: bookingInterface;
@@ -136,7 +137,9 @@ const BookingCard = ({ booking, refreshData }: BookingCardProps) => {
 
             <Flex justifyContent="space-between" direction={"row"}>
               {booking.buyer !== loggedInUser.uid && (
-                <MinimalProfileCard profile={booking.buyer} />
+                <Link href={`/profile/${booking.buyer.id}`}>
+                  <MinimalProfileCard profile={booking.buyer} />
+                </Link>
               )}
 
               {booking.status === "pending" &&
