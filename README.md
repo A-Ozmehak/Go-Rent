@@ -47,7 +47,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Deploy on Vercel
 
-This webapplication is deployed on Vercel on [https://go-rent.vercel.app/](https://go-rent.vercel.app/)
+This webapplication is deployed on Vercel on [https://go-rent-navy.vercel.app/](https://go-rent.vercel.app/)
 
 ## Design on Figmna
 
