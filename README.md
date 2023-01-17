@@ -1,6 +1,5 @@
 # Arbetsmetodik för utvecklare - gruppuppgift
 
-
 ## Beskrivning av projekt:
 
 Uppdraget var att skapa en uthyrningsportal där privatpersoner i Göteborg kan hyra/låna ut saker till andra, för att främja delningsekonomin i staden.
