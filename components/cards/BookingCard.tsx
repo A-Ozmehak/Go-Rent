@@ -136,7 +136,7 @@ const BookingCard = ({ booking, refreshData }: BookingCardProps) => {
 
             <Flex justifyContent="space-between" direction={"row"}>
               {booking.buyer !== loggedInUser.uid && (
-                <MinimalProfileCard profile={booking.seller} />
+                <MinimalProfileCard profile={booking.buyer} />
               )}
 
               {booking.status === "pending" &&

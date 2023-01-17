@@ -3,12 +3,17 @@ import { listingInterface } from "../../utils/interface";
 import BookingForm from "../forms/BookingForm";
 import Link from "next/link";
 import MinimalProfileCard from "./MinimalProfileCard.";
+import { auth } from "../../config/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 interface props {
   listing: listingInterface;
 }
 
 const ListingCard = ({ listing }: props) => {
+  const [loggedInUser] = useAuthState(auth);
+  const user = loggedInUser?.uid;
+
   return (
     <Flex
       gap={[0, 0, 20]}
@@ -86,10 +91,17 @@ const ListingCard = ({ listing }: props) => {
               </Box>
             </Box>
           </Flex>
-          <Flex direction={"column"} gap={1}>
-            <h4>Välj datum</h4>
-            <BookingForm listing={listing} profile={listing.seller} />
-          </Flex>
+          {listing.seller.id != user && (
+            <Flex direction={"column"} gap={1}>
+              <h4>Välj datum</h4>
+              <BookingForm listing={listing} profile={listing.seller} />
+            </Flex>
+          )}
+          {listing.seller.id === user && (
+            <Flex direction={"column"} gap={1}>
+              <h4>Detta är din annons</h4>
+            </Flex>
+          )}
         </Flex>
       </Box>
     </Flex>
