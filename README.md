@@ -1,5 +1,6 @@
 # Arbetsmetodik för utvecklare - gruppuppgift
 
+
 ## Beskrivning av projekt:
 
 Uppdraget var att skapa en uthyrningsportal där privatpersoner i Göteborg kan hyra/låna ut saker till andra, för att främja delningsekonomin i staden.
@@ -47,7 +48,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Deploy on Vercel
 
-This webapplication is deployed on Vercel on [https://go-rent-navy.vercel.app/](https://go-rent.vercel.app/)
+This webapplication is deployed on Vercel on [link](https://go-rent-navy.vercel.app/)
 
 ## Design on Figmna
 
